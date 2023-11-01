@@ -15,6 +15,7 @@
 		44FBAA322AF2820500E46D5E /* AddCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA312AF2820500E46D5E /* AddCompanyView.swift */; };
 		44FBAA342AF283A600E46D5E /* TestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA332AF283A600E46D5E /* TestFile.swift */; };
 		44FBAA362AF2843A00E46D5E /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA352AF2843A00E46D5E /* Test2.swift */; };
+		44FBAA382AF2852500E46D5E /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA372AF2852500E46D5E /* Testing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		44FBAA312AF2820500E46D5E /* AddCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyView.swift; sourceTree = "<group>"; };
 		44FBAA332AF283A600E46D5E /* TestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFile.swift; sourceTree = "<group>"; };
 		44FBAA352AF2843A00E46D5E /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
+		44FBAA372AF2852500E46D5E /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				44FBAA312AF2820500E46D5E /* AddCompanyView.swift */,
 				44FBAA332AF283A600E46D5E /* TestFile.swift */,
 				44FBAA352AF2843A00E46D5E /* Test2.swift */,
+				44FBAA372AF2852500E46D5E /* Testing.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44FBAA362AF2843A00E46D5E /* Test2.swift in Sources */,
+				44FBAA382AF2852500E46D5E /* Testing.swift in Sources */,
 				446917A02AF24CC300CD4D55 /* ContentView.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44FBAA322AF2820500E46D5E /* AddCompanyView.swift in Sources */,
