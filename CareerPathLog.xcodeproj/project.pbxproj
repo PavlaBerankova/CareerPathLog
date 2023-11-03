@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
-		446917A02AF24CC300CD4D55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179F2AF24CC300CD4D55 /* ContentView.swift */; };
+		446917A02AF24CC300CD4D55 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179F2AF24CC300CD4D55 /* MainView.swift */; };
 		446917A22AF24CC400CD4D55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446917A12AF24CC400CD4D55 /* Assets.xcassets */; };
 		446917A52AF24CC500CD4D55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446917A42AF24CC500CD4D55 /* Preview Assets.xcassets */; };
 		446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446917AC2AF24D1600CD4D55 /* LogScreenView.swift */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathLogApp.swift; sourceTree = "<group>"; };
-		4469179F2AF24CC300CD4D55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4469179F2AF24CC300CD4D55 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		446917A12AF24CC400CD4D55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		446917A42AF24CC500CD4D55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		446917AC2AF24D1600CD4D55 /* LogScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenView.swift; sourceTree = "<group>"; };
@@ -56,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */,
-				4469179F2AF24CC300CD4D55 /* ContentView.swift */,
 				446917AB2AF24CFF00CD4D55 /* Scene */,
 				446917A12AF24CC400CD4D55 /* Assets.xcassets */,
 				446917A32AF24CC500CD4D55 /* Preview Content */,
@@ -75,6 +74,7 @@
 		446917AB2AF24CFF00CD4D55 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				4469179F2AF24CC300CD4D55 /* MainView.swift */,
 				446917AC2AF24D1600CD4D55 /* LogScreenView.swift */,
 				44FBAA312AF2820500E46D5E /* AddCompanyView.swift */,
 			);
@@ -151,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				446917A02AF24CC300CD4D55 /* ContentView.swift in Sources */,
+				446917A02AF24CC300CD4D55 /* MainView.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44FBAA322AF2820500E46D5E /* AddCompanyView.swift in Sources */,
 				446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */,

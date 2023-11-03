@@ -75,7 +75,7 @@ struct LogScreenView: View {
             .navigationBarHidden(true)
             .navigationDestination(for: String.self) { view in
                 if view == "Correct" {
-                    ContentView()
+                    MainView()
                 }
             }
         }
