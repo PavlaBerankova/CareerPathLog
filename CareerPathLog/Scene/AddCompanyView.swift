@@ -7,12 +7,21 @@ struct AddCompanyView: View {
     @State private var urlOffer = String()
     @State private var notes = String()
 
+    @State private var shouldWorkRemotely = false
+
     @State private var dateOfSentCV = Date()
+
+    @State private var answer = false
     @State private var dateOfReply = Date()
+
+    @State private var firstRoundOfInterview = false
     @State private var dateOfFirstRoundOfInterview = Date()
+
+    @State private var secondRoundOfInterview = false
     @State private var dateOfSecondRoundOfInterview = Date()
 
-    @State private var shouldWorkRemotely = false
+    let decision = ["přijat", "zamítnuto", "bez odpovědi"]
+    @State private var selectedDecision = String()
 
     @State private var fullTextOffer = String()
     let startingDate = Date.distantPast
@@ -41,37 +50,61 @@ struct AddCompanyView: View {
                         displayedComponents: .date) {
                             Text("Odeslané CV")
                         }
-                    DatePicker(
-                        selection: $dateOfReply,
-                        in: startingDate...endingDate,
-                        displayedComponents: .date) {
-                            Text("Odpověď")
-                        }
-                    DatePicker(
-                        selection: $dateOfFirstRoundOfInterview,
-                        in: startingDate...endingDate,
-                        displayedComponents: .date) {
-                            Text("1. kolo pohovoru")
-                        }
-                    DatePicker(
-                        selection: $dateOfSecondRoundOfInterview,
-                        in: startingDate...endingDate,
-                        displayedComponents: .date) {
-                            Text("2. kolo pohovoru")
-                        }
+
                 } header: {
                     Text("Datum")
                 }
                 .tint(Color("LogScreenBackground"))
 
+                Toggle("Odpověď", isOn: $answer)
+                    .tint(Color("LogScreenBackground"))
+                if answer {
+                    DatePicker(
+                        selection: $dateOfReply,
+                        in: startingDate...endingDate,
+                        displayedComponents: .date) {
+                            Text("Datum odpovědi")
+                        }
+                }
 
+                Section {
+                    Toggle("Pozvání na 1. kolo pohovoru", isOn: $firstRoundOfInterview)
+                    if firstRoundOfInterview {
 
+                        DatePicker(
+                            selection: $dateOfFirstRoundOfInterview,
+                            in: startingDate...endingDate,
+                            displayedComponents: .date) {
+                                Text("1. kolo pohovoru")
+                            }
+                    }
+                }
+
+                Section {
+                    Toggle("Pozvání na 2. kolo pohovru", isOn: $secondRoundOfInterview)
+                    if secondRoundOfInterview {
+                        DatePicker(
+                            selection: $dateOfSecondRoundOfInterview,
+                            in: startingDate...endingDate,
+                            displayedComponents: .date) {
+                                Text("2. kolo pohovoru")
+                            }
+                    }
+                }
+
+                    Picker("Rozhodnutí", selection: $selectedDecision) {
+                        ForEach(decision, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.segmented)
 
                 Section {
                     TextEditor(text: $fullTextOffer)
                 } header: {
                     Text("Celý text inzerátu")
                 }
+
 
             }
             .navigationTitle("Přidat záznam")
