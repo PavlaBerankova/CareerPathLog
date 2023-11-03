@@ -2,7 +2,7 @@ import SwiftUI
 
 struct OfferCardView: View {
     // MARK: PROPERTIES
-    let date: Date
+    let date = Date.now
     let companyName: String
     let jobTitle: String
     let urlOffer: String?
@@ -13,8 +13,6 @@ struct OfferCardView: View {
         return abs(components.day!)
     }
     let notes: String?
-    @State private var progressValue: Float = 0.0
-    @State private var progressTotal: Float = 100.0
 
     // MARK: - BODY
     var body: some View {
@@ -27,7 +25,7 @@ struct OfferCardView: View {
 
             LazyVStack(alignment: .leading) {
                 HStack {
-                    Text("\(date.formatted(.dateTime.day().month()))\n\(date.formatted(.dateTime.year()))")
+                    Text("\(dateOfSentCV.formatted(.dateTime.day().month()))\n\(dateOfSentCV.formatted(.dateTime.year()))")
                         .bold()
                         .padding()
                         .background(
@@ -45,6 +43,7 @@ struct OfferCardView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     if let urlOffer = urlOffer {
                         Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
+                            .foregroundStyle(.blue)
                     }
                     Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)") // computed
                     if let notes = notes {
@@ -94,7 +93,7 @@ struct OfferCardView: View {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        OfferCardView(date: Date.now, companyName: "Futured", jobTitle: "iOS vývojář", urlOffer: "https://www.futured.app/job/ios-developer/", dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 1))!, notes: "stáž")
+        OfferCardView(companyName: "Futured", jobTitle: "iOS vývojář", urlOffer: "https://www.futured.app/job/ios-developer/", dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 1))!, notes: "stáž")
     }
     .padding(.horizontal)
 }
