@@ -13,41 +13,53 @@ struct OfferCardView: View {
         return abs(components.day!)
     }
     let notes: String?
+    var backgroundColor: Color {
+        if numberOfDaysSinceSendingCv <= 14 {
+            return Color.gray.opacity(0.7)
+        }
+        return Color("Third")
+    }
 
     // MARK: - BODY
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundStyle(.white)
-                .shadow(radius: 10)
-                .frame(maxWidth: .infinity)
-                .frame(height: 300)
+//            RoundedRectangle(cornerRadius: 20)
+//                //.background(backgroundColor)
+//                .foregroundStyle(.gray.opacity(0.1))
+//                .shadow(color: backgroundColor, radius: 10)
+//                .frame(maxWidth: .infinity)
+//                .frame(height: 260)
 
             LazyVStack(alignment: .leading) {
                 HStack {
                     Text("\(dateOfSentCV.formatted(.dateTime.day().month()))\n\(dateOfSentCV.formatted(.dateTime.year()))")
                         .bold()
+                        .foregroundStyle(Color("Fourth"))
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .border(.black)
-                                .foregroundStyle(.white)
+                        .background(RoundedRectangle(cornerRadius: 0)
+                            .border(.black)
+                            .foregroundStyle(.clear)
                         )
+
+
                     VStack(alignment: .leading) {
                         Text(companyName)
                             .font(.title)
+                            .foregroundStyle(Color("Fourth"))
                         Text(jobTitle)
+                            .foregroundStyle(Color("Fourth"))
                     }
                     .padding(.leading, 20)
                 }
                 VStack(alignment: .leading, spacing: 10) {
                     if let urlOffer = urlOffer {
                         Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color.black)
                     }
-                    Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)") // computed
+                    Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)") 
+                        .foregroundStyle(Color("Fourth")) // computed
                     if let notes = notes {
-                        Text("Poznámka: " + notes) // notes (model)
+                        Text("Poznámka: " + notes)
+                            .foregroundStyle(Color("Fourth"))// notes (model)
                     }
 
                     HStack {
@@ -58,7 +70,6 @@ struct OfferCardView: View {
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 30)
                                 .foregroundStyle(.white)
-                                .border(Color.black)
                                 .overlay {
                                     Text("Upravit")
                                         .font(.headline)
@@ -73,7 +84,6 @@ struct OfferCardView: View {
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 30)
                                 .foregroundStyle(.white)
-                                .border(Color.black)
                                 .overlay {
                                     Text("Detail")
                                         .font(.headline)
@@ -86,14 +96,16 @@ struct OfferCardView: View {
                 .padding(.top)
             }
             .padding()
-        }
+            .background(RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(backgroundColor.opacity(0.8))
+            )
     }
 }
 
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        OfferCardView(companyName: "Futured", jobTitle: "iOS vývojář", urlOffer: "https://www.futured.app/job/ios-developer/", dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 1))!, notes: "stáž")
+        OfferCardView(companyName: "Futured", jobTitle: "iOS vývojář", urlOffer: "https://www.futured.app/job/ios-developer/", dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 10, day: 1))!, notes: "stáž")
     }
     .padding(.horizontal)
 }

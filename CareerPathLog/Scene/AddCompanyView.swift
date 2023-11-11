@@ -107,6 +107,7 @@ struct AddCompanyView: View {
 
 
             }
+            .foregroundStyle(Color("Fourth"))
             .navigationTitle("Přidat záznam")
 
         }

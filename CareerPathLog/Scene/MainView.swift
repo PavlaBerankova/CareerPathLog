@@ -148,7 +148,7 @@ A co čekat potom? Do 2 dnů ti odpovíme. Potkáš se s HR Míšou a Full-stack
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        
+
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -156,7 +156,6 @@ A co čekat potom? Do 2 dnů ti odpovíme. Potkáš se s HR Míšou a Full-stack
             }
             .navigationBarBackButtonHidden(true)
         }
-       
     }
 }
 

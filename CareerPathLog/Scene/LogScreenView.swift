@@ -11,37 +11,41 @@ struct LogScreenView: View {
     @State private var showingLoginScreen = true
     @State private var wrongPassword = false
     @State private var wrongUsername = false
+    let textColor = Color("Fourth")
 
     
     // MARK: - BODY
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                Color("LogScreenBackground")
+                Color("LogScreenBackground").opacity(0.8)
                 Circle()
                     .scale(1.7)
-                    .foregroundColor(.white.opacity(0.15))
+                    .foregroundColor(Color.black.opacity(0.1))
                 Circle()
                     .scale(1.35)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.black.opacity(0.12))
 
-                VStack {
+                VStack(spacing: 20) {
                     Text("Login")
                         .font(.largeTitle)
+                        .foregroundStyle(textColor)
                         .bold()
                         .padding()
                     TextField("Username", text: $username)
                         .padding()
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.black.opacity(0.05))
+                        .background(Color.black.opacity(0.5))
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongUsername ? 2 : 0))
                     SecureField("Password", text: $password)
                         .padding()
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.black.opacity(0.05))
+                        .background(Color.black.opacity(0.5))
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongPassword ? 2 : 0))
                     Button {
@@ -65,7 +69,7 @@ struct LogScreenView: View {
                                 Text("Submit")
                                     .font(.title3)
                                     .bold()
-                                    .foregroundColor(.white)
+                                    .foregroundColor(textColor)
                             }
                     }
                 }
