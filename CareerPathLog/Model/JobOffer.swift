@@ -11,5 +11,6 @@ struct JobOffer: Codable {
     let firstRoundOfInterview: Date?
     let secondRoundOfInterview: Date?
     let fullTextOffer: String?
+    var jobOfferRejected = false
 }
 

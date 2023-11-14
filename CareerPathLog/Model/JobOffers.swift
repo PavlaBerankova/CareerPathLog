@@ -1,9 +1,5 @@
 import Foundation
 
-//struct JobOffers {
-//    var jobOffers: [JobOffer]
-//}
-
 struct JobOffers {
     static let mock = [
             JobOffer(
@@ -11,7 +7,7 @@ struct JobOffers {
                 jobTitle: "UX Designér/ka",
                 urlOffer: "https://www.startupjobs.cz/nabidka/69109/ux-designer-ka",
                 notes: "formou freelancingu",
-                dateOfSentCV: Date.now,
+                dateOfSentCV: DateComponents(year: 2023, month: 11, day: 14).date!,
                 dateOfReply: nil,
                 firstRoundOfInterview: nil,
                 secondRoundOfInterview: nil,
@@ -65,7 +61,7 @@ aktuálně hledáme nového kolegu nebo kolegyni na pozici UX Designér. Bavilo 
                 jobTitle: "iOS developer #Brno #Praha",
                 urlOffer: "https://www.startupjobs.cz/nabidka/68037/ios-developer-brno-praha",
                 notes: "nutnost ObjC",
-                dateOfSentCV: DateComponents(year: 2023, month: 10, day: 15).date!,
+                dateOfSentCV: DateComponents(year: 2023, month: 11, day: 14).date!,
                 dateOfReply: Date.now,
                 firstRoundOfInterview: nil,
                 secondRoundOfInterview: nil,
@@ -101,7 +97,7 @@ Rozvíjet nebudeš jen mobilní appku, ale i sám sebe - budeš v týmu mediorů
                 jobTitle: "Full-stack vývojář (JavaScript, TypeScript)",
                 urlOffer: "https://www.startupjobs.cz/nabidka/69531/full-stack-vyvojar-javascript-typescript",
                 notes: nil,
-                dateOfSentCV: DateComponents(year: 2023, month: 10, day: 30).date!,
+                dateOfSentCV: DateComponents(year: 2023, month: 11, day: 14).date!,
                 dateOfReply: nil,
                 firstRoundOfInterview: nil,
                 secondRoundOfInterview: nil,
