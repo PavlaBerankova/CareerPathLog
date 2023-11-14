@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MainView: View {
+struct OfferListView: View {
     @State private var data = [
         JobOffer(
             companyName: "FV Studio",
@@ -160,5 +160,5 @@ A co čekat potom? Do 2 dnů ti odpovíme. Potkáš se s HR Míšou a Full-stack
 }
 
 #Preview {
-    MainView()
+    OfferListView()
 }

@@ -18,34 +18,33 @@ struct LogScreenView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                Color("LogScreenBackground").opacity(0.8)
+                Color.theme.mainColor
                 Circle()
                     .scale(1.7)
-                    .foregroundColor(Color.black.opacity(0.1))
+                    .foregroundColor(Color.white.opacity(0.2))
                 Circle()
                     .scale(1.35)
-                    .foregroundColor(Color.black.opacity(0.12))
+                    .foregroundColor(Color.white)
 
                 VStack(spacing: 20) {
                     Text("Login")
                         .font(.largeTitle)
-                        .foregroundStyle(textColor)
                         .bold()
                         .padding()
                     TextField("Username", text: $username)
                         .padding()
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.black.opacity(0.5))
+                        .background(Color.black.opacity(0.1))
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongUsername ? 2 : 0))
                     SecureField("Password", text: $password)
                         .padding()
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.black.opacity(0.5))
+                        .background(Color.black.opacity(0.1))
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongPassword ? 2 : 0))
                     Button {
@@ -64,12 +63,12 @@ struct LogScreenView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
-                            .foregroundColor(Color("LogScreenBackground"))
+                            .foregroundColor(Color.theme.blueText)
                             .overlay {
                                 Text("Submit")
                                     .font(.title3)
                                     .bold()
-                                    .foregroundColor(textColor)
+                                    .foregroundColor(.white)
                             }
                     }
                 }
@@ -79,7 +78,7 @@ struct LogScreenView: View {
             .navigationBarHidden(true)
             .navigationDestination(for: String.self) { view in
                 if view == "Correct" {
-                    MainView()
+                    OfferListView()
                 }
             }
         }

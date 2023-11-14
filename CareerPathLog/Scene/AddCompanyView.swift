@@ -41,7 +41,6 @@ struct AddCompanyView: View {
                 }
 
                 Toggle("Možnost remote", isOn: $shouldWorkRemotely)
-                    .tint(Color("LogScreenBackground"))
 
                 Section {
                     DatePicker(
@@ -54,10 +53,8 @@ struct AddCompanyView: View {
                 } header: {
                     Text("Datum")
                 }
-                .tint(Color("LogScreenBackground"))
 
                 Toggle("Odpověď", isOn: $answer)
-                    .tint(Color("LogScreenBackground"))
                 if answer {
                     DatePicker(
                         selection: $dateOfReply,
@@ -104,12 +101,8 @@ struct AddCompanyView: View {
                 } header: {
                     Text("Celý text inzerátu")
                 }
-
-
             }
-            .foregroundStyle(Color("Fourth"))
             .navigationTitle("Přidat záznam")
-
         }
     }
 }

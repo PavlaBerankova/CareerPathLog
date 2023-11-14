@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct OfferCardView: View {
-    // MARK: PROPERTIES
+    // MARK: - PROPERTIES
     let date = Date.now
     let companyName: String
     let jobTitle: String
@@ -13,55 +13,56 @@ struct OfferCardView: View {
         return abs(components.day!)
     }
     let notes: String?
+    var textColor: Color {
+        if numberOfDaysSinceSendingCv <= 14{
+            return Color.theme.blackColor
+        }
+        return Color.theme.whiteColor
+    }
     var backgroundColor: Color {
         if numberOfDaysSinceSendingCv <= 14 {
-            return Color.gray.opacity(0.7)
+            return Color.theme.mainColor.opacity(0.7)
         }
-        return Color("Third")
+        return Color.theme.blackColor
+
     }
 
     // MARK: - BODY
     var body: some View {
-//            RoundedRectangle(cornerRadius: 20)
-//                //.background(backgroundColor)
-//                .foregroundStyle(.gray.opacity(0.1))
-//                .shadow(color: backgroundColor, radius: 10)
-//                .frame(maxWidth: .infinity)
-//                .frame(height: 260)
-
             LazyVStack(alignment: .leading) {
                 HStack {
+                    // SQUARE WITH DATE
                     Text("\(dateOfSentCV.formatted(.dateTime.day().month()))\n\(dateOfSentCV.formatted(.dateTime.year()))")
                         .bold()
-                        .foregroundStyle(Color("Fourth"))
+                        .foregroundStyle(textColor)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 0)
-                            .border(.black)
+                            .border(textColor)
                             .foregroundStyle(.clear)
                         )
 
-
+                    // COMPANY AND JOB TITLE
                     VStack(alignment: .leading) {
                         Text(companyName)
                             .font(.title)
-                            .foregroundStyle(Color("Fourth"))
                         Text(jobTitle)
-                            .foregroundStyle(Color("Fourth"))
                     }
+                    .foregroundStyle(textColor)
                     .padding(.leading, 20)
                 }
+
+                // INFO ROWS
                 VStack(alignment: .leading, spacing: 10) {
                     if let urlOffer = urlOffer {
                         Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(Color.theme.link)
                     }
-                    Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)") 
-                        .foregroundStyle(Color("Fourth")) // computed
+                    Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)")
                     if let notes = notes {
                         Text("Poznámka: " + notes)
-                            .foregroundStyle(Color("Fourth"))// notes (model)
                     }
 
+                    // BUTTONS
                     HStack {
                         Button {
                             print(Date.now)
@@ -73,7 +74,6 @@ struct OfferCardView: View {
                                 .overlay {
                                     Text("Upravit")
                                         .font(.headline)
-                                        .foregroundStyle(.black)
                                 }
 
                         }
@@ -87,12 +87,12 @@ struct OfferCardView: View {
                                 .overlay {
                                     Text("Detail")
                                         .font(.headline)
-                                        .foregroundStyle(.black)
                                 }
                         }
                     }
-
+                    .foregroundStyle(Color.theme.blackColor)
                 }
+                .foregroundStyle(textColor)
                 .padding(.top)
             }
             .padding()
