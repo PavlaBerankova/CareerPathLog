@@ -89,22 +89,12 @@ extension JobOfferCardView {
                     Text("Poznámka: " + notes)
                 }
 
-                // BUTTONS
-                HStack {
-                    Button {
-
-                    } label: {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 30)
-                            .foregroundStyle(.white)
-                            .overlay {
-                                Text("Detail")
-                                    .font(.headline)
-                            }
-                    }
+                // PROGRESS BAR
+                ProgressView(value: 0.25) {
+                    Text("CV odesláno")
+                        .font(.footnote)
                 }
-                .foregroundStyle(Color.theme.blackColor)
+                .padding(.vertical)
             }
             .foregroundStyle(textColor)
             .padding(.top)
