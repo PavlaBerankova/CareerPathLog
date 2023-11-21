@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct AddCompanyView: View {
+struct AddOfferView: View {
+    @Environment(\.dismiss) var dismiss
+    @ObservedObject var model: OfferViewModel
+
     // MARK: PROPERTIES
     @State private var companyName = String()
     @State private var jobTitle = String()
@@ -103,11 +106,38 @@ struct AddCompanyView: View {
                 }
             }
             .navigationTitle("Přidat záznam")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        addOffer()
+                        dismiss()
+                    } label: {
+                        Text("Uložit")
+                    }
+                }
+            }
         }
+    }
+
+    func addOffer() {
+        let newOffer = JobOffer(
+            companyName: companyName,
+            jobTitle: jobTitle,
+            urlOffer: urlOffer,
+            notes: notes,
+            dateOfSentCV: dateOfSentCV,
+            dateOfReply: dateOfReply,
+            firstRoundOfInterview: dateOfFirstRoundOfInterview,
+            secondRoundOfInterview: dateOfSecondRoundOfInterview,
+            fullTextOffer: fullTextOffer)
+
+        model.jobOffers.append(newOffer)
+        print(model.jobOffers)
+
     }
 }
 
 // MARK: - PREVIEW
 #Preview {
-    AddCompanyView()
+    AddOfferView(model: OfferViewModel())
 }

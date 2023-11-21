@@ -85,7 +85,7 @@ extension JobOfferCardView {
             .foregroundStyle(textColor)
 
             // INFO ROWS
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading) {
                 if let urlOffer = urlOffer {
                     Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
                         .foregroundStyle(Color.theme.link)
@@ -103,7 +103,7 @@ Divider()
                 //.padding(.vertical)
             }
             .foregroundStyle(textColor)
-            //.padding(.top)
+            .padding(.top, 5)
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10)
