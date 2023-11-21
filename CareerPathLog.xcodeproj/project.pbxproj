@@ -7,22 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44553D402B039E0600040EDE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D3F2B039E0600040EDE /* Color.swift */; };
+		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
-		446917A02AF24CC300CD4D55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179F2AF24CC300CD4D55 /* ContentView.swift */; };
+		446917A02AF24CC300CD4D55 /* OfferListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179F2AF24CC300CD4D55 /* OfferListView.swift */; };
 		446917A22AF24CC400CD4D55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446917A12AF24CC400CD4D55 /* Assets.xcassets */; };
 		446917A52AF24CC500CD4D55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446917A42AF24CC500CD4D55 /* Preview Assets.xcassets */; };
 		446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446917AC2AF24D1600CD4D55 /* LogScreenView.swift */; };
-		44FBAA322AF2820500E46D5E /* AddCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA312AF2820500E46D5E /* AddCompanyView.swift */; };
+		4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */; };
+		4475E7702AF51816003B0579 /* JobOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E76F2AF51816003B0579 /* JobOffer.swift */; };
+		4475E7722AF51820003B0579 /* JobOffers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E7712AF51820003B0579 /* JobOffers.swift */; };
+		44FBAA322AF2820500E46D5E /* AddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA312AF2820500E46D5E /* AddOfferView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44553D3F2B039E0600040EDE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathLogApp.swift; sourceTree = "<group>"; };
-		4469179F2AF24CC300CD4D55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4469179F2AF24CC300CD4D55 /* OfferListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferListView.swift; sourceTree = "<group>"; };
 		446917A12AF24CC400CD4D55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		446917A42AF24CC500CD4D55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		446917AC2AF24D1600CD4D55 /* LogScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenView.swift; sourceTree = "<group>"; };
-		44FBAA312AF2820500E46D5E /* AddCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompanyView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferCardView.swift; sourceTree = "<group>"; };
+		4475E76F2AF51816003B0579 /* JobOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOffer.swift; sourceTree = "<group>"; };
+		4475E7712AF51820003B0579 /* JobOffers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOffers.swift; sourceTree = "<group>"; };
+		44FBAA312AF2820500E46D5E /* AddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOfferView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44553D3E2B039DF400040EDE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				44553D3F2B039E0600040EDE /* Color.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		44553D432B03A16C00040EDE /* OfferListView */ = {
+			isa = PBXGroup;
+			children = (
+				4469179F2AF24CC300CD4D55 /* OfferListView.swift */,
+				44553D412B03A16300040EDE /* OfferViewModel.swift */,
+			);
+			path = OfferListView;
+			sourceTree = "<group>";
+		};
+		44553D442B03AAA400040EDE /* LogScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				446917AC2AF24D1600CD4D55 /* LogScreenView.swift */,
+			);
+			path = LogScreenView;
+			sourceTree = "<group>";
+		};
 		446917912AF24CC300CD4D55 = {
 			isa = PBXGroup;
 			children = (
@@ -56,7 +91,9 @@
 			isa = PBXGroup;
 			children = (
 				4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */,
-				4469179F2AF24CC300CD4D55 /* ContentView.swift */,
+				44553D3E2B039DF400040EDE /* Extension */,
+				4475E76E2AF51804003B0579 /* Model */,
+				4475E76B2AF4F40A003B0579 /* Components */,
 				446917AB2AF24CFF00CD4D55 /* Scene */,
 				446917A12AF24CC400CD4D55 /* Assets.xcassets */,
 				446917A32AF24CC500CD4D55 /* Preview Content */,
@@ -75,10 +112,36 @@
 		446917AB2AF24CFF00CD4D55 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				446917AC2AF24D1600CD4D55 /* LogScreenView.swift */,
-				44FBAA312AF2820500E46D5E /* AddCompanyView.swift */,
+				44D404402B0CAEA500D6D6C8 /* AddOfferView */,
+				44553D442B03AAA400040EDE /* LogScreenView */,
+				44553D432B03A16C00040EDE /* OfferListView */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		4475E76B2AF4F40A003B0579 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4475E76E2AF51804003B0579 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4475E76F2AF51816003B0579 /* JobOffer.swift */,
+				4475E7712AF51820003B0579 /* JobOffers.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		44D404402B0CAEA500D6D6C8 /* AddOfferView */ = {
+			isa = PBXGroup;
+			children = (
+				44FBAA312AF2820500E46D5E /* AddOfferView.swift */,
+			);
+			path = AddOfferView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +214,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				446917A02AF24CC300CD4D55 /* ContentView.swift in Sources */,
+				446917A02AF24CC300CD4D55 /* OfferListView.swift in Sources */,
+				4475E7722AF51820003B0579 /* JobOffers.swift in Sources */,
+				4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */,
+				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
-				44FBAA322AF2820500E46D5E /* AddCompanyView.swift in Sources */,
+				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
+				44553D402B039E0600040EDE /* Color.swift in Sources */,
+				44FBAA322AF2820500E46D5E /* AddOfferView.swift in Sources */,
 				446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,8 +362,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -324,8 +392,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
