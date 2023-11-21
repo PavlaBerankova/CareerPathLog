@@ -137,6 +137,7 @@ struct AddOfferView: View {
     }
 }
 
+
 // MARK: - PREVIEW
 #Preview {
     AddOfferView(model: OfferViewModel())

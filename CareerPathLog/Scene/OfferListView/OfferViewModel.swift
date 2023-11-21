@@ -1,13 +1,32 @@
 import Foundation
 
 class OfferViewModel: ObservableObject {
-    @Published var jobOffers = [JobOffer]()
-
-    init() {
-       
+    @Published var jobOffers = [JobOffer]() {
+        didSet {
+            saveItems()
+        }
     }
 
+    init() {
+        if let savedOffers = UserDefaults.standard.data(forKey: "Offers") {
+            if let decodedOffers = try? JSONDecoder().decode([JobOffer].self, from: savedOffers) {
+                jobOffers = decodedOffers
+                return
+            }
+        }
+        jobOffers = []
+    }
 
+    func saveItems() {
+        if let encodedData = try? JSONEncoder().encode(jobOffers) {
+            UserDefaults.standard.set(encodedData, forKey: "Offers")
+        }
+    }
+
+    func deleteItem(indexSet: IndexSet) {
+        jobOffers.remove(atOffsets: indexSet)
+        saveItems()
+    }
     //func fetchData() {
 //        self.jobOffers = [
 //            JobOffer(

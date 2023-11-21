@@ -6,7 +6,8 @@ struct OfferListView: View {
 
     var body: some View {
         NavigationStack {
-                List(model.jobOffers, id: \.id) { offer in
+            List {
+                ForEach(model.jobOffers, id: \.id) { offer in
                     JobOfferCardView(
                         companyName: offer.companyName,
                         jobTitle: offer.jobTitle,
@@ -14,21 +15,26 @@ struct OfferListView: View {
                         notes: offer.notes,
                         dateOfSentCV: offer.dateOfSentCV)
                 }
-                .listStyle(.plain)
-                .navigationTitle("Seznam oslovených firem")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarBackButtonHidden(true)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            showAddView.toggle()
-                        } label: {
-                            Image(systemName: "plus")
-                        }
+                .onDelete(perform: model.deleteItem)
+            }
+            .listStyle(.plain)
+            .navigationTitle("Seznam oslovených firem")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showAddView.toggle()
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
-        }
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
 
+            }
+        }
         .sheet(isPresented: $showAddView) {
             AddOfferView(model: model)
         }
