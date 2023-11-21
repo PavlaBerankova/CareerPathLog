@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LogScreenView: View {
     // MARK: PROPERTIES
+    @Binding var showSignInView: Bool
     @State private var username = String()
     @State private var password = String()
     @State private var testUsername = "Bershee"
@@ -16,7 +17,7 @@ struct LogScreenView: View {
     
     // MARK: - BODY
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack {
             ZStack {
                 Color.theme.mainColor
                 Circle()
@@ -52,7 +53,8 @@ struct LogScreenView: View {
                             wrongUsername = false
                             if password == testPassword {
                                 wrongPassword = false
-                                path.append("Correct")
+                                // TODO: rename 
+                                showSignInView = true
                             } else {
                                 wrongPassword = true
                             }
@@ -76,11 +78,6 @@ struct LogScreenView: View {
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
-            .navigationDestination(for: String.self) { view in
-                if view == "Correct" {
-                    OfferListView()
-                }
-            }
         }
     }
        
@@ -102,5 +99,5 @@ struct LogScreenView: View {
 
 // MARK: - PREVIEW
 #Preview {
-    LogScreenView()
+    LogScreenView(showSignInView: .constant(false))
 }

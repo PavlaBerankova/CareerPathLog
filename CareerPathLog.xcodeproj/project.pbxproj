@@ -17,6 +17,8 @@
 		4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */; };
 		4475E7702AF51816003B0579 /* JobOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E76F2AF51816003B0579 /* JobOffer.swift */; };
 		4475E7722AF51820003B0579 /* JobOffers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E7712AF51820003B0579 /* JobOffers.swift */; };
+		44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404442B0CC92100D6D6C8 /* RootView.swift */; };
+		44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */; };
 		44FBAA322AF2820500E46D5E /* AddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA312AF2820500E46D5E /* AddOfferView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferCardView.swift; sourceTree = "<group>"; };
 		4475E76F2AF51816003B0579 /* JobOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOffer.swift; sourceTree = "<group>"; };
 		4475E7712AF51820003B0579 /* JobOffers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOffers.swift; sourceTree = "<group>"; };
+		44D404442B0CC92100D6D6C8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		44FBAA312AF2820500E46D5E /* AddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOfferView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -97,6 +101,7 @@
 				446917AB2AF24CFF00CD4D55 /* Scene */,
 				446917A12AF24CC400CD4D55 /* Assets.xcassets */,
 				446917A32AF24CC500CD4D55 /* Preview Content */,
+				44D404442B0CC92100D6D6C8 /* RootView.swift */,
 			);
 			path = CareerPathLog;
 			sourceTree = "<group>";
@@ -115,6 +120,7 @@
 				44D404402B0CAEA500D6D6C8 /* AddOfferView */,
 				44553D442B03AAA400040EDE /* LogScreenView */,
 				44553D432B03A16C00040EDE /* OfferListView */,
+				44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -218,11 +224,13 @@
 				4475E7722AF51820003B0579 /* JobOffers.swift in Sources */,
 				4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */,
 				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
+				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
 				44553D402B039E0600040EDE /* Color.swift in Sources */,
 				44FBAA322AF2820500E46D5E /* AddOfferView.swift in Sources */,
 				446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */,
+				44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
