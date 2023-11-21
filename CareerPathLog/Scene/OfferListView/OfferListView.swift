@@ -25,6 +25,9 @@ struct OfferListView: View {
             }
             .navigationBarBackButtonHidden(true)
         }
+        .onAppear {
+            model.fetchData()
+        }
     }
 }
 

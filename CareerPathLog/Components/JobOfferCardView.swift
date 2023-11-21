@@ -50,23 +50,29 @@ struct JobOfferCardView: View {
 
 extension JobOfferCardView {
     private var jobOfferCard: some View {
-        LazyVStack(alignment: .leading) {
-            HStack {
+        LazyVStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 20) {
                 // SQUARE WITH DATE
-                Text("\(dateOfSentCV.formatted(.dateTime.day().month()))\n\(dateOfSentCV.formatted(.dateTime.year()))")
+                VStack(alignment: .leading) {
+                    Text("\(dateOfSentCV.formatted(.dateTime.day().month()))")
+                    Text("\(dateOfSentCV.formatted(.dateTime.year()))")
+                }
+                    .font(.headline)
                     .bold()
                     .foregroundStyle(textColor)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 0)
-                        .border(textColor)
-                        .foregroundStyle(.clear)
-                    )
+                    //.padding()
+//                    .background(RoundedRectangle(cornerRadius: 0)
+//                        .border(textColor)
+//                        .foregroundStyle(.clear)
+//                    )
 
                 // COMPANY AND JOB TITLE
                 VStack(alignment: .leading) {
                     Text(companyName)
-                        .font(.title)
+                        .font(.title2)
+                        .bold()
                     Text(jobTitle)
+                        .font(.footnote)
                 }
                 Spacer()
                     Image(systemName: "pencil")
@@ -85,19 +91,19 @@ extension JobOfferCardView {
                         .foregroundStyle(Color.theme.link)
                 }
                 Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)")
-                if let notes = notes {
-                    Text("Poznámka: " + notes)
-                }
-
+//                if let notes = notes {
+//                    Text("Poznámka: " + notes)
+//                }
+Divider()
                 // PROGRESS BAR
                 ProgressView(value: 0.25) {
                     Text("CV odesláno")
                         .font(.footnote)
                 }
-                .padding(.vertical)
+                //.padding(.vertical)
             }
             .foregroundStyle(textColor)
-            .padding(.top)
+            //.padding(.top)
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10)
