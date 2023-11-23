@@ -6,6 +6,7 @@ class OfferViewModel: ObservableObject {
             saveItems()
         }
     }
+    @Published var selectedOffer: JobOffer? 
 
     init() {
         if let savedOffers = UserDefaults.standard.data(forKey: "Offers") {
@@ -16,6 +17,17 @@ class OfferViewModel: ObservableObject {
         }
         jobOffers = []
     }
+
+    func updateItem(_ updatedOffer: JobOffer) {
+        guard let index = jobOffers.firstIndex(where: { $0.id == updatedOffer.id }) else {
+                return // Item not found
+            }
+
+            jobOffers[index] = updatedOffer
+
+            // Save the updated array to UserDefaults
+            saveItems()
+        }
 
     func saveItems() {
         if let encodedData = try? JSONEncoder().encode(jobOffers) {

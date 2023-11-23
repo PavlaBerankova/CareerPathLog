@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct OfferListView: View {
-    @ObservedObject var model = OfferViewModel()
+    @EnvironmentObject var model: OfferViewModel
     @State private var showAddView = false
     @State private var showSettingsView = false
+    //@State private var selectedOffer: JobOffer?
 
     var body: some View {
         NavigationStack {
@@ -23,6 +24,10 @@ struct OfferListView: View {
                                 urlOffer: offer.urlOffer,
                                 notes: offer.notes,
                                 dateOfSentCV: offer.dateOfSentCV)
+                            .onTapGesture {
+                                model.selectedOffer = offer
+                                showAddView.toggle()
+                            }
                         }
                         .onDelete(perform: model.deleteItem)
                     }
@@ -36,6 +41,7 @@ struct OfferListView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
+                        model.selectedOffer = nil
                         showAddView.toggle()
                     } label: {
                         Image(systemName: "plus")
@@ -53,14 +59,10 @@ struct OfferListView: View {
                         Image(systemName: "gear")
                     }
                 }
-
             }
-
-
         }
-
         .sheet(isPresented: $showAddView) {
-            AddOfferView(model: model)
+            TestAddOfferView()
         }
         .presentationDetents([.large])
         .sheet(isPresented: $showSettingsView) {
@@ -70,5 +72,6 @@ struct OfferListView: View {
 }
 
 #Preview {
-    OfferListView()
+        OfferListView()
+            .environmentObject(OfferViewModel())
 }

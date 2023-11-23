@@ -17,7 +17,6 @@ struct LogScreenView: View {
     
     // MARK: - BODY
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color.theme.mainColor
                 Circle()
@@ -78,7 +77,6 @@ struct LogScreenView: View {
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
-        }
     }
        
 

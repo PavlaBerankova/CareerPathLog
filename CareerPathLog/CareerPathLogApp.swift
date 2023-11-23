@@ -4,7 +4,10 @@ import SwiftUI
 struct CareerPathLogApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            NavigationStack {
+                RootView()
+                    .environmentObject(OfferViewModel())
+            }
         }
     }
 }

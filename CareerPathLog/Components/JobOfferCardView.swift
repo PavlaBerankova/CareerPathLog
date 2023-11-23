@@ -75,16 +75,16 @@ extension JobOfferCardView {
                         .font(.footnote)
                 }
                 Spacer()
-                Button {
-                    
-                } label: {
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(textColor)
-                .padding(.trailing, 5)
-                .padding(.bottom, 40)
-                }
+//                Button {
+//                    
+//                } label: {
+//                    Image(systemName: "pencil")
+//                        .resizable()
+//                        .frame(width: 20, height: 20)
+//                        .foregroundStyle(textColor)
+//                .padding(.trailing, 5)
+//                .padding(.bottom, 40)
+//                }
             }
             .foregroundStyle(textColor)
 
