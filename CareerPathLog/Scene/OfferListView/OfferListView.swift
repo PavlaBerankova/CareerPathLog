@@ -8,10 +8,13 @@ struct OfferListView: View {
 
     var body: some View {
         NavigationStack {
+            StatusBarView(countSendCV: 0, countInProcess: 0, countRejected: 0, countInterview: 0)
+            Spacer()
+
             Group {
                 if model.jobOffers.isEmpty {
-                    Text("Přidej firmu\nkliknutím na +")
-                        .font(.largeTitle)
+                    Text("Žádné záznamy")
+                        .font(.title3)
                         .opacity(0.5)
                         .lineLimit(2)
                         .padding(.horizontal)
@@ -38,6 +41,7 @@ struct OfferListView: View {
 
                 }
             }
+Spacer()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -51,14 +55,6 @@ struct OfferListView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     EditButton()
                 }
-
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Button {
-//                        showSettingsView.toggle()
-//                    } label: {
-//                        Image(systemName: "gear")
-//                    }
-//                }
             }
         }
         .sheet(isPresented: $showAddView) {
