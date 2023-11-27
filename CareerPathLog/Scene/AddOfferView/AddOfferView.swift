@@ -16,6 +16,11 @@ struct AddOfferView: View {
                 fulltextOfferEditor
             }
             .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
+            .onAppear {
+                if let selectedOffer = model.selectedOffer {
+                    model.fetchOfferToForm(selectedOffer)
+                }
+            }
             .toolbar {
                 if let selectedOffer = model.selectedOffer {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -38,11 +43,7 @@ struct AddOfferView: View {
                 }
             }
         }
-        .onAppear {
-            if let selectedOffer = model.selectedOffer {
-                model.fetchOfferToForm(selectedOffer)
-            }
-        }
+
     }
 }
 

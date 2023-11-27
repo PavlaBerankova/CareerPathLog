@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 class OfferViewModel: ObservableObject {
     @Published var jobOffers = [JobOffer]() {
@@ -6,7 +6,7 @@ class OfferViewModel: ObservableObject {
             saveOffer()
         }
     }
-    @Published var selectedOffer: JobOffer? 
+    @Published var selectedOffer: JobOffer?
     @Published var companyName = String()
     @Published var jobTitle = String()
     @Published var urlOffer = String()

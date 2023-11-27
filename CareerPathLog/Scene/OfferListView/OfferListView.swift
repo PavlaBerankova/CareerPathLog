@@ -3,8 +3,7 @@ import SwiftUI
 struct OfferListView: View {
     @EnvironmentObject var model: OfferViewModel
     @State private var showAddView = false
-    @State private var showSettingsView = false
-    //@State private var selectedOffer: JobOffer?
+    @State private var showFulltextOffer = false
 
     var body: some View {
         NavigationStack {
@@ -18,6 +17,7 @@ struct OfferListView: View {
                         .opacity(0.5)
                         .lineLimit(2)
                         .padding(.horizontal)
+                    Spacer()
                 } else {
                     List {
                         ForEach(model.jobOffers, id: \.id) { offer in
@@ -27,26 +27,42 @@ struct OfferListView: View {
                                 urlOffer: offer.urlOffer,
                                 notes: offer.notes,
                                 dateOfSentCV: offer.dateOfSentCV)
-                            .overlay(alignment: .bottomTrailing) {
-                                Menu {
-                                    Button(action: {}, label: {
-                                        Text("Upravit záznam")
-                                    })
-                                    Button(action: {}, label: {
-                                        Text("Přejít na inzerát")
-                                    })
-                                    Button(action: {}, label: {
-                                        Text("Zobrazit celý text inzerátu")
-                                    })
-                                } label: {
-                                    Image(systemName: "ellipsis")
-                                        .padding(20)
-                                        .padding(.bottom, 5)
-                                        .foregroundStyle(.black)
-                                }
-                            }
+//                            .overlay(alignment: .bottomTrailing) {
+//                                Menu {
+//                                    Button(action: {
+//                                        model.selectedOffer = offer
+//                                        showAddView.toggle()
+//                                    }, label: {
+//                                        HStack {
+//                                            Text("Upravit záznam")
+//                                            Image(systemName: "square.and.pencil")
+//                                        }
+//                                    })
+//                                    Button(action: {}, label: {
+//                                        HStack {
+//                                            Text("Přejít na inzerát")
+//                                            Image(systemName: "globe")
+//                                        }
+//                                    })
+//                                    Button(action: {
+//                                        model.selectedOffer = offer
+//                                        showFulltextOffer.toggle()
+//                                    }, label: {
+//                                        HStack {
+//                                            Text("Celý text inzerátu")
+//                                            Image(systemName: "note")
+//                                        }
+//                                    })
+//                                } label: {
+//                                    Image(systemName: "ellipsis")
+//                                        .padding(20)
+//                                        .padding(.bottom, 5)
+//                                        .foregroundStyle(.black)
+//                                }
+//                            }
                             .onTapGesture {
                                 model.selectedOffer = offer
+                                print("Toto je zvolený offer \(String(describing: model.selectedOffer))")
                                 showAddView.toggle()
                             }
                         }
@@ -59,12 +75,13 @@ struct OfferListView: View {
 
                 }
             }
-Spacer()
+            Spacer()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         model.selectedOffer = nil
                         showAddView.toggle()
+                        print(model.selectedOffer.debugDescription)
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -78,9 +95,11 @@ Spacer()
         .sheet(isPresented: $showAddView) {
             AddOfferView()
         }
-        .presentationDetents([.large])
-        .sheet(isPresented: $showSettingsView) {
-            SettingsView()
+        .sheet(isPresented: $showFulltextOffer) {
+            if let selectedOffer = model.selectedOffer {
+                Text(selectedOffer.fullTextOffer ?? "Nebyl přidán žádný text")
+                    .padding()
+            } 
         }
     }
 }
