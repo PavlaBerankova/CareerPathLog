@@ -52,13 +52,13 @@ struct OfferListView: View {
                     EditButton()
                 }
 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showSettingsView.toggle()
-                    } label: {
-                        Image(systemName: "gear")
-                    }
-                }
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button {
+//                        showSettingsView.toggle()
+//                    } label: {
+//                        Image(systemName: "gear")
+//                    }
+//                }
             }
         }
         .sheet(isPresented: $showAddView) {

@@ -90,10 +90,10 @@ extension JobOfferCardView {
 
             // INFO ROWS
             VStack(alignment: .leading) {
-                if let urlOffer = urlOffer {
-                    Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
-                        .foregroundStyle(Color.theme.link)
-                }
+//                if let urlOffer = urlOffer {
+//                    Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
+//                        .foregroundStyle(Color.theme.link)
+//                }
                 Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)")
 //                if let notes = notes {
 //                    Text("Poznámka: " + notes)
