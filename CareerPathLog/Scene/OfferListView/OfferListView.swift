@@ -45,12 +45,12 @@ struct OfferListView: View {
                                         .foregroundStyle(.black)
                                 }
                             }
-//                            .onTapGesture {
-//                                model.selectedOffer = offer
-//                                showAddView.toggle()
-//                            }
+                            .onTapGesture {
+                                model.selectedOffer = offer
+                                showAddView.toggle()
+                            }
                         }
-                        .onDelete(perform: model.deleteItem)
+                        .onDelete(perform: model.deleteOffer)
                     }
                     .listStyle(.plain)
                     .navigationTitle("Seznam oslovených firem")
@@ -76,7 +76,7 @@ Spacer()
             }
         }
         .sheet(isPresented: $showAddView) {
-            TestAddOfferView()
+            AddOfferView()
         }
         .presentationDetents([.large])
         .sheet(isPresented: $showSettingsView) {

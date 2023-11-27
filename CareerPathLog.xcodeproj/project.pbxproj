@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		443AE9D02B0DF42E00EF8D48 /* TestAddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* TestAddOfferView.swift */; };
+		443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */; };
 		44553D402B039E0600040EDE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D3F2B039E0600040EDE /* Color.swift */; };
 		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
@@ -21,11 +21,10 @@
 		449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CC2612B14E66200DCB95C /* StatusBarView.swift */; };
 		44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404442B0CC92100D6D6C8 /* RootView.swift */; };
 		44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */; };
-		44FBAA322AF2820500E46D5E /* AddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FBAA312AF2820500E46D5E /* AddOfferView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		443AE9CF2B0DF42E00EF8D48 /* TestAddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddOfferView.swift; sourceTree = "<group>"; };
+		443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOfferView.swift; sourceTree = "<group>"; };
 		44553D3F2B039E0600040EDE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,7 +39,6 @@
 		449CC2612B14E66200DCB95C /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		44D404442B0CC92100D6D6C8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		44FBAA312AF2820500E46D5E /* AddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOfferView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,8 +148,7 @@
 		44D404402B0CAEA500D6D6C8 /* AddOfferView */ = {
 			isa = PBXGroup;
 			children = (
-				44FBAA312AF2820500E46D5E /* AddOfferView.swift */,
-				443AE9CF2B0DF42E00EF8D48 /* TestAddOfferView.swift */,
+				443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */,
 			);
 			path = AddOfferView;
 			sourceTree = "<group>";
@@ -229,14 +226,13 @@
 				446917A02AF24CC300CD4D55 /* OfferListView.swift in Sources */,
 				4475E7722AF51820003B0579 /* JobOffers.swift in Sources */,
 				4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */,
-				443AE9D02B0DF42E00EF8D48 /* TestAddOfferView.swift in Sources */,
+				443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */,
 				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
 				449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */,
 				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
 				44553D402B039E0600040EDE /* Color.swift in Sources */,
-				44FBAA322AF2820500E46D5E /* AddOfferView.swift in Sources */,
 				446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */,
 				44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */,
 			);

@@ -1,147 +1,149 @@
-//import SwiftUI
-//
-//struct AddOfferView: View {
-//    @Environment(\.dismiss) var dismiss
-//    @EnvironmentObject var model: OfferViewModel
-//
-//    // MARK: PROPERTIES
-//    @State private var companyName = String()
-//    @State private var jobTitle = String()
-//    @State private var urlOffer = String()
-//    @State private var notes = String()
-//
-//    @State private var shouldWorkRemotely = false
-//
-//    @State private var dateOfSentCV = Date()
-//    @State private var reply = false
-//    @State private var dateOfReply = Date()
-//
-//    @State private var firstRoundOfInterview = false
-//    @State private var dateOfFirstRoundOfInterview = Date()
-//
-//    @State private var secondRoundOfInterview = false
-//    @State private var dateOfSecondRoundOfInterview = Date()
-//
-//    @State private var thirdRoundOfInterview = false
-//    @State private var dateOfThirdRoundOfInterview = Date()
-//
-//    let decision = ["přijat", "zamítnuto", "bez odpovědi"]
-//    @State private var selectedDecision = String()
-//
-//    @State private var fullTextOffer = String()
-//    let startingDate = Date.distantPast
-//    let endingDate = Date.distantFuture
-//
-//    // MARK: - BODY
-//    var body: some View {
-//        NavigationStack {
-//            Form {
-//                Section {
-//                    TextField("Název firmy", text: $companyName)
-//                    TextField("Název pozice", text: $jobTitle)
-//                    TextField("URL inzerátu", text: $urlOffer)
-//                    TextField("Poznámka", text: $notes)
-//                } header: {
-//                    Text("Info")
-//                }
-//
-//                Toggle("Možnost remote", isOn: $shouldWorkRemotely)
-//
-//                Section {
-//                    DatePicker(
-//                        selection: $dateOfSentCV,
-//                        in: startingDate...endingDate,
-//                        displayedComponents: .date) {
-//                            Text("Odeslané CV")
-//                        }
-//
-//                } header: {
-//                    Text("Datum")
-//                }
-//
-//                Toggle("Odpověď", isOn: $reply)
-//                if reply {
-//                    DatePicker(
-//                        selection: $dateOfReply,
-//                        in: startingDate...endingDate,
-//                        displayedComponents: .date) {
-//                            Text("Datum odpovědi")
-//                        }
-//                }
-//
-//                Section {
-//                    Toggle("Pozvání na 1. kolo pohovoru", isOn: $firstRoundOfInterview)
-//                    if firstRoundOfInterview {
-//
-//                        DatePicker(
-//                            selection: $dateOfFirstRoundOfInterview,
-//                            in: startingDate...endingDate,
-//                            displayedComponents: .date) {
-//                                Text("1. kolo pohovoru")
-//                            }
-//                    }
-//                }
-//
-//                Section {
-//                    Toggle("Pozvání na 2. kolo pohovru", isOn: $secondRoundOfInterview)
-//                    if secondRoundOfInterview {
-//                        DatePicker(
-//                            selection: $dateOfSecondRoundOfInterview,
-//                            in: startingDate...endingDate,
-//                            displayedComponents: .date) {
-//                                Text("2. kolo pohovoru")
-//                            }
-//                    }
-//                }
-//
-//                    Picker("Rozhodnutí", selection: $selectedDecision) {
-//                        ForEach(decision, id: \.self) {
-//                            Text($0)
-//                        }
-//                    }
-//                    .pickerStyle(.segmented)
-//
-//                Section {
-//                    TextEditor(text: $fullTextOffer)
-//                } header: {
-//                    Text("Celý text inzerátu")
-//                }
-//            }
-//            .navigationTitle("Přidat záznam")
-//            .toolbar {
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Button {
-//                        addOffer()
-//                        dismiss()
-//                    } label: {
-//                        Text("Uložit")
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    func addOffer() {
-//        let newOffer = JobOffer(
-//            companyName: companyName,
-//            jobTitle: jobTitle,
-//            urlOffer: urlOffer,
-//            notes: notes,
-//            dateOfSentCV: dateOfSentCV,
-//            dateOfReply: dateOfReply,
-//            dateOfFirstRoundInterview: dateOfFirstRoundOfInterview,
-//            dateOfSecondRoundInterview: dateOfSecondRoundOfInterview,
-//            fullTextOffer: fullTextOffer)
-//
-//        model.jobOffers.append(newOffer)
-//        print(model.jobOffers)
-//
-//    }
-//}
-//
-//
-//// MARK: - PREVIEW
-//#Preview {
-//    AddOfferView()
-//        .environmentObject(OfferViewModel())
-//}
+import SwiftUI
+
+struct AddOfferView: View {
+    @Environment(\.dismiss) 
+    var backToListView
+    @EnvironmentObject var model: OfferViewModel
+
+    // MARK: - BODY
+    var body: some View {
+        NavigationStack {
+            Form {
+                offerInfoSection
+                dateOfSendAndReplyCv
+                dateOfInterviews
+                statusPicker
+                fulltextOfferEditor
+            }
+            .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
+            .toolbar {
+                if let selectedOffer = model.selectedOffer {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            model.updateOffer(model.editedOffer(selectedOffer))
+                            backToListView()
+                        } label: {
+                            Text("Aktualizovat")
+                        }
+                    }
+                } else {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            model.addOffer()
+                            backToListView()
+                        } label: {
+                            Text("Uložit")
+                        }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            if let selectedOffer = model.selectedOffer {
+                model.fetchOfferToForm(selectedOffer)
+            }
+        }
+    }
+}
+
+// MARK: - EXTENSION
+extension AddOfferView {
+    private var offerInfoSection: some View {
+        Section {
+            TextField("Název firmy", text: $model.companyName)
+            TextField("Název pozice", text: $model.jobTitle)
+            TextField("URL inzerátu", text: $model.urlOffer)
+            TextField("Poznámka", text: $model.notes)
+            Toggle("Možnost remote", isOn: $model.shouldWorkRemotely)
+        } header: {
+            Text("Info")
+        }
+    }
+
+    private var dateOfSendAndReplyCv: some View {
+        Group {
+            Section {
+                DatePicker(
+                    selection: $model.dateOfSentCV,
+                    in: model.startingDate...model.endingDate,
+                    displayedComponents: .date) {
+                        Text("Odeslané CV")
+                    }
+                Toggle("Odpověď", isOn: $model.reply)
+                if model.reply {
+                    DatePicker(
+                        selection: $model.dateOfReply,
+                        in: model.startingDate...model.endingDate,
+                        displayedComponents: .date) {
+                            Text("Datum odpovědi")
+                        }
+                }
+            } header: {
+                Text("Datumy")
+            }
+        }
+    }
+
+    private var dateOfInterviews: some View {
+        Section {
+            Toggle("Pozvání na 1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
+            if model.firstRoundOfInterview {
+                DatePicker(
+                    selection: $model.dateOfFirstRoundOfInterview,
+                    in: model.startingDate...model.endingDate,
+                    displayedComponents: .date) {
+                        Text("1. kolo pohovoru")
+                    }
+            }
+
+            Toggle("Pozvání na 2. kolo pohovoru", isOn: $model.secondRoundOfInterview)
+            if model.secondRoundOfInterview {
+                DatePicker(
+                    selection: $model.dateOfSecondRoundOfInterview,
+                    in: model.startingDate...model.endingDate,
+                    displayedComponents: .date) {
+                        Text("2. kolo pohovoru")
+                    }
+            }
+
+            Toggle("Pozvání na 3. kolo pohovoru", isOn: $model.thirdRoundOfInterview)
+            if model.thirdRoundOfInterview {
+                DatePicker(
+                    selection: $model.dateOfThirdRoundOfInterview,
+                    in: model.startingDate...model.endingDate,
+                    displayedComponents: .date) {
+                        Text("3. kolo pohovoru")
+                    }
+            }
+        } header: {
+            Text("Pohovory")
+        }
+    }
+
+    private var statusPicker: some View {
+        Section {
+            Picker("Status", selection: $model.selectedStatus) {
+                ForEach(model.status, id: \.self) {
+                    Text($0)
+                }
+            }
+            .pickerStyle(.menu)
+        } header: {
+            Text("Status")
+        }
+    }
+
+    private var fulltextOfferEditor: some View {
+        Section {
+            TextEditor(text: $model.fullTextOffer)
+        } header: {
+            Text("Celý text inzerátu")
+        }
+    }
+}
+
+// MARK: - PREVIEW
+#Preview {
+    AddOfferView()
+        .environmentObject(OfferViewModel())
+}
