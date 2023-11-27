@@ -122,12 +122,7 @@ extension AddOfferView {
 
     private var statusPicker: some View {
         Section {
-            Picker("Status", selection: $model.selectedStatus) {
-                ForEach(model.status, id: \.self) {
-                    Text($0)
-                }
-            }
-            .pickerStyle(.menu)
+            Text("\(model.numberOfDaysSinceSendingCv()) dní bez odpovědi")
         } header: {
             Text("Status")
         }

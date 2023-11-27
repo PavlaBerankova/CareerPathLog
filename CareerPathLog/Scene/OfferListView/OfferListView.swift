@@ -8,7 +8,7 @@ struct OfferListView: View {
 
     var body: some View {
         NavigationStack {
-            StatusBarView(countSendCV: 0, countInProcess: 0, countRejected: 0, countInterview: 0)
+            StatusBarView(countSendCV: model.cvSentCounter, countAccepted: model.acceptedCounter, countRejected: model.rejectedCounter, countInterview: model.interviewCounter)
             Spacer()
 
             Group {

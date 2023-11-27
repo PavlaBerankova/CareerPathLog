@@ -24,6 +24,13 @@ class OfferViewModel: ObservableObject {
     @Published var selectedStatus = String()
     @Published var fullTextOffer = String()
 
+    @Published var cvSentCounter = 0
+    @Published var interviewCounter = 0
+    @Published var rejectedCounter = 0
+    @Published var acceptedCounter = 0
+
+    @Published var currentStatus = String()
+
     let startingDate = Date.distantPast
     let endingDate = Date.distantFuture
     let status = ["CV odesláno", "pozvání na pohovor", "zamítnuto", "1. týden bez odpovědi", "2. týdny bez odpovědi", "pracovní nabídka"]
@@ -82,6 +89,7 @@ class OfferViewModel: ObservableObject {
                 fullTextOffer: fullTextOffer)
 
             jobOffers.append(newOffer)
+            cvSentCounter += 1
         }
 
     // Fill the form with existing offer
@@ -100,4 +108,10 @@ class OfferViewModel: ObservableObject {
             dateOfSecondRoundOfInterview = offer.dateOfSecondRoundInterview ?? Date.now
             fullTextOffer = offer.fullTextOffer ?? ""
         }
+
+    func numberOfDaysSinceSendingCv() -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: dateOfSentCV, to: Date.now)
+        return abs(components.day!)
+    }
 }
