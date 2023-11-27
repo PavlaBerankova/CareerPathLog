@@ -31,88 +31,79 @@ struct JobOfferCardView: View {
 
     // MARK: - BODY
     var body: some View {
-        if jobOfferRejected {
-            jobOfferCard
-                .overlay {
-                    Image("rejected")
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundStyle(.red)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 300)
-                        .padding(20)
-            }
-        } else {
-            jobOfferCard
-        }
+        jobOfferCard
     }
 }
 
 extension JobOfferCardView {
     private var jobOfferCard: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 20) {
-                // SQUARE WITH DATE
-                VStack(alignment: .leading) {
-                    Text("\(dateOfSentCV.formatted(.dateTime.day().month()))")
-                    Text("\(dateOfSentCV.formatted(.dateTime.year()))")
-                }
-                    .font(.headline)
-                    .bold()
-                    .foregroundStyle(textColor)
-                    //.padding()
-//                    .background(RoundedRectangle(cornerRadius: 0)
-//                        .border(textColor)
-//                        .foregroundStyle(.clear)
-//                    )
-
-                // COMPANY AND JOB TITLE
-                VStack(alignment: .leading) {
-                    Text(companyName)
-                        .font(.title2)
-                        .bold()
-                    Text(jobTitle)
-                        .font(.footnote)
-                }
-                Spacer()
-//                Button {
-//                    
-//                } label: {
-//                    Image(systemName: "pencil")
-//                        .resizable()
-//                        .frame(width: 20, height: 20)
-//                        .foregroundStyle(textColor)
-//                .padding(.trailing, 5)
-//                .padding(.bottom, 40)
-//                }
-            }
-            .foregroundStyle(textColor)
-
-            // INFO ROWS
-            VStack(alignment: .leading) {
-//                if let urlOffer = urlOffer {
-//                    Link("Přejít na inzerát", destination: URL(string: urlOffer)!)
-//                        .foregroundStyle(Color.theme.link)
-//                }
-                Text("Počet dní od odeslání: \(numberOfDaysSinceSendingCv)")
-//                if let notes = notes {
-//                    Text("Poznámka: " + notes)
-//                }
-Divider()
-                // PROGRESS BAR
-                ProgressView(value: 0.25) {
-                    Text("CV odesláno")
-                        .font(.footnote)
-                }
-                //.padding(.vertical)
-            }
-            .foregroundStyle(textColor)
-            .padding(.top, 5)
+            infoTitle
+            infoRow
+                .foregroundStyle(textColor)
+                .padding(.top, 5)
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(backgroundColor.opacity(0.8))
         )
+    }
+
+    private var infoTitle: some View {
+        HStack(spacing: 20) {
+            VStack(alignment: .leading) {
+                Text(companyName)
+                    .font(.body)
+                    .fontWeight(.bold)
+                Text(jobTitle)
+                    .font(.callout)
+                    .fontWeight(.medium)
+            }
+            .foregroundStyle(textColor)
+            Spacer()
+
+            VStack {
+                Text("\(dateOfSentCV.formatted(.dateTime.day().month().year()))")
+                    .font(.callout)
+                Spacer()
+            }
+        }
+        .foregroundStyle(textColor)
+    }
+
+    private var infoRow: some View {
+        VStack(alignment: .leading) {
+            if let notes = notes {
+                Text("Poznámka: \(notes)")
+                    .font(.footnote)
+            }
+
+            HStack {
+                Text("\(numberOfDaysSinceSendingCv) dní bez odpovědi")
+                    .font(.footnote)
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .background(.gray.opacity(0.2))
+                    .cornerRadius(25)
+                Spacer()
+
+//                    Menu {
+//                        Button(action: {}, label: {
+//                            Text("Upravit záznam")
+//                        })
+//                        Button(action: {}, label: {
+//                            Text("Přejít na inzerát")
+//                        })
+//                        Button(action: {}, label: {
+//                            Text("Zobrazit celý text inzerátu")
+//                        })
+//
+//                    } label: {
+//                    Image(systemName: "ellipsis")
+//                }
+            }
+            .padding(.top, 5)
+        }
     }
 }
 

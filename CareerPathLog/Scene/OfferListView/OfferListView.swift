@@ -27,10 +27,28 @@ struct OfferListView: View {
                                 urlOffer: offer.urlOffer,
                                 notes: offer.notes,
                                 dateOfSentCV: offer.dateOfSentCV)
-                            .onTapGesture {
-                                model.selectedOffer = offer
-                                showAddView.toggle()
+                            .overlay(alignment: .bottomTrailing) {
+                                Menu {
+                                    Button(action: {}, label: {
+                                        Text("Upravit záznam")
+                                    })
+                                    Button(action: {}, label: {
+                                        Text("Přejít na inzerát")
+                                    })
+                                    Button(action: {}, label: {
+                                        Text("Zobrazit celý text inzerátu")
+                                    })
+                                } label: {
+                                    Image(systemName: "ellipsis")
+                                        .padding(20)
+                                        .padding(.bottom, 5)
+                                        .foregroundStyle(.black)
+                                }
                             }
+//                            .onTapGesture {
+//                                model.selectedOffer = offer
+//                                showAddView.toggle()
+//                            }
                         }
                         .onDelete(perform: model.deleteItem)
                     }
