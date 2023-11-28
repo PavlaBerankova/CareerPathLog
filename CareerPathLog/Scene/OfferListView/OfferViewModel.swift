@@ -43,6 +43,8 @@ class OfferViewModel: ObservableObject {
             }
         }
         jobOffers = []
+
+        resetToDefaultValues()
     }
 
     func updateOffer(_ updatedOffer: JobOffer) {
@@ -113,5 +115,25 @@ class OfferViewModel: ObservableObject {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.day], from: dateOfSentCV, to: Date.now)
         return abs(components.day!)
+    }
+
+    func resetToDefaultValues() {
+        selectedOffer = nil
+        companyName = String()
+        jobTitle = String()
+        urlOffer = String()
+        notes = String()
+        shouldWorkRemotely = false
+        dateOfSentCV = Date()
+        reply = false
+        dateOfReply = Date()
+        firstRoundOfInterview = false
+        dateOfFirstRoundOfInterview = Date()
+        secondRoundOfInterview = false
+        dateOfSecondRoundOfInterview = Date()
+        thirdRoundOfInterview = false
+        dateOfThirdRoundOfInterview = Date()
+        selectedStatus = String()
+        fullTextOffer = String()
     }
 }

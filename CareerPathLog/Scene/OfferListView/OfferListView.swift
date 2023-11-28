@@ -79,7 +79,7 @@ struct OfferListView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        model.selectedOffer = nil
+                        model.resetToDefaultValues()
                         showAddView.toggle()
                         print(model.selectedOffer.debugDescription)
                     } label: {
