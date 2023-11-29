@@ -40,7 +40,7 @@ struct StatusBarView: View {
             .cornerRadius(10)
 
             VStack(spacing: 10) {
-                Text("nabídek")
+                Text("nabídky")
                     .font(.caption2)
                 Text("\(countInterview)")
                     .font(.headline)

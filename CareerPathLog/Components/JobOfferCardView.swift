@@ -57,6 +57,7 @@ extension JobOfferCardView {
                     .fontWeight(.bold)
                 Text(jobTitle)
                     .font(.callout)
+                    .lineLimit(2)
                     .fontWeight(.medium)
             }
             .foregroundStyle(textColor)

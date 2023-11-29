@@ -24,7 +24,6 @@ class OfferViewModel: ObservableObject {
     @Published var selectedStatus = String()
     @Published var fullTextOffer = String()
 
-    @Published var cvSentCounter = 0
     @Published var interviewCounter = 0
     @Published var rejectedCounter = 0
     @Published var acceptedCounter = 0
@@ -33,7 +32,6 @@ class OfferViewModel: ObservableObject {
 
     let startingDate = Date.distantPast
     let endingDate = Date.distantFuture
-    let status = ["CV odesláno", "pozvání na pohovor", "zamítnuto", "1. týden bez odpovědi", "2. týdny bez odpovědi", "pracovní nabídka"]
 
     init() {
         if let savedOffers = UserDefaults.standard.data(forKey: "Offers") {
@@ -91,7 +89,6 @@ class OfferViewModel: ObservableObject {
                 fullTextOffer: fullTextOffer)
 
             jobOffers.append(newOffer)
-            cvSentCounter += 1
         }
 
     // Fill the form with existing offer
