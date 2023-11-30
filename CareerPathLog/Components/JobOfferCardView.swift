@@ -7,7 +7,7 @@ struct JobOfferCardView: View {
     let urlOffer: String?
     let notes: String?
     let dateOfSentCV: Date
-    var jobOfferRejected = false
+    var statusTitle: String
 
     var numberOfDaysSinceSendingCv: Int {
         let calendar = Calendar.current
@@ -40,8 +40,7 @@ extension JobOfferCardView {
         LazyVStack(alignment: .leading, spacing: 0) {
             infoTitle
             infoRow
-                .foregroundStyle(textColor)
-                .padding(.top, 5)
+            statusText
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10)
@@ -77,41 +76,38 @@ extension JobOfferCardView {
             if let notes = notes {
                 Text("Poznámka: \(notes)")
                     .font(.footnote)
+                    .foregroundStyle(textColor)
+                    .padding(.top, 10)
             }
-
-            HStack {
-                Text("\(numberOfDaysSinceSendingCv) dní bez odpovědi")
-                    .font(.footnote)
-                    .padding(5)
-                    .padding(.horizontal, 5)
-                    .background(.gray.opacity(0.2))
-                    .cornerRadius(25)
-                Spacer()
-
-//                    Menu {
-//                        Button(action: {}, label: {
-//                            Text("Upravit záznam")
-//                        })
-//                        Button(action: {}, label: {
-//                            Text("Přejít na inzerát")
-//                        })
-//                        Button(action: {}, label: {
-//                            Text("Zobrazit celý text inzerátu")
-//                        })
-//
-//                    } label: {
-//                    Image(systemName: "ellipsis")
-//                }
-            }
-            .padding(.top, 5)
         }
+    }
+
+    private var statusText: some View {
+        HStack {
+            Text(statusTitle)
+                .font(.footnote)
+                .padding(5)
+                .padding(.horizontal, 5)
+                .background(.gray.opacity(0.2))
+                .cornerRadius(25)
+                .foregroundStyle(textColor)
+                .padding(.top, 10)
+            Spacer()
+        }
+        .padding(.top, 5)
     }
 }
 
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        JobOfferCardView(companyName: "NoName", jobTitle: "iOS vývojář", urlOffer: "https://www.futured.app/job/ios-developer/", notes: "stáž", dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 10, day: 1))!)
+        JobOfferCardView(
+            companyName: "NoName",
+            jobTitle: "iOS vývojář",
+            urlOffer: "https://www.futured.app/job/ios-developer/",
+            notes: "stáž",
+            dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 10, day: 1))!,
+            statusTitle: Status.noResponse.rawValue)
     }
     .padding(.horizontal)
 }

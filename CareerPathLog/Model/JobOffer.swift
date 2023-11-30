@@ -17,6 +17,14 @@ struct JobOffer: Codable {
     var thirdRoundInterview: Bool
     let dateOfThirdRoundInterview: Date?
     let fullTextOffer: String?
+    var status: Status = .noResponse
     var jobOfferRejected = false
+}
+
+enum Status: String, Codable {
+    case noResponse = "bez odpovědi"
+    case interview = "pozvání pohovor"
+    case rejected = "zamítnuto"
+    case accepted = "pracovní nabídka"
 }
 
