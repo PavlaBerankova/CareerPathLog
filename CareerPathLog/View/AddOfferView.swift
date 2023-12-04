@@ -4,6 +4,8 @@ struct AddOfferView: View {
     @Environment(\.dismiss) 
     var backToListView
     @EnvironmentObject var model: OfferViewModel
+    @State private var showAlert = false
+    @State private var alertTitle = ""
 
     // MARK: - BODY
     var body: some View {
@@ -11,7 +13,9 @@ struct AddOfferView: View {
             Form {
                 offerInfoSection
                 dateOfSendAndReplyCv
-                dateOfInterviews
+                if model.status == .interview {
+                    dateOfInterviews
+                }
                 // statusPicker
                 fulltextOfferEditor
             }
@@ -34,8 +38,12 @@ struct AddOfferView: View {
                 } else {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            model.addOffer()
-                            backToListView()
+                            if model.checkTextFieldIsNotEmpty() {
+                                model.addOffer()
+                                backToListView()
+                            } else {
+                                showAlert.toggle()
+                            }
                         } label: {
                             Text("Uložit")
                         }
@@ -43,7 +51,9 @@ struct AddOfferView: View {
                 }
             }
         }
-
+        .alert("Musíš vyplnit \(model.titleAlert).", isPresented: $showAlert) {
+            Button("OK", role: .cancel) { }
+        }
     }
 }
 
@@ -81,8 +91,6 @@ extension AddOfferView {
 
                     Section {
                         Picker("Typ odpovědi", selection: $model.status) {
-                            Text(Status.noResponse.rawValue)
-                                .tag(Status.noResponse)
                             Text(Status.interview.rawValue)
                                 .tag(Status.interview)
                             Text(Status.accepted.rawValue)

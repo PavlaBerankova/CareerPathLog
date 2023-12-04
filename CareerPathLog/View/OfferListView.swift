@@ -8,11 +8,7 @@ struct OfferListView: View {
 
     var body: some View {
         NavigationStack {
-            StatusBarView(
-                countSendCV: model.jobOffers.count,
-                countAccepted: model.acceptedCounter,
-                countRejected: model.rejectedCounter,
-                countInterview: model.interviewCounter)
+            statusBar
             Spacer()
 
                     List {
@@ -121,6 +117,18 @@ struct OfferListView: View {
     }
 }
 
+// MARK: - EXTENSION
+extension OfferListView {
+    private var statusBar: some View {
+        StatusBarView(
+            countSendCV: model.jobOffers.count,
+            countAccepted: model.jobOffers.filter { ($0.status == .accepted) }.count,
+            countRejected: model.jobOffers.filter { ($0.status == .rejected) }.count,
+            countInterview: model.jobOffers.filter { ($0.status == .interview) }.count)
+    }
+}
+
+// MARK: - PREVIEW
 #Preview {
         OfferListView()
             .environmentObject(OfferViewModel())

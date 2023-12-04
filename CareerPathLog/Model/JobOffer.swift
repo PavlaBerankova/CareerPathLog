@@ -23,7 +23,7 @@ struct JobOffer: Codable {
 
 enum Status: String, Codable {
     case noResponse = "bez odpovědi"
-    case interview = "pozvání pohovor"
+    case interview = "pozvání na pohovor"
     case rejected = "zamítnuto"
     case accepted = "pracovní nabídka"
 }

@@ -22,7 +22,7 @@ struct StatusBarView: View {
             VStack(spacing: 10) {
                 Text("pohovory")
                     .font(.caption2)
-                Text("\(countAccepted)")
+                Text("\(countInterview)")
                     .font(.headline)
             }
             .padding()
@@ -42,7 +42,7 @@ struct StatusBarView: View {
             VStack(spacing: 10) {
                 Text("nabídky")
                     .font(.caption2)
-                Text("\(countInterview)")
+                Text("\(countAccepted)")
                     .font(.headline)
             }
             .padding()

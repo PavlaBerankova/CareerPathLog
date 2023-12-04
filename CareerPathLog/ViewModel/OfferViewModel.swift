@@ -26,9 +26,7 @@ class OfferViewModel: ObservableObject {
     @Published var fullTextOffer = String()
     @Published var status: Status = .noResponse
 
-    @Published var interviewCounter = 0
-    @Published var rejectedCounter = 0
-    @Published var acceptedCounter = 0
+    @Published var titleAlert = ""
 
     let startingDate = Date.distantPast
     let endingDate = Date.distantFuture
@@ -179,6 +177,21 @@ class OfferViewModel: ObservableObject {
             return "zamítnuto"
         case .accepted:
            return "pracovní nabídka"
+        }
+    }
+
+    func checkTextFieldIsNotEmpty() -> Bool {
+        if companyName.isEmpty && jobTitle.isEmpty {
+            titleAlert = "název firmy a pozice"
+            return false
+        } else if jobTitle.isEmpty {
+            titleAlert = "název pozice"
+            return false
+        } else if companyName.isEmpty {
+            titleAlert = "název firmy"
+            return false
+        } else {
+            return true
         }
     }
 }
