@@ -4,6 +4,8 @@ struct AddOfferView: View {
     @Environment(\.dismiss) 
     var backToListView
     @EnvironmentObject var model: OfferViewModel
+    @State private var showAlert = false
+    @State private var alertTitle = ""
 
     // MARK: - BODY
     var body: some View {
@@ -11,8 +13,10 @@ struct AddOfferView: View {
             Form {
                 offerInfoSection
                 dateOfSendAndReplyCv
-                dateOfInterviews
-                statusPicker
+                if model.status == .interview {
+                    dateOfInterviews
+                }
+                // statusPicker
                 fulltextOfferEditor
             }
             .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
@@ -34,8 +38,12 @@ struct AddOfferView: View {
                 } else {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            model.addOffer()
-                            backToListView()
+                            if model.checkTextFieldIsNotEmpty() {
+                                model.addOffer()
+                                backToListView()
+                            } else {
+                                showAlert.toggle()
+                            }
                         } label: {
                             Text("Uložit")
                         }
@@ -43,7 +51,9 @@ struct AddOfferView: View {
                 }
             }
         }
-
+        .alert("Musíš vyplnit \(model.titleAlert).", isPresented: $showAlert) {
+            Button("OK", role: .cancel) { }
+        }
     }
 }
 
@@ -78,16 +88,35 @@ extension AddOfferView {
                         displayedComponents: .date) {
                             Text("Datum odpovědi")
                         }
+
+                    Section {
+                        Picker("Typ odpovědi", selection: $model.status) {
+                            Text(Status.interview.rawValue)
+                                .tag(Status.interview)
+                            Text(Status.accepted.rawValue)
+                                .tag(Status.accepted)
+                            Text(Status.rejected.rawValue)
+                                .tag(Status.rejected)
+                        }
+                        .pickerStyle(.menu)
+                    }
                 }
-            } header: {
-                Text("Datumy")
             }
+//                Picker("Status", selection: $model.status) {
+//                    Text("\(model.numberOfDaysSinceSendingCv()) \(model.declensionWordDay()) " + Status.noResponse.rawValue) // -> 2 dny bez odpovědi, 0 dní bez odpovědi
+//                        .tag(Status.noResponse)
+//                    Text(Status.rejected.rawValue)
+//                        .tag(Status.rejected)
+//                    Text(Status.accepted.rawValue)
+//                        .tag(Status.accepted)
+//                }
+//                .pickerStyle(.inline)
         }
     }
 
     private var dateOfInterviews: some View {
         Section {
-            Toggle("Pozvání na 1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
+            Toggle("1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
             if model.firstRoundOfInterview {
                 DatePicker(
                     selection: $model.dateOfFirstRoundOfInterview,
@@ -97,7 +126,7 @@ extension AddOfferView {
                     }
             }
 
-            Toggle("Pozvání na 2. kolo pohovoru", isOn: $model.secondRoundOfInterview)
+            Toggle("2. kolo pohovoru", isOn: $model.secondRoundOfInterview)
             if model.secondRoundOfInterview {
                 DatePicker(
                     selection: $model.dateOfSecondRoundOfInterview,
@@ -107,7 +136,7 @@ extension AddOfferView {
                     }
             }
 
-            Toggle("Pozvání na 3. kolo pohovoru", isOn: $model.thirdRoundOfInterview)
+            Toggle("3. kolo pohovoru", isOn: $model.thirdRoundOfInterview)
             if model.thirdRoundOfInterview {
                 DatePicker(
                     selection: $model.dateOfThirdRoundOfInterview,
@@ -121,13 +150,17 @@ extension AddOfferView {
         }
     }
 
-    private var statusPicker: some View {
-        Section {
-            Text("\(model.numberOfDaysSinceSendingCv()) dní bez odpovědi")
-        } header: {
-            Text("Status")
-        }
-    }
+//    private var statusPicker: some View {
+//        Section {
+//            if let selectedOffer = model.selectedOffer {
+//                Text(model.statusText(selectedOffer))
+//            } else {
+//                Text(Status.noResponse.rawValue)
+//            }
+//        } header: {
+//            Text("Status")
+//        }
+//    }
 
     private var fulltextOfferEditor: some View {
         Section {

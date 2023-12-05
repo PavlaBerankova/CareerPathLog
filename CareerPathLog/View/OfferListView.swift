@@ -8,22 +8,9 @@ struct OfferListView: View {
 
     var body: some View {
         NavigationStack {
-            StatusBarView(
-                countSendCV: model.jobOffers.count,
-                countAccepted: model.acceptedCounter,
-                countRejected: model.rejectedCounter,
-                countInterview: model.interviewCounter)
+            statusBar
             Spacer()
 
-            Group {
-                if model.jobOffers.isEmpty {
-                    Text("Žádné záznamy")
-                        .font(.title3)
-                        .opacity(0.5)
-                        .lineLimit(2)
-                        .padding(.horizontal)
-                    Spacer()
-                } else {
                     List {
                         ForEach(model.jobOffers, id: \.id) { offer in
                             JobOfferCardView(
@@ -31,7 +18,9 @@ struct OfferListView: View {
                                 jobTitle: offer.jobTitle,
                                 urlOffer: offer.urlOffer,
                                 notes: offer.notes,
-                                dateOfSentCV: offer.dateOfSentCV)
+                                dateOfSentCV: offer.dateOfSentCV,
+                                statusTitle: model.statusText(offer)
+                            )
                             .overlay(alignment: .bottomTrailing) {
                                 Menu {
                                     Button(action: {
@@ -87,14 +76,11 @@ struct OfferListView: View {
                     .navigationTitle("Seznam oslovených firem")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden(true)
-
-                }
-            }
             Spacer()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        model.resetToDefaultValues()
+                        model.clearForm()
                         showAddView.toggle()
                         print(model.selectedOffer.debugDescription)
                     } label: {
@@ -131,6 +117,18 @@ struct OfferListView: View {
     }
 }
 
+// MARK: - EXTENSION
+extension OfferListView {
+    private var statusBar: some View {
+        StatusBarView(
+            countSendCV: model.jobOffers.count,
+            countAccepted: model.jobOffers.filter { ($0.status == .accepted) }.count,
+            countRejected: model.jobOffers.filter { ($0.status == .rejected) }.count,
+            countInterview: model.jobOffers.filter { ($0.status == .interview) }.count)
+    }
+}
+
+// MARK: - PREVIEW
 #Preview {
         OfferListView()
             .environmentObject(OfferViewModel())
