@@ -124,7 +124,8 @@ extension OfferListView {
             countSendCV: model.jobOffers.count,
             countAccepted: model.jobOffers.filter { ($0.status == .accepted) }.count,
             countRejected: model.jobOffers.filter { ($0.status == .rejected) }.count,
-            countInterview: model.jobOffers.filter { ($0.status == .interview) }.count)
+            countInterview: model.jobOffers.filter { ($0.status == .interview) }.count
+        )
     }
 }
 

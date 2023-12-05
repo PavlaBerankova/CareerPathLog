@@ -12,11 +12,11 @@ struct AddOfferView: View {
         NavigationStack {
             Form {
                 offerInfoSection
-                dateOfSendAndReplyCv
+                contacts
+                dates
                 if model.status == .interview {
-                    dateOfInterviews
+                    jobInterviews
                 }
-                // statusPicker
                 fulltextOfferEditor
             }
             .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
@@ -64,21 +64,31 @@ extension AddOfferView {
             TextField("Název firmy", text: $model.companyName)
             TextField("Název pozice", text: $model.jobTitle)
             TextField("URL inzerátu", text: $model.urlOffer)
+            TextField("Mzda", text: $model.salary)
             TextField("Poznámka", text: $model.notes)
-            Toggle("Možnost remote", isOn: $model.shouldWorkRemotely)
         } header: {
             Text("Info")
         }
     }
 
-    private var dateOfSendAndReplyCv: some View {
+    private var contacts: some View {
+        Section {
+            TextField("Kontaktní osoba", text: $model.contactPerson)
+            TextField("Email", text: $model.email)
+            TextField("Telefon", text: $model.phoneNumber)
+        } header: {
+            Text("Kontakty")
+        }
+    }
+
+    private var dates: some View {
         Group {
             Section {
                 DatePicker(
                     selection: $model.dateOfSentCV,
                     in: model.startingDate...model.endingDate,
                     displayedComponents: .date) {
-                        Text("Odeslané CV")
+                        Text("CV odesláno dne")
                     }
                 Toggle("Odpověď", isOn: $model.reply)
                 if model.reply {
@@ -91,6 +101,8 @@ extension AddOfferView {
 
                     Section {
                         Picker("Typ odpovědi", selection: $model.status) {
+                            Text(Status.noResponse.rawValue)
+                                .tag(Status.noResponse)
                             Text(Status.interview.rawValue)
                                 .tag(Status.interview)
                             Text(Status.accepted.rawValue)
@@ -102,19 +114,10 @@ extension AddOfferView {
                     }
                 }
             }
-//                Picker("Status", selection: $model.status) {
-//                    Text("\(model.numberOfDaysSinceSendingCv()) \(model.declensionWordDay()) " + Status.noResponse.rawValue) // -> 2 dny bez odpovědi, 0 dní bez odpovědi
-//                        .tag(Status.noResponse)
-//                    Text(Status.rejected.rawValue)
-//                        .tag(Status.rejected)
-//                    Text(Status.accepted.rawValue)
-//                        .tag(Status.accepted)
-//                }
-//                .pickerStyle(.inline)
         }
     }
 
-    private var dateOfInterviews: some View {
+    private var jobInterviews: some View {
         Section {
             Toggle("1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
             if model.firstRoundOfInterview {
@@ -122,7 +125,7 @@ extension AddOfferView {
                     selection: $model.dateOfFirstRoundOfInterview,
                     in: model.startingDate...model.endingDate,
                     displayedComponents: .date) {
-                        Text("1. kolo pohovoru")
+                        Text("Datum pohovoru")
                     }
             }
 
@@ -132,7 +135,7 @@ extension AddOfferView {
                     selection: $model.dateOfSecondRoundOfInterview,
                     in: model.startingDate...model.endingDate,
                     displayedComponents: .date) {
-                        Text("2. kolo pohovoru")
+                        Text("Datum pohovoru")
                     }
             }
 
@@ -142,25 +145,13 @@ extension AddOfferView {
                     selection: $model.dateOfThirdRoundOfInterview,
                     in: model.startingDate...model.endingDate,
                     displayedComponents: .date) {
-                        Text("3. kolo pohovoru")
+                        Text("Datum pohovoru")
                     }
             }
         } header: {
-            Text("Pohovory")
+            Text("Výběrové řízení")
         }
     }
-
-//    private var statusPicker: some View {
-//        Section {
-//            if let selectedOffer = model.selectedOffer {
-//                Text(model.statusText(selectedOffer))
-//            } else {
-//                Text(Status.noResponse.rawValue)
-//            }
-//        } header: {
-//            Text("Status")
-//        }
-//    }
 
     private var fulltextOfferEditor: some View {
         Section {

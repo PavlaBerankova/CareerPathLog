@@ -11,8 +11,11 @@ class OfferViewModel: ObservableObject {
     @Published var companyName = String()
     @Published var jobTitle = String()
     @Published var urlOffer = String()
+    @Published var salary = String()
     @Published var notes = String()
-    @Published var shouldWorkRemotely = false
+    @Published var contactPerson = String()
+    @Published var email = String()
+    @Published var phoneNumber = String()
     @Published var dateOfSentCV = Date()
     @Published var reply = false
     @Published var dateOfReply = Date()
@@ -57,9 +60,12 @@ class OfferViewModel: ObservableObject {
         return JobOffer(id: selectedOffer.id, 
                         companyName: companyName,
                         jobTitle: jobTitle,
-                        urlOffer: urlOffer,
+                        urlOffer: urlOffer, 
+                        salary: salary,
                         notes: notes,
-                        remote: shouldWorkRemotely,
+                        contactPerson: contactPerson,
+                        email: email,
+                        phoneNumber: phoneNumber,
                         dateOfSentCV: dateOfSentCV,
                         reply: reply,
                         dateOfReply: dateOfReply,
@@ -89,8 +95,11 @@ class OfferViewModel: ObservableObject {
                 companyName: companyName,
                 jobTitle: jobTitle,
                 urlOffer: urlOffer,
+                salary: salary, 
                 notes: notes,
-                remote: shouldWorkRemotely,
+                contactPerson: contactPerson,
+                email: email,
+                phoneNumber: phoneNumber,
                 dateOfSentCV: dateOfSentCV,
                 reply: reply,
                 dateOfReply: dateOfReply,
@@ -112,8 +121,11 @@ class OfferViewModel: ObservableObject {
             companyName = offer.companyName
             jobTitle = offer.jobTitle
             urlOffer = offer.urlOffer ?? ""
+            salary = offer.salary ?? ""
             notes = offer.notes ?? ""
-            shouldWorkRemotely = offer.remote
+            contactPerson = offer.contactPerson ?? ""
+            email = offer.email ?? ""
+            phoneNumber = offer.phoneNumber ?? ""
             dateOfSentCV = offer.dateOfSentCV
             reply = offer.reply
             dateOfReply = offer.dateOfReply ?? Date.now
@@ -149,8 +161,11 @@ class OfferViewModel: ObservableObject {
         companyName = String()
         jobTitle = String()
         urlOffer = String()
+        salary = String()
         notes = String()
-        shouldWorkRemotely = false
+        contactPerson = String()
+        email = String()
+        phoneNumber = String()
         dateOfSentCV = Date()
         reply = false
         dateOfReply = Date()

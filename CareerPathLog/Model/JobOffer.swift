@@ -5,8 +5,11 @@ struct JobOffer: Codable {
     let companyName: String
     let jobTitle: String
     let urlOffer: String?
+    let salary: String?
     let notes: String?
-    var remote: Bool
+    let contactPerson: String?
+    let email: String?
+    let phoneNumber: String?
     let dateOfSentCV: Date
     var reply: Bool
     let dateOfReply: Date?
