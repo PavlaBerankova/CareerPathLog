@@ -180,9 +180,7 @@ class OfferViewModel: ObservableObject {
         status = .noResponse
     }
 
-
-    // func declensionWordDay() -> String (dny, dní)
-    func statusText(_ offer: JobOffer) -> String { // func numberOfDaysSinceSendingCv(typ: Date) -> Int
+    func statusText(_ offer: JobOffer) -> String {
         switch offer.status {
         case .noResponse:
             return "\(declensionWordDay(numberOfDaysSinceSendingCv(from: offer.dateOfSentCV))) bez odpovědi"
@@ -207,6 +205,12 @@ class OfferViewModel: ObservableObject {
             return false
         } else {
             return true
+        }
+    }
+
+    func openJobOfferUrl() {
+        if let urlOffer = selectedOffer?.urlOffer, !urlOffer.isEmpty {
+            UIApplication.shared.open(URL(string: urlOffer)!)
         }
     }
 }

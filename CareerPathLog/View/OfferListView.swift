@@ -3,67 +3,21 @@ import SwiftUI
 struct OfferListView: View {
     @EnvironmentObject var model: OfferViewModel
     @State private var showAddView = false
+    @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var showingAlert = false
+    @State private var showContacts = false
 
     var body: some View {
         NavigationStack {
             statusBar
             Spacer()
-
                     List {
                         ForEach(model.jobOffers, id: \.id) { offer in
                             JobOfferCardView(
-                                companyName: offer.companyName,
-                                jobTitle: offer.jobTitle,
-                                urlOffer: offer.urlOffer,
-                                notes: offer.notes,
-                                dateOfSentCV: offer.dateOfSentCV,
-                                statusTitle: model.statusText(offer)
-                            )
-                            .overlay(alignment: .bottomTrailing) {
-                                Menu {
-                                    Button(action: {
-                                        model.selectedOffer = offer
-                                        showAddView.toggle()
-                                    }, label: {
-                                        HStack {
-                                            Text("Upravit záznam")
-                                            Image(systemName: "square.and.pencil")
-                                        }
-                                    })
-
-                                    Button(action: {
-                                        model.selectedOffer = offer
-                                        if let url = URL(string: model.selectedOffer?.urlOffer ?? "") {
-                                            UIApplication.shared.open(url)
-                                        } else {
-                                            showingAlert.toggle()
-                                            print(model.selectedOffer?.urlOffer)
-                                        }
-                                    }, label: {
-                                        HStack {
-                                            Text("Přejít na inzerát")
-                                            Image(systemName: "globe")
-                                        }
-                                    })
-
-                                    Button(action: {
-                                        model.selectedOffer = offer
-                                        showFulltextOffer.toggle()
-                                    }, label: {
-                                        HStack {
-                                            Text("Celý text inzerátu")
-                                            Image(systemName: "note")
-                                        }
-                                    })
-                                } label: {
-                                    Image(systemName: "ellipsis")
-                                        .padding(20)
-                                        .padding(.bottom, 5)
-                                        .foregroundStyle(.black)
-                                }
-                            }
+                                jobOffer: offer,
+                                statusTitle: model.statusText(offer),
+                                contentMenu: menuButtons(offer))
 //                            .onTapGesture {
 //                                model.selectedOffer = offer
 //                                print("Toto je zvolený offer \(String(describing: model.selectedOffer))")
@@ -99,20 +53,62 @@ struct OfferListView: View {
         .sheet(isPresented: $showAddView) {
             AddOfferView()
         }
-        .sheet(isPresented: $showFulltextOffer) {
-            ScrollView {
-                if let fullTextoffer = model.selectedOffer?.fullTextOffer {
-                    if !fullTextoffer.isEmpty {
-                        Text(fullTextoffer)
-                            .padding(25)
-                    }  else {
-                            Text("Není tu žádný text")
-                                .font(.title)
-                                .opacity(0.2)
-                                .padding(.top, 150)
+        .sheet(isPresented: $showNotes) {
+                if let notes = model.selectedOffer?.notes, !notes.isEmpty {
+                    Text(notes)
+                        .padding(25)
+                } else {
+                    VStack(spacing: 50) {
+                        Text("Žádné poznámky")
+                            .bold()
+                        Image(systemName: "note.text")
+                            .resizable()
+                            .frame(width: 100, height: 100)
                     }
+                    .font(.title)
+                    .opacity(0.2)
+                    .padding(.top, 150)
+                }
+        }
+        .sheet(isPresented: $showContacts) {
+            ScrollView {
+                if ((model.selectedOffer?.contactPerson) != nil) || ((model.selectedOffer?.email) != nil) || ((model.selectedOffer?.phoneNumber) != nil) {
+                    ContactsView(name: model.selectedOffer?.contactPerson ?? "", email: model.selectedOffer?.email ?? "", phone: model.selectedOffer?.phoneNumber ?? "")
+                    } else {
+                        VStack(spacing: 50) {
+                            Text("Žádné kontakty")
+                                .bold()
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                        }
+                        .font(.title)
+                        .opacity(0.2)
+                        .padding(.top, 150)
                 }
             }
+            .presentationDetents([.medium])
+            .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showFulltextOffer) {
+            ScrollView {
+                if let fullTextoffer = model.selectedOffer?.fullTextOffer, !fullTextoffer.isEmpty {
+                        Text(fullTextoffer)
+                            .padding(25)
+                    } else {
+                        VStack(spacing: 50) {
+                            Text("Text inzerátu chybí")
+                                .bold()
+                            Image(systemName: "doc.plaintext")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                        }
+                        .font(.title)
+                        .opacity(0.2)
+                        .padding(.top, 150)
+                }
+            }
+            .presentationDragIndicator(.visible)
         }
     }
 }
@@ -126,6 +122,31 @@ extension OfferListView {
             countRejected: model.jobOffers.filter { ($0.status == .rejected) }.count,
             countInterview: model.jobOffers.filter { ($0.status == .interview) }.count
         )
+    }
+
+    private func menuButtons(_ offer: JobOffer) -> some View {
+        Group {
+            MenuButton(title: "Upravit inzerát", icon: "square.and.pencil", action: {
+                model.selectedOffer = offer
+                showAddView.toggle()
+            })
+            MenuButton(title: "Přejít na inzerát", icon: "globe", action: {
+                model.selectedOffer = offer
+                model.openJobOfferUrl()
+            })
+            MenuButton(title: "Zobrazit poznámku", icon: "note.text", action: { 
+                model.selectedOffer = offer
+                showNotes.toggle()
+            })
+            MenuButton(title: "Kontakt", icon: "person.circle", action: {
+                model.selectedOffer = offer
+                showContacts.toggle()
+            })
+            MenuButton(title: "Celý text inzerátu", icon: "doc.plaintext", action: {
+                model.selectedOffer = offer
+                showFulltextOffer.toggle()
+            })
+        }
     }
 }
 

@@ -1,17 +1,14 @@
 import SwiftUI
 
-struct JobOfferCardView: View {
+struct JobOfferCardView<Content: View>: View {
     // MARK: - PROPERTIES
-    let companyName: String
-    let jobTitle: String
-    let urlOffer: String?
-    let notes: String?
-    let dateOfSentCV: Date
+    let jobOffer: JobOffer
     var statusTitle: String
+    var contentMenu: Content
 
     var numberOfDaysSinceSendingCv: Int {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: Date.now, to: dateOfSentCV)
+        let components = calendar.dateComponents([.day], from: Date.now, to: jobOffer.dateOfSentCV)
         return abs(components.day!)
     }
 
@@ -31,30 +28,28 @@ struct JobOfferCardView: View {
 
     // MARK: - BODY
     var body: some View {
-        jobOfferCard
-    }
-}
-
-extension JobOfferCardView {
-    private var jobOfferCard: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
             infoTitle
-            infoRow
-            statusText
+            HStack {
+                statusText
+                menuView
+            }
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(backgroundColor.opacity(0.8))
         )
     }
+}
 
+extension JobOfferCardView {
     private var infoTitle: some View {
         HStack(spacing: 20) {
             VStack(alignment: .leading) {
-                Text(companyName)
+                Text(jobOffer.companyName)
                     .font(.body)
                     .fontWeight(.bold)
-                Text(jobTitle)
+                Text(jobOffer.jobTitle)
                     .font(.callout)
                     .lineLimit(2)
                     .fontWeight(.medium)
@@ -62,24 +57,17 @@ extension JobOfferCardView {
             .foregroundStyle(textColor)
             Spacer()
 
-            VStack {
-                Text("\(dateOfSentCV.formatted(.dateTime.day().month().year()))")
+            VStack(alignment: .trailing) {
+                Text("\(jobOffer.dateOfSentCV.formatted(.dateTime.day().month().year()))")
                     .font(.callout)
+                if let salary = jobOffer.salary, !salary.isEmpty {
+                    Text(salary)
+                        .font(.footnote)
+                }
                 Spacer()
             }
         }
         .foregroundStyle(textColor)
-    }
-
-    private var infoRow: some View {
-        VStack(alignment: .leading) {
-            if let notes = notes {
-                Text("Poznámka: \(notes)")
-                    .font(.footnote)
-                    .foregroundStyle(textColor)
-                    .padding(.top, 10)
-            }
-        }
     }
 
     private var statusText: some View {
@@ -96,18 +84,22 @@ extension JobOfferCardView {
         }
         .padding(.top, 5)
     }
+
+    private var menuView: some View {
+        Menu {
+            contentMenu
+        } label: {
+            Image(systemName: "ellipsis")
+                .foregroundColor(textColor)
+                .padding(.top)
+        }
+    }
 }
 
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        JobOfferCardView(
-            companyName: "NoName",
-            jobTitle: "iOS vývojář",
-            urlOffer: "https://www.futured.app/job/ios-developer/",
-            notes: "stáž",
-            dateOfSentCV: Calendar.current.date(from: DateComponents(year: 2023, month: 10, day: 1))!,
-            statusTitle: Status.noResponse.rawValue)
+        JobOfferCardView(jobOffer: JobOffer(companyName: "Google", jobTitle: "UX Designér", urlOffer: nil, salary: nil, notes: "Poznámka", contactPerson: "Alena Novotná", email: nil, phoneNumber: nil, dateOfSentCV: Date.now, reply: false, dateOfReply: nil, firstRoundInterview: false, dateOfFirstRoundInterview: nil, secondRoundInterview: false, dateOfSecondRoundInterview: nil, thirdRoundInterview: false, dateOfThirdRoundInterview: nil, fullTextOffer: nil), statusTitle: Status.noResponse.rawValue, contentMenu: Button("Test"){ })
     }
     .padding(.horizontal)
 }
