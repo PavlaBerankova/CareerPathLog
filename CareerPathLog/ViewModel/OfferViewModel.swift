@@ -13,9 +13,6 @@ class OfferViewModel: ObservableObject {
     @Published var urlOffer = String()
     @Published var salary = String()
     @Published var notes = String()
-    @Published var contactPerson = String()
-    @Published var email = String()
-    @Published var phoneNumber = String()
     @Published var dateOfSentCV = Date()
     @Published var reply = false
     @Published var dateOfReply = Date()
@@ -63,9 +60,6 @@ class OfferViewModel: ObservableObject {
                         urlOffer: urlOffer, 
                         salary: salary,
                         notes: notes,
-                        contactPerson: contactPerson,
-                        email: email,
-                        phoneNumber: phoneNumber,
                         dateOfSentCV: dateOfSentCV,
                         reply: reply,
                         dateOfReply: dateOfReply,
@@ -97,9 +91,6 @@ class OfferViewModel: ObservableObject {
                 urlOffer: urlOffer,
                 salary: salary, 
                 notes: notes,
-                contactPerson: contactPerson,
-                email: email,
-                phoneNumber: phoneNumber,
                 dateOfSentCV: dateOfSentCV,
                 reply: reply,
                 dateOfReply: dateOfReply,
@@ -123,9 +114,6 @@ class OfferViewModel: ObservableObject {
             urlOffer = offer.urlOffer ?? ""
             salary = offer.salary ?? ""
             notes = offer.notes ?? ""
-            contactPerson = offer.contactPerson ?? ""
-            email = offer.email ?? ""
-            phoneNumber = offer.phoneNumber ?? ""
             dateOfSentCV = offer.dateOfSentCV
             reply = offer.reply
             dateOfReply = offer.dateOfReply ?? Date.now
@@ -163,9 +151,6 @@ class OfferViewModel: ObservableObject {
         urlOffer = String()
         salary = String()
         notes = String()
-        contactPerson = String()
-        email = String()
-        phoneNumber = String()
         dateOfSentCV = Date()
         reply = false
         dateOfReply = Date()
@@ -190,7 +175,20 @@ class OfferViewModel: ObservableObject {
             return "zamítnuto"
         case .accepted:
            return "pracovní nabídka"
+        case .allStatus:
+            return "zobrazit vše"
         }
+    }
+
+    func roundOfInterview(_ offer: JobOffer) -> String? {
+        if offer.firstRoundInterview && offer.secondRoundInterview && offer.thirdRoundInterview {
+            return "3. kolo"
+        } else if offer.firstRoundInterview && offer.secondRoundInterview {
+            return "2. kolo"
+        } else if offer.firstRoundInterview {
+            return "1. kolo"
+        }
+        return nil
     }
 
     func checkTextFieldIsNotEmpty() -> Bool {
@@ -208,9 +206,21 @@ class OfferViewModel: ObservableObject {
         }
     }
 
-    func openJobOfferUrl() {
-        if let urlOffer = selectedOffer?.urlOffer, !urlOffer.isEmpty {
-            UIApplication.shared.open(URL(string: urlOffer)!)
+    func filter(by status: Status) -> [JobOffer] {
+        if status == .allStatus {
+            sortByDate(jobOffers)
+        } else {
+            sortByDate(jobOffers).filter { $0.status == status }
         }
+    }
+
+    func sortByDate(_ jobOffer: [JobOffer]) -> [JobOffer] {
+        jobOffer.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
+    }
+}
+
+extension Date {
+    func formattedDate() -> String {
+        self.formatted(.dateTime.day().month().year())
     }
 }

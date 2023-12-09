@@ -7,9 +7,6 @@ struct JobOffer: Codable {
     let urlOffer: String?
     let salary: String?
     let notes: String?
-    let contactPerson: String?
-    let email: String?
-    let phoneNumber: String?
     let dateOfSentCV: Date
     var reply: Bool
     let dateOfReply: Date?
@@ -29,5 +26,6 @@ enum Status: String, Codable {
     case interview = "pozvání na pohovor"
     case rejected = "zamítnuto"
     case accepted = "pracovní nabídka"
+    case allStatus = "vše"
 }
 

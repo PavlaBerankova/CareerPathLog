@@ -4,6 +4,7 @@ struct JobOfferCardView<Content: View>: View {
     // MARK: - PROPERTIES
     let jobOffer: JobOffer
     var statusTitle: String
+    var statusSubtitle: String?
     var contentMenu: Content
 
     var numberOfDaysSinceSendingCv: Int {
@@ -28,14 +29,14 @@ struct JobOfferCardView<Content: View>: View {
 
     // MARK: - BODY
     var body: some View {
-        LazyVStack(alignment: .leading, spacing: 0) {
-            infoTitle
-            HStack {
-                statusText
-                menuView
+            LazyVStack(alignment: .leading, spacing: 0) {
+                infoTitle
+                HStack {
+                    statusText
+                    menuView
+                }
             }
-        }
-        .padding()
+            .padding()
         .background(RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(backgroundColor.opacity(0.8))
         )
@@ -58,7 +59,7 @@ extension JobOfferCardView {
             Spacer()
 
             VStack(alignment: .trailing) {
-                Text("\(jobOffer.dateOfSentCV.formatted(.dateTime.day().month().year()))")
+                Text("\(jobOffer.dateOfSentCV.formattedDate())")
                     .font(.callout)
                 if let salary = jobOffer.salary, !salary.isEmpty {
                     Text(salary)
@@ -80,9 +81,18 @@ extension JobOfferCardView {
                 .cornerRadius(25)
                 .foregroundStyle(textColor)
                 .padding(.top, 10)
+            if statusSubtitle != nil {
+                Text(statusSubtitle!)
+                    .font(.footnote)
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .background(.gray.opacity(0.2))
+                    .cornerRadius(25)
+                    .foregroundStyle(textColor)
+                    .padding(.top, 10)
+            }
             Spacer()
         }
-        .padding(.top, 5)
     }
 
     private var menuView: some View {
@@ -90,6 +100,7 @@ extension JobOfferCardView {
             contentMenu
         } label: {
             Image(systemName: "ellipsis")
+                .font(.title2)
                 .foregroundColor(textColor)
                 .padding(.top)
         }
@@ -99,7 +110,7 @@ extension JobOfferCardView {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        JobOfferCardView(jobOffer: JobOffer(companyName: "Google", jobTitle: "UX Designér", urlOffer: nil, salary: nil, notes: "Poznámka", contactPerson: "Alena Novotná", email: nil, phoneNumber: nil, dateOfSentCV: Date.now, reply: false, dateOfReply: nil, firstRoundInterview: false, dateOfFirstRoundInterview: nil, secondRoundInterview: false, dateOfSecondRoundInterview: nil, thirdRoundInterview: false, dateOfThirdRoundInterview: nil, fullTextOffer: nil), statusTitle: Status.noResponse.rawValue, contentMenu: Button("Test"){ })
+        JobOfferCardView(jobOffer: JobOffer(companyName: "Google", jobTitle: "UX Designér", urlOffer: nil, salary: nil, notes: "Poznámka", dateOfSentCV: Date.now, reply: false, dateOfReply: nil, firstRoundInterview: false, dateOfFirstRoundInterview: nil, secondRoundInterview: false, dateOfSecondRoundInterview: nil, thirdRoundInterview: false, dateOfThirdRoundInterview: nil, fullTextOffer: nil), statusTitle: Status.interview.rawValue, statusSubtitle: "1.kolo", contentMenu: Button("Test"){ })
     }
-    .padding(.horizontal)
+     .padding(.horizontal)
 }

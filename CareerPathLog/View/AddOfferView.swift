@@ -12,11 +12,11 @@ struct AddOfferView: View {
         NavigationStack {
             Form {
                 offerInfoSection
-                contacts
                 dates
                 if model.status == .interview {
                     jobInterviews
                 }
+                notesEditor
                 fulltextOfferEditor
             }
             .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
@@ -65,19 +65,16 @@ extension AddOfferView {
             TextField("Název pozice", text: $model.jobTitle)
             TextField("URL inzerátu", text: $model.urlOffer)
             TextField("Mzda", text: $model.salary)
-            TextField("Poznámka", text: $model.notes)
         } header: {
             Text("Info")
         }
     }
 
-    private var contacts: some View {
+    private var notesEditor: some View {
         Section {
-            TextField("Kontaktní osoba", text: $model.contactPerson)
-            TextField("Email", text: $model.email)
-            TextField("Telefon", text: $model.phoneNumber)
+            TextEditor(text: $model.notes)
         } header: {
-            Text("Kontakty")
+            Text("Poznámky")
         }
     }
 
