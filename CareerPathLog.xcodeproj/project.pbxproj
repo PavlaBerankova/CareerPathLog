@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4423D2922B242047006F7EB6 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* MenuButton.swift */; };
-		4423D2942B242DBF006F7EB6 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2932B242DBF006F7EB6 /* ContactsView.swift */; };
+		4423D2922B242047006F7EB6 /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* MenuButtonView.swift */; };
 		443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */; };
 		44553D402B039E0600040EDE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D3F2B039E0600040EDE /* Color.swift */; };
 		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
@@ -23,11 +22,13 @@
 		449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CC2612B14E66200DCB95C /* StatusBarView.swift */; };
 		44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404442B0CC92100D6D6C8 /* RootView.swift */; };
 		44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */; };
+		44E5781B2B24FD070052346E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781A2B24FD070052346E /* Image.swift */; };
+		44E5781D2B2503F30052346E /* StatusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781C2B2503F30052346E /* StatusButtonView.swift */; };
+		44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781E2B2513ED0052346E /* NotificationCountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4423D2912B242047006F7EB6 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
-		4423D2932B242DBF006F7EB6 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		4423D2912B242047006F7EB6 /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 		443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOfferView.swift; sourceTree = "<group>"; };
 		44553D3F2B039E0600040EDE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
@@ -43,6 +44,9 @@
 		449CC2612B14E66200DCB95C /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		44D404442B0CC92100D6D6C8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		44E5781A2B24FD070052346E /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		44E5781C2B2503F30052346E /* StatusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonView.swift; sourceTree = "<group>"; };
+		44E5781E2B2513ED0052346E /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				44553D3F2B039E0600040EDE /* Color.swift */,
+				44E5781A2B24FD070052346E /* Image.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -120,8 +125,9 @@
 			children = (
 				4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */,
 				449CC2612B14E66200DCB95C /* StatusBarView.swift */,
-				4423D2912B242047006F7EB6 /* MenuButton.swift */,
-				4423D2932B242DBF006F7EB6 /* ContactsView.swift */,
+				4423D2912B242047006F7EB6 /* MenuButtonView.swift */,
+				44E5781C2B2503F30052346E /* StatusButtonView.swift */,
+				44E5781E2B2513ED0052346E /* NotificationCountView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -216,7 +222,9 @@
 				446917A02AF24CC300CD4D55 /* OfferListView.swift in Sources */,
 				4475E7722AF51820003B0579 /* JobOffers.swift in Sources */,
 				4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */,
+				44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */,
 				443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */,
+				44E5781B2B24FD070052346E /* Image.swift in Sources */,
 				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
 				449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */,
 				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,
@@ -224,9 +232,9 @@
 				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
 				44553D402B039E0600040EDE /* Color.swift in Sources */,
 				446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */,
-				4423D2922B242047006F7EB6 /* MenuButton.swift in Sources */,
+				4423D2922B242047006F7EB6 /* MenuButtonView.swift in Sources */,
+				44E5781D2B2503F30052346E /* StatusButtonView.swift in Sources */,
 				44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */,
-				4423D2942B242DBF006F7EB6 /* ContactsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +376,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -398,7 +406,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

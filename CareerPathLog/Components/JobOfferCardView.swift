@@ -2,29 +2,54 @@ import SwiftUI
 
 struct JobOfferCardView<Content: View>: View {
     // MARK: - PROPERTIES
-    let jobOffer: JobOffer
+    let companyName: String
+    let jobTitle: String
+    let salary: String?
+    let dateOfSentCv: Date
     var statusTitle: String
     var statusSubtitle: String?
     var contentMenu: Content
 
     var numberOfDaysSinceSendingCv: Int {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: Date.now, to: jobOffer.dateOfSentCV)
+        let components = calendar.dateComponents([.day], from: Date.now, to: dateOfSentCv)
         return abs(components.day!)
     }
-
     var textColor: Color {
-        if numberOfDaysSinceSendingCv <= 14{
-            return Color.theme.blackColor
+        if statusTitle == Status.rejected.rawValue {
+            return Color.white
+        } else if statusTitle == Status.noResponse.rawValue && numberOfDaysSinceSendingCv > 14 {
+            return Color.white
         }
-        return Color.theme.whiteColor
+        return Color.black
+
     }
 
-    var backgroundColor: Color {
-        if numberOfDaysSinceSendingCv <= 14 {
-            return Color.theme.mainColor.opacity(0.7)
+    var rowBackgroundColor: Color {
+        if statusTitle == Status.rejected.rawValue {
+            return Color.black
+        } else if statusTitle == Status.accepted.rawValue {
+            return Color.yellow
+        } else if statusTitle == Status.interview.rawValue {
+            return Color.yellow.opacity(0.4)
         }
-        return Color.theme.blackColor
+        return Color.black.opacity(0.07)
+    }
+
+    var statusBackgroundColor: Color {
+        if (statusTitle == Status.noResponse.rawValue) && (numberOfDaysSinceSendingCv > 14) {
+            return Color.black
+        } else if (statusTitle == Status.noResponse.rawValue) && (numberOfDaysSinceSendingCv <= 14) {
+            return Color.gray.opacity(0.2)
+        } else if statusTitle == Status.accepted.rawValue {
+            return Color.white.opacity(0.7)
+        } else if statusTitle == Status.interview.rawValue {
+            return Color.gray.opacity(0.2)
+        } else if statusTitle == Status.rejected.rawValue {
+            return Color.red
+        } else {
+            return Color.gray.opacity(0.2)
+        }
     }
 
     // MARK: - BODY
@@ -38,19 +63,20 @@ struct JobOfferCardView<Content: View>: View {
             }
             .padding()
         .background(RoundedRectangle(cornerRadius: 10)
-            .foregroundStyle(backgroundColor.opacity(0.8))
+            .foregroundStyle(rowBackgroundColor.opacity(0.8))
         )
     }
 }
 
+// MARK: - EXTENSION
 extension JobOfferCardView {
     private var infoTitle: some View {
         HStack(spacing: 20) {
             VStack(alignment: .leading) {
-                Text(jobOffer.companyName)
+                Text(companyName)
                     .font(.body)
                     .fontWeight(.bold)
-                Text(jobOffer.jobTitle)
+                Text(jobTitle)
                     .font(.callout)
                     .lineLimit(2)
                     .fontWeight(.medium)
@@ -59,9 +85,10 @@ extension JobOfferCardView {
             Spacer()
 
             VStack(alignment: .trailing) {
-                Text("\(jobOffer.dateOfSentCV.formattedDate())")
+                Text("\(dateOfSentCv.formattedDate())")
                     .font(.callout)
-                if let salary = jobOffer.salary, !salary.isEmpty {
+                    .bold()
+                if let salary = salary, !salary.isEmpty {
                     Text(salary)
                         .font(.footnote)
                 }
@@ -75,9 +102,10 @@ extension JobOfferCardView {
         HStack {
             Text(statusTitle)
                 .font(.footnote)
+                .fontWeight(statusTitle == Status.accepted.rawValue || statusTitle == Status.rejected.rawValue ? .bold : .regular)
                 .padding(5)
                 .padding(.horizontal, 5)
-                .background(.gray.opacity(0.2))
+                .background(statusBackgroundColor)
                 .cornerRadius(25)
                 .foregroundStyle(textColor)
                 .padding(.top, 10)
@@ -86,7 +114,7 @@ extension JobOfferCardView {
                     .font(.footnote)
                     .padding(5)
                     .padding(.horizontal, 5)
-                    .background(.gray.opacity(0.2))
+                    .background(statusBackgroundColor)
                     .cornerRadius(25)
                     .foregroundStyle(textColor)
                     .padding(.top, 10)
@@ -110,7 +138,12 @@ extension JobOfferCardView {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        JobOfferCardView(jobOffer: JobOffer(companyName: "Google", jobTitle: "UX Designér", urlOffer: nil, salary: nil, notes: "Poznámka", dateOfSentCV: Date.now, reply: false, dateOfReply: nil, firstRoundInterview: false, dateOfFirstRoundInterview: nil, secondRoundInterview: false, dateOfSecondRoundInterview: nil, thirdRoundInterview: false, dateOfThirdRoundInterview: nil, fullTextOffer: nil), statusTitle: Status.interview.rawValue, statusSubtitle: "1.kolo", contentMenu: Button("Test"){ })
+        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""))
+        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""))
+        JobOfferCardView(companyName: "Apple", jobTitle: "iOS Developer", salary: "60 000kč", dateOfSentCv: Date.now, statusTitle: Status.accepted.rawValue, statusSubtitle: nil, contentMenu: Text(""))
+        JobOfferCardView(companyName: "Microsoft", jobTitle: "Tester", salary: nil, dateOfSentCv: Date.now, statusTitle: Status.rejected.rawValue, statusSubtitle: nil, contentMenu: Text(""))
+        JobOfferCardView(companyName: "Eprin", jobTitle: "C# developer", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.interview.rawValue, statusSubtitle: "2. kolo", contentMenu: Text(""))
     }
-     .padding(.horizontal)
+    .padding(.horizontal)
 }
+

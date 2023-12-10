@@ -6,24 +6,25 @@ struct OfferListView: View {
     @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var showingAlert = false
-    @State private var selectedFilter = Status.noResponse
+    @State private var selectedFilter = Status.allStatus
 
     var body: some View {
         NavigationStack {
-            statusBar
+            VStack {
+                statusBar
+            }
+            .padding(.horizontal, 20)
             Spacer()
                 List {
                     ForEach(model.filter(by: selectedFilter), id: \.id) { offer in
                         JobOfferCardView(
-                            jobOffer: offer,
+                            companyName: offer.companyName,
+                            jobTitle: offer.jobTitle,
+                            salary: offer.salary,
+                            dateOfSentCv: offer.dateOfSentCV,
                             statusTitle: model.statusText(offer),
                             statusSubtitle: model.roundOfInterview(offer),
                             contentMenu: menuButtons(offer))
-                        //                            .onTapGesture {
-                        //                                model.selectedOffer = offer
-                        //                                print("Toto je zvolený offer \(String(describing: model.selectedOffer))")
-                        //                                showAddView.toggle()
-                        //                            }
                     }
 
                     .onDelete(perform: model.deleteOffer)
@@ -33,35 +34,8 @@ struct OfferListView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
                 Spacer()
-
-
                 .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            HStack {
-                                Menu {
-                                    Section {
-                                        MenuButton(title: Status.allStatus.rawValue, icon: "", action: {
-                                            selectedFilter = Status.allStatus
-                                        })
-                                        MenuButton(title: Status.interview.rawValue, icon: "", action: {
-                                            selectedFilter = Status.interview
-                                        })
-                                        MenuButton(title: Status.accepted.rawValue, icon: "", action: {
-                                            selectedFilter = Status.accepted
-                                        })
-                                        MenuButton(title: Status.noResponse.rawValue, icon: "", action: {
-                                            selectedFilter = Status.noResponse
-                                        })
-                                        MenuButton(title: Status.rejected.rawValue, icon: "", action: {
-                                            selectedFilter = Status.rejected
-                                        })
-                                    } header: {
-                                        Text("Filtrovat")
-                                    }
-                                } label: {
-                                    Image(systemName: "line.3.horizontal.decrease.circle")
-                                        .foregroundStyle(.black)
-                                }
                                 Button {
                                     model.clearForm()
                                     showAddView.toggle()
@@ -70,7 +44,6 @@ struct OfferListView: View {
                                     Image(systemName: "plus")
                                         .foregroundStyle(.black)
                                 }
-                            }
                         }
                 }
                 .alert("Odkaz na inzerát tu není.", isPresented: $showingAlert) {
@@ -127,22 +100,23 @@ struct OfferListView: View {
     // MARK: - EXTENSION
     extension OfferListView {
         private var statusBar: some View {
-            StatusBarView(
-                countSendCV: model.jobOffers.count,
-                countAccepted: model.jobOffers.filter { ($0.status == .accepted) }.count,
-                countRejected: model.jobOffers.filter { ($0.status == .rejected) }.count,
-                countInterview: model.jobOffers.filter { ($0.status == .interview) }.count
-            )
-            .padding(.top)
+                HStack {
+                    StatusButtonView(symbol: Image.status.sending, count: model.jobOffers.count, action: { selectedFilter = Status.allStatus })
+                    StatusButtonView(symbol: Image.status.noResponse, count: model.jobOffers.filter { ($0.status == .noResponse) }.count, action: { selectedFilter = Status.noResponse })
+                    StatusButtonView(symbol: Image.status.interview, count: model.jobOffers.filter { ($0.status == .interview) }.count, action: { selectedFilter = Status.interview })
+                    StatusButtonView(symbol: Image.status.accepted, count: model.jobOffers.filter { ($0.status == .accepted) }.count, action: { selectedFilter = Status.accepted })
+                    StatusButtonView(symbol: Image.status.rejected, count: model.jobOffers.filter { ($0.status == .rejected) }.count, action: { selectedFilter = Status.rejected })
+                }
+                .padding(.top)
         }
 
         private func menuButtons(_ offer: JobOffer) -> some View {
             Group {
-                MenuButton(title: "Upravit záznam", icon: "square.and.pencil", action: {
+                MenuButtonView(title: "Upravit záznam", icon: "square.and.pencil", action: {
                     model.selectedOffer = offer
                     showAddView.toggle()
                 })
-                MenuButton(title: "Přejít na inzerát", icon: "globe", action: {
+                MenuButtonView(title: "Přejít na inzerát", icon: "globe", action: {
                     model.selectedOffer = offer
                     if let urlOffer = model.selectedOffer?.urlOffer, !urlOffer.isEmpty {
                         UIApplication.shared.open(URL(string: urlOffer)!)
@@ -150,11 +124,11 @@ struct OfferListView: View {
                         showingAlert.toggle()
                     }
                 })
-                MenuButton(title: "Zobrazit poznámku", icon: "note.text", action: {
+                MenuButtonView(title: "Zobrazit poznámku", icon: "note.text", action: {
                     model.selectedOffer = offer
                     showNotes.toggle()
                 })
-                MenuButton(title: "Celý text inzerátu", icon: "doc.plaintext", action: {
+                MenuButtonView(title: "Celý text inzerátu", icon: "doc.plaintext", action: {
                     model.selectedOffer = offer
                     showFulltextOffer.toggle()
                 })
@@ -164,6 +138,6 @@ struct OfferListView: View {
 
 // MARK: - PREVIEW
 #Preview {
-        OfferListView()
-            .environmentObject(OfferViewModel())
+    OfferListView()
+        .environmentObject(OfferViewModel())
 }

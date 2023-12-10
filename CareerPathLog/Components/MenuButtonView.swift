@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MenuButton: View {
+struct MenuButtonView: View {
     let title: String
     let icon: String
     let action: () -> Void
@@ -19,5 +19,5 @@ struct MenuButton: View {
 }
 
 #Preview {
-    MenuButton(title: "Poznámka", icon: "pencil", action: { })
+    MenuButtonView(title: "Poznámka", icon: "pencil", action: { })
 }
