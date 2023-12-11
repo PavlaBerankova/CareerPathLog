@@ -4,9 +4,17 @@ class OfferViewModel: ObservableObject {
     @Published var jobOffers = [JobOffer]() {
         didSet {
             saveOffer()
+            updateFilteredOffers(selectFilter: selectedFilter)
         }
     }
+    @Published var filteredOffers = [JobOffer]()
+    // jobOffers.filter { $0.status == selectedFilter }
+    func updateFilteredOffers(selectFilter: Status) {
+        filteredOffers = jobOffers.filter { $0.status == selectFilter }
+    }
+
     @Published var selectedOffer: JobOffer?
+    @Published var selectedFilter = Status.noResponse
 
     @Published var companyName = String()
     @Published var jobTitle = String()
@@ -105,6 +113,7 @@ class OfferViewModel: ObservableObject {
             )
 
             jobOffers.append(newOffer)
+        updateFilteredOffers(selectFilter: selectedFilter)
         }
 
     // Fill the form with existing offer
@@ -166,27 +175,33 @@ class OfferViewModel: ObservableObject {
     }
 
     func statusText(_ offer: JobOffer) -> String {
-        switch offer.status {
-        case .noResponse:
-            return "\(declensionWordDay(numberOfDaysSinceSendingCv(from: offer.dateOfSentCV))) bez odpovědi"
-        case .interview:
-            return "pozvání na pohovor"
-        case .rejected:
-            return "zamítnuto"
-        case .accepted:
-           return "pracovní nabídka"
-        case .allStatus:
-            return "zobrazit vše"
+        if offer.reply {
+            switch offer.status {
+            case .noResponse:
+                return "\(declensionWordDay(numberOfDaysSinceSendingCv(from: offer.dateOfSentCV))) bez odpovědi"
+            case .interview:
+                return "pozvání na pohovor"
+            case .rejected:
+                return "zamítnuto"
+            case .accepted:
+               return "pracovní nabídka"
+            case .allStatus:
+                return "zobrazit vše"
+            }
+        } else {
+            return Status.noResponse.rawValue
         }
     }
 
     func roundOfInterview(_ offer: JobOffer) -> String? {
-        if offer.firstRoundInterview && offer.secondRoundInterview && offer.thirdRoundInterview {
-            return "3. kolo"
-        } else if offer.firstRoundInterview && offer.secondRoundInterview {
-            return "2. kolo"
-        } else if offer.firstRoundInterview {
-            return "1. kolo"
+        if offer.reply {
+            if offer.firstRoundInterview && offer.secondRoundInterview && offer.thirdRoundInterview {
+                return "3. kolo"
+            } else if offer.firstRoundInterview && offer.secondRoundInterview {
+                return "2. kolo"
+            } else if offer.firstRoundInterview {
+                return "1. kolo"
+            }
         }
         return nil
     }
@@ -217,10 +232,19 @@ class OfferViewModel: ObservableObject {
     func sortByDate(_ jobOffer: [JobOffer]) -> [JobOffer] {
         jobOffer.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
     }
-}
 
-extension Date {
-    func formattedDate() -> String {
-        self.formatted(.dateTime.day().month().year())
-    }
+    func totalCountForStatus(_ status: Status) -> Int {
+            switch status {
+            case .allStatus:
+                return jobOffers.count
+            case .noResponse:
+                return jobOffers.filter { $0.status == .noResponse }.count
+            case .interview:
+                return jobOffers.filter { $0.status == .interview }.count
+            case .accepted:
+                return jobOffers.filter { $0.status == .accepted }.count
+            case .rejected:
+                return jobOffers.filter { $0.status == .rejected }.count
+            }
+        }
 }

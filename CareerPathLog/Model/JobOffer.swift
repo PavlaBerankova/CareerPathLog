@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct JobOffer: Codable {
     var id = UUID()
@@ -21,11 +22,10 @@ struct JobOffer: Codable {
     var jobOfferRejected = false
 }
 
-enum Status: String, Codable {
+enum Status: String, Codable, CaseIterable {
+    case allStatus = "vše"
     case noResponse = "bez odpovědi"
     case interview = "pozvání na pohovor"
-    case rejected = "zamítnuto"
     case accepted = "pracovní nabídka"
-    case allStatus = "vše"
+    case rejected = "zamítnuto"
 }
-

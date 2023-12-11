@@ -13,7 +13,7 @@ struct AddOfferView: View {
             Form {
                 offerInfoSection
                 dates
-                if model.status == .interview {
+                if model.status == .interview && model.reply {
                     jobInterviews
                 }
                 notesEditor
@@ -41,6 +41,8 @@ struct AddOfferView: View {
                             if model.checkTextFieldIsNotEmpty() {
                                 model.addOffer()
                                 backToListView()
+                                print(model.jobOffers.count)
+                                print(model.filteredOffers.count)
                             } else {
                                 showAlert.toggle()
                             }
@@ -109,45 +111,45 @@ extension AddOfferView {
                         }
                         .pickerStyle(.menu)
                     }
-                }
+                } 
             }
         }
     }
 
     private var jobInterviews: some View {
-        Section {
-            Toggle("1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
-            if model.firstRoundOfInterview {
-                DatePicker(
-                    selection: $model.dateOfFirstRoundOfInterview,
-                    in: model.startingDate...model.endingDate,
-                    displayedComponents: .date) {
-                        Text("Datum pohovoru")
-                    }
-            }
+            Section {
+                Toggle("1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
+                if model.firstRoundOfInterview {
+                    DatePicker(
+                        selection: $model.dateOfFirstRoundOfInterview,
+                        in: model.startingDate...model.endingDate,
+                        displayedComponents: .date) {
+                            Text("Datum pohovoru")
+                        }
+                }
 
-            Toggle("2. kolo pohovoru", isOn: $model.secondRoundOfInterview)
-            if model.secondRoundOfInterview {
-                DatePicker(
-                    selection: $model.dateOfSecondRoundOfInterview,
-                    in: model.startingDate...model.endingDate,
-                    displayedComponents: .date) {
-                        Text("Datum pohovoru")
-                    }
-            }
+                Toggle("2. kolo pohovoru", isOn: $model.secondRoundOfInterview)
+                if model.secondRoundOfInterview {
+                    DatePicker(
+                        selection: $model.dateOfSecondRoundOfInterview,
+                        in: model.startingDate...model.endingDate,
+                        displayedComponents: .date) {
+                            Text("Datum pohovoru")
+                        }
+                }
 
-            Toggle("3. kolo pohovoru", isOn: $model.thirdRoundOfInterview)
-            if model.thirdRoundOfInterview {
-                DatePicker(
-                    selection: $model.dateOfThirdRoundOfInterview,
-                    in: model.startingDate...model.endingDate,
-                    displayedComponents: .date) {
-                        Text("Datum pohovoru")
-                    }
+                Toggle("3. kolo pohovoru", isOn: $model.thirdRoundOfInterview)
+                if model.thirdRoundOfInterview {
+                    DatePicker(
+                        selection: $model.dateOfThirdRoundOfInterview,
+                        in: model.startingDate...model.endingDate,
+                        displayedComponents: .date) {
+                            Text("Datum pohovoru")
+                        }
+                }
+            } header: {
+                Text("Výběrové řízení")
             }
-        } header: {
-            Text("Výběrové řízení")
-        }
     }
 
     private var fulltextOfferEditor: some View {
