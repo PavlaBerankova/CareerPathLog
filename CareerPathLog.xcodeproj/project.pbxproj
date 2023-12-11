@@ -25,6 +25,7 @@
 		44E5781B2B24FD070052346E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781A2B24FD070052346E /* Image.swift */; };
 		44E5781D2B2503F30052346E /* StatusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781C2B2503F30052346E /* StatusButtonView.swift */; };
 		44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781E2B2513ED0052346E /* NotificationCountView.swift */; };
+		44E578212B255C630052346E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E578202B255C630052346E /* Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		44E5781A2B24FD070052346E /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		44E5781C2B2503F30052346E /* StatusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonView.swift; sourceTree = "<group>"; };
 		44E5781E2B2513ED0052346E /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
+		44E578202B255C630052346E /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 			children = (
 				44553D3F2B039E0600040EDE /* Color.swift */,
 				44E5781A2B24FD070052346E /* Image.swift */,
+				44E578202B255C630052346E /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -125,8 +128,8 @@
 			children = (
 				4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */,
 				449CC2612B14E66200DCB95C /* StatusBarView.swift */,
-				4423D2912B242047006F7EB6 /* MenuButtonView.swift */,
 				44E5781C2B2503F30052346E /* StatusButtonView.swift */,
+				4423D2912B242047006F7EB6 /* MenuButtonView.swift */,
 				44E5781E2B2513ED0052346E /* NotificationCountView.swift */,
 			);
 			path = Components;
@@ -225,6 +228,7 @@
 				44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */,
 				443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */,
 				44E5781B2B24FD070052346E /* Image.swift in Sources */,
+				44E578212B255C630052346E /* Date.swift in Sources */,
 				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
 				449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */,
 				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,

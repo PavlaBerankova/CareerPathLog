@@ -2,8 +2,29 @@ import SwiftUI
 
 struct NotificationCountView : View {
   var value: Int
-  let foreground: Color = .black
-  let background: Color = .yellow
+    var foreground: Color  {
+        if status == .allStatus {
+            return Color.white
+        } else {
+            return Color.black
+        }
+    }
+    var background: Color {
+        switch status {
+        case .allStatus:
+            return Color("DarkGray")
+        case .noResponse:
+            return Color("BlueLink")
+        case .interview:
+            return Color.yellow
+        case .rejected:
+            return Color.red
+        case .accepted:
+            return Color.green
+        }
+    }
+
+  let status: Status
 
   private let size = 16.0
   private let x = 50.0
@@ -52,5 +73,12 @@ struct NotificationCountView : View {
 }
 
 #Preview {
-    NotificationCountView(value: 7)
+    VStack(spacing: 20) {
+        NotificationCountView(value: 10, status: .allStatus)
+        NotificationCountView(value: 5, status: .noResponse)
+        NotificationCountView(value: 3, status: .interview)
+        NotificationCountView(value: 0, status: .accepted)
+        NotificationCountView(value: 4, status: .rejected)
+    }
+    .fixedSize()
 }
