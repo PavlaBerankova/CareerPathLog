@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct StatusBarView: View {
-    @Binding var selectedStatus: Status
+    // @Binding var selectedStatus: Status
+    @EnvironmentObject var model: OfferViewModel
 
     let columns = [
             GridItem(.flexible()),
@@ -14,13 +15,25 @@ struct StatusBarView: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(Status.allCases, id: \.self) { status in
-                StatusButtonView(isSelected: selectedStatus == status, action: { selectedStatus = status }, status: status)
+                StatusButtonView(
+                    isSelected: model.selectedFilter == status,
+                    status: status) {
+                        if status == .allStatus {
+                            model.selectedFilter = .allStatus
+                        } else {
+                            model.selectedFilter = status
+                            model.updateFilteredOffers(selectFilter: status)
+                        }
+                        print(model.selectedFilter);
+                        print(model.filteredOffers)
+                    }
             }
         }
     }
 }
 
 #Preview {
-    StatusBarView(selectedStatus: .constant(Status.interview))
+    StatusBarView()
         .padding(.horizontal)
+        .environmentObject(OfferViewModel())
 }

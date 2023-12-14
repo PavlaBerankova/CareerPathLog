@@ -33,9 +33,8 @@ struct StatusButtonView: View {
             return model.jobOffers.filter { $0.status == .rejected }.count
         }
     }
-
+    var status: Status
     var action: () -> Void
-    @Binding var status: Status
 
     var body: some View {
         Button {
@@ -47,12 +46,21 @@ struct StatusButtonView: View {
             .scaledToFill()
             .padding()
             .font(.title)
-            .frame(minWidth: 60, maxWidth: 70,
-                   minHeight: 60, maxHeight: 70)
+            .frame(width: 60, height: 60)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color("Gray1"))
+            )
             .foregroundColor(.black)
-            .background(.gray.opacity(0.1))
-            .border(isSelected ? .black.opacity(0.4) : .clear, width: 0.8)
-            .cornerRadius(10)
+           // .background(.gray.opacity(0.05))
+            .frame(width: 63, height: 63)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(isSelected ? .black : .clear)
+
+            )
+//            .border(isSelected ? .black.opacity(0.4) : .clear, width: 0.8)
+//            .cornerRadius(10)
 
         }
         .symbolEffect(.bounce, value: value)
@@ -65,12 +73,13 @@ struct StatusButtonView: View {
 
 #Preview {
     HStack {
-        StatusButtonView(isSelected: true, action: { }, status: .constant(.allStatus))
-        StatusButtonView(isSelected: true, action: { }, status: .constant(.noResponse))
-        StatusButtonView(isSelected: false, action: { }, status: .constant(.interview))
-        StatusButtonView(isSelected: false, action: { }, status: .constant(.accepted))
-        StatusButtonView(isSelected: true, action: { }, status: .constant(.rejected))
+        StatusButtonView(isSelected: true, status: .allStatus, action: { })
+        StatusButtonView(isSelected: true, status: .noResponse, action: { })
+        StatusButtonView(isSelected: false, status: .interview, action: { })
+        StatusButtonView(isSelected: false, status: .accepted, action: { })
+        StatusButtonView(isSelected: true, status: .rejected, action: { })
     }
     .padding(.horizontal)
     .environmentObject(OfferViewModel())
 }
+

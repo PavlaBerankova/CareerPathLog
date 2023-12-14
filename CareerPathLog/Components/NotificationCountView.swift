@@ -23,6 +23,7 @@ struct NotificationCountView : View {
             return Color.green
         }
     }
+
   let status: Status
 
   private let size = 16.0

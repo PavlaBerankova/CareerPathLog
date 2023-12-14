@@ -46,9 +46,9 @@ struct OfferListView: View {
                                 contentMenu: menuButtons(offer))
                         }
 
-                        .onDelete(perform: model.deleteOffer)
+                        .onDelete(perform: model.deleteFilteredOffer)
                     }
-
+                    Spacer()
                 }
             }
             .listStyle(.plain)
@@ -124,7 +124,7 @@ struct OfferListView: View {
     extension OfferListView {
         private var statusBar: some View {
                 VStack {
-                    StatusBarView(selectedStatus: $model.selectedFilter)
+                    StatusBarView()
 //                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.sending, count: model.jobOffers.count, action: { selectedFilter = Status.allStatus }, status: .allStatus)
 //                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.noResponse, count: model.jobOffers.filter { ($0.status == .noResponse) }.count, action: { selectedFilter = Status.noResponse }, status: .noResponse)
 //                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.interview, count: model.jobOffers.filter { ($0.status == .interview) }.count, action: { selectedFilter = Status.interview }, status: .interview)
@@ -165,3 +165,4 @@ struct OfferListView: View {
     OfferListView()
         .environmentObject(OfferViewModel())
 }
+

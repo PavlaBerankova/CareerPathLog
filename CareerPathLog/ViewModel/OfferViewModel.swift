@@ -92,6 +92,11 @@ class OfferViewModel: ObservableObject {
         saveOffer()
     }
 
+    func deleteFilteredOffer(indexSet: IndexSet) {
+        filteredOffers.remove(atOffsets: indexSet)
+    }
+
+
     func addOffer() {
             let newOffer = JobOffer(
                 companyName: companyName,
