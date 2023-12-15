@@ -1,7 +1,11 @@
 import Foundation
 import SwiftUI
 
-struct JobOffer: Codable {
+struct JobOffer: Codable, Identifiable, Equatable {
+    static func == (lhs: JobOffer, rhs: JobOffer) -> Bool {
+            return lhs.id == rhs.id
+        }
+
     var id = UUID()
     let companyName: String
     let jobTitle: String

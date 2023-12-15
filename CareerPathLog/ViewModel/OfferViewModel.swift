@@ -13,6 +13,12 @@ class OfferViewModel: ObservableObject {
         filteredOffers = jobOffers.filter { $0.status == selectFilter }
     }
 
+    func updateJobOffersArray() {
+        for offer in filteredOffers {
+            
+        }
+    }
+
     @Published var selectedOffer: JobOffer?
     @Published var selectedFilter = Status.noResponse
 
@@ -62,7 +68,7 @@ class OfferViewModel: ObservableObject {
 
     // Edit existing offer
     func editedOffer(_ selectedOffer: JobOffer) -> JobOffer {
-        return JobOffer(id: selectedOffer.id, 
+        return JobOffer(id: selectedOffer.id,
                         companyName: companyName,
                         jobTitle: jobTitle,
                         urlOffer: urlOffer, 
@@ -78,7 +84,8 @@ class OfferViewModel: ObservableObject {
                         thirdRoundInterview: thirdRoundOfInterview,
                         dateOfThirdRoundInterview: dateOfThirdRoundOfInterview,
                         fullTextOffer: fullTextOffer,
-                        status: status)
+                        status: reply ? status : .noResponse // reset and update status to .noResponse when user toggle reply to false
+        )
     }
 
     func saveOffer() {
@@ -92,10 +99,21 @@ class OfferViewModel: ObservableObject {
         saveOffer()
     }
 
-    func deleteFilteredOffer(indexSet: IndexSet) {
-        filteredOffers.remove(atOffsets: indexSet)
-    }
+    func deleteFilteredOffer(at offsets: IndexSet) {
+        for index in offsets {
+            let deletedOffer = filteredOffers[index]
 
+            // Remove from filteredOffers
+            filteredOffers.remove(at: index)
+
+            // Find the index in jobOffers
+            if let indexInJobOffers = jobOffers.firstIndex(of: deletedOffer) {
+                // Remove from jobOffers
+                jobOffers.remove(at: indexInJobOffers)
+                saveOffer()
+            }
+        }
+    }
 
     func addOffer() {
             let newOffer = JobOffer(
@@ -121,7 +139,7 @@ class OfferViewModel: ObservableObject {
         updateFilteredOffers(selectFilter: selectedFilter)
         }
 
-    // Fill the form with existing offer
+    // Fill the form with selecting offer
     func fetchOfferToForm(_ offer: JobOffer) {
             companyName = offer.companyName
             jobTitle = offer.jobTitle
@@ -194,7 +212,7 @@ class OfferViewModel: ObservableObject {
                 return "zobrazit vše"
             }
         } else {
-            return Status.noResponse.rawValue
+            return "\(declensionWordDay(numberOfDaysSinceSendingCv(from: offer.dateOfSentCV))) \(Status.noResponse.rawValue)"
         }
     }
 
@@ -252,4 +270,8 @@ class OfferViewModel: ObservableObject {
                 return jobOffers.filter { $0.status == .rejected }.count
             }
         }
+
+    func resetStatusAtSelectedOffer() {
+        selectedOffer?.status = .noResponse
+    }
 }

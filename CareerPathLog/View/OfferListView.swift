@@ -45,7 +45,6 @@ struct OfferListView: View {
                                 statusSubtitle: model.roundOfInterview(offer),
                                 contentMenu: menuButtons(offer))
                         }
-
                         .onDelete(perform: model.deleteFilteredOffer)
                     }
                     Spacer()
@@ -58,6 +57,15 @@ struct OfferListView: View {
             Spacer()
         }
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    print("This is main job offer: \(model.jobOffers.count)")
+                    print("This is filtered job offers: \(model.filteredOffers.count)")
+                } label: {
+                    Text("PRINT OFFERS")
+                        .foregroundStyle(.black)
+                }
+            }
                 ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             model.clearForm()
@@ -125,11 +133,6 @@ struct OfferListView: View {
         private var statusBar: some View {
                 VStack {
                     StatusBarView()
-//                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.sending, count: model.jobOffers.count, action: { selectedFilter = Status.allStatus }, status: .allStatus)
-//                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.noResponse, count: model.jobOffers.filter { ($0.status == .noResponse) }.count, action: { selectedFilter = Status.noResponse }, status: .noResponse)
-//                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.interview, count: model.jobOffers.filter { ($0.status == .interview) }.count, action: { selectedFilter = Status.interview }, status: .interview)
-//                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.accepted, count: model.jobOffers.filter { ($0.status == .accepted) }.count, action: { selectedFilter = Status.accepted }, status: .accepted)
-//                    StatusButtonView(selectedFilterButton: $tappedFilterButton, symbol: Image.status.rejected, count: model.jobOffers.filter { ($0.status == .rejected) }.count, action: { selectedFilter = Status.rejected }, status: .rejected)
                 }
                 .padding(.top)
         }
