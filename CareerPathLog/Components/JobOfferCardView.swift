@@ -16,40 +16,31 @@ struct JobOfferCardView<Content: View>: View {
         return abs(components.day!)
     }
     var textColor: Color {
-        if statusTitle == Status.rejected.rawValue {
-            return Color.white
-        } else if statusTitle == Status.noResponse.rawValue && numberOfDaysSinceSendingCv > 14 {
-            return Color.white
+        if numberOfDaysSinceSendingCv > 14 {
+            return .white
+        } else {
+            return .black
         }
-        return Color.black
-
     }
-
     var rowBackgroundColor: Color {
-        if statusTitle == Status.rejected.rawValue {
-            return Color.black
-        } else if statusTitle == Status.accepted.rawValue {
-            return Color.yellow
-        } else if statusTitle == Status.interview.rawValue {
-            return Color.yellow.opacity(0.4)
+        if numberOfDaysSinceSendingCv > 14 {
+            return .black
+        } else {
+            return .black.opacity(0.07)
         }
-        return Color.black.opacity(0.07)
     }
 
     var statusBackgroundColor: Color {
-        if (statusTitle == Status.noResponse.rawValue) && (numberOfDaysSinceSendingCv > 14) {
-            return Color.black
-        } else if (statusTitle == Status.noResponse.rawValue) && (numberOfDaysSinceSendingCv <= 14) {
-            return Color.gray.opacity(0.2)
+        if statusTitle == Status.interview.rawValue {
+            return Color.yellow.opacity(0.3)
         } else if statusTitle == Status.accepted.rawValue {
-            return Color.white.opacity(0.7)
-        } else if statusTitle == Status.interview.rawValue {
-            return Color.gray.opacity(0.2)
+            return Color.green.opacity(0.3)
         } else if statusTitle == Status.rejected.rawValue {
-            return Color.red
-        } else {
-            return Color.gray.opacity(0.2)
+            return Color.red.opacity(0.3)
+        } else if numberOfDaysSinceSendingCv > 14 {
+            return Color.blue
         }
+        return Color.blue.opacity(0.1)
     }
 
     // MARK: - BODY
@@ -102,7 +93,6 @@ extension JobOfferCardView {
         HStack {
             Text(statusTitle)
                 .font(.footnote)
-                .fontWeight(statusTitle == Status.accepted.rawValue || statusTitle == Status.rejected.rawValue ? .bold : .regular)
                 .padding(5)
                 .padding(.horizontal, 5)
                 .background(statusBackgroundColor)
