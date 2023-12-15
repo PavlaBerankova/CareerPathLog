@@ -2,11 +2,10 @@ import SwiftUI
 
 struct OfferListView: View {
     @EnvironmentObject var model: OfferViewModel
-    @State private var showAddView = false
+    // @State private var showAddView = false
     @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var showingAlert = false
-    // @State private var selectedFilter = Status.allStatus
     @State private var tappedFilterButton = true
 
     var body: some View {
@@ -27,7 +26,10 @@ struct OfferListView: View {
                                 dateOfSentCv: offer.dateOfSentCV,
                                 statusTitle: model.statusText(offer),
                                 statusSubtitle: model.roundOfInterview(offer),
-                                contentMenu: menuButtons(offer))
+                                contentMenu: menuButtons(offer), 
+                                overlayButtonAction: {
+                                    model.showingAddView(with: offer)
+                                })
 
                         }
                         .onDelete(perform: model.deleteOffer)
@@ -43,7 +45,11 @@ struct OfferListView: View {
                                 dateOfSentCv: offer.dateOfSentCV,
                                 statusTitle: model.statusText(offer),
                                 statusSubtitle: model.roundOfInterview(offer),
-                                contentMenu: menuButtons(offer))
+                                contentMenu: menuButtons(offer),
+                                overlayButtonAction: {
+                                    model.showingAddView(with: offer)
+                                }
+                            )
                         }
                         .onDelete(perform: model.deleteFilteredOffer)
                     }
@@ -69,7 +75,7 @@ struct OfferListView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             model.clearForm()
-                            showAddView.toggle()
+                            model.showAddView.toggle()
 
                         } label: {
                             Image(systemName: "plus")
@@ -80,7 +86,7 @@ struct OfferListView: View {
         .alert("Odkaz na inzerát tu není.", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         }
-        .sheet(isPresented: $showAddView) {
+        .sheet(isPresented: $model.showAddView) {
             AddOfferView()
                 .presentationDragIndicator(.visible)
         }
@@ -140,8 +146,7 @@ struct OfferListView: View {
         private func menuButtons(_ offer: JobOffer) -> some View {
             Group {
                 MenuButtonView(title: "Upravit záznam", icon: "square.and.pencil", action: {
-                    model.selectedOffer = offer
-                    showAddView.toggle()
+                    model.showingAddView(with: offer)
                 })
                 MenuButtonView(title: "Přejít na inzerát", icon: "globe", action: {
                     model.selectedOffer = offer
@@ -165,7 +170,10 @@ struct OfferListView: View {
 
 // MARK: - PREVIEW
 #Preview {
-    OfferListView()
-        .environmentObject(OfferViewModel())
+    NavigationStack {
+        OfferListView()
+            .environmentObject(OfferViewModel())
+    }
+
 }
 

@@ -9,6 +9,7 @@ struct JobOfferCardView<Content: View>: View {
     var statusTitle: String
     var statusSubtitle: String?
     var contentMenu: Content
+    var overlayButtonAction: () -> Void
 
     var numberOfDaysSinceSendingCv: Int {
         let calendar = Calendar.current
@@ -53,8 +54,18 @@ struct JobOfferCardView<Content: View>: View {
                 }
             }
             .padding()
-        .background(RoundedRectangle(cornerRadius: 10)
+            .background(RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(rowBackgroundColor.opacity(0.8))
+            .overlay {
+                Button {
+                    overlayButtonAction()
+                } label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .padding(.trailing, 80)
+                        .foregroundStyle(.clear)
+
+                }
+            }
         )
     }
 }
@@ -119,8 +130,9 @@ extension JobOfferCardView {
         } label: {
             Image(systemName: "ellipsis")
                 .font(.title2)
+                .padding(.bottom, 10)
                 .foregroundColor(textColor)
-                .padding(.top)
+                .frame(width: 60, height: 50, alignment: .bottomTrailing)
         }
     }
 }
@@ -128,11 +140,11 @@ extension JobOfferCardView {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""))
-        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""))
-        JobOfferCardView(companyName: "Apple", jobTitle: "iOS Developer", salary: "60 000kč", dateOfSentCv: Date.now, statusTitle: Status.accepted.rawValue, statusSubtitle: nil, contentMenu: Text(""))
-        JobOfferCardView(companyName: "Microsoft", jobTitle: "Tester", salary: nil, dateOfSentCv: Date.now, statusTitle: Status.rejected.rawValue, statusSubtitle: nil, contentMenu: Text(""))
-        JobOfferCardView(companyName: "Eprin", jobTitle: "C# developer", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.interview.rawValue, statusSubtitle: "2. kolo", contentMenu: Text(""))
+        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { print("TAP")})
+        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { })
+        JobOfferCardView(companyName: "Apple", jobTitle: "iOS Developer", salary: "60 000kč", dateOfSentCv: Date.now, statusTitle: Status.accepted.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { })
+        JobOfferCardView(companyName: "Microsoft", jobTitle: "Tester", salary: nil, dateOfSentCv: Date.now, statusTitle: Status.rejected.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { })
+        JobOfferCardView(companyName: "Eprin", jobTitle: "C# developer", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.interview.rawValue, statusSubtitle: "2. kolo", contentMenu: Text(""), overlayButtonAction: { })
     }
     .padding(.horizontal)
 }

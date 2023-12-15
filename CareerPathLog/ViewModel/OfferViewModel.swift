@@ -21,6 +21,7 @@ class OfferViewModel: ObservableObject {
 
     @Published var selectedOffer: JobOffer?
     @Published var selectedFilter = Status.noResponse
+    @Published var showAddView = false
 
     @Published var companyName = String()
     @Published var jobTitle = String()
@@ -273,5 +274,10 @@ class OfferViewModel: ObservableObject {
 
     func resetStatusAtSelectedOffer() {
         selectedOffer?.status = .noResponse
+    }
+
+    func showingAddView(with offer: JobOffer) {
+        selectedOffer = offer
+        showAddView.toggle()
     }
 }
