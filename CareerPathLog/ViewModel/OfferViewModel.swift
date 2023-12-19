@@ -7,16 +7,17 @@ class OfferViewModel: ObservableObject {
             updateFilteredOffers(selectFilter: selectedFilter)
         }
     }
+
+    // @Published var sortedJobOffers = [JobOffer]()
     @Published var filteredOffers = [JobOffer]()
     // jobOffers.filter { $0.status == selectedFilter }
     func updateFilteredOffers(selectFilter: Status) {
-        filteredOffers = jobOffers.filter { $0.status == selectFilter }
-    }
-
-    func updateJobOffersArray() {
-        for offer in filteredOffers {
-            
+        if selectFilter == .allStatus {
+            filteredOffers = jobOffers.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
+        } else {
+            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
         }
+
     }
 
     @Published var selectedOffer: JobOffer?
@@ -279,5 +280,20 @@ class OfferViewModel: ObservableObject {
     func showingAddView(with offer: JobOffer) {
         selectedOffer = offer
         showAddView.toggle()
+    }
+
+    func titleTextBySelectedFilter() -> String {
+        switch selectedFilter {
+        case .allStatus:
+            return "Oslovené firmy"
+        case .noResponse:
+            return "CV bez odpovědi"
+        case .interview:
+            return "Pozvání na pohovor"
+        case .accepted:
+            return "Pracovní nabídky"
+        case .rejected:
+            return "Zamítnuté inzeráty"
+        }
     }
 }

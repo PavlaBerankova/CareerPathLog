@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct StatusBarView: View {
-    // @Binding var selectedStatus: Status
     @EnvironmentObject var model: OfferViewModel
 
     let columns = [
@@ -18,14 +17,13 @@ struct StatusBarView: View {
                 StatusButtonView(
                     isSelected: model.selectedFilter == status,
                     status: status) {
-                        if status == .allStatus {
-                            model.selectedFilter = .allStatus
-                        } else {
-                            model.selectedFilter = status
-                            model.updateFilteredOffers(selectFilter: status)
-                        }
+                        model.selectedFilter = status
+                        model.updateFilteredOffers(selectFilter: status)
+
+                        // TEST - INFO
                         print(model.selectedFilter);
-                        print(model.filteredOffers)
+                        print(model.filteredOffers.count)
+                        //////////////////////////////////
                     }
             }
         }

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct OfferListView: View {
     @EnvironmentObject var model: OfferViewModel
-    // @State private var showAddView = false
     @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var showingAlert = false
@@ -15,63 +14,66 @@ struct OfferListView: View {
             }
             .padding(.horizontal, 20)
             Spacer()
-            Group {
-                if model.selectedFilter == .allStatus {
-                    List {
-                        ForEach(model.jobOffers, id: \.id) { offer in
-                            JobOfferCardView(
-                                companyName: offer.companyName,
-                                jobTitle: offer.jobTitle,
-                                salary: offer.salary,
-                                dateOfSentCv: offer.dateOfSentCV,
-                                statusTitle: model.statusText(offer),
-                                statusSubtitle: model.roundOfInterview(offer),
-                                contentMenu: menuButtons(offer), 
-                                overlayButtonAction: {
-                                    model.showingAddView(with: offer)
-                                })
-
-                        }
-                        .onDelete(perform: model.deleteOffer)
-                        }
-                    Spacer()
-                } else {
-                    List {
-                        ForEach(model.filteredOffers, id: \.id) { offer in
-                            JobOfferCardView(
-                                companyName: offer.companyName,
-                                jobTitle: offer.jobTitle,
-                                salary: offer.salary,
-                                dateOfSentCv: offer.dateOfSentCV,
-                                statusTitle: model.statusText(offer),
-                                statusSubtitle: model.roundOfInterview(offer),
-                                contentMenu: menuButtons(offer),
-                                overlayButtonAction: {
-                                    model.showingAddView(with: offer)
-                                }
-                            )
-                        }
-                        .onDelete(perform: model.deleteFilteredOffer)
+                List {
+                    ForEach(model.filteredOffers, id: \.id) { offer in
+                        JobOfferCardView(
+                            jobOffer: offer,
+                            statusSubtitle: model.roundOfInterview(offer),
+                            contentMenu: menuButtons(offer),
+                            overlayButtonAction: {
+                                model.showingAddView(with: offer)
+                            }
+                        )
                     }
-                    Spacer()
+                    .onDelete(perform: model.deleteFilteredOffer)
                 }
-            }
-            .listStyle(.plain)
-            .navigationTitle("Career Path Log")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            Spacer()
-        }
+                .listStyle(.plain)
+                Spacer()
+
+                .navigationTitle(model.titleTextBySelectedFilter())
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden(true)
+                }
+//                if model.selectedFilter == .allStatus {
+//                    List {
+//                        ForEach(model.jobOffers, id: \.id) { offer in
+//                            JobOfferCardView(
+//                                companyName: offer.companyName,
+//                                jobTitle: offer.jobTitle,
+//                                salary: offer.salary,
+//                                dateOfSentCv: offer.dateOfSentCV,
+//                                statusTitle: model.statusText(offer),
+//                                statusSubtitle: model.roundOfInterview(offer),
+//                                contentMenu: menuButtons(offer), 
+//                                overlayButtonAction: {
+//                                    model.showingAddView(with: offer)
+//                                })
+//
+//                        }
+//                        .onDelete(perform: model.deleteOffer)
+//                        }
+//                    Spacer()
+//                } else {
+//                    List {
+//                        ForEach(model.filteredOffers, id: \.id) { offer in
+//                            JobOfferCardView(
+//                                companyName: offer.companyName,
+//                                jobTitle: offer.jobTitle,
+//                                salary: offer.salary,
+//                                dateOfSentCv: offer.dateOfSentCV,
+//                                statusTitle: model.statusText(offer),
+//                                statusSubtitle: model.roundOfInterview(offer),
+//                                contentMenu: menuButtons(offer),
+//                                overlayButtonAction: {
+//                                    model.showingAddView(with: offer)
+//                                }
+//                            )
+//                        }
+//                        .onDelete(perform: model.deleteFilteredOffer)
+//                    }
+//                    Spacer()
+//                }
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    print("This is main job offer: \(model.jobOffers.count)")
-                    print("This is filtered job offers: \(model.filteredOffers.count)")
-                } label: {
-                    Text("PRINT OFFERS")
-                        .foregroundStyle(.black)
-                }
-            }
                 ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             model.clearForm()
