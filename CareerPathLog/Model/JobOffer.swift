@@ -13,11 +13,6 @@ struct JobOffer: Codable, Identifiable, Equatable {
     let salary: String?
     let notes: String?
     let dateOfSentCV: Date
-    var numberOfDaysSinceSendCV: Int {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: dateOfSentCV, to: Date.now)
-        return abs(components.day!)
-    }
     var reply: Bool
     let dateOfReply: Date?
     var firstRoundInterview: Bool
@@ -28,26 +23,31 @@ struct JobOffer: Codable, Identifiable, Equatable {
     let dateOfThirdRoundInterview: Date?
     let fullTextOffer: String?
     var status: Status = .noResponse
+    var numberOfDaysSinceSendCV: Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: dateOfSentCV, to: Date.now)
+        return abs(components.day!)
+    }
     var statusText: String {
         if reply {
             switch status {
             case .noResponse:
-                return "\(declensionWordDay(numberOfDaysSinceSendCV)) bez odpovědi"
+                return "\(numberOfDaysSinceSendCV.inflectWordDay()) \(Status.noResponse.rawValue)"
             case .interview:
-                return "pozvání na pohovor"
+                return Status.interview.rawValue
             case .rejected:
-                return "zamítnuto"
+                return Status.rejected.rawValue
             case .accepted:
-               return "pracovní nabídka"
+                return Status.accepted.rawValue
             case .allStatus:
-                return "zobrazit vše"
+                return Status.allStatus.rawValue
             }
         } else {
-            return "\(declensionWordDay(numberOfDaysSinceSendCV)) \(Status.noResponse.rawValue)"
+            return "\(numberOfDaysSinceSendCV.inflectWordDay()) \(Status.noResponse.rawValue)"
         }
     }
     var statusSubtitle: String? {
-            if reply {
+        if reply && status == .interview {
                 if firstRoundInterview && secondRoundInterview && thirdRoundInterview {
                     return "3. kolo"
                 } else if firstRoundInterview && secondRoundInterview {
@@ -57,41 +57,6 @@ struct JobOffer: Codable, Identifiable, Equatable {
                 }
             }
             return nil
-    }
-    var jobOfferRejected = false
-}
-
-extension JobOffer {
-    func declensionWordDay(_ number: Int) -> String {
-        switch number {
-        case 5... :
-            return "\(number) dní"
-        case 2...4 :
-            return "\(number) dny"
-        case 1 :
-            return "\(number) den"
-        default:
-            return "\(number) dní"
-        }
-    }
-
-    func statusText(_ offer: JobOffer) -> String {
-        if offer.reply {
-            switch offer.status {
-            case .noResponse:
-                return "\(declensionWordDay(numberOfDaysSinceSendCV)) bez odpovědi"
-            case .interview:
-                return "pozvání na pohovor"
-            case .rejected:
-                return "zamítnuto"
-            case .accepted:
-               return "pracovní nabídka"
-            case .allStatus:
-                return "zobrazit vše"
-            }
-        } else {
-            return "\(declensionWordDay(numberOfDaysSinceSendCV)) \(Status.noResponse.rawValue)"
-        }
     }
 }
 

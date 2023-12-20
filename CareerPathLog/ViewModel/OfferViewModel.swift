@@ -8,17 +8,7 @@ class OfferViewModel: ObservableObject {
         }
     }
 
-    // @Published var sortedJobOffers = [JobOffer]()
     @Published var filteredOffers = [JobOffer]()
-    // jobOffers.filter { $0.status == selectedFilter }
-    func updateFilteredOffers(selectFilter: Status) {
-        if selectFilter == .allStatus {
-            filteredOffers = jobOffers.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
-        } else {
-            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
-        }
-
-    }
 
     @Published var selectedOffer: JobOffer?
     @Published var selectedFilter = Status.noResponse
@@ -59,21 +49,29 @@ class OfferViewModel: ObservableObject {
         clearForm()
     }
 
+    func updateFilteredOffers(selectFilter: Status) {
+        if selectFilter == .allStatus {
+            filteredOffers = jobOffers.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
+        } else {
+            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
+        }
+    }
+
     func updateOffer(_ updatedOffer: JobOffer) {
         guard let index = jobOffers.firstIndex(where: { $0.id == updatedOffer.id }) else {
-                return // Item not found
-            }
-            jobOffers[index] = updatedOffer
-            // Save the updated array to UserDefaults
-            saveOffer()
+            return // Item not found
         }
+        jobOffers[index] = updatedOffer
+        // Save the updated array to UserDefaults
+        saveOffer()
+    }
 
     // Edit existing offer
     func editedOffer(_ selectedOffer: JobOffer) -> JobOffer {
         return JobOffer(id: selectedOffer.id,
                         companyName: companyName,
                         jobTitle: jobTitle,
-                        urlOffer: urlOffer, 
+                        urlOffer: urlOffer,
                         salary: salary,
                         notes: notes,
                         dateOfSentCV: dateOfSentCV,
@@ -96,11 +94,6 @@ class OfferViewModel: ObservableObject {
         }
     }
 
-    func deleteOffer(indexSet: IndexSet) {
-        jobOffers.remove(atOffsets: indexSet)
-        saveOffer()
-    }
-
     func deleteFilteredOffer(at offsets: IndexSet) {
         for index in offsets {
             let deletedOffer = filteredOffers[index]
@@ -118,64 +111,45 @@ class OfferViewModel: ObservableObject {
     }
 
     func addOffer() {
-            let newOffer = JobOffer(
-                companyName: companyName,
-                jobTitle: jobTitle,
-                urlOffer: urlOffer,
-                salary: salary, 
-                notes: notes,
-                dateOfSentCV: dateOfSentCV,
-                reply: reply,
-                dateOfReply: dateOfReply,
-                firstRoundInterview: firstRoundOfInterview,
-                dateOfFirstRoundInterview: dateOfFirstRoundOfInterview,
-                secondRoundInterview: secondRoundOfInterview,
-                dateOfSecondRoundInterview: dateOfSecondRoundOfInterview,
-                thirdRoundInterview: thirdRoundOfInterview,
-                dateOfThirdRoundInterview: dateOfThirdRoundOfInterview,
-                fullTextOffer: fullTextOffer,
-                status: status
-            )
+        let newOffer = JobOffer(
+            companyName: companyName,
+            jobTitle: jobTitle,
+            urlOffer: urlOffer,
+            salary: salary,
+            notes: notes,
+            dateOfSentCV: dateOfSentCV,
+            reply: reply,
+            dateOfReply: dateOfReply,
+            firstRoundInterview: firstRoundOfInterview,
+            dateOfFirstRoundInterview: dateOfFirstRoundOfInterview,
+            secondRoundInterview: secondRoundOfInterview,
+            dateOfSecondRoundInterview: dateOfSecondRoundOfInterview,
+            thirdRoundInterview: thirdRoundOfInterview,
+            dateOfThirdRoundInterview: dateOfThirdRoundOfInterview,
+            fullTextOffer: fullTextOffer,
+            status: status
+        )
 
-            jobOffers.append(newOffer)
+        jobOffers.append(newOffer)
         updateFilteredOffers(selectFilter: selectedFilter)
-        }
+    }
 
     // Fill the form with selecting offer
     func fetchOfferToForm(_ offer: JobOffer) {
-            companyName = offer.companyName
-            jobTitle = offer.jobTitle
-            urlOffer = offer.urlOffer ?? ""
-            salary = offer.salary ?? ""
-            notes = offer.notes ?? ""
-            dateOfSentCV = offer.dateOfSentCV
-            reply = offer.reply
-            dateOfReply = offer.dateOfReply ?? Date.now
-            firstRoundOfInterview = offer.firstRoundInterview
-            dateOfFirstRoundOfInterview = offer.dateOfFirstRoundInterview ?? Date.now
-            secondRoundOfInterview = offer.secondRoundInterview
-            dateOfSecondRoundOfInterview = offer.dateOfSecondRoundInterview ?? Date.now
-            fullTextOffer = offer.fullTextOffer ?? ""
-            status = offer.status
-        }
-
-    func numberOfDaysSinceSendingCv(from date: Date) -> Int {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: date, to: Date.now)
-        return abs(components.day!)
-    }
-
-    func declensionWordDay(_ number: Int) -> String {
-        switch number {
-        case 5... :
-            return "\(number) dní"
-        case 2...4 :
-            return "\(number) dny"
-        case 1 :
-            return "\(number) den"
-        default:
-            return "\(number) dní"
-        }
+        companyName = offer.companyName
+        jobTitle = offer.jobTitle
+        urlOffer = offer.urlOffer ?? ""
+        salary = offer.salary ?? ""
+        notes = offer.notes ?? ""
+        dateOfSentCV = offer.dateOfSentCV
+        reply = offer.reply
+        dateOfReply = offer.dateOfReply ?? Date.now
+        firstRoundOfInterview = offer.firstRoundInterview
+        dateOfFirstRoundOfInterview = offer.dateOfFirstRoundInterview ?? Date.now
+        secondRoundOfInterview = offer.secondRoundInterview
+        dateOfSecondRoundOfInterview = offer.dateOfSecondRoundInterview ?? Date.now
+        fullTextOffer = offer.fullTextOffer ?? ""
+        status = offer.status
     }
 
     func clearForm() {
@@ -199,38 +173,6 @@ class OfferViewModel: ObservableObject {
         status = .noResponse
     }
 
-    func statusText(_ offer: JobOffer) -> String {
-        if offer.reply {
-            switch offer.status {
-            case .noResponse:
-                return "\(declensionWordDay(numberOfDaysSinceSendingCv(from: offer.dateOfSentCV))) bez odpovědi"
-            case .interview:
-                return "pozvání na pohovor"
-            case .rejected:
-                return "zamítnuto"
-            case .accepted:
-               return "pracovní nabídka"
-            case .allStatus:
-                return "zobrazit vše"
-            }
-        } else {
-            return "\(declensionWordDay(numberOfDaysSinceSendingCv(from: offer.dateOfSentCV))) \(Status.noResponse.rawValue)"
-        }
-    }
-
-    func roundOfInterview(_ offer: JobOffer) -> String? {
-        if offer.reply {
-            if offer.firstRoundInterview && offer.secondRoundInterview && offer.thirdRoundInterview {
-                return "3. kolo"
-            } else if offer.firstRoundInterview && offer.secondRoundInterview {
-                return "2. kolo"
-            } else if offer.firstRoundInterview {
-                return "1. kolo"
-            }
-        }
-        return nil
-    }
-
     func checkTextFieldIsNotEmpty() -> Bool {
         if companyName.isEmpty && jobTitle.isEmpty {
             titleAlert = "název firmy a pozice"
@@ -246,35 +188,19 @@ class OfferViewModel: ObservableObject {
         }
     }
 
-    func filter(by status: Status) -> [JobOffer] {
-        if status == .allStatus {
-            sortByDate(jobOffers)
-        } else {
-            sortByDate(jobOffers).filter { $0.status == status }
-        }
-    }
-
-    func sortByDate(_ jobOffer: [JobOffer]) -> [JobOffer] {
-        jobOffer.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
-    }
-
     func totalCountForStatus(_ status: Status) -> Int {
-            switch status {
-            case .allStatus:
-                return jobOffers.count
-            case .noResponse:
-                return jobOffers.filter { $0.status == .noResponse }.count
-            case .interview:
-                return jobOffers.filter { $0.status == .interview }.count
-            case .accepted:
-                return jobOffers.filter { $0.status == .accepted }.count
-            case .rejected:
-                return jobOffers.filter { $0.status == .rejected }.count
-            }
+        switch status {
+        case .allStatus:
+            return jobOffers.count
+        case .noResponse:
+            return jobOffers.filter { $0.status == .noResponse }.count
+        case .interview:
+            return jobOffers.filter { $0.status == .interview }.count
+        case .accepted:
+            return jobOffers.filter { $0.status == .accepted }.count
+        case .rejected:
+            return jobOffers.filter { $0.status == .rejected }.count
         }
-
-    func resetStatusAtSelectedOffer() {
-        selectedOffer?.status = .noResponse
     }
 
     func showingAddView(with offer: JobOffer) {

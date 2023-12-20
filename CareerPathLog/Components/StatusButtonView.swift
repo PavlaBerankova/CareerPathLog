@@ -1,21 +1,22 @@
 import SwiftUI
 
 struct StatusButtonView: View {
+// MARK: - PROPERTIES
     @EnvironmentObject var model: OfferViewModel
     @State private var value = 0
     var isSelected = false
     var symbol: Image {
             switch status {
             case .noResponse:
-                Image(systemName: "clock.arrow.circlepath")
+                Image.status.noResponse
             case .allStatus:
-                Image(systemName: "envelope")
+                Image.status.allSendCv
             case .interview:
-                Image(systemName: "person.bubble")
+                Image.status.interview
             case .accepted:
-                Image(systemName: "checkmark.bubble")
+                Image.status.accepted
             case .rejected:
-                Image(systemName: "x.square")
+                Image.status.rejected
             }
     }
 
@@ -36,6 +37,7 @@ struct StatusButtonView: View {
     var status: Status
     var action: () -> Void
 
+    // MARK: - BODY
     var body: some View {
         Button {
             action()
@@ -49,19 +51,14 @@ struct StatusButtonView: View {
             .frame(width: 60, height: 60)
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color("Gray1"))
+                    .foregroundColor(Color("White"))
             )
             .foregroundColor(.black)
-           // .background(.gray.opacity(0.05))
             .frame(width: 63, height: 63)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(isSelected ? .black : .clear)
-
             )
-//            .border(isSelected ? .black.opacity(0.4) : .clear, width: 0.8)
-//            .cornerRadius(10)
-
         }
         .symbolEffect(.bounce, value: value)
         .font(.largeTitle)
@@ -71,8 +68,9 @@ struct StatusButtonView: View {
     }
 }
 
+// MARK: - PREVIEW
 #Preview {
-    HStack {
+    VStack {
         StatusButtonView(isSelected: true, status: .allStatus, action: { })
         StatusButtonView(isSelected: true, status: .noResponse, action: { })
         StatusButtonView(isSelected: false, status: .interview, action: { })
@@ -82,4 +80,3 @@ struct StatusButtonView: View {
     .padding(.horizontal)
     .environmentObject(OfferViewModel())
 }
-

@@ -1,23 +1,10 @@
 import SwiftUI
 
 struct JobOfferCardView<Content: View>: View {
-    let jobOffer: JobOffer
-
     // MARK: - PROPERTIES
-//    let companyName: String
-//    let jobTitle: String
-//    let salary: String?
-//    let dateOfSentCv: Date
-    // var statusTitle: String
-    var statusSubtitle: String?
+    let jobOffer: JobOffer
     var contentMenu: Content
     var overlayButtonAction: () -> Void
-
-//    var numberOfDaysSinceSendingCv: Int //{
-//        let calendar = Calendar.current
-//        let components = calendar.dateComponents([.day], from: Date.now, to: dateOfSentCv)
-//        return abs(components.day!)
-//    }
     var textColor: Color {
         if jobOffer.status == Status.noResponse {
             if jobOffer.numberOfDaysSinceSendCV > 14 {
@@ -29,15 +16,16 @@ struct JobOfferCardView<Content: View>: View {
             return .black
         }
     }
+
     var rowBackgroundColor: Color {
         if jobOffer.status == Status.noResponse {
             if jobOffer.numberOfDaysSinceSendCV > 14 {
                 return .black
             } else {
-                return .black.opacity(0.07)
+                return Color("White")
             }
         } else {
-            return .black.opacity(0.07)
+            return Color("White")
         }
     }
 
@@ -75,7 +63,6 @@ struct JobOfferCardView<Content: View>: View {
                     RoundedRectangle(cornerRadius: 10)
                         .padding(.trailing, 80)
                         .foregroundStyle(.clear)
-
                 }
             }
         )
@@ -122,8 +109,8 @@ extension JobOfferCardView {
                 .cornerRadius(25)
                 .foregroundStyle(textColor)
                 .padding(.top, 10)
-            if statusSubtitle != nil {
-                Text(statusSubtitle!)
+            if let statusSubtitle = jobOffer.statusSubtitle {
+                Text(statusSubtitle)
                     .font(.footnote)
                     .padding(5)
                     .padding(.horizontal, 5)
@@ -140,7 +127,7 @@ extension JobOfferCardView {
         Menu {
             contentMenu
         } label: {
-            Image(systemName: "ellipsis")
+            Image.info.menuDots
                 .font(.title2)
                 .padding(.bottom, 10)
                 .foregroundColor(textColor)
@@ -152,13 +139,8 @@ extension JobOfferCardView {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        JobOfferCardView(jobOffer: JobOffer(companyName: "Google", jobTitle: "Tester", urlOffer: nil, salary: "40 000kč", notes: "Toto je poznámka", dateOfSentCV: Date.now, reply: false, dateOfReply: nil, firstRoundInterview: false, dateOfFirstRoundInterview: nil, secondRoundInterview: false, dateOfSecondRoundInterview: nil, thirdRoundInterview: false, dateOfThirdRoundInterview: nil, fullTextOffer: "Toto je celý text inzerátu"), contentMenu: Text(""), overlayButtonAction: { })
-//        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { print("TAP")}, numberOfDaysSinceSendingCv: 10)
-//        JobOfferCardView(companyName: "Google", jobTitle: "UX Designér", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.noResponse.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { }, numberOfDaysSinceSendingCv: 20)
-//        JobOfferCardView(companyName: "Apple", jobTitle: "iOS Developer", salary: "60 000kč", dateOfSentCv: Date.now, statusTitle: Status.accepted.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { }, numberOfDaysSinceSendingCv: 2)
-//        JobOfferCardView(companyName: "Microsoft", jobTitle: "Tester", salary: nil, dateOfSentCv: Date.now, statusTitle: Status.rejected.rawValue, statusSubtitle: nil, contentMenu: Text(""), overlayButtonAction: { }, numberOfDaysSinceSendingCv: 0)
-//        JobOfferCardView(companyName: "Eprin", jobTitle: "C# developer", salary: "40 000kč", dateOfSentCv: Date.now, statusTitle: Status.interview.rawValue, statusSubtitle: "2. kolo", contentMenu: Text(""), overlayButtonAction: { }, numberOfDaysSinceSendingCv: 9)
+        JobOfferCardView(jobOffer: JobOffers.mock.first!, contentMenu: Text("Content Menu"), overlayButtonAction: { })
+        JobOfferCardView(jobOffer: JobOffers.mock.last!, contentMenu: Text("Content Menu"), overlayButtonAction: { })
     }
     .padding(.horizontal)
 }
-

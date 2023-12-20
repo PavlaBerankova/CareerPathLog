@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct StatusBarView: View {
+    // MARK: - PROPERTIES
     @EnvironmentObject var model: OfferViewModel
-
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
@@ -11,6 +11,7 @@ struct StatusBarView: View {
             GridItem(.flexible())
         ]
 
+    // MARK: - BODY
     var body: some View {
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(Status.allCases, id: \.self) { status in
@@ -30,6 +31,7 @@ struct StatusBarView: View {
     }
 }
 
+// MARK: - PREVIEW
 #Preview {
     StatusBarView()
         .padding(.horizontal)

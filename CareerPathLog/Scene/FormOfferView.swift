@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddOfferView: View {
+struct FormOfferView: View {
     @Environment(\.dismiss) 
     var backToListView
     @EnvironmentObject var model: OfferViewModel
@@ -12,14 +12,15 @@ struct AddOfferView: View {
         NavigationStack {
             Form {
                 offerInfoSection
-                dates
+                datesAndResponse
                 if model.status == .interview && model.reply {
-                    jobInterviews
+                    jobInterviewsSection
                 }
-                notesEditor
-                fulltextOfferEditor
+                offerTextEditor(with: $model.notes, header: "Poznámky")
+                offerTextEditor(with: $model.fullTextOffer, header: "Celý text inzerátu")
             }
             .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
+            .toolbarTitleDisplayMode(.large)
             .onAppear {
                 if let selectedOffer = model.selectedOffer {
                     model.fetchOfferToForm(selectedOffer)
@@ -27,29 +28,9 @@ struct AddOfferView: View {
             }
             .toolbar {
                 if let selectedOffer = model.selectedOffer {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            model.updateOffer(model.editedOffer(selectedOffer))
-                            backToListView()
-                        } label: {
-                            Text("Aktualizovat")
-                        }
-                    }
+                    updateButton(for: selectedOffer)
                 } else {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            if model.checkTextFieldIsNotEmpty() {
-                                model.addOffer()
-                                backToListView()
-                                print(model.jobOffers.count)
-                                print(model.filteredOffers.count)
-                            } else {
-                                showAlert.toggle()
-                            }
-                        } label: {
-                            Text("Uložit")
-                        }
-                    }
+                    saveButton
                 }
             }
         }
@@ -60,27 +41,19 @@ struct AddOfferView: View {
 }
 
 // MARK: - EXTENSION
-extension AddOfferView {
+extension FormOfferView {
     private var offerInfoSection: some View {
         Section {
             TextField("Název firmy", text: $model.companyName)
             TextField("Název pozice", text: $model.jobTitle)
             TextField("URL inzerátu", text: $model.urlOffer)
-            TextField("Mzda", text: $model.salary)
+            TextField("Mzda / plat", text: $model.salary)
         } header: {
             Text("Info")
         }
     }
 
-    private var notesEditor: some View {
-        Section {
-            TextEditor(text: $model.notes)
-        } header: {
-            Text("Poznámky")
-        }
-    }
-
-    private var dates: some View {
+    private var datesAndResponse: some View {
         Group {
             Section {
                 DatePicker(
@@ -116,7 +89,7 @@ extension AddOfferView {
         }
     }
 
-    private var jobInterviews: some View {
+    private var jobInterviewsSection: some View {
             Section {
                 Toggle("1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
                 if model.firstRoundOfInterview {
@@ -152,17 +125,48 @@ extension AddOfferView {
             }
     }
 
-    private var fulltextOfferEditor: some View {
+    private func offerTextEditor(with offerText: Binding<String>, header: String) -> some View {
         Section {
-            TextEditor(text: $model.fullTextOffer)
+            TextEditor(text: offerText)
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: 100, maxHeight: 400)
+                .padding(.vertical)
         } header: {
-            Text("Celý text inzerátu")
+            Text(header)
+        }
+    }
+
+    private var saveButton: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                if model.checkTextFieldIsNotEmpty() {
+                    model.addOffer()
+                    backToListView()
+                } else {
+                    showAlert.toggle()
+                }
+            } label: {
+                Text("Uložit")
+            }
+        }
+    }
+
+    private func updateButton(for selectedOffer: JobOffer) -> some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                model.updateOffer(model.editedOffer(selectedOffer))
+                backToListView()
+            } label: {
+                Text("Aktualizovat")
+            }
         }
     }
 }
 
 // MARK: - PREVIEW
 #Preview {
-    AddOfferView()
-        .environmentObject(OfferViewModel())
+    NavigationStack {
+        FormOfferView()
+            .environmentObject(OfferViewModel())
+    }
 }
