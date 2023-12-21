@@ -1,57 +1,39 @@
 import SwiftUI
 
 struct StatusBarView: View {
-    let countSendCV: Int
-    let countAccepted: Int
-    let countRejected: Int
-    let countInterview: Int
+    // MARK: - PROPERTIES
+    @EnvironmentObject var model: OfferViewModel
+    let columns = [
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
 
+    // MARK: - BODY
     var body: some View {
-        HStack {
-            VStack(spacing: 10) {
-                Text("odesláno")
-                    .font(.caption2)
-                Text("\(countSendCV)")
-                    .font(.headline)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
+        LazyVGrid(columns: columns, spacing: 20) {
+            ForEach(Status.allCases, id: \.self) { status in
+                StatusButtonView(
+                    isSelected: model.selectedFilter == status,
+                    status: status) {
+                        model.selectedFilter = status
+                        model.updateFilteredOffers(selectFilter: status)
 
-
-            VStack(spacing: 10) {
-                Text("pohovory")
-                    .font(.caption2)
-                Text("\(countInterview)")
-                    .font(.headline)
+                        // TEST - INFO
+                        print(model.selectedFilter);
+                        print(model.filteredOffers.count)
+                        //////////////////////////////////
+                    }
             }
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
-
-            VStack(spacing: 10) {
-                Text("zamítnuto")
-                    .font(.caption2)
-                Text("\(countRejected)")
-                    .font(.headline)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
-
-            VStack(spacing: 10) {
-                Text("nabídky")
-                    .font(.caption2)
-                Text("\(countAccepted)")
-                    .font(.headline)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
         }
     }
 }
 
+// MARK: - PREVIEW
 #Preview {
-    StatusBarView(countSendCV: 0, countAccepted: 0, countRejected: 1, countInterview: 0)
+    StatusBarView()
+        .padding(.horizontal)
+        .environmentObject(OfferViewModel())
 }

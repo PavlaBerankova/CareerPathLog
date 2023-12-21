@@ -7,24 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */; };
+		4423D2922B242047006F7EB6 /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* MenuButtonView.swift */; };
+		443AE9D02B0DF42E00EF8D48 /* FormOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* FormOfferView.swift */; };
 		44553D402B039E0600040EDE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D3F2B039E0600040EDE /* Color.swift */; };
 		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
 		446917A02AF24CC300CD4D55 /* OfferListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179F2AF24CC300CD4D55 /* OfferListView.swift */; };
 		446917A22AF24CC400CD4D55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446917A12AF24CC400CD4D55 /* Assets.xcassets */; };
 		446917A52AF24CC500CD4D55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446917A42AF24CC500CD4D55 /* Preview Assets.xcassets */; };
-		446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446917AC2AF24D1600CD4D55 /* LogScreenView.swift */; };
 		4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */; };
 		4475E7702AF51816003B0579 /* JobOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E76F2AF51816003B0579 /* JobOffer.swift */; };
 		4475E7722AF51820003B0579 /* JobOffers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475E7712AF51820003B0579 /* JobOffers.swift */; };
+		449A45272B34251300891DBE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A45262B34251300891DBE /* Coordinator.swift */; };
 		449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449CC2612B14E66200DCB95C /* StatusBarView.swift */; };
+		44B7AC362B32EB74001955C5 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B7AC352B32EB74001955C5 /* Int.swift */; };
 		44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404442B0CC92100D6D6C8 /* RootView.swift */; };
-		44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */; };
+		44E5781B2B24FD070052346E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781A2B24FD070052346E /* Image.swift */; };
+		44E5781D2B2503F30052346E /* StatusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781C2B2503F30052346E /* StatusButtonView.swift */; };
+		44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5781E2B2513ED0052346E /* NotificationCountView.swift */; };
+		44E578212B255C630052346E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E578202B255C630052346E /* Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOfferView.swift; sourceTree = "<group>"; };
+		4423D2912B242047006F7EB6 /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
+		443AE9CF2B0DF42E00EF8D48 /* FormOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormOfferView.swift; sourceTree = "<group>"; };
 		44553D3F2B039E0600040EDE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,13 +38,17 @@
 		4469179F2AF24CC300CD4D55 /* OfferListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferListView.swift; sourceTree = "<group>"; };
 		446917A12AF24CC400CD4D55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		446917A42AF24CC500CD4D55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		446917AC2AF24D1600CD4D55 /* LogScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenView.swift; sourceTree = "<group>"; };
 		4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferCardView.swift; sourceTree = "<group>"; };
 		4475E76F2AF51816003B0579 /* JobOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOffer.swift; sourceTree = "<group>"; };
 		4475E7712AF51820003B0579 /* JobOffers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOffers.swift; sourceTree = "<group>"; };
+		449A45262B34251300891DBE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		449CC2612B14E66200DCB95C /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		44B7AC352B32EB74001955C5 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		44D404442B0CC92100D6D6C8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		44E5781A2B24FD070052346E /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		44E5781C2B2503F30052346E /* StatusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButtonView.swift; sourceTree = "<group>"; };
+		44E5781E2B2513ED0052346E /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
+		44E578202B255C630052346E /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				44553D3F2B039E0600040EDE /* Color.swift */,
+				44E5781A2B24FD070052346E /* Image.swift */,
+				44E578202B255C630052346E /* Date.swift */,
+				44B7AC352B32EB74001955C5 /* Int.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -81,10 +94,11 @@
 			children = (
 				4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */,
 				44D404442B0CC92100D6D6C8 /* RootView.swift */,
+				449A45252B3424FE00891DBE /* Environment */,
 				44553D3E2B039DF400040EDE /* Extension */,
 				4475E76E2AF51804003B0579 /* Model */,
 				4475E76B2AF4F40A003B0579 /* Components */,
-				446917AB2AF24CFF00CD4D55 /* View */,
+				446917AB2AF24CFF00CD4D55 /* Scene */,
 				44CC9F2D2B1732D60077DC9B /* ViewModel */,
 				446917A12AF24CC400CD4D55 /* Assets.xcassets */,
 				446917A32AF24CC500CD4D55 /* Preview Content */,
@@ -100,15 +114,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		446917AB2AF24CFF00CD4D55 /* View */ = {
+		446917AB2AF24CFF00CD4D55 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				446917AC2AF24D1600CD4D55 /* LogScreenView.swift */,
 				4469179F2AF24CC300CD4D55 /* OfferListView.swift */,
-				443AE9CF2B0DF42E00EF8D48 /* AddOfferView.swift */,
-				44D404462B0CCBFE00D6D6C8 /* SettingsView.swift */,
+				443AE9CF2B0DF42E00EF8D48 /* FormOfferView.swift */,
 			);
-			path = View;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		4475E76B2AF4F40A003B0579 /* Components */ = {
@@ -116,6 +128,9 @@
 			children = (
 				4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */,
 				449CC2612B14E66200DCB95C /* StatusBarView.swift */,
+				44E5781C2B2503F30052346E /* StatusButtonView.swift */,
+				4423D2912B242047006F7EB6 /* MenuButtonView.swift */,
+				44E5781E2B2513ED0052346E /* NotificationCountView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -127,6 +142,14 @@
 				4475E7712AF51820003B0579 /* JobOffers.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		449A45252B3424FE00891DBE /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				449A45262B34251300891DBE /* Coordinator.swift */,
+			);
+			path = Environment;
 			sourceTree = "<group>";
 		};
 		44CC9F2D2B1732D60077DC9B /* ViewModel */ = {
@@ -210,15 +233,20 @@
 				446917A02AF24CC300CD4D55 /* OfferListView.swift in Sources */,
 				4475E7722AF51820003B0579 /* JobOffers.swift in Sources */,
 				4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */,
-				443AE9D02B0DF42E00EF8D48 /* AddOfferView.swift in Sources */,
+				44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */,
+				443AE9D02B0DF42E00EF8D48 /* FormOfferView.swift in Sources */,
+				44E5781B2B24FD070052346E /* Image.swift in Sources */,
+				449A45272B34251300891DBE /* Coordinator.swift in Sources */,
+				44E578212B255C630052346E /* Date.swift in Sources */,
 				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
 				449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */,
 				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
 				44553D402B039E0600040EDE /* Color.swift in Sources */,
-				446917AD2AF24D1600CD4D55 /* LogScreenView.swift in Sources */,
-				44D404472B0CCBFE00D6D6C8 /* SettingsView.swift in Sources */,
+				4423D2922B242047006F7EB6 /* MenuButtonView.swift in Sources */,
+				44B7AC362B32EB74001955C5 /* Int.swift in Sources */,
+				44E5781D2B2503F30052346E /* StatusButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +388,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -390,7 +418,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

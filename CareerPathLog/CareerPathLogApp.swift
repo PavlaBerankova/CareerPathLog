@@ -7,6 +7,7 @@ struct CareerPathLogApp: App {
             NavigationStack {
                 RootView()
                     .environmentObject(OfferViewModel())
+                    .environmentObject(Coordinator())
             }
         }
     }
