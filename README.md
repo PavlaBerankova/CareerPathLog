@@ -1,7 +1,6 @@
 # CareerPathLog - mobile app for iOS
 
-This project was created on base [challenge](https://github.com/juniorguru/challenge/blob/main/challenges/challenge-1.md) from junior.guru.
-
+This project was created based on junior.guru challenge - [Hack your way to a new job](https://github.com/juniorguru/challenge/blob/main/challenges/challenge-1.md)
 
 User can records:
 - all sent CV
