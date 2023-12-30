@@ -29,9 +29,8 @@ User can records:
 
 ## Video
 
-https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/9b61002e-ccea-41c0-9d9b-3b017181087c
+https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/1ca45797-ec52-4297-b3c0-7bb892e80ee3
 
-![CPL-Screen3]()
 
 
 
