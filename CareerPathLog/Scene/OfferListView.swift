@@ -7,6 +7,7 @@ struct OfferListView: View {
     @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var showingAlert = false
+    @State private var selectedLanguage = "cs"
 
     // MARK: - BODY
     var body: some View {
@@ -19,6 +20,7 @@ struct OfferListView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             plusButton
+            languageButton
         }
         .alert("Odkaz na inzerát tu není.", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
@@ -94,6 +96,18 @@ struct OfferListView: View {
                 } label: {
                     Image(systemName: "plus")
                         .foregroundStyle(.black)
+                }
+            }
+        }
+
+        private var languageButton: some ToolbarContent {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                   
+                } label: {
+                    Text(selectedLanguage)
+                        .foregroundStyle(.black)
+                        .bold()
                 }
             }
         }
