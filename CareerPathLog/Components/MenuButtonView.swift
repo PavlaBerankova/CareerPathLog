@@ -15,6 +15,8 @@ struct MenuButtonView: View {
                 Text(title)
                 Spacer()
                 icon
+                    .resizable()
+                    .scaledToFit()
             }
         }
     }
@@ -23,10 +25,15 @@ struct MenuButtonView: View {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        MenuButtonView(title: "Notes", icon: Image.flags.english, action: { })
-        MenuButtonView(title: "Notes", icon: Image.flags.czech, action: { })
-        MenuButtonView(title: "Czech", icon: Image.menu.web, action: { })
-
+        MenuButtonView(title: "English", icon: Image.flags.english, action: { })
+            .frame(maxWidth: .infinity)
+            .frame(height: 55)
+        MenuButtonView(title: "Czech", icon: Image.flags.czech, action: { })
+            .frame(maxWidth: .infinity)
+            .frame(height: 55)
+        MenuButtonView(title: "Open URL", icon: Image.menu.web, action: { })
+            .frame(maxWidth: .infinity)
+            .frame(height: 55)
     }
     .foregroundStyle(.black)
     .padding(.horizontal)

@@ -31,7 +31,9 @@
         }
       }
     },
-    "%lld dní bez odpovědi" : {
+    "%lld days without response" : {
+      "comment" : "JobOffer.statusText",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "variations" : {
@@ -56,7 +58,7 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "new",
+                  "state" : "translated",
                   "value" : "%lld dní bez odpovědi"
                 }
               }
@@ -89,8 +91,16 @@
         }
       }
     },
-    "1. kolo" : {
+    "1. round" : {
+      "comment" : "JobOffer.statusSubtitle",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. kolo"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -99,8 +109,16 @@
         }
       }
     },
-    "1. kolo pohovoru" : {
+    "1. round of interview" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. kolo pohovoru"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -109,8 +127,16 @@
         }
       }
     },
-    "2. kolo" : {
+    "2. round" : {
+      "comment" : "JobOffer.statusSubtitle",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. kolo"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -119,8 +145,16 @@
         }
       }
     },
-    "2. kolo pohovoru" : {
+    "2. round of interview" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. kolo pohovoru"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -129,8 +163,16 @@
         }
       }
     },
-    "3. kolo" : {
+    "3. round" : {
+      "comment" : "JobOffer.statusSubtitle",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. kolo"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -139,8 +181,16 @@
         }
       }
     },
-    "3. kolo pohovoru" : {
+    "3. round of interview" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. kolo pohovoru"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -159,7 +209,27 @@
         }
       }
     },
+    "accepted" : {
+      "comment" : "Status text in JobOfferCardView - lowercased",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pracovní nabídka"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "accepted"
+          }
+        }
+      }
+    },
     "Accepted" : {
+      "comment" : "JobOffer.Status.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -175,17 +245,39 @@
         }
       }
     },
-    "Aktualizovat" : {
+    "Add record" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat záznam"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add record"
+          }
+        }
+      }
+    },
+    "all submitted CV" : {
+      "comment" : "is not used",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update"
+            "value" : "all submitted CV"
           }
         }
       }
     },
     "All submitted CV" : {
+      "comment" : "JobOffer.Status.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -201,22 +293,56 @@
         }
       }
     },
-    "bez odpovědi" : {
+    "company name" : {
+      "comment" : "OfferViewModel",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "název firmy"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "no response"
+            "value" : "company name"
           }
         }
       }
     },
-    "Celý text inzerátu" : {
+    "Company name" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Název firmy"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fulltext offer"
+            "value" : "Company name"
+          }
+        }
+      }
+    },
+    "company name and job title" : {
+      "comment" : "OfferViewModel",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "název firmy a název pozice"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "company name and job title"
           }
         }
       }
@@ -227,26 +353,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Content Menu"
-          }
-        }
-      }
-    },
-    "CV bez odpovědi" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No response"
-          }
-        }
-      }
-    },
-    "CV odesláno dne" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Date of submission CV"
           }
         }
       }
@@ -267,8 +373,34 @@
         }
       }
     },
-    "Datum odpovědi" : {
+    "Date of interview" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum pohovoru"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date of interview"
+          }
+        }
+      }
+    },
+    "Date of response" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum odpovědi"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -277,12 +409,20 @@
         }
       }
     },
-    "Datum pohovoru" : {
+    "Date of submitted CV" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CV odesláno dne"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Date of interview"
+            "value" : "Date of submitted CV"
           }
         }
       }
@@ -319,8 +459,34 @@
         }
       }
     },
-    "Info" : {
+    "Full text offer" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Celý text inzerátu"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full text offer"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -329,7 +495,27 @@
         }
       }
     },
+    "interview" : {
+      "comment" : "Status text in JobOfferCardView - lowercased",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pohovor"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "interview"
+          }
+        }
+      }
+    },
     "Interview" : {
+      "comment" : "JobOffer.Status.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -345,58 +531,16 @@
         }
       }
     },
-    "Musíš vyplnit %@." : {
+    "job title" : {
+      "comment" : "OfferViewModel",
+      "extractionState" : "manual",
       "localizations" : {
-        "en" : {
+        "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You must fill %@"
+            "value" : "název pozice"
           }
-        }
-      }
-    },
-    "Mzda / plat" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salary"
-          }
-        }
-      }
-    },
-    "název firmy" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "company name"
-          }
-        }
-      }
-    },
-    "Název firmy" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Company name"
-          }
-        }
-      }
-    },
-    "název firmy a pozice" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "company name and job title"
-          }
-        }
-      }
-    },
-    "název pozice" : {
-      "localizations" : {
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -405,8 +549,16 @@
         }
       }
     },
-    "Název pozice" : {
+    "Job title" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Název pozice"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -431,7 +583,27 @@
         }
       }
     },
+    "Note is missing" : {
+      "comment" : "Model.AlertTitle.title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Žádné poznámky"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note is missing"
+          }
+        }
+      }
+    },
     "Notes" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -447,34 +619,16 @@
         }
       }
     },
-    "Notes are missing" : {
+    "OK" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Žádné poznámky"
+            "value" : "OK"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notes are missing"
-          }
-        }
-      }
-    },
-    "Odpověď" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Response"
-          }
-        }
-      }
-    },
-    "OK" : {
-      "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -483,7 +637,9 @@
         }
       }
     },
-    "Open url" : {
+    "Open URL" : {
+      "comment" : "Model.MenuItemRow.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -499,97 +655,27 @@
         }
       }
     },
-    "Oslovené firmy" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oslovené firmy"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All submitted resume"
-          }
-        }
-      }
-    },
-    "Poznámky" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notes"
-          }
-        }
-      }
-    },
-    "pozvání na pohovor" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "interview"
-          }
-        }
-      }
-    },
-    "Pozvání na pohovor" : {
+    "rejected" : {
+      "comment" : "Status text in JobOfferCardView - lowercased",
       "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozvání na pohovor"
+            "value" : "zamítnuto"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Interview"
-          }
-        }
-      }
-    },
-    "pracovní nabídka" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "accepted"
-          }
-        }
-      }
-    },
-    "Pracovní nabídky" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pracovní nabídky"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accepted"
-          }
-        }
-      }
-    },
-    "Přidat záznam" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add records"
+            "value" : "rejected"
           }
         }
       }
     },
     "Rejected" : {
+      "comment" : "JobOffer.Status.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -601,6 +687,60 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rejected"
+          }
+        }
+      }
+    },
+    "Response" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odpověď"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Response"
+          }
+        }
+      }
+    },
+    "Salary" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mzda / plat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salary"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uložit"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
           }
         }
       }
@@ -654,7 +794,81 @@
         }
       }
     },
+    "StatusPicker - accepted" : {
+      "comment" : "OfferFormView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pracovní nabídka"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "accepted"
+          }
+        }
+      }
+    },
+    "StatusPicker - interview" : {
+      "comment" : "OfferFormView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pozvání na pohovor"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "interview"
+          }
+        }
+      }
+    },
+    "StatusPicker - no response" : {
+      "comment" : "OfferFormView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bez odpovědi"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no response"
+          }
+        }
+      }
+    },
+    "StatusPicker - rejected" : {
+      "comment" : "OfferFormView",
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "zamítnuto"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "rejected"
+          }
+        }
+      }
+    },
     "Text offer is missing" : {
+      "comment" : "AlertTitle.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -670,28 +884,52 @@
         }
       }
     },
-    "Typ odpovědi" : {
+    "Type of response" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typ odpovědi"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Status of response"
+            "value" : "Type of response"
           }
         }
       }
     },
-    "Uložit" : {
+    "Update" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualizovat"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save"
+            "value" : "Update"
           }
         }
       }
     },
-    "URL inzerátu" : {
+    "URL offer" : {
+      "comment" : "FormOfferView",
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL inzerátu"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -701,6 +939,8 @@
       }
     },
     "URL offer is missing" : {
+      "comment" : "AlertTitle.title",
+      "extractionState" : "manual",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -716,48 +956,19 @@
         }
       }
     },
-    "vše" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "all"
-          }
-        }
-      }
-    },
-    "Výběrové řízení" : {
+    "You must fill %@ field." : {
+      "comment" : "FormOfferView",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Výběrová řízení"
+            "value" : "Musíš vyplnit %@."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Interview"
-          }
-        }
-      }
-    },
-    "Zamítnuté inzeráty" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rejected"
-          }
-        }
-      }
-    },
-    "zamítnuto" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "rejected"
+            "value" : "You must fill %@ field."
           }
         }
       }

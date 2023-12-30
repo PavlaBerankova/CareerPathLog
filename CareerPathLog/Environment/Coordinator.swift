@@ -2,7 +2,7 @@ import SwiftUI
 
 final class Coordinator: ObservableObject {
     var addOfferView: some View {
-        FormOfferView()
+        OfferFormView()
             .presentationDragIndicator(.visible)
     }
 

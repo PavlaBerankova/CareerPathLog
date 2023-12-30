@@ -15,7 +15,7 @@ struct OfferListView: View {
             statusBar
             jobOfferlist
         }
-        .navigationTitle((model.selectedFilter.titleBySelectedFilter))
+        .navigationTitle((model.selectedFilter.title))
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -25,7 +25,7 @@ struct OfferListView: View {
         .alert(alertTitle, isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         }
-        .sheet(isPresented: $model.showAddView) {
+        .sheet(isPresented: $model.showFormView) {
             coordinator.addOfferView
         }
         .sheet(isPresented: $showNotes) {
@@ -54,7 +54,7 @@ struct OfferListView: View {
                         jobOffer: offer,
                         contentMenu: menuButtons(offer),
                         overlayButtonAction: {
-                            model.showingAddView(with: offer)
+                            model.showFormView(with: offer)
                         }
                     )
                 }
@@ -67,7 +67,7 @@ struct OfferListView: View {
             Group {
                 // FIRST ROW - EDIT
                 MenuButtonView(title: MenuItemRow.edit.title, icon: Image.menu.edit, action: {
-                    model.showingAddView(with: offer)
+                    model.showFormView(with: offer)
                 })
 
                 // SECOND ROW - URL
@@ -109,7 +109,7 @@ struct OfferListView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     model.clearForm()
-                    model.showAddView.toggle()
+                    model.showFormView.toggle()
 
                 } label: {
                     Image(systemName: "plus")

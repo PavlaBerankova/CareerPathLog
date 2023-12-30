@@ -28,120 +28,34 @@ struct JobOffer: Codable, Identifiable, Equatable {
         let components = calendar.dateComponents([.day], from: dateOfSubmissionV, to: Date.now)
         return abs(components.day!)
     }
-    var statusText: LocalizedStringResource {
+    var statusText: LocalizedStringKey {
         if response {
             switch status {
             case .noResponse:
-                return "\(numberOfDaysSinceSubmittedCV) dní bez odpovědi"
+                return "\(numberOfDaysSinceSubmittedCV) days without response"
             case .interview:
-                return Status.interview.title
+                return "interview"
             case .rejected:
-                return Status.rejected.title
+                return "rejected"
             case .accepted:
-                return Status.accepted.title
+                return "accepted"
             case .allStatus:
-                return Status.allStatus.title
+                return "all submitted CV"
             }
         } else {
-            return "\(numberOfDaysSinceSubmittedCV) dní bez odpovědi"
+            return "\(numberOfDaysSinceSubmittedCV) days without response"
         }
     }
     var statusSubtitle: LocalizedStringResource? {
         if response && status == .interview {
                 if firstRoundOfInterview && secondRoundOfInterview && thirdRoundOfInterview {
-                    return "3. kolo"
+                    return "3. round"
                 } else if firstRoundOfInterview && secondRoundOfInterview {
-                    return "2. kolo"
+                    return "2. round"
                 } else if firstRoundOfInterview {
-                    return "1. kolo"
+                    return "1. round"
                 }
             }
             return nil
-    }
-}
-
-enum Status: Identifiable, CaseIterable, Codable {
-    case allStatus
-    case noResponse
-    case interview
-    case accepted
-    case rejected
-
-    var id: Self { return self }
-
-    var title: LocalizedStringResource {
-        switch self {
-        case .allStatus:
-            "vše"
-        case .noResponse:
-            "bez odpovědi"
-        case .interview:
-            "pozvání na pohovor"
-        case .accepted:
-            "pracovní nabídka"
-        case .rejected:
-            "zamítnuto"
-        }
-    }
-
-    var titleBySelectedFilter: LocalizedStringKey {
-        switch self {
-        case .allStatus:
-            "All submitted CV"
-            // "Oslovené firmy"
-        case .noResponse:
-            "No response"
-            // "CV bez odpovědi"
-        case .interview:
-            "Interview"
-            // "Pozvání na pohovor"
-        case .accepted:
-            "Accepted"
-            // "Pracovní nabídky"
-        case .rejected:
-            "Rejected"
-            // "Zamítnuté"
-        }
-    }
-}
-
-enum MenuItemRow: Identifiable, Codable {
-    case edit
-    case url
-    case notes
-    case fullText
-
-    var id: Self { return self }
-
-    var title: LocalizedStringKey {
-        switch self {
-        case .edit:
-            "Edit"
-        case .url:
-            "Open url"
-        case .notes:
-            "Show notes"
-        case .fullText:
-            "Show fulltext offer"
-        }
-    }
-}
-
-enum AlertTitle: Identifiable, Codable {
-    case url
-    case notes
-    case fulltext
-
-    var id: Self { return self }
-
-    var title: LocalizedStringKey {
-        switch self {
-        case .url:
-            "URL offer is missing"
-        case .notes:
-            "Notes are missing"
-        case .fulltext:
-            "Text offer is missing"
-        }
     }
 }

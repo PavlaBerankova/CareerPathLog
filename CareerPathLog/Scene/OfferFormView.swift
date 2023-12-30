@@ -1,10 +1,11 @@
 import SwiftUI
 
-struct FormOfferView: View {
+struct OfferFormView: View {
     @Environment(\.dismiss) 
     var backToListView
     @EnvironmentObject var model: OfferViewModel
     @State private var showAlert = false
+    let dateOfInterview: LocalizedStringKey = "Date of interview"
 
     // MARK: - BODY
     var body: some View {
@@ -12,13 +13,13 @@ struct FormOfferView: View {
             Form {
                 offerInfoSection
                 datesAndResponse
-                if model.status == .interview && model.reply {
+                if model.status == .interview && model.response {
                     jobInterviewsSection
                 }
-                offerTextEditor(with: $model.notes, header: "Poznámky")
-                offerTextEditor(with: $model.fullTextOffer, header: "Celý text inzerátu")
+                offerTextEditor(with: $model.notes, header: "Notes")
+                offerTextEditor(with: $model.fullTextOffer, header: "Full text offer")
             }
-            .navigationTitle(LocalizedStringKey(model.selectedOffer?.companyName ?? "Přidat záznam"))
+            .navigationTitle(LocalizedStringKey(model.selectedOffer?.companyName ?? "Add record"))
             .toolbarTitleDisplayMode(.large)
             .onAppear {
                 if let selectedOffer = model.selectedOffer {
@@ -33,20 +34,20 @@ struct FormOfferView: View {
                 }
             }
         }
-        .alert("Musíš vyplnit \(model.titleAlert).", isPresented: $showAlert) {
+        .alert("You must fill \(model.titleAlert) field.", isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
         }
     }
 }
 
 // MARK: - EXTENSION
-extension FormOfferView {
+extension OfferFormView {
     private var offerInfoSection: some View {
         Section {
-            TextField("Název firmy", text: $model.companyName)
-            TextField("Název pozice", text: $model.jobTitle)
-            TextField("URL inzerátu", text: $model.urlOffer)
-            TextField("Mzda / plat", text: $model.salary)
+            TextField("Company name", text: $model.companyName)
+            TextField("Job title", text: $model.jobTitle)
+            TextField("URL offer", text: $model.urlOffer)
+            TextField("Salary", text: $model.salary)
         } header: {
             Text("Info")
         }
@@ -56,29 +57,29 @@ extension FormOfferView {
         Group {
             Section {
                 DatePicker(
-                    selection: $model.dateOfSentCV,
+                    selection: $model.dateOfSubmittedCV,
                     in: model.startingDate...model.endingDate,
                     displayedComponents: .date) {
-                        Text("CV odesláno dne")
+                        Text("Date of submitted CV")
                     }
-                Toggle("Odpověď", isOn: $model.reply)
-                if model.reply {
+                Toggle("Response", isOn: $model.response)
+                if model.response {
                     DatePicker(
-                        selection: $model.dateOfReply,
+                        selection: $model.dateOfResponse,
                         in: model.startingDate...model.endingDate,
                         displayedComponents: .date) {
-                            Text("Datum odpovědi")
+                            Text("Date of response")
                         }
 
                     Section {
-                        Picker("Typ odpovědi", selection: $model.status) {
-                            Text(Status.noResponse.title)
+                        Picker("Type of response", selection: $model.status) {
+                            Text(LocalizedStringKey("StatusPicker - no response"))
                                 .tag(Status.noResponse)
-                            Text(Status.interview.title)
+                            Text(LocalizedStringKey("StatusPicker - interview"))
                                 .tag(Status.interview)
-                            Text(Status.accepted.title)
+                            Text(LocalizedStringKey("StatusPicker - accepted"))
                                 .tag(Status.accepted)
-                            Text(Status.rejected.title)
+                            Text(LocalizedStringKey("StatusPicker - rejected"))
                                 .tag(Status.rejected)
                         }
                         .pickerStyle(.menu)
@@ -90,37 +91,37 @@ extension FormOfferView {
 
     private var jobInterviewsSection: some View {
             Section {
-                Toggle("1. kolo pohovoru", isOn: $model.firstRoundOfInterview)
+                Toggle("1. round of interview", isOn: $model.firstRoundOfInterview)
                 if model.firstRoundOfInterview {
                     DatePicker(
                         selection: $model.dateOfFirstRoundOfInterview,
                         in: model.startingDate...model.endingDate,
                         displayedComponents: .date) {
-                            Text("Datum pohovoru")
+                            Text(dateOfInterview)
                         }
                 }
 
-                Toggle("2. kolo pohovoru", isOn: $model.secondRoundOfInterview)
+                Toggle("2. round of interview", isOn: $model.secondRoundOfInterview)
                 if model.secondRoundOfInterview {
                     DatePicker(
                         selection: $model.dateOfSecondRoundOfInterview,
                         in: model.startingDate...model.endingDate,
                         displayedComponents: .date) {
-                            Text("Datum pohovoru")
+                            Text(dateOfInterview)
                         }
                 }
 
-                Toggle("3. kolo pohovoru", isOn: $model.thirdRoundOfInterview)
+                Toggle("3. round of interview", isOn: $model.thirdRoundOfInterview)
                 if model.thirdRoundOfInterview {
                     DatePicker(
                         selection: $model.dateOfThirdRoundOfInterview,
                         in: model.startingDate...model.endingDate,
                         displayedComponents: .date) {
-                            Text("Datum pohovoru")
+                            Text(dateOfInterview)
                         }
                 }
             } header: {
-                Text("Výběrové řízení")
+                Text(LocalizedStringKey("Interview"))
             }
     }
 
@@ -145,7 +146,7 @@ extension FormOfferView {
                     showAlert.toggle()
                 }
             } label: {
-                Text("Uložit")
+                Text("Save")
             }
         }
     }
@@ -160,7 +161,7 @@ extension FormOfferView {
                     showAlert.toggle()
                 }
             } label: {
-                Text("Aktualizovat")
+                Text("Update")
             }
         }
     }
@@ -169,7 +170,7 @@ extension FormOfferView {
 // MARK: - PREVIEW
 #Preview("Czech") {
     NavigationStack {
-        FormOfferView()
+        OfferFormView()
             .environmentObject(OfferViewModel())
             .environment(\.locale, Locale(identifier: "cs"))
     }
@@ -177,7 +178,7 @@ extension FormOfferView {
 
 #Preview("English") {
     NavigationStack {
-        FormOfferView()
+        OfferFormView()
             .environmentObject(OfferViewModel())
             .environment(\.locale, Locale(identifier: "en"))
     }
