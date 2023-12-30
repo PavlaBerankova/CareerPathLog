@@ -14,7 +14,7 @@ struct OfferListView: View {
             statusBar
             jobOfferlist
         }
-        .navigationTitle(model.titleTextBySelectedFilter())
+        .navigationTitle((model.titleTextBySelectedFilter()))
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -100,10 +100,20 @@ struct OfferListView: View {
     }
 
 // MARK: - PREVIEW
-#Preview {
+#Preview("Czech") {
     NavigationStack {
         OfferListView()
             .environmentObject(OfferViewModel())
             .environmentObject(Coordinator())
+            .environment(\.locale, Locale(identifier: "cs"))
+    }
+}
+
+#Preview("English") {
+    NavigationStack {
+        OfferListView()
+            .environmentObject(OfferViewModel())
+            .environmentObject(Coordinator())
+            .environment(\.locale, Locale(identifier: "en"))
     }
 }

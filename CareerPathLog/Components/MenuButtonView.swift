@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MenuButtonView: View {
     // MARK: - PROPERTIES
-    let title: String
+    let title: LocalizedStringResource
     let icon: String
     let action: () -> Void
 
@@ -22,7 +22,7 @@ struct MenuButtonView: View {
 
 // MARK: - PREVIEW
 #Preview {
-    MenuButtonView(title: "Poznámka", icon: "pencil", action: { })
+    MenuButtonView(title: "Notes", icon: "pencil", action: { })
         .padding(.horizontal)
         .foregroundStyle(.black)
 }

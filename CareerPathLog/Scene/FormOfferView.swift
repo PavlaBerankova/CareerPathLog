@@ -5,7 +5,6 @@ struct FormOfferView: View {
     var backToListView
     @EnvironmentObject var model: OfferViewModel
     @State private var showAlert = false
-    @State private var alertTitle = ""
 
     // MARK: - BODY
     var body: some View {
@@ -19,7 +18,7 @@ struct FormOfferView: View {
                 offerTextEditor(with: $model.notes, header: "Poznámky")
                 offerTextEditor(with: $model.fullTextOffer, header: "Celý text inzerátu")
             }
-            .navigationTitle(model.selectedOffer?.companyName ?? "Přidat záznam")
+            .navigationTitle(LocalizedStringKey(model.selectedOffer?.companyName ?? "Přidat záznam"))
             .toolbarTitleDisplayMode(.large)
             .onAppear {
                 if let selectedOffer = model.selectedOffer {
@@ -73,13 +72,13 @@ extension FormOfferView {
 
                     Section {
                         Picker("Typ odpovědi", selection: $model.status) {
-                            Text(Status.noResponse.rawValue)
+                            Text(Status.noResponse.title)
                                 .tag(Status.noResponse)
-                            Text(Status.interview.rawValue)
+                            Text(Status.interview.title)
                                 .tag(Status.interview)
-                            Text(Status.accepted.rawValue)
+                            Text(Status.accepted.title)
                                 .tag(Status.accepted)
-                            Text(Status.rejected.rawValue)
+                            Text(Status.rejected.title)
                                 .tag(Status.rejected)
                         }
                         .pickerStyle(.menu)
@@ -125,7 +124,7 @@ extension FormOfferView {
             }
     }
 
-    private func offerTextEditor(with offerText: Binding<String>, header: String) -> some View {
+    private func offerTextEditor(with offerText: Binding<String>, header: LocalizedStringResource) -> some View {
         Section {
             TextEditor(text: offerText)
                 .frame(maxWidth: .infinity)
@@ -154,8 +153,12 @@ extension FormOfferView {
     private func updateButton(for selectedOffer: JobOffer) -> some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button {
-                model.updateOffer(model.editedOffer(selectedOffer))
-                backToListView()
+                if model.checkTextFieldIsNotEmpty() {
+                    model.updateOffer(model.editedOffer(selectedOffer))
+                    backToListView()
+                } else {
+                    showAlert.toggle()
+                }
             } label: {
                 Text("Aktualizovat")
             }
@@ -164,9 +167,18 @@ extension FormOfferView {
 }
 
 // MARK: - PREVIEW
-#Preview {
+#Preview("Czech") {
     NavigationStack {
         FormOfferView()
             .environmentObject(OfferViewModel())
+            .environment(\.locale, Locale(identifier: "cs"))
+    }
+}
+
+#Preview("English") {
+    NavigationStack {
+        FormOfferView()
+            .environmentObject(OfferViewModel())
+            .environment(\.locale, Locale(identifier: "en"))
     }
 }

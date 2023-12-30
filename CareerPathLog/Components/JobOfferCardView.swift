@@ -7,7 +7,7 @@ struct JobOfferCardView<Content: View>: View {
     var overlayButtonAction: () -> Void
     var textColor: Color {
         if jobOffer.status == Status.noResponse {
-            if jobOffer.numberOfDaysSinceSendCV > 14 {
+            if jobOffer.numberOfDaysSinceSubmittedCV > 14 {
                 return .white
             } else {
                 return .black
@@ -19,7 +19,7 @@ struct JobOfferCardView<Content: View>: View {
 
     var rowBackgroundColor: Color {
         if jobOffer.status == Status.noResponse {
-            if jobOffer.numberOfDaysSinceSendCV > 14 {
+            if jobOffer.numberOfDaysSinceSubmittedCV > 14 {
                 return .black
             } else {
                 return Color("White")
@@ -37,7 +37,7 @@ struct JobOfferCardView<Content: View>: View {
         } else if jobOffer.status == Status.rejected {
             return Color.red.opacity(0.3)
         } else if jobOffer.status == Status.noResponse {
-            if jobOffer.numberOfDaysSinceSendCV > 14 {
+            if jobOffer.numberOfDaysSinceSubmittedCV > 14 {
                 return Color.blue
             }
         }
@@ -86,7 +86,7 @@ extension JobOfferCardView {
             Spacer()
 
             VStack(alignment: .trailing) {
-                Text("\(jobOffer.dateOfSentCV.formattedDate())")
+                Text("\(jobOffer.dateOfSubmissionV.formattedDate())")
                     .font(.callout)
                     .bold()
                 if let salary = jobOffer.salary, !salary.isEmpty {
