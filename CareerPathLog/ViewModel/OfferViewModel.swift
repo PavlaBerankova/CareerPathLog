@@ -12,16 +12,16 @@ class OfferViewModel: ObservableObject {
 
     @Published var selectedOffer: JobOffer?
     @Published var selectedFilter = Status.noResponse
-    @Published var showAddView = false
+    @Published var showFormView = false
 
     @Published var companyName = String()
     @Published var jobTitle = String()
     @Published var urlOffer = String()
     @Published var salary = String()
     @Published var notes = String()
-    @Published var dateOfSentCV = Date()
-    @Published var reply = false
-    @Published var dateOfReply = Date()
+    @Published var dateOfSubmittedCV = Date()
+    @Published var response = false
+    @Published var dateOfResponse = Date()
     @Published var firstRoundOfInterview = false
     @Published var dateOfFirstRoundOfInterview = Date()
     @Published var secondRoundOfInterview = false
@@ -32,7 +32,7 @@ class OfferViewModel: ObservableObject {
     @Published var fullTextOffer = String()
     @Published var status: Status = .noResponse
 
-    @Published var titleAlert = ""
+    @Published var titleAlert: LocalizedStringResource = ""
 
     let startingDate = Date.distantPast
     let endingDate = Date.distantFuture
@@ -51,9 +51,9 @@ class OfferViewModel: ObservableObject {
 
     func updateFilteredOffers(selectFilter: Status) {
         if selectFilter == .allStatus {
-            filteredOffers = jobOffers.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
+            filteredOffers = jobOffers.sorted { $0.dateOfSubmissionV > $1.dateOfSubmissionV }
         } else {
-            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSentCV > $1.dateOfSentCV }
+            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSubmissionV > $1.dateOfSubmissionV }
         }
     }
 
@@ -74,17 +74,17 @@ class OfferViewModel: ObservableObject {
                         urlOffer: urlOffer,
                         salary: salary,
                         notes: notes,
-                        dateOfSentCV: dateOfSentCV,
-                        reply: reply,
-                        dateOfReply: dateOfReply,
-                        firstRoundInterview: firstRoundOfInterview,
-                        dateOfFirstRoundInterview: dateOfFirstRoundOfInterview,
-                        secondRoundInterview: secondRoundOfInterview,
-                        dateOfSecondRoundInterview: dateOfSecondRoundOfInterview,
-                        thirdRoundInterview: thirdRoundOfInterview,
-                        dateOfThirdRoundInterview: dateOfThirdRoundOfInterview,
+                        dateOfSubmissionV: dateOfSubmittedCV,
+                        response: response,
+                        dateOfResponse: dateOfResponse,
+                        firstRoundOfInterview: firstRoundOfInterview,
+                        dateOfFirstRoundOfInterview: dateOfFirstRoundOfInterview,
+                        secondRoundOfInterview: secondRoundOfInterview,
+                        dateOfSecondRoundOfInterview: dateOfSecondRoundOfInterview,
+                        thirdRoundOfInterview: thirdRoundOfInterview,
+                        dateOfThirdRoundOfInterview: dateOfThirdRoundOfInterview,
                         fullTextOffer: fullTextOffer,
-                        status: reply ? status : .noResponse // reset and update status to .noResponse when user toggle reply to false
+                        status: response ? status : .noResponse // reset and update status to .noResponse when user toggle reply to false
         )
     }
 
@@ -117,15 +117,15 @@ class OfferViewModel: ObservableObject {
             urlOffer: urlOffer,
             salary: salary,
             notes: notes,
-            dateOfSentCV: dateOfSentCV,
-            reply: reply,
-            dateOfReply: dateOfReply,
-            firstRoundInterview: firstRoundOfInterview,
-            dateOfFirstRoundInterview: dateOfFirstRoundOfInterview,
-            secondRoundInterview: secondRoundOfInterview,
-            dateOfSecondRoundInterview: dateOfSecondRoundOfInterview,
-            thirdRoundInterview: thirdRoundOfInterview,
-            dateOfThirdRoundInterview: dateOfThirdRoundOfInterview,
+            dateOfSubmissionV: dateOfSubmittedCV,
+            response: response,
+            dateOfResponse: dateOfResponse,
+            firstRoundOfInterview: firstRoundOfInterview,
+            dateOfFirstRoundOfInterview: dateOfFirstRoundOfInterview,
+            secondRoundOfInterview: secondRoundOfInterview,
+            dateOfSecondRoundOfInterview: dateOfSecondRoundOfInterview,
+            thirdRoundOfInterview: thirdRoundOfInterview,
+            dateOfThirdRoundOfInterview: dateOfThirdRoundOfInterview,
             fullTextOffer: fullTextOffer,
             status: status
         )
@@ -141,13 +141,13 @@ class OfferViewModel: ObservableObject {
         urlOffer = offer.urlOffer ?? ""
         salary = offer.salary ?? ""
         notes = offer.notes ?? ""
-        dateOfSentCV = offer.dateOfSentCV
-        reply = offer.reply
-        dateOfReply = offer.dateOfReply ?? Date.now
-        firstRoundOfInterview = offer.firstRoundInterview
-        dateOfFirstRoundOfInterview = offer.dateOfFirstRoundInterview ?? Date.now
-        secondRoundOfInterview = offer.secondRoundInterview
-        dateOfSecondRoundOfInterview = offer.dateOfSecondRoundInterview ?? Date.now
+        dateOfSubmittedCV = offer.dateOfSubmissionV
+        response = offer.response
+        dateOfResponse = offer.dateOfResponse ?? Date.now
+        firstRoundOfInterview = offer.firstRoundOfInterview
+        dateOfFirstRoundOfInterview = offer.dateOfFirstRoundOfInterview ?? Date.now
+        secondRoundOfInterview = offer.secondRoundOfInterview
+        dateOfSecondRoundOfInterview = offer.dateOfSecondRoundOfInterview ?? Date.now
         fullTextOffer = offer.fullTextOffer ?? ""
         status = offer.status
     }
@@ -159,9 +159,9 @@ class OfferViewModel: ObservableObject {
         urlOffer = String()
         salary = String()
         notes = String()
-        dateOfSentCV = Date()
-        reply = false
-        dateOfReply = Date()
+        dateOfSubmittedCV = Date()
+        response = false
+        dateOfResponse = Date()
         firstRoundOfInterview = false
         dateOfFirstRoundOfInterview = Date()
         secondRoundOfInterview = false
@@ -175,13 +175,13 @@ class OfferViewModel: ObservableObject {
 
     func checkTextFieldIsNotEmpty() -> Bool {
         if companyName.isEmpty && jobTitle.isEmpty {
-            titleAlert = "název firmy a pozice"
+            titleAlert = "company name and job title"
             return false
         } else if jobTitle.isEmpty {
-            titleAlert = "název pozice"
+            titleAlert = "job title"
             return false
         } else if companyName.isEmpty {
-            titleAlert = "název firmy"
+            titleAlert = "company name"
             return false
         } else {
             return true
@@ -203,23 +203,8 @@ class OfferViewModel: ObservableObject {
         }
     }
 
-    func showingAddView(with offer: JobOffer) {
+    func showFormView(with offer: JobOffer) {
         selectedOffer = offer
-        showAddView.toggle()
-    }
-
-    func titleTextBySelectedFilter() -> String {
-        switch selectedFilter {
-        case .allStatus:
-            return "Oslovené firmy"
-        case .noResponse:
-            return "CV bez odpovědi"
-        case .interview:
-            return "Pozvání na pohovor"
-        case .accepted:
-            return "Pracovní nabídky"
-        case .rejected:
-            return "Zamítnuté inzeráty"
-        }
+        showFormView.toggle()
     }
 }

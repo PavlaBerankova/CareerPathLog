@@ -7,6 +7,7 @@ struct OfferListView: View {
     @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var showingAlert = false
+    @State private var alertTitle: LocalizedStringKey = ""
 
     // MARK: - BODY
     var body: some View {
@@ -14,23 +15,24 @@ struct OfferListView: View {
             statusBar
             jobOfferlist
         }
-        .navigationTitle(model.titleTextBySelectedFilter())
+        .navigationTitle((model.selectedFilter.title))
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             plusButton
+            languageButton
         }
-        .alert("Odkaz na inzerát tu není.", isPresented: $showingAlert) {
+        .alert(alertTitle, isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         }
-        .sheet(isPresented: $model.showAddView) {
+        .sheet(isPresented: $model.showFormView) {
             coordinator.addOfferView
         }
         .sheet(isPresented: $showNotes) {
-            coordinator.offerInfo(with: model.selectedOffer?.notes, type: "notes")
+            coordinator.offerSheet(with: model.selectedOffer?.notes)
         }
         .sheet(isPresented: $showFulltextOffer) {
-            coordinator.offerInfo(with: model.selectedOffer?.fullTextOffer, type: "fullTextOffer")
+            coordinator.offerSheet(with: model.selectedOffer?.fullTextOffer)
         }
     }
 }
@@ -52,7 +54,7 @@ struct OfferListView: View {
                         jobOffer: offer,
                         contentMenu: menuButtons(offer),
                         overlayButtonAction: {
-                            model.showingAddView(with: offer)
+                            model.showFormView(with: offer)
                         }
                     )
                 }
@@ -63,24 +65,42 @@ struct OfferListView: View {
 
         private func menuButtons(_ offer: JobOffer) -> some View {
             Group {
-                MenuButtonView(title: "Upravit záznam", icon: Image.info.edit, action: {
-                    model.showingAddView(with: offer)
+                // FIRST ROW - EDIT
+                MenuButtonView(title: MenuItemRow.edit.title, icon: Image.menu.edit, action: {
+                    model.showFormView(with: offer)
                 })
-                MenuButtonView(title: "Přejít na inzerát", icon: Image.info.web, action: {
+
+                // SECOND ROW - URL
+                MenuButtonView(title: MenuItemRow.url.title, icon: Image.menu.web, action: {
                     model.selectedOffer = offer
                     if let urlOffer = model.selectedOffer?.urlOffer, !urlOffer.isEmpty {
                         UIApplication.shared.open(URL(string: urlOffer)!)
                     } else {
+                        alertTitle = AlertTitle.url.title
                         showingAlert.toggle()
                     }
                 })
-                MenuButtonView(title: "Zobrazit poznámku", icon: Image.info.notes, action: {
+
+                // THIRD ROW - NOTES
+                MenuButtonView(title: MenuItemRow.notes.title, icon: Image.menu.notes, action: {
                     model.selectedOffer = offer
-                    showNotes.toggle()
+                    if let notes = model.selectedOffer?.notes, !notes.isEmpty {
+                        showNotes.toggle()
+                    } else {
+                        alertTitle = AlertTitle.notes.title
+                        showingAlert.toggle()
+                    }
                 })
-                MenuButtonView(title: "Celý text inzerátu", icon: Image.info.document, action: {
+
+                // FOURTH ROW - FULLTEXT
+                MenuButtonView(title: MenuItemRow.fullText.title, icon: Image.menu.document, action: {
                     model.selectedOffer = offer
-                    showFulltextOffer.toggle()
+                    if let fulltext = model.selectedOffer?.fullTextOffer, !fulltext.isEmpty {
+                        showFulltextOffer.toggle()
+                    } else {
+                        alertTitle = AlertTitle.fulltext.title
+                        showingAlert.toggle()
+                    }
                 })
             }
         }
@@ -89,7 +109,7 @@ struct OfferListView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     model.clearForm()
-                    model.showAddView.toggle()
+                    model.showFormView.toggle()
 
                 } label: {
                     Image(systemName: "plus")
@@ -97,13 +117,40 @@ struct OfferListView: View {
                 }
             }
         }
+
+        private var languageButton: some ToolbarContent {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Section {
+                        Text("Selection language")
+                    }
+                    Section {
+                        MenuButtonView(title: "English", icon: Image.flags.english, action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) })
+                        MenuButtonView(title: "Czech", icon: Image.flags.czech, action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) })
+                    }
+                } label: {
+                    Image(systemName: "gear")
+                        .foregroundColor(.black)
+                }
+            }
+        }
     }
 
 // MARK: - PREVIEW
-#Preview {
+#Preview("Czech") {
     NavigationStack {
         OfferListView()
             .environmentObject(OfferViewModel())
             .environmentObject(Coordinator())
+            .environment(\.locale, Locale(identifier: "cs"))
+    }
+}
+
+#Preview("English") {
+    NavigationStack {
+        OfferListView()
+            .environmentObject(OfferViewModel())
+            .environmentObject(Coordinator())
+            .environment(\.locale, Locale(identifier: "en"))
     }
 }

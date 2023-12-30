@@ -13,9 +13,9 @@ struct NotificationCountView : View {
     var background: Color {
         switch status {
         case .allStatus:
-            return Color("DarkGray")
+            return Color("DarkGrayColor")
         case .noResponse:
-            return Color("BlueCircle")
+            return Color("BlueColor")
         case .interview:
             return Color.yellow
         case .rejected:
