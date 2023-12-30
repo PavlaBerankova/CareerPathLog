@@ -11,7 +11,7 @@ class OfferViewModel: ObservableObject {
     @Published var filteredOffers = [JobOffer]()
 
     @Published var selectedOffer: JobOffer?
-    @Published var selectedFilter = Status.noResponse
+    @Published var selectedFilter = Status.allStatus
     @Published var showFormView = false
 
     @Published var companyName = String()

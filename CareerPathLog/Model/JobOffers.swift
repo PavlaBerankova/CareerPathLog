@@ -1,6 +1,6 @@
 import Foundation
 
-class JobOffers: ObservableObject {
+struct JobOffers {
     static let mock = [
         JobOffer(
             companyName: "FV Studio",
