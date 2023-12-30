@@ -2,13 +2,34 @@
   "sourceLanguage" : "cs",
   "strings" : {
     "" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "%lld dní bez odpovědi" : {
       "localizations" : {
@@ -138,12 +159,44 @@
         }
       }
     },
+    "Accepted" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pracovní nabídky"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accepted"
+          }
+        }
+      }
+    },
     "Aktualizovat" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Update"
+          }
+        }
+      }
+    },
+    "All submitted CV" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oslovené firmy"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All submitted CV"
           }
         }
       }
@@ -193,7 +246,23 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Submission of CV"
+            "value" : "Date of submission CV"
+          }
+        }
+      }
+    },
+    "Czech" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Čeština"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czech"
           }
         }
       }
@@ -218,12 +287,60 @@
         }
       }
     },
+    "Edit" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upravit inzerát"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
+    "English" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angličtina"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        }
+      }
+    },
     "Info" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Info"
+          }
+        }
+      }
+    },
+    "Interview" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozvání na pohovor"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interview"
           }
         }
       }
@@ -298,8 +415,30 @@
         }
       }
     },
+    "No response" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CV bez odpovědi"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No response"
+          }
+        }
+      }
+    },
     "Notes" : {
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poznámky"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -308,12 +447,18 @@
         }
       }
     },
-    "Odkaz na inzerát tu není." : {
+    "Notes are missing" : {
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Žádné poznámky"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URL offer is missing."
+            "value" : "Notes are missing"
           }
         }
       }
@@ -338,8 +483,30 @@
         }
       }
     },
+    "Open url" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přejít na inzerát"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open URL"
+          }
+        }
+      }
+    },
     "Oslovené firmy" : {
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oslovené firmy"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -369,7 +536,14 @@
       }
     },
     "Pozvání na pohovor" : {
+      "extractionState" : "manual",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozvání na pohovor"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -390,20 +564,16 @@
     },
     "Pracovní nabídky" : {
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pracovní nabídky"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accepted"
-          }
-        }
-      }
-    },
-    "Přejít na inzerát" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to URL offer"
           }
         }
       }
@@ -419,8 +589,79 @@
         }
       }
     },
-    "Text inzerátu chybí" : {
+    "Rejected" : {
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zamítnuté"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejected"
+          }
+        }
+      }
+    },
+    "Selection language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vybrat jazyk"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selection language"
+          }
+        }
+      }
+    },
+    "Show fulltext offer" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Celý text inzerátu"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full text offer"
+          }
+        }
+      }
+    },
+    "Show notes" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobrazit poznámky"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        }
+      }
+    },
+    "Text offer is missing" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text inzerátu chybí"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -449,22 +690,28 @@
         }
       }
     },
-    "Upravit záznam" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit "
-          }
-        }
-      }
-    },
     "URL inzerátu" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL offer"
+          }
+        }
+      }
+    },
+    "URL offer is missing" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL inzerátu chybí"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL offer is missing"
           }
         }
       }
@@ -481,20 +728,16 @@
     },
     "Výběrové řízení" : {
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Výběrová řízení"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Interview"
-          }
-        }
-      }
-    },
-    "Žádné poznámky" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There are no notes"
           }
         }
       }
@@ -515,16 +758,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "rejected"
-          }
-        }
-      }
-    },
-    "Zobrazit poznámku" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show notes"
           }
         }
       }

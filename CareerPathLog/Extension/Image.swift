@@ -2,7 +2,8 @@ import SwiftUI
 
 extension Image {
     static let status = StatusSymbol()
-    static let info = MenuButtonSymbol()
+    static let menu = MenuButtonSymbol()
+    static let flags = FlagsSymbol()
 }
 
 struct StatusSymbol {
@@ -15,8 +16,13 @@ struct StatusSymbol {
 
 struct MenuButtonSymbol {
     let menuDots = Image(systemName: "ellipsis")
-    let edit = "square.and.pencil"
-    let web = "globe"
-    let notes = "note.text"
-    let document = "doc.plaintext"
+    let edit = Image(systemName: "square.and.pencil")
+    let web = Image(systemName: "globe")
+    let notes = Image(systemName: "note.text")
+    let document = Image(systemName: "doc.plaintext")
+}
+
+struct FlagsSymbol {
+    let czech = Image("czech-republic")
+    let english = Image("united-kingdom")
 }

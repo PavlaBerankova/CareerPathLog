@@ -51,7 +51,7 @@ struct StatusButtonView: View {
             .frame(width: 60, height: 60)
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color("White"))
+                    .foregroundColor(Color("WhiteColor"))
             )
             .foregroundColor(.black)
             .frame(width: 63, height: 63)

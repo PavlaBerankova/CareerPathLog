@@ -6,26 +6,13 @@ final class Coordinator: ObservableObject {
             .presentationDragIndicator(.visible)
     }
 
-    func offerInfo(with text: String?, type: String) -> some View {
+    func offerSheet(with text: String?) -> some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                if let text = text, !text.isEmpty {
-                    Text(text)
+            LazyVStack(alignment: .leading) {
+                    Text(text ?? "")
                         .padding(25)
-                } else {
-                    VStack(spacing: 50) {
-                        Text(type == "notes" ? "Žádné poznámky" : "Text inzerátu chybí")
-                            .bold()
-                        Image(systemName: type == "notes" ? Image.info.notes : Image.info.document)
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                    }
-                    .font(.title)
-                    .opacity(0.2)
-                    .padding()
-                }
             }
-            .padding(.top, 50)
+            .padding(.top, 30)
         }
         .presentationDragIndicator(.visible)
         .presentationDetents([.medium, .large])

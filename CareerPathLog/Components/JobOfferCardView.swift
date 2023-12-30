@@ -22,10 +22,10 @@ struct JobOfferCardView<Content: View>: View {
             if jobOffer.numberOfDaysSinceSubmittedCV > 14 {
                 return .black
             } else {
-                return Color("White")
+                return Color("WhiteColor")
             }
         } else {
-            return Color("White")
+            return Color("WhiteColor")
         }
     }
 
@@ -127,7 +127,7 @@ extension JobOfferCardView {
         Menu {
             contentMenu
         } label: {
-            Image.info.menuDots
+            Image.menu.menuDots
                 .font(.title2)
                 .padding(.bottom, 10)
                 .foregroundColor(textColor)

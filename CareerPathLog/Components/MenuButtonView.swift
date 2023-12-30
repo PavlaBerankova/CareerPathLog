@@ -2,8 +2,8 @@ import SwiftUI
 
 struct MenuButtonView: View {
     // MARK: - PROPERTIES
-    let title: LocalizedStringResource
-    let icon: String
+    let title: LocalizedStringKey
+    let icon: Image
     let action: () -> Void
 
     // MARK: - BODY
@@ -14,7 +14,7 @@ struct MenuButtonView: View {
             HStack {
                 Text(title)
                 Spacer()
-                Image(systemName: icon)
+                icon
             }
         }
     }
@@ -22,7 +22,12 @@ struct MenuButtonView: View {
 
 // MARK: - PREVIEW
 #Preview {
-    MenuButtonView(title: "Notes", icon: "pencil", action: { })
-        .padding(.horizontal)
-        .foregroundStyle(.black)
+    VStack {
+        MenuButtonView(title: "Notes", icon: Image.flags.english, action: { })
+        MenuButtonView(title: "Notes", icon: Image.flags.czech, action: { })
+        MenuButtonView(title: "Czech", icon: Image.menu.web, action: { })
+
+    }
+    .foregroundStyle(.black)
+    .padding(.horizontal)
 }

@@ -83,4 +83,65 @@ enum Status: Identifiable, CaseIterable, Codable {
             "zamítnuto"
         }
     }
+
+    var titleBySelectedFilter: LocalizedStringKey {
+        switch self {
+        case .allStatus:
+            "All submitted CV"
+            // "Oslovené firmy"
+        case .noResponse:
+            "No response"
+            // "CV bez odpovědi"
+        case .interview:
+            "Interview"
+            // "Pozvání na pohovor"
+        case .accepted:
+            "Accepted"
+            // "Pracovní nabídky"
+        case .rejected:
+            "Rejected"
+            // "Zamítnuté"
+        }
+    }
+}
+
+enum MenuItemRow: Identifiable, Codable {
+    case edit
+    case url
+    case notes
+    case fullText
+
+    var id: Self { return self }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .edit:
+            "Edit"
+        case .url:
+            "Open url"
+        case .notes:
+            "Show notes"
+        case .fullText:
+            "Show fulltext offer"
+        }
+    }
+}
+
+enum AlertTitle: Identifiable, Codable {
+    case url
+    case notes
+    case fulltext
+
+    var id: Self { return self }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .url:
+            "URL offer is missing"
+        case .notes:
+            "Notes are missing"
+        case .fulltext:
+            "Text offer is missing"
+        }
+    }
 }
