@@ -17,10 +17,11 @@ User can records:
 
 
 ## Screenshots
+- Czech localization
 
 <div style="display: flex;">
-  <img src="ttps://github.com/PavlaBerankova/CareerPathLog/assets/107038196/91fd2c66-03ce-45f2-9bf7-8edddaaed950" alt="ListView" width="200" />
-  <img src="ttps://github.com/PavlaBerankova/CareerPathLog/assets/107038196/3daa0326-9560-4bc1-9472-cf7be1605764" alt="Selection language" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/91fd2c66-03ce-45f2-9bf7-8edddaaed950" alt="ListView" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/3daa0326-9560-4bc1-9472-cf7be1605764" alt="Selection language" width="200" />
   <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a7cd4cc9-9217-4d86-813a-c0116a0ceffe" alt="Add record" width="200" />
   <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/f6d8919b-8e7d-4779-973d-9029b59c9cca" alt="Update record" width="200" />
 
