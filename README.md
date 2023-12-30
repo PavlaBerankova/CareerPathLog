@@ -17,18 +17,21 @@ User can records:
 
 
 ## Screenshots
+- Czech localization
 
 <div style="display: flex;">
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/ee24faa8-a039-4030-8bfe-6bc40206a8b7" alt="MainScreen" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/f209883d-0bc3-419e-8743-4c4c0cd14bed" alt="ContentsMenu" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a7f1f528-cfad-47cb-a91b-464cbc16f34a" alt="AddView" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/4be2f1ef-be39-4a6d-b851-6a484d910924" alt="UpdateView" width="200" />
- 
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/91fd2c66-03ce-45f2-9bf7-8edddaaed950" alt="ListView" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/3daa0326-9560-4bc1-9472-cf7be1605764" alt="Selection language" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a7cd4cc9-9217-4d86-813a-c0116a0ceffe" alt="Add record" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/f6d8919b-8e7d-4779-973d-9029b59c9cca" alt="Update record" width="200" />
+
 </div>
 
 ## Video
 
 https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/9b61002e-ccea-41c0-9d9b-3b017181087c
+
+![CPL-Screen3]()
 
 
 
