@@ -66,12 +66,12 @@ struct OfferListView: View {
         private func menuButtons(_ offer: JobOffer) -> some View {
             Group {
                 // FIRST ROW - EDIT
-                MenuButtonView(title: MenuItemRow.edit.title, icon: Image.menu.edit, action: {
+                ContentMenuView(title: MenuItemRow.edit.title, icon: Image.menu.edit, action: {
                     model.showFormView(with: offer)
                 })
 
                 // SECOND ROW - URL
-                MenuButtonView(title: MenuItemRow.url.title, icon: Image.menu.web, action: {
+                ContentMenuView(title: MenuItemRow.url.title, icon: Image.menu.web, action: {
                     model.selectedOffer = offer
                     if let urlOffer = model.selectedOffer?.urlOffer, !urlOffer.isEmpty {
                         UIApplication.shared.open(URL(string: urlOffer)!)
@@ -82,7 +82,7 @@ struct OfferListView: View {
                 })
 
                 // THIRD ROW - NOTES
-                MenuButtonView(title: MenuItemRow.notes.title, icon: Image.menu.notes, action: {
+                ContentMenuView(title: MenuItemRow.notes.title, icon: Image.menu.notes, action: {
                     model.selectedOffer = offer
                     if let notes = model.selectedOffer?.notes, !notes.isEmpty {
                         showNotes.toggle()
@@ -93,7 +93,7 @@ struct OfferListView: View {
                 })
 
                 // FOURTH ROW - FULLTEXT
-                MenuButtonView(title: MenuItemRow.fullText.title, icon: Image.menu.document, action: {
+                ContentMenuView(title: MenuItemRow.fullText.title, icon: Image.menu.document, action: {
                     model.selectedOffer = offer
                     if let fulltext = model.selectedOffer?.fullTextOffer, !fulltext.isEmpty {
                         showFulltextOffer.toggle()
@@ -125,8 +125,8 @@ struct OfferListView: View {
                         Text("Selection language")
                     }
                     Section {
-                        MenuButtonView(title: "English", icon: Image.flags.english, action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) })
-                        MenuButtonView(title: "Czech", icon: Image.flags.czech, action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) })
+                        ContentMenuView(title: "English", icon: Image.flags.english, action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) })
+                        ContentMenuView(title: "Czech", icon: Image.flags.czech, action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) })
                     }
                 } label: {
                     Image(systemName: "gear")

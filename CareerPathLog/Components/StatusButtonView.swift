@@ -46,18 +46,15 @@ struct StatusButtonView: View {
             symbol
             .resizable()
             .scaledToFill()
+            .foregroundColor(.black)
             .padding()
             .font(.title)
             .frame(width: 60, height: 60)
-            .background(
+            .background(Color("WhiteColor"))
+            .clipShape(.rect(cornerRadius: 10))
+            .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color("WhiteColor"))
-            )
-            .foregroundColor(.black)
-            .frame(width: 63, height: 63)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(isSelected ? .black : .clear)
+                    .stroke(isSelected ? .black : .clear, lineWidth: 1.5)
             )
         }
         .symbolEffect(.bounce, value: value)
