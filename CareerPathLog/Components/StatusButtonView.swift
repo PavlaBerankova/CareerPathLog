@@ -50,12 +50,7 @@ struct StatusButtonView: View {
             .padding()
             .font(.title)
             .frame(width: 60, height: 60)
-            .background(Color("WhiteColor"))
-            .clipShape(.rect(cornerRadius: 10))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(isSelected ? .black : .clear, lineWidth: 1.5)
-            )
+            .opacity(isSelected ? 1 : 0.3)
         }
         .symbolEffect(.bounce, value: value)
         .font(.largeTitle)

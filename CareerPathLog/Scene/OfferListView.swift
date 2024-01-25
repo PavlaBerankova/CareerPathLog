@@ -12,11 +12,11 @@ struct OfferListView: View {
     // MARK: - BODY
     var body: some View {
         NavigationStack {
-            statusBar
             jobOfferlist
+            statusBar
         }
         .navigationTitle((model.selectedFilter.title))
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             plusButton
