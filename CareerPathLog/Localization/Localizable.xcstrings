@@ -293,6 +293,9 @@
         }
       }
     },
+    "Bez odpovědi" : {
+
+    },
     "company name" : {
       "comment" : "OfferViewModel",
       "extractionState" : "manual",
@@ -567,6 +570,9 @@
         }
       }
     },
+    "Nabídky" : {
+
+    },
     "No response" : {
       "localizations" : {
         "cs" : {
@@ -654,6 +660,9 @@
           }
         }
       }
+    },
+    "Pohovory" : {
+
     },
     "rejected" : {
       "comment" : "Status text in JobOfferCardView - lowercased",
@@ -956,6 +965,9 @@
         }
       }
     },
+    "Vše" : {
+
+    },
     "You must fill %@ field." : {
       "comment" : "FormOfferView",
       "localizations" : {
@@ -972,6 +984,9 @@
           }
         }
       }
+    },
+    "Zamítnuto" : {
+
     }
   },
   "version" : "1.0"
