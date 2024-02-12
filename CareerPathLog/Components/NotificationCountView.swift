@@ -3,11 +3,12 @@ import SwiftUI
 struct NotificationCountView : View {
     // MARK: - PROPERTIES
     var value: Int
+    // let foreground: Color = .black
     var foreground: Color  {
-        if status == .allStatus {
+        if status == .interview {
             return Color.white
         } else {
-            return Color.black
+            return Color.white
         }
     }
     var background: Color {
@@ -17,11 +18,11 @@ struct NotificationCountView : View {
         case .noResponse:
             return Color("BlueColor")
         case .interview:
-            return Color.yellow
+            return Color("PurpleColor")
         case .rejected:
-            return Color.red
+            return Color("RedColor")
         case .accepted:
-            return Color.green
+            return Color("GreenColor")
         }
     }
 
@@ -42,7 +43,7 @@ struct NotificationCountView : View {
             if hasTwoOrLessDigits() {
                 Text("\(value)")
                     .foregroundColor(foreground)
-                    .font(Font.caption)
+                    .font(Font.caption).bold()
                     .position(x: x, y: y)
             } else {
                 Text("99+")
