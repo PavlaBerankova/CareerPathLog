@@ -18,28 +18,14 @@ User can records:
 
 
 ## Screenshots
-- Czech localization
 
 <div style="display: flex;">
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/91fd2c66-03ce-45f2-9bf7-8edddaaed950" alt="ListView" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/3daa0326-9560-4bc1-9472-cf7be1605764" alt="Selection language" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a7cd4cc9-9217-4d86-813a-c0116a0ceffe" alt="Add record" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/f6d8919b-8e7d-4779-973d-9029b59c9cca" alt="Update record" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a4df1057-601c-4335-917a-60280dd5836d" alt="ListView" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/7fa107b5-e05a-4c7f-a38f-6dc87b385ac2" alt="Selection language" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/47f056ef-e43d-42e5-b59f-2ae81fff44ed" alt="Add record" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/50174dc2-edb2-4b02-b4cf-092bc6c21719" alt="Update record" width="200" />
 </div>
 
-<br>
-
-- English localization
-<div style="display: flex;">
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/ccd65c9c-dc53-41d4-9e59-069d354e8f52)" alt="ListView-en" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/d8a3fdac-571f-43a1-9ae5-e384ac343d88" alt="Selection language-en" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/4eb49d2c-f6f7-4dec-947d-2e69465e57d8" alt="Add record-en" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/dcedbd20-d07d-4601-800d-986e8440ab90" alt="Update record-en" width="200" />
-</div>
-
-## Video
-
-https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/1ca45797-ec52-4297-b3c0-7bb892e80ee3
 
 
 
