@@ -16,7 +16,7 @@ struct OfferListView: View {
             statusBar
         }
         .navigationTitle((model.selectedFilter.title))
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             plusButton
