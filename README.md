@@ -26,6 +26,11 @@ User can records:
   <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/50174dc2-edb2-4b02-b4cf-092bc6c21719" alt="Update record" width="200" />
 </div>
 
+## Video
+
+https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/8ca259db-590f-46f5-867d-5fb6bcede1bb
+
+
 
 
 
