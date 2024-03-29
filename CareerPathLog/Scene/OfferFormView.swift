@@ -127,10 +127,9 @@ extension OfferFormView {
 
     private func offerTextEditor(with offerText: Binding<String>, header: LocalizedStringResource) -> some View {
         Section {
-            TextEditor(text: offerText)
-                .frame(maxWidth: .infinity)
-                .frame(minHeight: 100, maxHeight: 400)
-                .padding(.vertical)
+            TextField("", text: offerText, axis: .vertical)
+                .textFieldStyle(.plain)
+                .frame(minHeight: 100, alignment: .topLeading)
         } header: {
             Text(header)
         }
