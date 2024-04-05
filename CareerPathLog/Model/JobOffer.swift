@@ -12,7 +12,7 @@ struct JobOffer: Codable, Identifiable, Equatable {
     let urlOffer: String?
     let salary: String?
     let notes: String?
-    let dateOfSubmissionV: Date
+    let dateOfSentCv: Date
     var response: Bool
     let dateOfResponse: Date?
     var firstRoundOfInterview: Bool
@@ -25,7 +25,7 @@ struct JobOffer: Codable, Identifiable, Equatable {
     var status: Status = .noResponse
     var numberOfDaysSinceSubmittedCV: Int {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: dateOfSubmissionV, to: Date.now)
+        let components = calendar.dateComponents([.day], from: dateOfSentCv, to: Date.now)
         return abs(components.day!)
     }
     var statusText: LocalizedStringKey {

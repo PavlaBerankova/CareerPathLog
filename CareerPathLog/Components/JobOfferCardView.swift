@@ -86,7 +86,7 @@ extension JobOfferCardView {
             Spacer()
 
             VStack(alignment: .trailing) {
-                Text("\(jobOffer.dateOfSubmissionV.formattedDate())")
+                Text("\(jobOffer.dateOfSentCv.formattedDate())")
                     .font(.callout)
                     .bold()
                 if let salary = jobOffer.salary, !salary.isEmpty {

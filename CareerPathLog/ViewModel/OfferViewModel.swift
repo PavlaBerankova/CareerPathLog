@@ -51,9 +51,9 @@ class OfferViewModel: ObservableObject {
 
     func updateFilteredOffers(selectFilter: Status) {
         if selectFilter == .allStatus {
-            filteredOffers = jobOffers.sorted { $0.dateOfSubmissionV > $1.dateOfSubmissionV }
+            filteredOffers = jobOffers.sorted { $0.dateOfSentCv > $1.dateOfSentCv }
         } else {
-            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSubmissionV > $1.dateOfSubmissionV }
+            filteredOffers = jobOffers.filter { $0.status == selectFilter }.sorted { $0.dateOfSentCv > $1.dateOfSentCv }
         }
     }
 
@@ -74,7 +74,7 @@ class OfferViewModel: ObservableObject {
                         urlOffer: urlOffer,
                         salary: salary,
                         notes: notes,
-                        dateOfSubmissionV: dateOfSubmittedCV,
+                        dateOfSentCv: dateOfSubmittedCV,
                         response: response,
                         dateOfResponse: dateOfResponse,
                         firstRoundOfInterview: firstRoundOfInterview,
@@ -117,7 +117,7 @@ class OfferViewModel: ObservableObject {
             urlOffer: urlOffer,
             salary: salary,
             notes: notes,
-            dateOfSubmissionV: dateOfSubmittedCV,
+            dateOfSentCv: dateOfSubmittedCV,
             response: response,
             dateOfResponse: dateOfResponse,
             firstRoundOfInterview: firstRoundOfInterview,
@@ -141,7 +141,7 @@ class OfferViewModel: ObservableObject {
         urlOffer = offer.urlOffer ?? ""
         salary = offer.salary ?? ""
         notes = offer.notes ?? ""
-        dateOfSubmittedCV = offer.dateOfSubmissionV
+        dateOfSubmittedCV = offer.dateOfSentCv
         response = offer.response
         dateOfResponse = offer.dateOfResponse ?? Date.now
         firstRoundOfInterview = offer.firstRoundOfInterview
