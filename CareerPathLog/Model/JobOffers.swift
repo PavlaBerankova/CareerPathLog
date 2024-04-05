@@ -5,7 +5,7 @@ struct JobOffers {
         JobOffer(
             companyName: "FV Studio",
             jobTitle: "UX Designér/ka",
-            urlOffer: "https://www.startupjobs.cz/nabidka/69109/ux-designer-ka",
+            offerUrl: "https://www.startupjobs.cz/nabidka/69109/ux-designer-ka",
             salary: "40 000kč",
             notes: "Toto je poznámka",
             dateOfSentCv: DateComponents(year: 2023, month: 11, day: 14).date ?? Date.now,
@@ -66,7 +66,7 @@ struct JobOffers {
             JobOffer(
                 companyName: "Betsys",
                 jobTitle: "iOS developer #Brno #Praha",
-                urlOffer: "https://www.startupjobs.cz/nabidka/68037/ios-developer-brno-praha",
+                offerUrl: "https://www.startupjobs.cz/nabidka/68037/ios-developer-brno-praha",
                 salary: "45 000kč",
                 notes: "nutnost ObjC",
                 dateOfSentCv: DateComponents(year: 2023, month: 11, day: 14).date ?? Date.now,
@@ -109,7 +109,7 @@ Rozvíjet nebudeš jen mobilní appku, ale i sám sebe - budeš v týmu mediorů
             JobOffer(
                 companyName: "Futured",
                 jobTitle: "Full-stack vývojář (JavaScript, TypeScript)",
-                urlOffer: "https://www.startupjobs.cz/nabidka/69531/full-stack-vyvojar-javascript-typescript",
+                offerUrl: "https://www.startupjobs.cz/nabidka/69531/full-stack-vyvojar-javascript-typescript",
                 salary: nil,
                 notes: nil,
                 dateOfSentCv: DateComponents(year: 2023, month: 11, day: 14).date ?? Date.now,

@@ -9,7 +9,7 @@ struct JobOffer: Codable, Identifiable, Equatable {
     var id = UUID()
     let companyName: String
     let jobTitle: String
-    let urlOffer: String?
+    let offerUrl: String?
     let salary: String?
     let notes: String?
     let dateOfSentCv: Date

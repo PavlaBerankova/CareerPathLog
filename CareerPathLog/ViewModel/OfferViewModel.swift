@@ -71,7 +71,7 @@ class OfferViewModel: ObservableObject {
         return JobOffer(id: selectedOffer.id,
                         companyName: companyName,
                         jobTitle: jobTitle,
-                        urlOffer: urlOffer,
+                        offerUrl: urlOffer,
                         salary: salary,
                         notes: notes,
                         dateOfSentCv: dateOfSubmittedCV,
@@ -114,7 +114,7 @@ class OfferViewModel: ObservableObject {
         let newOffer = JobOffer(
             companyName: companyName,
             jobTitle: jobTitle,
-            urlOffer: urlOffer,
+            offerUrl: urlOffer,
             salary: salary,
             notes: notes,
             dateOfSentCv: dateOfSubmittedCV,
@@ -138,7 +138,7 @@ class OfferViewModel: ObservableObject {
     func fetchOfferToForm(_ offer: JobOffer) {
         companyName = offer.companyName
         jobTitle = offer.jobTitle
-        urlOffer = offer.urlOffer ?? ""
+        urlOffer = offer.offerUrl ?? ""
         salary = offer.salary ?? ""
         notes = offer.notes ?? ""
         dateOfSubmittedCV = offer.dateOfSentCv

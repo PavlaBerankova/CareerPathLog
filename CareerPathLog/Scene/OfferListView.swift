@@ -73,7 +73,7 @@ struct OfferListView: View {
                 // SECOND ROW - URL
                 ContentMenuView(title: MenuItemRow.url.title, icon: Image.menu.web, action: {
                     model.selectedOffer = offer
-                    if let urlOffer = model.selectedOffer?.urlOffer, !urlOffer.isEmpty {
+                    if let urlOffer = model.selectedOffer?.offerUrl, !urlOffer.isEmpty {
                         UIApplication.shared.open(URL(string: urlOffer)!)
                     } else {
                         alertTitle = AlertTitle.url.title
