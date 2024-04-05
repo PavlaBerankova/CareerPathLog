@@ -1,8 +1,16 @@
+***
+  
+<p><strong>I AM WORKING ON CONVERT THIS PROJECT TO CORE DATA AND IMPROVING THE APPLICATION CODE</strong></p> 
+
+Can you see in branch `core-data`
+
+***
+
 # CareerPathLog - mobile app for iOS
 
 This project was created based on junior.guru challenge - [Hack your way to a new job](https://github.com/juniorguru/challenge/blob/main/challenges/challenge-1.md)
 
-User can records:
+## User can records:
 - all submitted CV
 - job offer information (company name, job title, salary, offer url, notes, full text offer)
 - important dates (date of response, date of interview)
