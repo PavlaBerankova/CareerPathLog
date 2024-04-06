@@ -2,14 +2,18 @@ import CoreData
 import SwiftUI
 
 struct JobOfferTestViewCoreDataView: View {
-  @FetchRequest<JobOfferEntity>(sortDescriptors: []) var jobOffers: FetchedResults
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest<JobOfferEntity>(sortDescriptors: [SortDescriptor(\.dateOfSentCv)]) var jobOffers: FetchedResults
 
     var body: some View {
       NavigationView {
         List(jobOffers) { offer in
-          Text(offer.companyName ?? "Company name placeholder")
+            OfferCardView(
+            jobOffer: offer,
+            overlayButtonAction: { })
         }
-        .font(.title)
+        .listStyle(.plain)
+        .navigationTitle("Všechny CV")
       }
     }
 }

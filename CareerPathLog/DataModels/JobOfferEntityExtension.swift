@@ -22,8 +22,8 @@ extension JobOfferEntity {
       notes ?? ""
   }
 
-  var viewDateOfSentCv: Date {
-    dateOfSentCv ?? Date()
+  var viewDateOfSentCv: String {
+      dateOfSentCv?.formattedDate() ?? ""
   }
 
   var viewDateOfFirstRoundOfInterview: Date {
@@ -50,7 +50,7 @@ extension JobOfferEntity {
 
   var viewNumberOfDaysSinceSubmittedCv: Int {
     let calendar = Calendar.current
-    let componenets = calendar.dateComponents([.day], from: viewDateOfSentCv)
+      let componenets = calendar.dateComponents([.day], from: dateOfSentCv ?? Date())
     return abs(componenets.day!)
   }
 
