@@ -31,6 +31,7 @@
 		44F7BD042B407CF0009240CA /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7BD032B407CF0009240CA /* Status.swift */; };
 		44F7BD062B407D1F009240CA /* AlertTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7BD052B407D1F009240CA /* AlertTitle.swift */; };
 		44F7BD082B408D6F009240CA /* MenuItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7BD072B408D6F009240CA /* MenuItemRow.swift */; };
+		44FC27332BC11595009BB889 /* OfferCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC27322BC11595009BB889 /* OfferCardView.swift */; };
 		44FE271C2B3FF2D700A29969 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 44FE271B2B3FF2D700A29969 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		44F7BD032B407CF0009240CA /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		44F7BD052B407D1F009240CA /* AlertTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTitle.swift; sourceTree = "<group>"; };
 		44F7BD072B408D6F009240CA /* MenuItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemRow.swift; sourceTree = "<group>"; };
+		44FC27322BC11595009BB889 /* OfferCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCardView.swift; sourceTree = "<group>"; };
 		44FE271B2B3FF2D700A29969 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +176,7 @@
 				44AEF2432BBFE4D900F9F627 /* JobOfferEntityExtension.swift */,
 				44AEF2452BBFE4EA00F9F627 /* JobOfferDataModel.xcdatamodeld */,
 				44AEF2482BBFE72700F9F627 /* JobOfferTestViewCoreDataView.swift */,
+				44FC27322BC11595009BB889 /* OfferCardView.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				44E5781B2B24FD070052346E /* Image.swift in Sources */,
 				449A45272B34251300891DBE /* Coordinator.swift in Sources */,
 				44E578212B255C630052346E /* Date.swift in Sources */,
+				44FC27332BC11595009BB889 /* OfferCardView.swift in Sources */,
 				4475E7702AF51816003B0579 /* JobOffer.swift in Sources */,
 				449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */,
 				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,

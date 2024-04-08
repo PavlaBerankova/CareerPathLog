@@ -24,12 +24,12 @@ class JobOfferContainer {
 extension JobOfferContainer {
   func addMockData(context: NSManagedObjectContext) {
     let firstOffer = JobOfferEntity(context: context)
-    firstOffer.companyName = "FV Studio"
+    firstOffer.companyName = "AV Studio"
     firstOffer.jobTitle = "UX Designér/ka"
     firstOffer.offerUrl = "https://www.startupjobs.cz/nabidka/69109/ux-designer-ka"
     firstOffer.salary = "40 000kč"
     firstOffer.notes = "Toto je poznámka"
-    firstOffer.dateOfSentCv = DateComponents(year: 2023, month: 11, day: 14).date ?? Date.now
+    firstOffer.dateOfSentCv = DateComponents(year: 2023, month: 11, day: 14).date ?? Date()
     firstOffer.response = false
     // firstOffer.dateOfResponse: nil,
     firstOffer.firstRoundOfInterview = false
@@ -90,8 +90,9 @@ extension JobOfferContainer {
     secondOffer.offerUrl = "https://www.startupjobs.cz/nabidka/69531/full-stack-vyvojar-javascript-typescript"
     secondOffer.salary = ""
     secondOffer.notes = "Notes"
-    secondOffer.dateOfSentCv = DateComponents(year: 2023, month: 11, day: 14).date ?? Date.now
+    secondOffer.dateOfSentCv = Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 1))
     secondOffer.response = true
+    // secondOffer.status = .rejected
     secondOffer.dateOfResponse = Date.now
     secondOffer.firstRoundOfInterview = false
     secondOffer.secondRoundOfInterview = false
