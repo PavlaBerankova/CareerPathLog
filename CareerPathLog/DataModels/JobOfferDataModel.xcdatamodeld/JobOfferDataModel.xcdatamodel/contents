@@ -15,6 +15,7 @@
         <attribute name="response" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="salary" optional="YES" attributeType="String"/>
         <attribute name="secondRoundOfInterview" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="thirdRoundOfInterview" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>
