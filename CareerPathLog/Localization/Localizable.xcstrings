@@ -245,6 +245,12 @@
         }
       }
     },
+    "Add" : {
+
+    },
+    "Add offer" : {
+
+    },
     "Add record" : {
       "comment" : "FormOfferView",
       "extractionState" : "manual",
@@ -442,6 +448,9 @@
           }
         }
       }
+    },
+    "Edit offer" : {
+
     },
     "English" : {
       "localizations" : {

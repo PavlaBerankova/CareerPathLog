@@ -4,9 +4,8 @@ struct OfferCardView: View {
     // MARK: - PROPERTIES
     let jobOffer: JobOfferEntity
     // var contentMenu: Content
-    var overlayButtonAction: () -> Void
     var textColor: Color {
-        if jobOffer.status == Status.noResponse {
+        if jobOffer.viewStatus == Status.noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
                 return .white
             } else {
@@ -18,7 +17,7 @@ struct OfferCardView: View {
     }
 
     var rowBackgroundColor: Color {
-        if jobOffer.status == Status.noResponse {
+        if jobOffer.viewStatus == Status.noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
                 return .black
             } else {
@@ -30,13 +29,13 @@ struct OfferCardView: View {
     }
 
     var statusBackgroundColor: Color {
-        if jobOffer.status == Status.interview {
+        if jobOffer.viewStatus == Status.interview {
             return Color.yellow.opacity(0.3)
-        } else if jobOffer.status == Status.accepted {
+        } else if jobOffer.viewStatus == Status.accepted {
             return Color.green.opacity(0.3)
-        } else if jobOffer.status == Status.rejected {
+        } else if jobOffer.viewStatus == Status.rejected {
             return Color.red.opacity(0.3)
-        } else if jobOffer.status == Status.noResponse {
+        } else if jobOffer.viewStatus == Status.noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
                 return Color.blue
             }
@@ -56,15 +55,6 @@ struct OfferCardView: View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(rowBackgroundColor.opacity(0.8))
-            .overlay {
-                Button {
-                    overlayButtonAction()
-                } label: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .padding(.trailing, 80)
-                        .foregroundStyle(.clear)
-                }
-            }
         )
     }
 }
@@ -77,9 +67,10 @@ extension OfferCardView {
                 Text(jobOffer.viewCompanyName)
                     .font(.body)
                     .fontWeight(.bold)
+                    .lineLimit(1)
                 Text(jobOffer.viewJobTitle)
                     .font(.callout)
-                    .lineLimit(2)
+                    .lineLimit(1)
                     .fontWeight(.medium)
             }
             .foregroundStyle(textColor)

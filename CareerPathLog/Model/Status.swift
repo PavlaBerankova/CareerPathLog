@@ -11,16 +11,11 @@ enum Status: String, Identifiable, CaseIterable, Codable {
 
     var title: LocalizedStringKey {
         switch self {
-        case .allStatus:
-            "All submitted CV"
-        case .noResponse:
-            "No response"
-        case .interview:
-            "Interview"
-        case .accepted:
-            "Accepted"
-        case .rejected:
-            "Rejected"
+        case .allStatus: "All submitted CV"
+        case .noResponse: "No response"
+        case .interview: "Interview"
+        case .accepted: "Accepted"
+        case .rejected: "Rejected"
         }
     }
 }

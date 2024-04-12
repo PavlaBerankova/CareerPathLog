@@ -2,26 +2,32 @@ import CoreData
 import Foundation
 
 // Container can reads data model
-class JobOfferContainer {
-  let persistenContainer: NSPersistentContainer
+class PersistenceController {
+  static let shared = PersistenceController()
+
+  let container: NSPersistentContainer
 
   init(forPreview: Bool = false) {
-    persistenContainer = NSPersistentContainer(name: "JobOfferDataModel")
+    container = NSPersistentContainer(name: "JobOfferDataModel")
 
     if forPreview {
-      persistenContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+      container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
     }
-    persistenContainer.loadPersistentStores { _, _ in }
+    container.loadPersistentStores { storeDescription, error in
+      if let error = error as NSError? {
+        print("Error load persistent stores: \(error.localizedDescription)")
+      }
+    }
 
     // If forPreview is true then we want to load up some mock data. Do this AFTER you call loadPersistentStores.
     if forPreview {
-      addMockData(context: persistenContainer.viewContext)
+      addMockData(context: container.viewContext)
     }
    }
 }
 
 // Newly created entities are first added to context (memory) and then saved and persisted on the disk.
-extension JobOfferContainer {
+extension PersistenceController {
   func addMockData(context: NSManagedObjectContext) {
     let firstOffer = JobOfferEntity(context: context)
     firstOffer.companyName = "AV Studio"

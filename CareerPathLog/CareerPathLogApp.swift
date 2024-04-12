@@ -5,6 +5,8 @@ import SwiftUI
 
 @main
 struct CareerPathLogApp: App {
+  let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
@@ -12,7 +14,7 @@ struct CareerPathLogApp: App {
               JobOfferTestViewCoreDataView()
                     .environmentObject(OfferViewModel())
                     .environmentObject(Coordinator())
-                    .environment(\.managedObjectContext, JobOfferContainer().persistenContainer.viewContext)
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
     }

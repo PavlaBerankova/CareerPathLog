@@ -2,23 +2,46 @@ import CoreData
 import SwiftUI
 
 struct JobOfferTestViewCoreDataView: View {
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest<JobOfferEntity>(sortDescriptors: [SortDescriptor(\.dateOfSentCv)]) var jobOffers: FetchedResults
+  @Environment(\.managedObjectContext) var context
+  @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)])
+  private var jobOffers: FetchedResults<JobOfferEntity>
 
-    var body: some View {
-      NavigationView {
-        List(jobOffers) { offer in
-            OfferCardView(
-            jobOffer: offer,
-            overlayButtonAction: { })
+  @State private var showingAddView = false
+
+  var body: some View {
+    NavigationStack {
+      List {
+        ForEach(jobOffers) { offer in
+          OfferCardView(jobOffer: offer)
+            .overlay(
+              NavigationLink {
+                AddUpdateOfferView(jobOffer: offer)
+              } label: {
+                EmptyView()
+              }
+              // for hidden an arrow in NavigationLink
+                .opacity(0)
+            )
         }
-        .listStyle(.plain)
-        .navigationTitle("Všechny CV")
+        .listRowSeparator(.hidden)
+      }
+      .listStyle(.plain)
+      .navigationTitle("Všechny CV")
+      .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button("Add", systemImage: "plus") {
+            showingAddView.toggle()
+          }
+        }
+      }
+      .sheet(isPresented: $showingAddView) {
+        AddUpdateOfferView(jobOffer: nil)
       }
     }
+  }
 }
 
 #Preview {
-    JobOfferTestViewCoreDataView()
-    .environment(\.managedObjectContext, JobOfferContainer(forPreview: true).persistenContainer.viewContext)
+  JobOfferTestViewCoreDataView()
+    .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
 }
