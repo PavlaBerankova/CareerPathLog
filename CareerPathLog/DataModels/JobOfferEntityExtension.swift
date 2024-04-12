@@ -30,7 +30,7 @@ extension JobOfferEntity {
     thirdRoundOfInterview: Bool,
     dateOfThirdRoundOfInterview: Date?,
     fullTextOffer: String?,
-    status: Status) {
+    status: String?) {
       self.init(context: PersistenceController.shared.container.viewContext)
       self.companyName = companyName
       self.jobTitle = jobTitle
@@ -47,7 +47,7 @@ extension JobOfferEntity {
       self.thirdRoundOfInterview = thirdRoundOfInterview
       self.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
       self.fullTextOffer = fullTextOffer
-      self.status = status.rawValue
+      self.status = status
     }
 
   var viewCompanyName: String {
@@ -74,6 +74,10 @@ extension JobOfferEntity {
     dateOfSentCv?.formattedDate() ?? ""
   }
 
+  var viewDateOfResponse: String {
+        dateOfResponse?.formattedDate() ?? ""
+    }
+
   var viewDateOfFirstRoundOfInterview: Date {
    dateOfFirstRoundOfInterview ?? Date()
   }
@@ -90,14 +94,18 @@ extension JobOfferEntity {
     fullTextOffer ?? ""
   }
 
-  var viewStatus: Status {
-    get {
-      return Status(rawValue: String(self.status ?? "No response")) ?? .noResponse
+    var viewStatus: String {
+        status ?? "No response"
     }
-    set {
-      self.status = String(newValue.rawValue)
-    }
-  }
+
+//  var viewStatus: Status {
+//    get {
+//      return Status(rawValue: String(self.status ?? "No response")) ?? .noResponse
+//    }
+//    set {
+//      self.status = String(newValue.rawValue)
+//    }
+//  }
 
   var viewNumberOfDaysSinceSubmittedCv: Int {
     let calendar = Calendar.current
@@ -108,15 +116,15 @@ extension JobOfferEntity {
   var viewStatusText: LocalizedStringKey {
     if response {
       switch viewStatus {
-      case .noResponse:
+      case "No response":
         return "\(viewNumberOfDaysSinceSubmittedCv) days without response"
-      case .interview:
+      case "Interview":
         return "interview"
-      case .rejected:
+      case "Rejected":
         return "rejected"
-      case .accepted:
+      case "Accepted":
         return "accepted"
-      case .allStatus:
+      default:
         return "all submitted CV"
       }
     } else {
@@ -125,7 +133,7 @@ extension JobOfferEntity {
   }
 
   var statusSubtitle: LocalizedStringResource? {
-    if response && viewStatus == .interview {
+    if response && viewStatus == "Interview" {
       if firstRoundOfInterview && secondRoundOfInterview && thirdRoundOfInterview {
         return "3. round"
       } else if firstRoundOfInterview && secondRoundOfInterview {

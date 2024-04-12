@@ -37,6 +37,9 @@ struct JobOfferTestViewCoreDataView: View {
       .sheet(isPresented: $showingAddView) {
         AddUpdateOfferView(jobOffer: nil)
       }
+      .onAppear {
+         try? context.save()
+      }
     }
   }
 }

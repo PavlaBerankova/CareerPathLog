@@ -3,20 +3,19 @@
     <entity name="JobOfferEntity" representedClassName="JobOfferEntity" syncable="YES" codeGenerationType="class">
         <attribute name="companyName" attributeType="String"/>
         <attribute name="dateOfFirstRoundOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="dateOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateOfResponse" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateOfSecondRoundOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateOfSentCv" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateOfThirdRoundOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="firstRoundOfInterview" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="firstRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="fullTextOffer" optional="YES" attributeType="String"/>
         <attribute name="jobTitle" attributeType="String" defaultValueString=""/>
         <attribute name="notes" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="offerUrl" optional="YES" attributeType="String"/>
-        <attribute name="response" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="salary" optional="YES" attributeType="String" defaultValueString=""/>
-        <attribute name="secondRoundOfInterview" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="status" attributeType="String" defaultValueString="No response"/>
-        <attribute name="thirdRoundOfInterview" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="response" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="salary" optional="YES" attributeType="String"/>
+        <attribute name="secondRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="status" attributeType="String"/>
+        <attribute name="thirdRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>

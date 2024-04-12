@@ -15,7 +15,7 @@ struct AddUpdateOfferView: View {
   @State private var dateOfSentCv = Date()
   @State private var response = true
   @State private var dateOfResponse = Date()
-  @State private var status: Status = .noResponse
+  @State private var status: String = "No response"
 
   @State private var firstRoundOfInterview = false
   @State private var dateOfFirstRoundOfInterview = Date()
@@ -30,6 +30,7 @@ struct AddUpdateOfferView: View {
   let startDate = Date.distantPast
   let endDate = Date.distantFuture
   let dateOfInterview: LocalizedStringKey = "Date of interview"
+    let pickerStatus = ["No response", "Interview", "Accepted", "Rejected"]
 
 
     var body: some View {
@@ -62,14 +63,9 @@ struct AddUpdateOfferView: View {
 
                   Section {
                     Picker("Type of response", selection: $status) {
-                          Text(LocalizedStringKey("StatusPicker - no response"))
-                              .tag(Status.noResponse)
-                          Text(LocalizedStringKey("StatusPicker - interview"))
-                              .tag(Status.interview)
-                          Text(LocalizedStringKey("StatusPicker - accepted"))
-                              .tag(Status.accepted)
-                          Text(LocalizedStringKey("StatusPicker - rejected"))
-                              .tag(Status.rejected)
+                        ForEach(pickerStatus, id: \.self) {
+                            Text(LocalizedStringKey($0))
+                        }
                       }
                       .pickerStyle(.menu)
                   }
@@ -122,8 +118,7 @@ struct AddUpdateOfferView: View {
                 addJobOffer()
               } else {
                 // update current offer updateJobOffer()
-//                updateJobOffer(jobOffer: jobOffer)
-                saveJobOffers()
+                updateJobOffer()
               }
             }
           }
@@ -131,7 +126,7 @@ struct AddUpdateOfferView: View {
         // fetch exist data from jobOffer to form for edit and update
         .onAppear {
           if jobOffer != nil {
-            self.companyName = jobOffer?.companyName ?? ""
+              self.companyName = jobOffer?.viewCompanyName ?? ""
             self.jobTitle = jobOffer?.jobTitle ?? ""
             self.offerUrl = jobOffer?.offerUrl ?? ""
             self.salary = jobOffer?.salary ?? ""
@@ -146,7 +141,7 @@ struct AddUpdateOfferView: View {
             self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
             self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
             self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
-            self.status = jobOffer?.viewStatus ?? .noResponse
+            self.status = jobOffer?.status ?? Status.noResponse.rawValue
           }
         }
       }
@@ -170,40 +165,52 @@ struct AddUpdateOfferView: View {
       newJobOffer.thirdRoundOfInterview = thirdRoundOfInterview
       newJobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
       newJobOffer.fullTextOffer = fullTextOffer
-      newJobOffer.status = status.rawValue
+      newJobOffer.status = status
 
       saveJobOffers()
     }
   }
 
-  private func updateJobOffer(jobOffer: JobOfferEntity?) {
-    let updateJobOffer
-    self.companyName = jobOffer?.companyName ?? ""
-    self.jobTitle = jobOffer?.jobTitle ?? ""
-    self.offerUrl = jobOffer?.offerUrl ?? ""
-    self.salary = jobOffer?.salary ?? ""
-    self.notes = jobOffer?.notes ?? ""
-    self.dateOfSentCv = jobOffer?.dateOfSentCv ?? Date()
-    self.response = jobOffer?.response ?? false
-    self.dateOfResponse = jobOffer?.dateOfResponse ?? Date()
-    self.firstRoundOfInterview = jobOffer?.firstRoundOfInterview ?? false
-    self.dateOfFirstRoundOfInterview = jobOffer?.dateOfFirstRoundOfInterview ?? Date()
-    self.secondRoundOfInterview = jobOffer?.secondRoundOfInterview ?? false
-    self.dateOfSecondRoundOfInterview = jobOffer?.dateOfSecondRoundOfInterview ?? Date()
-    self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
-    self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
-    self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
-    self.status = jobOffer?.viewStatus ?? .noResponse
+    private func updateJobOffer() {
+        if let jobOffer = jobOffer {
+            withAnimation {
+                jobOffer.companyName = companyName
+                jobOffer.jobTitle = jobTitle
+                jobOffer.offerUrl = offerUrl
+                jobOffer.salary = salary
+                jobOffer.notes = notes
+                jobOffer.dateOfSentCv = dateOfSentCv
+                jobOffer.response = response
+                jobOffer.dateOfResponse = dateOfResponse
+                jobOffer.firstRoundOfInterview = firstRoundOfInterview
+                jobOffer.dateOfFirstRoundOfInterview = dateOfFirstRoundOfInterview
+                jobOffer.secondRoundOfInterview = secondRoundOfInterview
+                jobOffer.dateOfSecondRoundOfInterview = dateOfSecondRoundOfInterview
+                jobOffer.thirdRoundOfInterview = thirdRoundOfInterview
+                jobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
+                jobOffer.fullTextOffer = fullTextOffer
+                jobOffer.status = status
+            }
+        }
+            saveJobOffers()
+            dismiss()
+    }
 
-    saveJobOffers()
-  }
 
   private func saveJobOffers() {
     do {
       try viewContext.save()
       dismiss()
-    } catch let error as NSError {
-      fatalError("Unresolved error \(error), \(error.userInfo)")
+    } catch {
+        let nsError = (error as NSError)
+            if nsError.code == 0,
+                nsError.domain == "Foundation._GenericObjCError" {
+                print("Got invalid error from Objective-C")
+            }
+            else {
+                // Actually handle your error here
+                fatalError("Unresolved error \(nsError.debugDescription), \(nsError.userInfo), \(nsError.localizedDescription), \(String(describing: nsError.localizedFailureReason)), \(String(describing: nsError.localizedRecoverySuggestion)), \(String(describing: nsError.localizedRecoveryOptions))")
+            }
     }
   }
 
