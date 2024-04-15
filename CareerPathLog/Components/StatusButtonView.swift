@@ -52,7 +52,7 @@ struct StatusButtonView: View {
             .frame(width: 60, height: 60)
             .opacity(isSelected ? 1 : 0.3)
         }
-        .symbolEffect(.bounce, value: value)
+        // .symbolEffect(.bounce, value: value) .bounce is only for iOS17
         .font(.largeTitle)
         .overlay(
             NotificationCountView(value: count, status: status)

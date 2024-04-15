@@ -2,7 +2,7 @@ import CoreData
 import SwiftUI
 
 struct JobOfferTestViewCoreDataView: View {
-  @Environment(\.managedObjectContext) var context
+  @Environment(\.managedObjectContext) var viewContext
   @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)])
   private var jobOffers: FetchedResults<JobOfferEntity>
 
@@ -12,16 +12,11 @@ struct JobOfferTestViewCoreDataView: View {
     NavigationStack {
       List {
         ForEach(jobOffers) { offer in
-          OfferCardView(jobOffer: offer)
-            .overlay(
-              NavigationLink {
-                AddUpdateOfferView(jobOffer: offer)
-              } label: {
-                EmptyView()
-              }
-              // for hidden an arrow in NavigationLink
-                .opacity(0)
-            )
+          NavigationLink {
+            AddUpdateOfferView(jobOffer: offer)
+          } label: {
+            OfferCardView(jobOffer: offer)
+          }
         }
         .listRowSeparator(.hidden)
       }
@@ -38,7 +33,7 @@ struct JobOfferTestViewCoreDataView: View {
         AddUpdateOfferView(jobOffer: nil)
       }
       .onAppear {
-         try? context.save()
+         try? viewContext.save()
       }
     }
   }

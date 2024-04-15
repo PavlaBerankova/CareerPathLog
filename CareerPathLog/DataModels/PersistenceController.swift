@@ -1,11 +1,24 @@
 import CoreData
-import Foundation
+import SwiftUI
 
 // Container can reads data model
-class PersistenceController {
+class PersistenceController: ObservableObject {
   static let shared = PersistenceController()
 
-  let container: NSPersistentContainer
+  // The first time you reference the property, it will create an NSPersistentContainer.
+  lazy var container: NSPersistentContainer = {
+
+    // Pass the data model filename to the container’s initializer.
+    let container = NSPersistentContainer(name: "JobOfferDataModel")
+
+    // Load any persistent stores, which creates a store if none exists.
+    container.loadPersistentStores { storeDescription, error in
+      if let error = error as NSError? {
+        fatalError("Unresolved error \(error), \(error.userInfo)")
+      }
+    }
+    return container
+  }()
 
   init(forPreview: Bool = false) {
     container = NSPersistentContainer(name: "JobOfferDataModel")
@@ -15,19 +28,51 @@ class PersistenceController {
     }
     container.loadPersistentStores { storeDescription, error in
       if let error = error as NSError? {
-        print("Error load persistent stores: \(error.localizedDescription)")
+        // Replace this implementation with code to handle the error appropriately.
+        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+
+        /*
+         Typical reasons for an error here include:
+         * The parent directory does not exist, cannot be created, or disallows writing.
+         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+         * The device is out of space.
+         * The store could not be migrated to the current model version.
+         Check the error message to determine what the actual problem was.
+         */
+        fatalError("Unresolved error \(error), \(error.userInfo)")
       }
     }
+
+    /// - Tag: viewContextMergePolicy
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    container.viewContext.undoManager = nil
+    container.viewContext.shouldDeleteInaccessibleFaults = true
 
     // If forPreview is true then we want to load up some mock data. Do this AFTER you call loadPersistentStores.
     if forPreview {
       addMockData(context: container.viewContext)
     }
-   }
+  }
 }
 
-// Newly created entities are first added to context (memory) and then saved and persisted on the disk.
 extension PersistenceController {
+  func saveContext() {
+    // Add a convenience method to commit changes to the store.
+    let context = container.viewContext
+
+    // Verify that the context has uncommitted changes
+    if context.hasChanges {
+      do {
+        // Attempt to save changes.
+        try context.save()
+      } catch {
+        // The context couldn't be saved.
+        let nserror = error as NSError
+        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+      }
+    }
+  }
+
   func addMockData(context: NSManagedObjectContext) {
     let firstOffer = JobOfferEntity(context: context)
     firstOffer.companyName = "AV Studio"

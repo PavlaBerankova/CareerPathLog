@@ -20,7 +20,6 @@ struct OfferFormView: View {
                 offerTextEditor(with: $model.fullTextOffer, header: "Full text offer")
             }
             .navigationTitle(LocalizedStringKey(model.selectedOffer?.companyName ?? "Add record"))
-            .toolbarTitleDisplayMode(.large)
             .onAppear {
                 if let selectedOffer = model.selectedOffer {
                     model.fetchOfferToForm(selectedOffer)

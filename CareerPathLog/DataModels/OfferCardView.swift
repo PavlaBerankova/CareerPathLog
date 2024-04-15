@@ -135,4 +135,3 @@ extension OfferCardView {
     }
     .padding(.horizontal)
 }
-

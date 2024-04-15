@@ -1,12 +1,11 @@
 import CoreData
 import SwiftUI
 
-// We need to set up a space in memory (context) to manage our data objects. SwiftUI has a really easy way in which we can do this.
-
 @main
 struct CareerPathLogApp: App {
+  @Environment(\.scenePhase) var scenePhase
+  // @StateObject private var coreDataStack = PersistenceController.shared
   let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
             NavigationStack {
@@ -16,6 +15,11 @@ struct CareerPathLogApp: App {
                     .environmentObject(Coordinator())
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
+        }
+        .onChange(of: scenePhase) { newPhase in
+          if newPhase == .background {
+            persistenceController.saveContext()
+          }
         }
     }
 }

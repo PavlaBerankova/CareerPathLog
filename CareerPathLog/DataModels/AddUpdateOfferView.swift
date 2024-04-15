@@ -4,6 +4,7 @@ import SwiftUI
 struct AddUpdateOfferView: View {
   let jobOffer: JobOfferEntity?
 
+  @EnvironmentObject var persistenceController: PersistenceController
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.dismiss) private var dismiss
 
@@ -110,7 +111,6 @@ struct AddUpdateOfferView: View {
           CustomTextEditor(with: $fullTextOffer, header: "Full text offer")
         }
         .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
-        .toolbarTitleDisplayMode(.large)
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
             Button(jobOffer == nil ? "Save" : "Update") {
@@ -167,7 +167,7 @@ struct AddUpdateOfferView: View {
       newJobOffer.fullTextOffer = fullTextOffer
       newJobOffer.status = status
 
-      saveJobOffers()
+      persistenceController.saveContext()
     }
   }
 
@@ -192,27 +192,9 @@ struct AddUpdateOfferView: View {
                 jobOffer.status = status
             }
         }
-            saveJobOffers()
-            dismiss()
-    }
-
-
-  private func saveJobOffers() {
-    do {
-      try viewContext.save()
+      persistenceController.saveContext()
       dismiss()
-    } catch {
-        let nsError = (error as NSError)
-            if nsError.code == 0,
-                nsError.domain == "Foundation._GenericObjCError" {
-                print("Got invalid error from Objective-C")
-            }
-            else {
-                // Actually handle your error here
-                fatalError("Unresolved error \(nsError.debugDescription), \(nsError.userInfo), \(nsError.localizedDescription), \(String(describing: nsError.localizedFailureReason)), \(String(describing: nsError.localizedRecoverySuggestion)), \(String(describing: nsError.localizedRecoveryOptions))")
-            }
     }
-  }
 
   private func CustomTextEditor(with offerText: Binding<String>, header: LocalizedStringResource) -> some View {
       Section {
