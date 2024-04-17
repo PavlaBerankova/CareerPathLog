@@ -5,7 +5,7 @@ struct OfferCardView: View {
     let jobOffer: JobOfferEntity
     // var contentMenu: Content
     var textColor: Color {
-        if jobOffer.viewStatus == "No response" {
+        if jobOffer.viewStatus == .noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
                 return .white
             } else {
@@ -17,7 +17,7 @@ struct OfferCardView: View {
     }
 
     var rowBackgroundColor: Color {
-        if jobOffer.viewStatus == "No response" {
+        if jobOffer.viewStatus == .noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
                 return .black
             } else {
@@ -29,13 +29,13 @@ struct OfferCardView: View {
     }
 
     var statusBackgroundColor: Color {
-        if jobOffer.viewStatus == "Interview" {
+        if jobOffer.viewStatus == .interview {
             return Color.yellow.opacity(0.3)
-        } else if jobOffer.viewStatus == "Accepted" {
+        } else if jobOffer.viewStatus == .accepted {
             return Color.green.opacity(0.3)
-        } else if jobOffer.viewStatus == "Rejected"{
+        } else if jobOffer.viewStatus == .rejected {
             return Color.red.opacity(0.3)
-        } else if jobOffer.viewStatus == "No response" {
+        } else if jobOffer.viewStatus == .noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
                 return Color.blue
             }

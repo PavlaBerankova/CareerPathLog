@@ -4,7 +4,7 @@ import SwiftUI
 struct AddUpdateOfferView: View {
   let jobOffer: JobOfferEntity?
 
-  @EnvironmentObject var persistenceController: PersistenceController
+  let persistenceController = PersistenceController.shared
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.dismiss) private var dismiss
 
@@ -16,7 +16,7 @@ struct AddUpdateOfferView: View {
   @State private var dateOfSentCv = Date()
   @State private var response = true
   @State private var dateOfResponse = Date()
-  @State private var status: String = "No response"
+    @State private var status: Status = .noResponse
 
   @State private var firstRoundOfInterview = false
   @State private var dateOfFirstRoundOfInterview = Date()
@@ -30,7 +30,7 @@ struct AddUpdateOfferView: View {
 
   let startDate = Date.distantPast
   let endDate = Date.distantFuture
-  let dateOfInterview: LocalizedStringKey = "Date of interview"
+  let dateOfInterview: LocalizedStringKey = "    Date of interview"
     let pickerStatus = ["No response", "Interview", "Accepted", "Rejected"]
 
 
@@ -64,46 +64,51 @@ struct AddUpdateOfferView: View {
 
                   Section {
                     Picker("Type of response", selection: $status) {
-                        ForEach(pickerStatus, id: \.self) {
-                            Text(LocalizedStringKey($0))
-                        }
+                        Text(LocalizedStringKey("StatusPicker - no response"))
+                            .tag(Status.noResponse)
+                        Text(LocalizedStringKey("StatusPicker - interview"))
+                            .tag(Status.interview)
+                        Text(LocalizedStringKey("StatusPicker - accepted"))
+                            .tag(Status.accepted)
+                        Text(LocalizedStringKey("StatusPicker - rejected"))
+                            .tag(Status.rejected)
                       }
                       .pickerStyle(.menu)
                   }
+                  
+                  if status == .interview {
+                      Section {
+                          Toggle("1. round of interview", isOn: $firstRoundOfInterview)
+                          if firstRoundOfInterview {
+                              DatePicker(
+                                selection: $dateOfFirstRoundOfInterview,
+                                in: startDate...endDate,
+                                displayedComponents: .date) {
+                                    Text(dateOfInterview)
+                                }
+                          }
 
-                Section {
-                    Toggle("1. round of interview", isOn: $firstRoundOfInterview)
-                    if firstRoundOfInterview {
-                        DatePicker(
-                            selection: $dateOfFirstRoundOfInterview,
-                            in: startDate...endDate,
-                            displayedComponents: .date) {
-                                Text(dateOfInterview)
-                            }
-                    }
+                          Toggle("2. round of interview", isOn: $secondRoundOfInterview)
+                          if secondRoundOfInterview {
+                              DatePicker(
+                                selection: $dateOfSecondRoundOfInterview,
+                                in: startDate...endDate,
+                                displayedComponents: .date) {
+                                    Text(dateOfInterview)
+                                }
+                          }
 
-                    Toggle("2. round of interview", isOn: $secondRoundOfInterview)
-                    if secondRoundOfInterview {
-                        DatePicker(
-                            selection: $dateOfSecondRoundOfInterview,
-                            in: startDate...endDate,
-                            displayedComponents: .date) {
-                                Text(dateOfInterview)
-                            }
-                    }
-
-                    Toggle("3. round of interview", isOn: $thirdRoundOfInterview)
-                    if thirdRoundOfInterview {
-                        DatePicker(
-                            selection: $dateOfThirdRoundOfInterview,
-                            in: startDate...endDate,
-                            displayedComponents: .date) {
-                                Text(dateOfInterview)
-                            }
-                    }
-                } header: {
-                    Text(LocalizedStringKey("Interview"))
-                }
+                          Toggle("3. round of interview", isOn: $thirdRoundOfInterview)
+                          if thirdRoundOfInterview {
+                              DatePicker(
+                                selection: $dateOfThirdRoundOfInterview,
+                                in: startDate...endDate,
+                                displayedComponents: .date) {
+                                    Text(dateOfInterview)
+                                }
+                          }
+                      }
+                  }
               }
           }
 
@@ -141,7 +146,7 @@ struct AddUpdateOfferView: View {
             self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
             self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
             self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
-            self.status = jobOffer?.status ?? Status.noResponse.rawValue
+            self.status = jobOffer?.viewStatus ?? .noResponse
           }
         }
       }
@@ -165,9 +170,10 @@ struct AddUpdateOfferView: View {
       newJobOffer.thirdRoundOfInterview = thirdRoundOfInterview
       newJobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
       newJobOffer.fullTextOffer = fullTextOffer
-      newJobOffer.status = status
+      newJobOffer.status = status.rawValue
 
       persistenceController.saveContext()
+      dismiss()
     }
   }
 
@@ -189,7 +195,7 @@ struct AddUpdateOfferView: View {
                 jobOffer.thirdRoundOfInterview = thirdRoundOfInterview
                 jobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
                 jobOffer.fullTextOffer = fullTextOffer
-                jobOffer.status = status
+                jobOffer.status = status.rawValue
             }
         }
       persistenceController.saveContext()

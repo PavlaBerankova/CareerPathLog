@@ -11,6 +11,9 @@
         }
       }
     },
+    "    Date of interview" : {
+
+    },
     "%@" : {
       "localizations" : {
         "en" : {
@@ -246,10 +249,36 @@
       }
     },
     "Add" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        }
+      }
     },
     "Add offer" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat záznam"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add offer"
+          }
+        }
+      }
     },
     "Add record" : {
       "comment" : "FormOfferView",
@@ -391,7 +420,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Date of interview"
           }
         }
@@ -450,7 +479,20 @@
       }
     },
     "Edit offer" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upravit záznam"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit offer"
+          }
+        }
+      }
     },
     "English" : {
       "localizations" : {

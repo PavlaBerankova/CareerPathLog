@@ -156,7 +156,6 @@
 			children = (
 				4475E76F2AF51816003B0579 /* JobOffer.swift */,
 				4475E7712AF51820003B0579 /* JobOffers.swift */,
-				44F7BD032B407CF0009240CA /* Status.swift */,
 				44F7BD052B407D1F009240CA /* AlertTitle.swift */,
 				44F7BD072B408D6F009240CA /* MenuItemRow.swift */,
 			);
@@ -180,6 +179,7 @@
 				44AEF2482BBFE72700F9F627 /* JobOfferTestViewCoreDataView.swift */,
 				44FC27322BC11595009BB889 /* OfferCardView.swift */,
 				447B1F792BC479AB00C36AC5 /* AddUpdateOfferView.swift */,
+				44F7BD032B407CF0009240CA /* Status.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";

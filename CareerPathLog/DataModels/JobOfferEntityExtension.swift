@@ -94,18 +94,18 @@ extension JobOfferEntity {
     fullTextOffer ?? ""
   }
 
-    var viewStatus: String {
-        status ?? "No response"
-    }
+//    var viewStatus: String {
+//        status ?? "No response"
+//    }
 
-//  var viewStatus: Status {
-//    get {
-//      return Status(rawValue: String(self.status ?? "No response")) ?? .noResponse
-//    }
-//    set {
-//      self.status = String(newValue.rawValue)
-//    }
-//  }
+  var viewStatus: Status {
+    get {
+      return Status(rawValue: String(self.status ?? "No response")) ?? .noResponse
+    }
+    set {
+      self.status = String(newValue.rawValue)
+    }
+  }
 
   var viewNumberOfDaysSinceSubmittedCv: Int {
     let calendar = Calendar.current
@@ -116,15 +116,15 @@ extension JobOfferEntity {
   var viewStatusText: LocalizedStringKey {
     if response {
       switch viewStatus {
-      case "No response":
+      case .noResponse:
         return "\(viewNumberOfDaysSinceSubmittedCv) days without response"
-      case "Interview":
+      case .interview:
         return "interview"
-      case "Rejected":
+      case .rejected:
         return "rejected"
-      case "Accepted":
+      case .accepted:
         return "accepted"
-      default:
+      case .allStatus:
         return "all submitted CV"
       }
     } else {
@@ -133,7 +133,7 @@ extension JobOfferEntity {
   }
 
   var statusSubtitle: LocalizedStringResource? {
-    if response && viewStatus == "Interview" {
+      if response && viewStatus == .interview {
       if firstRoundOfInterview && secondRoundOfInterview && thirdRoundOfInterview {
         return "3. round"
       } else if firstRoundOfInterview && secondRoundOfInterview {
