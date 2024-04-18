@@ -3,6 +3,7 @@ import SwiftUI
 struct OfferCardView: View {
     // MARK: - PROPERTIES
     let jobOffer: JobOfferEntity
+    var threeDotButtonAction: () -> Void
     // var contentMenu: Content
     var textColor: Color {
         if jobOffer.viewStatus == .noResponse {
@@ -55,6 +56,15 @@ struct OfferCardView: View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(rowBackgroundColor.opacity(0.8))
+            .overlay {
+                Button {
+                    threeDotButtonAction()
+                } label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .padding(.trailing, 80)
+                        .foregroundStyle(.clear)
+                }
+            }
         )
     }
 }
@@ -100,7 +110,7 @@ extension OfferCardView {
                 .cornerRadius(25)
                 .foregroundStyle(textColor)
                 .padding(.top, 10)
-            if let statusSubtitle = jobOffer.statusSubtitle {
+            if let statusSubtitle = jobOffer.viewInterviewStatusSubtitle{
                 Text(statusSubtitle)
                     .font(.footnote)
                     .padding(5)

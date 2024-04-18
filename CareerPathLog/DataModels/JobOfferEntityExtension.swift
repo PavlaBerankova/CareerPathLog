@@ -132,7 +132,7 @@ extension JobOfferEntity {
     }
   }
 
-  var statusSubtitle: LocalizedStringResource? {
+  var viewInterviewStatusSubtitle: LocalizedStringResource? {
       if response && viewStatus == .interview {
       if firstRoundOfInterview && secondRoundOfInterview && thirdRoundOfInterview {
         return "3. round"

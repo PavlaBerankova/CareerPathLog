@@ -15,7 +15,11 @@ struct JobOfferTestViewCoreDataView: View {
           NavigationLink {
             AddUpdateOfferView(jobOffer: offer)
           } label: {
-            OfferCardView(jobOffer: offer)
+              OfferCardView(
+                jobOffer: offer,
+                threeDotButtonAction: {
+                    print("Tap on three button")
+                })
           }
         }
         .listRowSeparator(.hidden)

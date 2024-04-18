@@ -109,7 +109,7 @@ extension JobOfferCardView {
                 .cornerRadius(25)
                 .foregroundStyle(textColor)
                 .padding(.top, 10)
-            if let statusSubtitle = jobOffer.statusSubtitle {
+            if let statusSubtitle = jobOffer.viewInterviewStatusSubtitle {
                 Text(statusSubtitle)
                     .font(.footnote)
                     .padding(5)

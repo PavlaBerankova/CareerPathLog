@@ -46,7 +46,7 @@ struct JobOffer: Codable, Identifiable, Equatable {
             return "\(numberOfDaysSinceSubmittedCV) days without response"
         }
     }
-    var statusSubtitle: LocalizedStringResource? {
+    var viewInterviewStatusSubtitle: LocalizedStringResource? {
         if response && status == .interview {
                 if firstRoundOfInterview && secondRoundOfInterview && thirdRoundOfInterview {
                     return "3. round"
