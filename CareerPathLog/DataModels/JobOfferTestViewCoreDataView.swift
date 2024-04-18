@@ -17,9 +17,13 @@ struct JobOfferTestViewCoreDataView: View {
           } label: {
               OfferCardView(
                 jobOffer: offer,
-                threeDotButtonAction: {
-                    print("Tap on three button")
-                })
+                threeDotButtonAction: { print("Tap on three dot button") },
+                contentMenu: Text("Menu"))
+//              OfferCardView(
+//                jobOffer: offer,
+//                contentMenu: {
+//                    print("Tap on three button")
+//                })
           }
         }
         .listRowSeparator(.hidden)

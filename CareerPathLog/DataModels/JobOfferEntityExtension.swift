@@ -108,8 +108,8 @@ extension JobOfferEntity {
   }
 
   var viewNumberOfDaysSinceSubmittedCv: Int {
-    let calendar = Calendar.current
-    let componenets = calendar.dateComponents([.day], from: dateOfSentCv ?? Date())
+      let calendar = Calendar.current
+      let componenets = calendar.dateComponents([.day], from: dateOfSentCv ?? Date(), to: Date.now)
     return abs(componenets.day!)
   }
 

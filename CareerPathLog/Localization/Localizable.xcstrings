@@ -94,6 +94,9 @@
         }
       }
     },
+    "1. kolo" : {
+
+    },
     "1. round" : {
       "comment" : "JobOffer.statusSubtitle",
       "extractionState" : "manual",
@@ -328,6 +331,9 @@
         }
       }
     },
+    "Brno" : {
+
+    },
     "company name" : {
       "comment" : "OfferViewModel",
       "extractionState" : "manual",
@@ -391,6 +397,9 @@
           }
         }
       }
+    },
+    "ContentMenu" : {
+
     },
     "Czech" : {
       "localizations" : {
@@ -617,6 +626,9 @@
           }
         }
       }
+    },
+    "Menu" : {
+
     },
     "No response" : {
       "localizations" : {
