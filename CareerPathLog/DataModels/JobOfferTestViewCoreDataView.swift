@@ -15,7 +15,7 @@ struct JobOfferTestViewCoreDataView: View {
           NavigationLink {
             AddUpdateOfferView(jobOffer: offer)
           } label: {
-            OfferCardView(jobOffer: offer)
+              OfferCardView(jobOffer: offer, contentMenu: Text("Menu"))
           }
         }
         .listRowSeparator(.hidden)
