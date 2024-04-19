@@ -12,6 +12,7 @@ struct AddUpdateOfferView: View {
   @State private var jobTitle = String()
   @State private var offerUrl = String()
   @State private var salary = String()
+  @State private var jobLocation = String()
 
   @State private var dateOfSentCv = Date()
   @State private var response = true
@@ -42,6 +43,7 @@ struct AddUpdateOfferView: View {
               TextField("Job title", text: $jobTitle)
               TextField("URL offer", text: $offerUrl)
               TextField("Salary", text: $salary)
+              TextField("Job location", text: $jobLocation)
           } header: {
               Text("Info")
           }
@@ -131,7 +133,7 @@ struct AddUpdateOfferView: View {
         // fetch exist data from jobOffer to form for edit and update
         .onAppear {
           if jobOffer != nil {
-              self.companyName = jobOffer?.viewCompanyName ?? ""
+            self.companyName = jobOffer?.viewCompanyName ?? ""
             self.jobTitle = jobOffer?.jobTitle ?? ""
             self.offerUrl = jobOffer?.offerUrl ?? ""
             self.salary = jobOffer?.salary ?? ""
@@ -147,6 +149,7 @@ struct AddUpdateOfferView: View {
             self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
             self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
             self.status = jobOffer?.viewStatus ?? .noResponse
+            self.jobLocation = jobOffer?.jobLocation ?? ""
           }
         }
       }
@@ -171,6 +174,7 @@ struct AddUpdateOfferView: View {
       newJobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
       newJobOffer.fullTextOffer = fullTextOffer
       newJobOffer.status = status.rawValue
+      newJobOffer.jobLocation = jobLocation
 
       persistenceController.saveContext()
       dismiss()
@@ -196,6 +200,7 @@ struct AddUpdateOfferView: View {
                 jobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
                 jobOffer.fullTextOffer = fullTextOffer
                 jobOffer.status = status.rawValue
+                jobOffer.jobLocation = jobLocation
             }
         }
       persistenceController.saveContext()

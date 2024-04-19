@@ -18,7 +18,8 @@ struct JobOffersEntities {
       thirdRoundOfInterview: false,
       dateOfThirdRoundOfInterview: nil,
       fullTextOffer: "Celý text inzerátu",
-      status: "No response"),
+      status: "No response", 
+      jobLocation: "Praha"),
     JobOfferEntity(
       companyName: "Futured",
       jobTitle: "Full-stack vývojář",
@@ -35,7 +36,8 @@ struct JobOffersEntities {
       thirdRoundOfInterview: false,
       dateOfThirdRoundOfInterview: nil,
       fullTextOffer: nil,
-      status: "Interview"),
+      status: "Interview", 
+      jobLocation: "Brno"),
     JobOfferEntity(
       companyName: "Apple",
       jobTitle: "iOS Developer",
@@ -52,7 +54,8 @@ struct JobOffersEntities {
       thirdRoundOfInterview: false,
       dateOfThirdRoundOfInterview: nil,
       fullTextOffer: nil,
-      status: "Accepted"),
+      status: "Accepted", 
+      jobLocation: nil),
     JobOfferEntity(
       companyName: "Google",
       jobTitle: "UX Designer",
@@ -69,6 +72,7 @@ struct JobOffersEntities {
       thirdRoundOfInterview: false,
       dateOfThirdRoundOfInterview: nil,
       fullTextOffer: nil,
-      status: "Rejected")
+      status: "Rejected", 
+      jobLocation: "Ostrava")
   ]
 }

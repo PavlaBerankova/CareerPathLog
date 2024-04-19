@@ -331,9 +331,6 @@
         }
       }
     },
-    "Brno" : {
-
-    },
     "company name" : {
       "comment" : "OfferViewModel",
       "extractionState" : "manual",
@@ -591,6 +588,9 @@
         }
       }
     },
+    "Job location" : {
+
+    },
     "job title" : {
       "comment" : "OfferViewModel",
       "extractionState" : "manual",
@@ -626,9 +626,6 @@
           }
         }
       }
-    },
-    "Menu" : {
-
     },
     "No response" : {
       "localizations" : {

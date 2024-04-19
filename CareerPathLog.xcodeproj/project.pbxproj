@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4423D2922B242047006F7EB6 /* ContentMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* ContentMenuView.swift */; };
+		4423D2922B242047006F7EB6 /* CustomMenuRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */; };
+		443486B92BD29FAF009AB943 /* GlassEfectBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */; };
 		443AE9D02B0DF42E00EF8D48 /* OfferFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* OfferFormView.swift */; };
 		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
@@ -40,7 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4423D2912B242047006F7EB6 /* ContentMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuView.swift; sourceTree = "<group>"; };
+		4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuRowView.swift; sourceTree = "<group>"; };
+		443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassEfectBackgroundView.swift; sourceTree = "<group>"; };
 		443AE9CF2B0DF42E00EF8D48 /* OfferFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferFormView.swift; sourceTree = "<group>"; };
 		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,7 +153,6 @@
 				4475E76C2AF4F43A003B0579 /* JobOfferCardView.swift */,
 				449CC2612B14E66200DCB95C /* StatusBarView.swift */,
 				44E5781C2B2503F30052346E /* StatusButtonView.swift */,
-				4423D2912B242047006F7EB6 /* ContentMenuView.swift */,
 				44E5781E2B2513ED0052346E /* NotificationCountView.swift */,
 			);
 			path = Components;
@@ -163,7 +164,6 @@
 				4475E76F2AF51816003B0579 /* JobOffer.swift */,
 				4475E7712AF51820003B0579 /* JobOffers.swift */,
 				44F7BD052B407D1F009240CA /* AlertTitle.swift */,
-				44F7BD072B408D6F009240CA /* MenuItemRow.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,6 +189,9 @@
 				44D744DD2BD14F04000DD36F /* InfoTagView.swift */,
 				44D744DF2BD14FED000DD36F /* JobOfferEntities.swift */,
 				44D744E12BD15032000DD36F /* StatusTextView.swift */,
+				4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */,
+				44F7BD072B408D6F009240CA /* MenuItemRow.swift */,
+				443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				4475E76D2AF4F43A003B0579 /* JobOfferCardView.swift in Sources */,
 				44AEF2442BBFE4D900F9F627 /* JobOfferEntityExtension.swift in Sources */,
 				44E5781F2B2513ED0052346E /* NotificationCountView.swift in Sources */,
+				443486B92BD29FAF009AB943 /* GlassEfectBackgroundView.swift in Sources */,
 				443AE9D02B0DF42E00EF8D48 /* OfferFormView.swift in Sources */,
 				44AEF2422BBFE49100F9F627 /* PersistenceController.swift in Sources */,
 				44D744E02BD14FED000DD36F /* JobOfferEntities.swift in Sources */,
@@ -302,7 +306,7 @@
 				44F7BD082B408D6F009240CA /* MenuItemRow.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
-				4423D2922B242047006F7EB6 /* ContentMenuView.swift in Sources */,
+				4423D2922B242047006F7EB6 /* CustomMenuRowView.swift in Sources */,
 				447B1F7A2BC479AB00C36AC5 /* AddUpdateOfferView.swift in Sources */,
 				44E5781D2B2503F30052346E /* StatusButtonView.swift in Sources */,
 				44F7BD062B407D1F009240CA /* AlertTitle.swift in Sources */,

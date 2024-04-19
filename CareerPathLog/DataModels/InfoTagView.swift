@@ -7,7 +7,7 @@ struct InfoTagView: View {
     Text(title)
       .padding(.vertical, 4)
       .padding(.horizontal, 8)
-      .frame(width: 70, height: 20)
+      .frame(height: 20)
       .background(
         Color.gray.opacity(0.08)
 
@@ -19,5 +19,5 @@ struct InfoTagView: View {
 }
 
 #Preview {
-  InfoTagView(title: "Full-time")
+  InfoTagView(title: "Full-time/par-time")
 }
