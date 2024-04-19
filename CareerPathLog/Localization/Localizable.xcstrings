@@ -12,7 +12,20 @@
       }
     },
     "    Date of interview" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "    Datum pohovoru"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date of Interview"
+          }
+        }
+      }
     },
     "%@" : {
       "localizations" : {
@@ -95,7 +108,20 @@
       }
     },
     "1. kolo" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. kolo"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. round"
+          }
+        }
+      }
     },
     "1. round" : {
       "comment" : "JobOffer.statusSubtitle",
@@ -331,6 +357,38 @@
         }
       }
     },
+    "Choose type" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vyber typ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose type"
+          }
+        }
+      }
+    },
+    "Choose Type" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vyber typ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choose type"
+          }
+        }
+      }
+    },
     "company name" : {
       "comment" : "OfferViewModel",
       "extractionState" : "manual",
@@ -426,7 +484,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Date of interview"
           }
         }
@@ -534,6 +592,38 @@
         }
       }
     },
+    "Full-time" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full-time"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full-time"
+          }
+        }
+      }
+    },
+    "Hybrid" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hybrid"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hybrid"
+          }
+        }
+      }
+    },
     "Info" : {
       "comment" : "FormOfferView",
       "extractionState" : "manual",
@@ -588,11 +678,53 @@
         }
       }
     },
+    "Interviews" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pohovory"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interview"
+          }
+        }
+      }
+    },
     "Job level" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seniorita"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Job level"
+          }
+        }
+      }
     },
     "Job location" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokalita"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        }
+      }
     },
     "job title" : {
       "comment" : "OfferViewModel",
@@ -631,10 +763,36 @@
       }
     },
     "junior" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "junior"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "junior"
+          }
+        }
+      }
     },
     "medior" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "medior"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "medior"
+          }
+        }
+      }
     },
     "No response" : {
       "localizations" : {
@@ -706,6 +864,22 @@
         }
       }
     },
+    "On-site" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On-site"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On-site"
+          }
+        }
+      }
+    },
     "Open URL" : {
       "comment" : "Model.MenuItemRow.title",
       "extractionState" : "manual",
@@ -720,6 +894,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open URL"
+          }
+        }
+      }
+    },
+    "Part-time" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Part-time"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Part-time"
           }
         }
       }
@@ -756,6 +946,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rejected"
+          }
+        }
+      }
+    },
+    "Remote" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote"
           }
         }
       }
@@ -832,7 +1038,20 @@
       }
     },
     "senior" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "senior"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "senior"
+          }
+        }
+      }
     },
     "Show fulltext offer" : {
       "localizations" : {
@@ -956,6 +1175,23 @@
         }
       }
     },
+    "Type" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vyber typ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Typ"
+          }
+        }
+      }
+    },
     "Type of response" : {
       "comment" : "FormOfferView",
       "extractionState" : "manual",
@@ -970,6 +1206,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Type of response"
+          }
+        }
+      }
+    },
+    "Types of Employment" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typ úvazku"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Types of Employment"
           }
         }
       }
@@ -1029,7 +1281,30 @@
       }
     },
     "Všechny CV" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Všechny CV"
+          }
+        }
+      }
+    },
+    "Working arrangements" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typ spolupráce"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Working arrangements"
+          }
+        }
+      }
     },
     "You must fill %@ field." : {
       "comment" : "FormOfferView",

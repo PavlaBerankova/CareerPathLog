@@ -19,5 +19,7 @@
         <attribute name="secondRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="status" attributeType="String"/>
         <attribute name="thirdRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="typesOfEmployment" optional="YES" attributeType="String"/>
+        <attribute name="workingArrangements" optional="YES" attributeType="String"/>
     </entity>
 </model>

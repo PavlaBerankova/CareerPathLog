@@ -15,9 +15,11 @@ struct AddUpdateOfferView: View {
     @State private var salary = String()
     @State private var jobLocation = String()
     @State private var jobLevel: JobLevel = .none
+    @State private var typesOfEmployment: TypesOfEmployment = .none
+    @State private var workingArrangements: WorkingArrangements = .none
 
     @State private var dateOfSentCv = Date()
-    @State private var response = true
+    @State private var response = false
     @State private var dateOfResponse = Date()
     @State private var status: Status = .noResponse
 
@@ -39,90 +41,12 @@ struct AddUpdateOfferView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section {
-                    TextField("Company name", text: $companyName)
-                    TextField("Job title", text: $jobTitle)
-                    TextField("URL offer", text: $offerUrl)
-                    TextField("Salary", text: $salary)
-                    TextField("Job location", text: $jobLocation)
-                    Picker("Job level", selection: $jobLevel) {
-                        Text("junior").tag(JobLevel.junior)
-                        Text("medior").tag(JobLevel.medior)
-                        Text("senior").tag(JobLevel.senior)
-                    }
-                    .pickerStyle(.segmented)
-                } header: {
-                    Text("Info")
+                infoSection
+                dateAndResponseSection
+                if status == .interview {
+                    interviewSection
                 }
-
-                Section {
-                    DatePicker(
-                        selection: $dateOfSentCv,
-                        in: startDate...endDate,
-                        displayedComponents: .date) {
-                            Text("Date of submitted CV")
-                        }
-                    Toggle("Response", isOn: $response)
-                    if response {
-                        DatePicker(
-                            selection: $dateOfResponse,
-                            in: startDate...endDate,
-                            displayedComponents: .date) {
-                                Text("Date of response")
-                            }
-
-                        Section {
-                            Picker("Type of response", selection: $status) {
-                                Text(LocalizedStringKey("StatusPicker - no response"))
-                                    .tag(Status.noResponse)
-                                Text(LocalizedStringKey("StatusPicker - interview"))
-                                    .tag(Status.interview)
-                                Text(LocalizedStringKey("StatusPicker - accepted"))
-                                    .tag(Status.accepted)
-                                Text(LocalizedStringKey("StatusPicker - rejected"))
-                                    .tag(Status.rejected)
-                            }
-                            .pickerStyle(.menu)
-                        }
-
-                        if status == .interview {
-                            Section {
-                                Toggle("1. round of interview", isOn: $firstRoundOfInterview)
-                                if firstRoundOfInterview {
-                                    DatePicker(
-                                        selection: $dateOfFirstRoundOfInterview,
-                                        in: startDate...endDate,
-                                        displayedComponents: .date) {
-                                            Text(dateOfInterview)
-                                        }
-                                }
-
-                                Toggle("2. round of interview", isOn: $secondRoundOfInterview)
-                                if secondRoundOfInterview {
-                                    DatePicker(
-                                        selection: $dateOfSecondRoundOfInterview,
-                                        in: startDate...endDate,
-                                        displayedComponents: .date) {
-                                            Text(dateOfInterview)
-                                        }
-                                }
-
-                                Toggle("3. round of interview", isOn: $thirdRoundOfInterview)
-                                if thirdRoundOfInterview {
-                                    DatePicker(
-                                        selection: $dateOfThirdRoundOfInterview,
-                                        in: startDate...endDate,
-                                        displayedComponents: .date) {
-                                            Text(dateOfInterview)
-                                        }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                CustomTextEditor(with: $notes, header: "Notes")
-                CustomTextEditor(with: $fullTextOffer, header: "Full text offer")
+                notesAndFulltextOfferSection
             }
             .formStyle(.grouped)
             .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
@@ -159,6 +83,8 @@ struct AddUpdateOfferView: View {
                     self.status = jobOffer?.viewStatus ?? .noResponse
                     self.jobLocation = jobOffer?.jobLocation ?? ""
                     self.jobLevel = jobOffer?.viewJobLevel ?? .none
+                    self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
+                    self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
 
                 }
             }
@@ -186,6 +112,8 @@ struct AddUpdateOfferView: View {
             newJobOffer.status = status.rawValue
             newJobOffer.jobLocation = jobLocation
             newJobOffer.jobLevel = jobLevel.rawValue
+            newJobOffer.typesOfEmployment = typesOfEmployment.rawValue
+            newJobOffer.workingArrangements = workingArrangements.rawValue
 
             persistenceController.saveContext()
             dismiss()
@@ -213,6 +141,8 @@ struct AddUpdateOfferView: View {
                 jobOffer.status = status.rawValue
                 jobOffer.jobLocation = jobLocation
                 jobOffer.jobLevel = jobLevel.rawValue
+                jobOffer.typesOfEmployment = typesOfEmployment.rawValue
+                jobOffer.workingArrangements = workingArrangements.rawValue
             }
         }
         persistenceController.saveContext()
@@ -226,6 +156,123 @@ struct AddUpdateOfferView: View {
                 .frame(minHeight: 100, alignment: .topLeading)
         } header: {
             Text(header)
+        }
+    }
+}
+
+// MARK: - EXTENSION
+extension AddUpdateOfferView {
+    private var infoSection: some View {
+        Section {
+            TextField("Company name", text: $companyName)
+            TextField("Job title", text: $jobTitle)
+            TextField("URL offer", text: $offerUrl)
+            TextField("Salary", text: $salary)
+            TextField("Job location", text: $jobLocation)
+
+            Picker("Types of Employment", selection: $typesOfEmployment) {
+                Text("Choose type").tag(nil as TypesOfEmployment?)
+                Divider()
+
+                Text("Part-time").tag(TypesOfEmployment.partTime)
+                Text("Full-time").tag(TypesOfEmployment.fullTime)
+            }
+            .pickerStyle(.menu)
+
+            Picker("Working arrangements", selection: $workingArrangements) {
+                Text("Choose Type").tag(nil as WorkingArrangements?)
+                Divider()
+
+                Text("Remote").tag(WorkingArrangements.remote)
+                Text("On-site").tag(WorkingArrangements.onSite)
+                Text("Hybrid").tag(WorkingArrangements.hybrid)
+            }
+
+            Picker("Job level", selection: $jobLevel) {
+                Text("junior").tag(JobLevel.junior)
+                Text("medior").tag(JobLevel.medior)
+                Text("senior").tag(JobLevel.senior)
+            }
+            .pickerStyle(.segmented)
+        } header: {
+            Text("Info")
+        }
+    }
+
+    private var dateAndResponseSection: some View {
+        Section {
+            DatePicker(
+                selection: $dateOfSentCv,
+                in: startDate...endDate,
+                displayedComponents: .date) {
+                    Text("Date of submitted CV")
+                }
+            Toggle("Response", isOn: $response)
+            if response {
+                DatePicker(
+                    selection: $dateOfResponse,
+                    in: startDate...endDate,
+                    displayedComponents: .date) {
+                        Text("Date of response")
+                    }
+
+                Section {
+                    Picker("Type of response", selection: $status) {
+                        Text(LocalizedStringKey("StatusPicker - no response"))
+                            .tag(Status.noResponse)
+                        Text(LocalizedStringKey("StatusPicker - interview"))
+                            .tag(Status.interview)
+                        Text(LocalizedStringKey("StatusPicker - accepted"))
+                            .tag(Status.accepted)
+                        Text(LocalizedStringKey("StatusPicker - rejected"))
+                            .tag(Status.rejected)
+                    }
+                    .pickerStyle(.menu)
+                }
+            }
+        }
+    }
+
+    private var interviewSection: some View {
+        Section {
+            Toggle("1. round of interview", isOn: $firstRoundOfInterview)
+            if firstRoundOfInterview {
+                DatePicker(
+                    selection: $dateOfFirstRoundOfInterview,
+                    in: startDate...endDate,
+                    displayedComponents: .date) {
+                        Text(dateOfInterview)
+                    }
+            }
+
+            Toggle("2. round of interview", isOn: $secondRoundOfInterview)
+            if secondRoundOfInterview {
+                DatePicker(
+                    selection: $dateOfSecondRoundOfInterview,
+                    in: startDate...endDate,
+                    displayedComponents: .date) {
+                        Text(dateOfInterview)
+                    }
+            }
+
+            Toggle("3. round of interview", isOn: $thirdRoundOfInterview)
+            if thirdRoundOfInterview {
+                DatePicker(
+                    selection: $dateOfThirdRoundOfInterview,
+                    in: startDate...endDate,
+                    displayedComponents: .date) {
+                        Text(dateOfInterview)
+                    }
+            }
+        } header: {
+            Text("Interviews")
+        }
+    }
+
+    private var notesAndFulltextOfferSection: some View {
+        Group {
+            CustomTextEditor(with: $notes, header: "Notes")
+            CustomTextEditor(with: $fullTextOffer, header: "Full text offer")
         }
     }
 }

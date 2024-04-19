@@ -128,7 +128,6 @@ extension OfferCardView {
                 .font(.body)
                 .fontWeight(.bold)
                 .lineLimit(2)
-                .padding(.bottom, 2)
             Text(jobOffer.viewCompanyName)
                 .font(.callout)
                 .foregroundStyle(.secondary)
@@ -146,8 +145,12 @@ extension OfferCardView {
             if jobOffer.viewJobLevel != .none {
                 InfoTagView(title: jobOffer.viewJobLevel.rawValue)
             }
-            InfoTagView(title: "full-time, part-time")
-            InfoTagView(title: "remote/on-site")
+            if jobOffer.viewTypesOfEmployment != .none {
+                InfoTagView(title: jobOffer.viewTypesOfEmployment.rawValue)
+            }
+            if jobOffer.viewWorkingArrangements != .none {
+                InfoTagView(title: jobOffer.viewWorkingArrangements.rawValue)
+            }
         }
         .font(.callout)
     }

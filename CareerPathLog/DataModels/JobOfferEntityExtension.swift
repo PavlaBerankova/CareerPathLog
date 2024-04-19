@@ -32,7 +32,9 @@ extension JobOfferEntity {
         fullTextOffer: String?,
         status: String?,
         jobLocation: String?,
-        jobLevel: String?) {
+        jobLevel: String?,
+        typesOfEmployment: String?,
+        workingArrangements: String?) {
             self.init(context: PersistenceController.shared.container.viewContext)
             self.companyName = companyName
             self.jobTitle = jobTitle
@@ -52,6 +54,8 @@ extension JobOfferEntity {
             self.status = status
             self.jobLocation = jobLocation
             self.jobLevel = jobLevel
+            self.typesOfEmployment = typesOfEmployment
+            self.workingArrangements = workingArrangements
         }
 
     var viewCompanyName: String {
@@ -155,6 +159,24 @@ extension JobOfferEntity {
         }
         set {
             self.jobLevel = String(newValue.rawValue)
+        }
+    }
+
+    var viewTypesOfEmployment: TypesOfEmployment {
+        get {
+            return TypesOfEmployment(rawValue: String(self.typesOfEmployment ?? "none")) ?? .none
+        }
+        set {
+            self.typesOfEmployment = String(newValue.rawValue)
+        }
+    }
+
+    var viewWorkingArrangements: WorkingArrangements {
+        get {
+            return WorkingArrangements(rawValue: String(self.workingArrangements ?? "none")) ?? .none
+        }
+        set {
+            self.workingArrangements = String(newValue.rawValue)
         }
     }
 

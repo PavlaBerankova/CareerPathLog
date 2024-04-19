@@ -31,12 +31,13 @@ struct JobOfferTestViewCoreDataView: View {
         ToolbarItem(placement: .topBarTrailing) {
           Button("Add", systemImage: "plus") {
             newOffer = true
+            selectedJobOffer = nil
             showingAddUpdateView.toggle()
           }
         }
       }
       .sheet(isPresented: $showingAddUpdateView) {
-          AddUpdateOfferView(jobOffer: selectedJobOffer == nil ? nil : selectedJobOffer)
+          AddUpdateOfferView(jobOffer: newOffer ? nil : selectedJobOffer)
       }
       .onAppear {
          try? viewContext.save()
