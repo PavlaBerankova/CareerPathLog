@@ -588,6 +588,9 @@
         }
       }
     },
+    "Job level" : {
+
+    },
     "Job location" : {
 
     },
@@ -626,6 +629,12 @@
           }
         }
       }
+    },
+    "junior" : {
+
+    },
+    "medior" : {
+
     },
     "No response" : {
       "localizations" : {
@@ -821,6 +830,9 @@
           }
         }
       }
+    },
+    "senior" : {
+
     },
     "Show fulltext offer" : {
       "localizations" : {

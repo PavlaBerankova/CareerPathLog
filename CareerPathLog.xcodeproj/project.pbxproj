@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4423D2922B242047006F7EB6 /* CustomMenuRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */; };
 		443486B92BD29FAF009AB943 /* GlassEfectBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */; };
+		443486BB2BD2AF1F009AB943 /* JobLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443486BA2BD2AF1F009AB943 /* JobLevel.swift */; };
 		443AE9D02B0DF42E00EF8D48 /* OfferFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* OfferFormView.swift */; };
 		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuRowView.swift; sourceTree = "<group>"; };
 		443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassEfectBackgroundView.swift; sourceTree = "<group>"; };
+		443486BA2BD2AF1F009AB943 /* JobLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobLevel.swift; sourceTree = "<group>"; };
 		443AE9CF2B0DF42E00EF8D48 /* OfferFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferFormView.swift; sourceTree = "<group>"; };
 		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 				4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */,
 				44F7BD072B408D6F009240CA /* MenuItemRow.swift */,
 				443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */,
+				443486BA2BD2AF1F009AB943 /* JobLevel.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				44F7BD042B407CF0009240CA /* Status.swift in Sources */,
 				44D744E22BD15032000DD36F /* StatusTextView.swift in Sources */,
 				44F7BD082B408D6F009240CA /* MenuItemRow.swift in Sources */,
+				443486BB2BD2AF1F009AB943 /* JobLevel.swift in Sources */,
 				4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */,
 				44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */,
 				4423D2922B242047006F7EB6 /* CustomMenuRowView.swift in Sources */,

@@ -9,6 +9,7 @@
         <attribute name="dateOfThirdRoundOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="fullTextOffer" optional="YES" attributeType="String"/>
+        <attribute name="jobLevel" optional="YES" attributeType="String"/>
         <attribute name="jobLocation" optional="YES" attributeType="String"/>
         <attribute name="jobTitle" attributeType="String" defaultValueString=""/>
         <attribute name="notes" optional="YES" attributeType="String" defaultValueString=""/>

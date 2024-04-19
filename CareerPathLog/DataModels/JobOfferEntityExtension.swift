@@ -31,7 +31,8 @@ extension JobOfferEntity {
         dateOfThirdRoundOfInterview: Date?,
         fullTextOffer: String?,
         status: String?,
-        jobLocation: String?) {
+        jobLocation: String?,
+        jobLevel: String?) {
             self.init(context: PersistenceController.shared.container.viewContext)
             self.companyName = companyName
             self.jobTitle = jobTitle
@@ -50,6 +51,7 @@ extension JobOfferEntity {
             self.fullTextOffer = fullTextOffer
             self.status = status
             self.jobLocation = jobLocation
+            self.jobLevel = jobLevel
         }
 
     var viewCompanyName: String {
@@ -95,10 +97,6 @@ extension JobOfferEntity {
     var viewFullTextOffer: String {
         fullTextOffer ?? ""
     }
-
-    //    var viewStatus: String {
-    //        status ?? "No response"
-    //    }
 
     var viewStatus: Status {
         get {
@@ -150,4 +148,14 @@ extension JobOfferEntity {
     var viewJobLocation: String {
         jobLocation ?? ""
     }
+
+    var viewJobLevel: JobLevel {
+        get {
+            return JobLevel(rawValue: String(self.jobLevel ?? "none")) ?? .none
+        }
+        set {
+            self.jobLevel = String(newValue.rawValue)
+        }
+    }
+
 }

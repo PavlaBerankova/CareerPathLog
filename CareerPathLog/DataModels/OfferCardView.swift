@@ -143,7 +143,9 @@ extension OfferCardView {
 
     private var tagInfo: some View {
         VStack(alignment: .trailing) {
-            InfoTagView(title: "junior/medior")
+            if jobOffer.viewJobLevel != .none {
+                InfoTagView(title: jobOffer.viewJobLevel.rawValue)
+            }
             InfoTagView(title: "full-time, part-time")
             InfoTagView(title: "remote/on-site")
         }
