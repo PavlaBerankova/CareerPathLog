@@ -5,20 +5,20 @@ import SwiftUI
 struct CareerPathLogApp: App {
   @Environment(\.scenePhase) var scenePhase
   // @StateObject private var coreDataStack = PersistenceController.shared
-  let persistenceController = PersistenceController.shared
+  // let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 // RootView()
-              JobOfferTestViewCoreDataView()
-                    .environmentObject(OfferViewModel())
-                    .environmentObject(Coordinator())
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                JobOfferTestViewCoreDataView()
+//                    .environmentObject(OfferViewModel())
+//                    .environmentObject(Coordinator())
+                    .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
             }
         }
         .onChange(of: scenePhase) { newPhase in
           if newPhase == .background {
-            persistenceController.saveContext()
+              PersistenceController.shared.saveContext()
           }
         }
     }

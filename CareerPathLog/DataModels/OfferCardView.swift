@@ -106,7 +106,7 @@ struct OfferCardView<Content: View>: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 180)
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 10)
+//                    .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 10)
             )
             .foregroundColor(rowBackgroundColor)
             Button {

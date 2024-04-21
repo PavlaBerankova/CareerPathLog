@@ -22,6 +22,7 @@ class PersistenceController: ObservableObject {
 
   init(forPreview: Bool = false) {
     container = NSPersistentContainer(name: "JobOfferDataModel")
+    container.viewContext.automaticallyMergesChangesFromParent = true
 
     if forPreview {
       container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -56,6 +57,11 @@ class PersistenceController: ObservableObject {
 }
 
 extension PersistenceController {
+    func delete(item: JobOfferEntity) {
+        container.viewContext.delete(item)
+          saveContext()
+       }
+
   func saveContext() {
     // Add a convenience method to commit changes to the store.
     let context = container.viewContext

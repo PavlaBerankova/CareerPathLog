@@ -8,7 +8,7 @@ struct JobOfferTestViewCoreDataView: View {
 
   @State private var showingAddUpdateView = false
   @State private var newOffer = false
-  @State private var selectedJobOffer: JobOfferEntity? = nil
+  @State var selectedJobOffer: JobOfferEntity?
 
   var body: some View {
     NavigationStack {
@@ -17,12 +17,11 @@ struct JobOfferTestViewCoreDataView: View {
               OfferCardView(
                 jobOffer: offer,
                 onTapOfferCard: {
-                    newOffer = false
-                    selectedJobOffer = offer
-                    showingAddUpdateView.toggle()
+                    changeStatus(offer)
                 },
                 onTapThreeDotButton: openMenu(for: offer))
         }
+        .onDelete(perform: deleteItems)
         .listRowSeparator(.hidden)
       }
       .listStyle(.plain)
@@ -30,23 +29,41 @@ struct JobOfferTestViewCoreDataView: View {
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {
           Button("Add", systemImage: "plus") {
-            newOffer = true
             selectedJobOffer = nil
+              print(selectedJobOffer)
             showingAddUpdateView.toggle()
           }
         }
       }
+      .sheet(item: $selectedJobOffer) { offer in
+          AddUpdateOfferView(jobOffer: offer)
+      }
       .sheet(isPresented: $showingAddUpdateView) {
-          AddUpdateOfferView(jobOffer: newOffer ? nil : selectedJobOffer)
+          AddUpdateOfferView(jobOffer: nil)
       }
       .onAppear {
          try? viewContext.save()
+          print(selectedJobOffer)
       }
     }
   }
 
-    private func showAddUpdateView(with offer: JobOfferEntity) {
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { jobOffers[$0] }.forEach(viewContext.delete)
+            do {
+                try viewContext.save()
+            } catch {
+                // Handle the error appropriately
+                print("Failed to save the context: \(error.localizedDescription)")
+            }
+        }
+    }
 
+    private func changeStatus(_ offer: JobOfferEntity) {
+        self.selectedJobOffer = offer // Set the offer first
+        print(selectedJobOffer)
+        self.newOffer = false
     }
 
     private func openMenu(for offer: JobOfferEntity) -> some View {
@@ -95,6 +112,6 @@ struct JobOfferTestViewCoreDataView: View {
 }
 
 #Preview {
-  JobOfferTestViewCoreDataView()
+    JobOfferTestViewCoreDataView()
     .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
 }

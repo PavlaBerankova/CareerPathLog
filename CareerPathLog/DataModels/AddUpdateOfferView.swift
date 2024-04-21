@@ -3,7 +3,7 @@ import SwiftUI
 
 struct AddUpdateOfferView: View {
     // MARK: - PROPERTIES
-    let jobOffer: JobOfferEntity?
+    var jobOffer: JobOfferEntity?
 
     let persistenceController = PersistenceController.shared
     @Environment(\.managedObjectContext) private var viewContext
@@ -64,7 +64,7 @@ struct AddUpdateOfferView: View {
             }
             // fetch exist data from jobOffer to form for edit and update
             .onAppear {
-                if jobOffer != nil {
+                print(jobOffer)
                     self.companyName = jobOffer?.viewCompanyName ?? ""
                     self.jobTitle = jobOffer?.jobTitle ?? ""
                     self.offerUrl = jobOffer?.offerUrl ?? ""
@@ -86,7 +86,7 @@ struct AddUpdateOfferView: View {
                     self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
                     self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
 
-                }
+
             }
         }
     }
