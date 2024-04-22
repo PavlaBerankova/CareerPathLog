@@ -40,51 +40,61 @@ struct AddUpdateOfferView: View {
     // MARK: - BODY
     var body: some View {
         NavigationStack {
-            Form {
-                infoSection
-                dateAndResponseSection
-                if status == .interview {
-                    interviewSection
+                Form {
+                    infoSection
+                    dateAndResponseSection
+                    if status == .interview {
+                        interviewSection
+                    }
+                    notesAndFulltextOfferSection
                 }
-                notesAndFulltextOfferSection
-            }
-            .formStyle(.grouped)
-            .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(jobOffer == nil ? "Save" : "Update") {
-                        if jobOffer == nil {
-                            addJobOffer()
-                        } else {
-                            // update current offer updateJobOffer()
-                            updateJobOffer()
+                .formStyle(.grouped)
+                .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(jobOffer == nil ? "Save" : "Update") {
+                            if jobOffer == nil {
+                                addJobOffer()
+                            } else {
+                                // update current offer updateJobOffer()
+                                updateJobOffer()
+                            }
+                        }
+                    }
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            HStack {
+                                Image(systemName: "chevron.left")
+                                Text("Back")
+                            }
                         }
                     }
                 }
-            }
-            // fetch exist data from jobOffer to form for edit and update
-            .onAppear {
-                print(jobOffer)
-                    self.companyName = jobOffer?.viewCompanyName ?? ""
-                    self.jobTitle = jobOffer?.jobTitle ?? ""
-                    self.offerUrl = jobOffer?.offerUrl ?? ""
-                    self.salary = jobOffer?.salary ?? ""
-                    self.notes = jobOffer?.notes ?? ""
-                    self.dateOfSentCv = jobOffer?.dateOfSentCv ?? Date()
-                    self.response = jobOffer?.response ?? false
-                    self.dateOfResponse = jobOffer?.dateOfResponse ?? Date()
-                    self.firstRoundOfInterview = jobOffer?.firstRoundOfInterview ?? false
-                    self.dateOfFirstRoundOfInterview = jobOffer?.dateOfFirstRoundOfInterview ?? Date()
-                    self.secondRoundOfInterview = jobOffer?.secondRoundOfInterview ?? false
-                    self.dateOfSecondRoundOfInterview = jobOffer?.dateOfSecondRoundOfInterview ?? Date()
-                    self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
-                    self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
-                    self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
-                    self.status = jobOffer?.viewStatus ?? .noResponse
-                    self.jobLocation = jobOffer?.jobLocation ?? ""
-                    self.jobLevel = jobOffer?.viewJobLevel ?? .none
-                    self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
-                    self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
+                // fetch exist data from jobOffer to form for edit and update
+                .onAppear {
+                    print(jobOffer)
+                        self.companyName = jobOffer?.viewCompanyName ?? ""
+                        self.jobTitle = jobOffer?.jobTitle ?? ""
+                        self.offerUrl = jobOffer?.offerUrl ?? ""
+                        self.salary = jobOffer?.salary ?? ""
+                        self.notes = jobOffer?.notes ?? ""
+                        self.dateOfSentCv = jobOffer?.dateOfSentCv ?? Date()
+                        self.response = jobOffer?.response ?? false
+                        self.dateOfResponse = jobOffer?.dateOfResponse ?? Date()
+                        self.firstRoundOfInterview = jobOffer?.firstRoundOfInterview ?? false
+                        self.dateOfFirstRoundOfInterview = jobOffer?.dateOfFirstRoundOfInterview ?? Date()
+                        self.secondRoundOfInterview = jobOffer?.secondRoundOfInterview ?? false
+                        self.dateOfSecondRoundOfInterview = jobOffer?.dateOfSecondRoundOfInterview ?? Date()
+                        self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
+                        self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
+                        self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
+                        self.status = jobOffer?.viewStatus ?? .noResponse
+                        self.jobLocation = jobOffer?.jobLocation ?? ""
+                        self.jobLevel = jobOffer?.viewJobLevel ?? .none
+                        self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
+                        self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
 
 
             }

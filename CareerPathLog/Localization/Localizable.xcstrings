@@ -278,6 +278,7 @@
       }
     },
     "Add" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -353,6 +354,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "All submitted CV"
+          }
+        }
+      }
+    },
+    "Back" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zpět"
           }
         }
       }
@@ -1281,6 +1292,7 @@
       }
     },
     "Všechny CV" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {

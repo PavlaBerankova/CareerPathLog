@@ -16,12 +16,12 @@ struct OfferCardView<Content: View>: View {
     var textColor: Color {
         if jobOffer.viewStatus == .noResponse {
             if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
-                return .black
+                return .accentColor
             } else {
-                return .black
+                return .accentColor
             }
         } else {
-            return .black
+            return .accentColor
         }
     }
 
@@ -41,7 +41,7 @@ struct OfferCardView<Content: View>: View {
     }
 
     var statusTextColor: Color {
-        .black
+        .accent
         //    switch jobOffer.viewStatus {
         //    case "No response": return .noResponseColorDarker
         //    case "Interview": return .interviewColorDarker
@@ -99,7 +99,7 @@ struct OfferCardView<Content: View>: View {
                                     Gradient(colors: [.white, .white.opacity(0.0)]), startPoint: .top, endPoint: .bottom)
 
                     LinearGradient(gradient:
-                                    Gradient(colors: [Color.purple.opacity(0.2), .cyan.opacity(0.4)]), startPoint: .top, endPoint: .bottomTrailing)
+                                    Gradient(colors: [Color.purple.opacity(0.2), .blue.opacity(0.4)]), startPoint: .top, endPoint: .bottomTrailing)
 
                     Color.white.opacity(0.35)
                 }

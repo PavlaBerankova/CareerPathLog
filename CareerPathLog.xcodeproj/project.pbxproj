@@ -10,6 +10,7 @@
 		4407B06B2BD2EAE50003C3D0 /* TypesOfEmployment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407B06A2BD2EAE50003C3D0 /* TypesOfEmployment.swift */; };
 		4407B06D2BD2F54F0003C3D0 /* WorkingArrangements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407B06C2BD2F54F0003C3D0 /* WorkingArrangements.swift */; };
 		4423D2922B242047006F7EB6 /* CustomMenuRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */; };
+		442A115C2BD5A70F00FD2D90 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442A115B2BD5A70F00FD2D90 /* PlusButtonView.swift */; };
 		443486B92BD29FAF009AB943 /* GlassEfectBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */; };
 		443486BB2BD2AF1F009AB943 /* JobLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443486BA2BD2AF1F009AB943 /* JobLevel.swift */; };
 		443AE9D02B0DF42E00EF8D48 /* OfferFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443AE9CF2B0DF42E00EF8D48 /* OfferFormView.swift */; };
@@ -47,6 +48,7 @@
 		4407B06A2BD2EAE50003C3D0 /* TypesOfEmployment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesOfEmployment.swift; sourceTree = "<group>"; };
 		4407B06C2BD2F54F0003C3D0 /* WorkingArrangements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingArrangements.swift; sourceTree = "<group>"; };
 		4423D2912B242047006F7EB6 /* CustomMenuRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuRowView.swift; sourceTree = "<group>"; };
+		442A115B2BD5A70F00FD2D90 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
 		443486B82BD29FAF009AB943 /* GlassEfectBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassEfectBackgroundView.swift; sourceTree = "<group>"; };
 		443486BA2BD2AF1F009AB943 /* JobLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobLevel.swift; sourceTree = "<group>"; };
 		443AE9CF2B0DF42E00EF8D48 /* OfferFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferFormView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				443486BA2BD2AF1F009AB943 /* JobLevel.swift */,
 				4407B06A2BD2EAE50003C3D0 /* TypesOfEmployment.swift */,
 				4407B06C2BD2F54F0003C3D0 /* WorkingArrangements.swift */,
+				442A115B2BD5A70F00FD2D90 /* PlusButtonView.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				449CC2622B14E66200DCB95C /* StatusBarView.swift in Sources */,
 				44D404452B0CC92100D6D6C8 /* RootView.swift in Sources */,
 				44D744DE2BD14F04000DD36F /* InfoTagView.swift in Sources */,
+				442A115C2BD5A70F00FD2D90 /* PlusButtonView.swift in Sources */,
 				44AEF2472BBFE4EA00F9F627 /* JobOfferDataModel.xcdatamodeld in Sources */,
 				44F7BD042B407CF0009240CA /* Status.swift in Sources */,
 				44D744E22BD15032000DD36F /* StatusTextView.swift in Sources */,
