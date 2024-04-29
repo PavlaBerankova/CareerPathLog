@@ -1,7 +1,7 @@
 import CoreData
 import SwiftUI
 
-struct JobOfferTestViewCoreDataView: View {
+struct JobOfferListView: View {
     @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)])
     private var jobOffers: FetchedResults<JobOfferEntity>
@@ -9,52 +9,85 @@ struct JobOfferTestViewCoreDataView: View {
     @State private var showingAddUpdateView = false
     @State var selectedJobOffer: JobOfferEntity?
 
+    let sections: [FilterCategory] = FilterCategory.allCases
+    @State var selected: FilterCategory = .All
+
     var body: some View {
         NavigationStack {
-            ZStack {
-                List {
-                    ForEach(jobOffers) { offer in
-                        OfferCardView(
-                            jobOffer: offer,
-                            onTapOfferCard: {
-                                changeStatus(offer)
-                            },
-                            onTapThreeDotButton: openMenu(for: offer))
-                    }
-                    .onDelete(perform: deleteItems)
-                    .listRowSeparator(.hidden)
-                }
-                .listStyle(.plain)
-                .navigationTitle("Všechny CV")
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        PlusButtonView {
-                            selectedJobOffer = nil
-                            showingAddUpdateView.toggle()
+            HorizontalFilterView(selectedItem: $selected, items: sections, itemsCount: jobOffers.count)
+            Spacer()
+            VStack(alignment: .leading, spacing: 0) {
+                switch selected {
+                case .All:
+                        List {
+                            ForEach(jobOffers) { offer in
+                                OfferCardView(
+                                    jobOffer: offer,
+                                    onTapOfferCard: {
+                                        changeStatus(offer)
+                                    },
+                                    onTapThreeDotButton: openMenu(for: offer))
+                            }
+                            .onDelete(perform: deleteItems)
+                            .listRowSeparator(.hidden)
                         }
-                        //          Button("Add", systemImage: "plus") {
-                        //            selectedJobOffer = nil
-                        //              print(selectedJobOffer)
-                        //            showingAddUpdateView.toggle()
-                        //          }
-                    }
-                }
-                .toolbarBackground(.hidden, for: .bottomBar)
-                .sheet(item: $selectedJobOffer) { offer in
-                    AddUpdateOfferView(jobOffer: offer)
+                        .listStyle(.plain)
 
-                }
-
-                .sheet(isPresented: $showingAddUpdateView) {
-                    AddUpdateOfferView(jobOffer: nil)
-                }
-                .onAppear {
-                    try? viewContext.save()
-                    print(selectedJobOffer)
+                case .NoResponse:
+                    Text("No Response")
+                case .Interview:
+                    Text("Interview")
+                case .Accepted:
+                    Text("Accepted")
+                case .Rejected:
+                    Text("Rejected")
+                case .Archive:
+                    Text("Archive")
                 }
             }
+            Spacer()
         }
+        .ignoresSafeArea(edges: .bottom)
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                PlusButtonView {
+                    selectedJobOffer = nil
+                    showingAddUpdateView.toggle()
+                }
+            }
 
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Section {
+                        Text("Menu and Settings")
+                    }
+                    Section {
+                        Text("Statistics")
+                        Text("Profile")
+                        Text("Language")
+                    }
+                } label: {
+                    Image(systemName: "line.3.horizontal")
+                }
+            }
+
+//            ToolbarItem(placement: .topBarLeading) {
+//                Text("Hi, Pavla!")
+//                    .foregroundStyle(.accent)
+//                    .font(.title2)
+//            }
+        }
+        .toolbarBackground(.hidden, for: .bottomBar)
+        .sheet(item: $selectedJobOffer) { offer in
+            AddUpdateOfferView(jobOffer: offer)
+        }
+        .sheet(isPresented: $showingAddUpdateView) {
+            AddUpdateOfferView(jobOffer: nil)
+        }
+        .onAppear {
+            try? viewContext.save()
+            print(selectedJobOffer)
+        }
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -120,6 +153,8 @@ struct JobOfferTestViewCoreDataView: View {
 }
 
 #Preview {
-    JobOfferTestViewCoreDataView()
-        .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
+    NavigationStack {
+        JobOfferListView()
+            .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
+    }
 }

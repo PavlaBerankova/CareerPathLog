@@ -10,7 +10,7 @@ struct CareerPathLogApp: App {
         WindowGroup {
             NavigationStack {
                 // RootView()
-                JobOfferTestViewCoreDataView()
+                JobOfferListView()
 //                    .environmentObject(OfferViewModel())
 //                    .environmentObject(Coordinator())
                     .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
