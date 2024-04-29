@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct InfoTagView: View {
+// MARK: - PROPERTIES
   let title: String
 
+// MARK: - BODY
   var body: some View {
           Text(title)
             .padding(.vertical, 4)
@@ -17,6 +19,7 @@ struct InfoTagView: View {
   }
 }
 
+// MARK: - PREVIEW
 #Preview {
   InfoTagView(title: "Full-time/par-time")
 }

@@ -51,52 +51,16 @@ struct AddUpdateOfferView: View {
                 .formStyle(.grouped)
                 .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(jobOffer == nil ? "Save" : "Update") {
-                            if jobOffer == nil {
-                                addJobOffer()
-                            } else {
-                                // update current offer updateJobOffer()
-                                updateJobOffer()
-                            }
-                        }
-                    }
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            HStack {
-                                Image(systemName: "chevron.left")
-                                Text("Back")
-                            }
-                        }
+                    saveUpdateButton
+                    if jobOffer != nil {
+                        backButton
                     }
                 }
-                // fetch exist data from jobOffer to form for edit and update
                 .onAppear {
+                    // for test only
                     print(jobOffer)
-                        self.companyName = jobOffer?.viewCompanyName ?? ""
-                        self.jobTitle = jobOffer?.jobTitle ?? ""
-                        self.offerUrl = jobOffer?.offerUrl ?? ""
-                        self.salary = jobOffer?.salary ?? ""
-                        self.notes = jobOffer?.notes ?? ""
-                        self.dateOfSentCv = jobOffer?.dateOfSentCv ?? Date()
-                        self.response = jobOffer?.response ?? false
-                        self.dateOfResponse = jobOffer?.dateOfResponse ?? Date()
-                        self.firstRoundOfInterview = jobOffer?.firstRoundOfInterview ?? false
-                        self.dateOfFirstRoundOfInterview = jobOffer?.dateOfFirstRoundOfInterview ?? Date()
-                        self.secondRoundOfInterview = jobOffer?.secondRoundOfInterview ?? false
-                        self.dateOfSecondRoundOfInterview = jobOffer?.dateOfSecondRoundOfInterview ?? Date()
-                        self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
-                        self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
-                        self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
-                        self.status = jobOffer?.viewStatus ?? .noResponse
-                        self.jobLocation = jobOffer?.jobLocation ?? ""
-                        self.jobLevel = jobOffer?.viewJobLevel ?? .none
-                        self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
-                        self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
-
-
+                    ///////////////////////////////
+                    fetchJobOffer()
             }
         }
     }
@@ -172,6 +136,31 @@ struct AddUpdateOfferView: View {
 
 // MARK: - EXTENSION
 extension AddUpdateOfferView {
+    private var saveUpdateButton: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(jobOffer == nil ? "Save" : "Update") {
+                if jobOffer == nil {
+                    addJobOffer()
+                } else {
+                    updateJobOffer()
+                }
+            }
+        }
+    }
+
+    private var backButton: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button {
+                dismiss()
+            } label: {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Back")
+                }
+            }
+        }
+    }
+
     private var infoSection: some View {
         Section {
             TextField("Company name", text: $companyName)
@@ -284,6 +273,30 @@ extension AddUpdateOfferView {
             CustomTextEditor(with: $notes, header: "Notes")
             CustomTextEditor(with: $fullTextOffer, header: "Full text offer")
         }
+    }
+
+    private func fetchJobOffer() {
+        self.companyName = jobOffer?.viewCompanyName ?? ""
+        self.jobTitle = jobOffer?.jobTitle ?? ""
+        self.offerUrl = jobOffer?.offerUrl ?? ""
+        self.salary = jobOffer?.salary ?? ""
+        self.notes = jobOffer?.notes ?? ""
+        self.dateOfSentCv = jobOffer?.dateOfSentCv ?? Date()
+        self.response = jobOffer?.response ?? false
+        self.dateOfResponse = jobOffer?.dateOfResponse ?? Date()
+        self.firstRoundOfInterview = jobOffer?.firstRoundOfInterview ?? false
+        self.dateOfFirstRoundOfInterview = jobOffer?.dateOfFirstRoundOfInterview ?? Date()
+        self.secondRoundOfInterview = jobOffer?.secondRoundOfInterview ?? false
+        self.dateOfSecondRoundOfInterview = jobOffer?.dateOfSecondRoundOfInterview ?? Date()
+        self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
+        self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
+        self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
+        self.status = jobOffer?.viewStatus ?? .noResponse
+        self.jobLocation = jobOffer?.jobLocation ?? ""
+        self.jobLevel = jobOffer?.viewJobLevel ?? .none
+        self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
+        self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
+
     }
 }
 

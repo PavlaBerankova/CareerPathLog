@@ -9,10 +9,8 @@ struct CareerPathLogApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                // RootView()
                 JobOfferListView()
-//                    .environmentObject(OfferViewModel())
-//                    .environmentObject(Coordinator())
+                    .environmentObject(Coordinator())
                     .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
             }
         }

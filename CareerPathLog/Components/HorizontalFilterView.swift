@@ -1,10 +1,13 @@
 import SwiftUI
 
+// MARK: - FILTER VIEW
 struct HorizontalFilterView: View {
+    // MARK: PROPERTIES
     @Binding var selectedItem: FilterCategory
     var items: [FilterCategory]
     let itemsCount: Int?
 
+    // MARK: BODY
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
@@ -14,18 +17,20 @@ struct HorizontalFilterView: View {
                             selectedItem = item
                         }
                 }
-
             }
             .padding()
         }
     }
 }
 
+// MARK: - FILTER ITEM
 struct HorizontalFilterItem: View {
+    // MARK: PROPERTIES
     let filterCategory: String
     let itemsCount: Int?
     @Binding var selectedFilter: FilterCategory
 
+    // MARK: BODY
     var body: some View {
         VStack(spacing: 0.0) {
             HStack {
@@ -45,6 +50,7 @@ struct HorizontalFilterItem: View {
     }
 }
 
+// MARK: - PREVIEW
 #Preview("Filter View") {
     HorizontalFilterView(selectedItem: .constant(.NoResponse), items: FilterCategory.allCases, itemsCount: 8)
 }

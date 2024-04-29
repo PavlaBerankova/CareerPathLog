@@ -2,12 +2,14 @@
 import SwiftUI
 
 struct StatusTextView: View {
+    // MARK: - PROPERTIES
     let title: String
     let subtitle: LocalizedStringResource?
     let textColor: Color
     let backgroundColor: Color
     let borderColor: Color
 
+    // MARK: - BODY
     var body: some View {
         Text(title)
         //                if let subtitle = subtitle {
@@ -33,6 +35,7 @@ struct StatusTextView: View {
     }
 }
 
+// MARK: - PREVIEW
 #Preview {
     ZStack {
         LinearGradient(gradient:

@@ -2,9 +2,11 @@ import CoreData
 import SwiftUI
 
 struct JobOfferListView: View {
+    // MARK: - PROPERTIES
     @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)])
     private var jobOffers: FetchedResults<JobOfferEntity>
+    @EnvironmentObject var coordinator: Coordinator
 
     @State private var showingAddUpdateView = false
     @State var selectedJobOffer: JobOfferEntity?
@@ -12,82 +14,28 @@ struct JobOfferListView: View {
     let sections: [FilterCategory] = FilterCategory.allCases
     @State var selected: FilterCategory = .All
 
+    // MARK: - BODY
     var body: some View {
-        NavigationStack {
-            HorizontalFilterView(selectedItem: $selected, items: sections, itemsCount: jobOffers.count)
-            Spacer()
-            VStack(alignment: .leading, spacing: 0) {
-                switch selected {
-                case .All:
-                        List {
-                            ForEach(jobOffers) { offer in
-                                OfferCardView(
-                                    jobOffer: offer,
-                                    onTapOfferCard: {
-                                        changeStatus(offer)
-                                    },
-                                    onTapThreeDotButton: openMenu(for: offer))
-                            }
-                            .onDelete(perform: deleteItems)
-                            .listRowSeparator(.hidden)
-                        }
-                        .listStyle(.plain)
-
-                case .NoResponse:
-                    Text("No Response")
-                case .Interview:
-                    Text("Interview")
-                case .Accepted:
-                    Text("Accepted")
-                case .Rejected:
-                    Text("Rejected")
-                case .Archive:
-                    Text("Archive")
-                }
+            NavigationStack {
+                topBarFilter
+                Spacer()
+                offerListView
+                Spacer()
             }
-            Spacer()
-        }
-        .ignoresSafeArea(edges: .bottom)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                PlusButtonView {
-                    selectedJobOffer = nil
-                    showingAddUpdateView.toggle()
-                }
+            .ignoresSafeArea(edges: .bottom)
+            .toolbar {
+                addButton
+                topBarMenu
             }
-
-            ToolbarItem(placement: .topBarTrailing) {
-                Menu {
-                    Section {
-                        Text("Menu and Settings")
-                    }
-                    Section {
-                        Text("Statistics")
-                        Text("Profile")
-                        Text("Language")
-                    }
-                } label: {
-                    Image(systemName: "line.3.horizontal")
-                }
+            .toolbarBackground(.hidden, for: .bottomBar)
+            .sheet(item: $selectedJobOffer) { offer in
+                coordinator.addUpdateOfferView(with: offer)
             }
-
-//            ToolbarItem(placement: .topBarLeading) {
-//                Text("Hi, Pavla!")
-//                    .foregroundStyle(.accent)
-//                    .font(.title2)
-//            }
-        }
-        .toolbarBackground(.hidden, for: .bottomBar)
-        .sheet(item: $selectedJobOffer) { offer in
-            AddUpdateOfferView(jobOffer: offer)
-        }
-        .sheet(isPresented: $showingAddUpdateView) {
-            AddUpdateOfferView(jobOffer: nil)
-        }
-        .onAppear {
-            try? viewContext.save()
-            print(selectedJobOffer)
-        }
+            .presentationDragIndicator(.visible)
+            .onAppear {
+                try? viewContext.save()
+                print(selectedJobOffer)
+            }
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -152,9 +100,81 @@ struct JobOfferListView: View {
     }
 }
 
+// MARK: - EXTENSION
+extension JobOfferListView {
+    private var topBarMenu: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Menu {
+                Section {
+                    Text("Menu and Settings")
+                }
+                Section {
+                    Text("Statistics")
+                    Text("Profile")
+                    Text("Language")
+                }
+            } label: {
+                Image(systemName: "line.3.horizontal")
+            }
+        }
+    }
+
+    private var topBarFilter: some View {
+        HorizontalFilterView(selectedItem: $selected, items: sections, itemsCount: jobOffers.count)
+    }
+
+    private var offerListView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            switch selected {
+            case .All:
+                List {
+                    ForEach(jobOffers) { offer in
+                        OfferCardView(
+                            jobOffer: offer,
+                            onTapOfferCard: {
+                                changeStatus(offer)
+                            },
+                            onTapThreeDotButton: openMenu(for: offer))
+                    }
+                    .onDelete(perform: deleteItems)
+                    .listRowSeparator(.hidden)
+                }
+                .listStyle(.plain)
+
+            case .NoResponse:
+                Text("No Response")
+            case .Interview:
+                Text("Interview")
+            case .Accepted:
+                Text("Accepted")
+            case .Rejected:
+                Text("Rejected")
+            case .Archive:
+                Text("Archive")
+            }
+        }
+    }
+
+    private var addButton: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+                NavigationLink {
+                    coordinator.addUpdateOfferView(with: nil)
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 50, height: 50)
+                        .foregroundStyle(Color.black)
+                }
+        }
+    }
+}
+
+// MARK: - PREVIEW
 #Preview {
     NavigationStack {
         JobOfferListView()
             .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
+            .environmentObject(Coordinator())
     }
 }
