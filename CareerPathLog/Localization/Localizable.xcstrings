@@ -995,6 +995,9 @@
         }
       }
     },
+    "Print" : {
+
+    },
     "Profile" : {
       "localizations" : {
         "cs" : {

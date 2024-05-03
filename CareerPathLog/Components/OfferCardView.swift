@@ -188,20 +188,12 @@ extension OfferCardView {
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .background(Color.white.opacity(0.5))
-            //        .overlay(
-            //          RoundedRectangle(cornerRadius: 21)
-            //            .strokeBorder(Color.black, lineWidth: 2)
-            //        )
             .foregroundColor(statusTextColor)
-            //.cornerRadius(21)
             .bold()
             .cornerRadius(8)
         .foregroundStyle(statusTextColor)
         }
-        //.offset(x: 0, y: 25)
     }
-
-
 
     private var menuView: some View {
         Menu {

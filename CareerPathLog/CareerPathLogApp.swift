@@ -4,8 +4,7 @@ import SwiftUI
 @main
 struct CareerPathLogApp: App {
   @Environment(\.scenePhase) var scenePhase
-  // @StateObject private var coreDataStack = PersistenceController.shared
-  // let persistenceController = PersistenceController.shared
+ 
     var body: some Scene {
         WindowGroup {
             NavigationStack {

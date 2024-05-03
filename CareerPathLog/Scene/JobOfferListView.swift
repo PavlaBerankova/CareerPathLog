@@ -7,35 +7,54 @@ struct JobOfferListView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)])
     private var jobOffers: FetchedResults<JobOfferEntity>
     @EnvironmentObject var coordinator: Coordinator
-
-    @State private var showingAddUpdateView = false
-    @State var selectedJobOffer: JobOfferEntity?
+    @State private var selectedJobOffer: JobOfferEntity?
+    @State private var newOffer = false
+    @State private var showNotes = false
+    @State private var showFulltextOffer = false
+    @State private var tappedMenuButton: MenuButton = .edit
 
     let sections: [FilterCategory] = FilterCategory.allCases
     @State var selected: FilterCategory = .All
 
     // MARK: - BODY
     var body: some View {
-            NavigationStack {
-                topBarFilter
-                Spacer()
-                offerListView
-                Spacer()
+        NavigationStack {
+            topBarFilter
+            Spacer()
+            offerListView
+            Spacer()
+        }
+        .ignoresSafeArea(edges: .bottom)
+        .toolbar {
+            addButton
+            topBarMenu
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    print(selectedJobOffer.debugDescription)
+                    print(tappedMenuButton)
+                } label: {
+                    Text("Print")
+                }
             }
-            .ignoresSafeArea(edges: .bottom)
-            .toolbar {
-                addButton
-                topBarMenu
-            }
-            .toolbarBackground(.hidden, for: .bottomBar)
-            .sheet(item: $selectedJobOffer) { offer in
+        }
+        .toolbarBackground(.hidden, for: .bottomBar)
+        .sheet(isPresented: $newOffer) {
+            coordinator.addUpdateOfferView(with: nil)
+        }
+        .sheet(item: $selectedJobOffer) { offer in
+            switch tappedMenuButton {
+            case .notes:
+                coordinator.infoText(with: offer.notes)
+            case .fulltext:
+                coordinator.infoText(with: offer.fullTextOffer)
+            case .edit:
                 coordinator.addUpdateOfferView(with: offer)
             }
-            .presentationDragIndicator(.visible)
-            .onAppear {
-                try? viewContext.save()
-                print(selectedJobOffer)
-            }
+        }
+        .presentationDragIndicator(.visible)
+        .onAppear {
+            try? viewContext.save()
+        }
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -50,54 +69,7 @@ struct JobOfferListView: View {
         }
     }
 
-    private func changeStatus(_ offer: JobOfferEntity) {
-        self.selectedJobOffer = offer // Set the offer first
-        print(selectedJobOffer)
-    }
 
-    private func openMenu(for offer: JobOfferEntity) -> some View {
-        Group {
-            // FIRST ROW - EDIT
-            CustomMenuRowView(title: MenuItemRow.edit.title, icon: Image.menu.edit, action: {
-                showingAddUpdateView.toggle()
-                selectedJobOffer = offer
-            })
-
-            // SECOND ROW - URL
-            CustomMenuRowView(title: MenuItemRow.url.title, icon: Image.menu.web, action: {
-                selectedJobOffer = offer
-                if let urlOffer = selectedJobOffer?.viewOfferUrl, !urlOffer.isEmpty {
-                    UIApplication.shared.open(URL(string: urlOffer)!)
-                } else {
-                    //                    alertTitle = AlertTitle.url.title
-                    //                    showingAlert.toggle()
-                }
-            })
-
-            // THIRD ROW - NOTES
-            CustomMenuRowView(title: MenuItemRow.notes.title, icon: Image.menu.notes, action: {
-                selectedJobOffer = offer
-                if let notes = selectedJobOffer?.viewNotes, !notes.isEmpty {
-                    // showNotes.toggle()
-                } else {
-                    //                    alertTitle = AlertTitle.notes.title
-                    //                    showingAlert.toggle()
-                }
-            })
-
-            // FOURTH ROW - FULLTEXT
-            CustomMenuRowView(title: MenuItemRow.fullText.title, icon: Image.menu.document, action: {
-                selectedJobOffer = offer
-                if let fulltext = selectedJobOffer?.viewFullTextOffer, !fulltext.isEmpty {
-                    // showFulltextOffer.toggle()
-                } else {
-                    //                    alertTitle = AlertTitle.fulltext.title
-                    //                    showingAlert.toggle()
-                }
-            })
-        }
-
-    }
 }
 
 // MARK: - EXTENSION
@@ -132,9 +104,11 @@ extension JobOfferListView {
                         OfferCardView(
                             jobOffer: offer,
                             onTapOfferCard: {
-                                changeStatus(offer)
+                                selectedJobOffer = offer
+                                tappedMenuButton = .edit
                             },
-                            onTapThreeDotButton: openMenu(for: offer))
+                            onTapThreeDotButton:
+                                openMenu(for: offer))
                     }
                     .onDelete(perform: deleteItems)
                     .listRowSeparator(.hidden)
@@ -157,15 +131,63 @@ extension JobOfferListView {
 
     private var addButton: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
-                NavigationLink {
-                    coordinator.addUpdateOfferView(with: nil)
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 50, height: 50)
-                        .foregroundStyle(Color.black)
+            Button {
+                newOffer.toggle()
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 55, height: 55)
+                    .foregroundStyle(Color.black)
+            }
+        }
+    }
+
+    func openMenu(for offer: JobOfferEntity) -> some View {
+        Group {
+            // FIRST ROW - EDIT
+            MenuOfferRowView(
+                title: MenuRow.edit.title, icon: Image.menu.edit,
+                action: {
+                    selectedJobOffer = offer
+                    tappedMenuButton = .edit
                 }
+            )
+
+            // SECOND ROW - URL
+            if let urlOffer = offer.offerUrl, !urlOffer.isEmpty {
+                Group {
+                    MenuOfferRowView(
+                        title: MenuRow.url.title,
+                        icon: Image.menu.web) {
+                            UIApplication.shared.open(URL(string: urlOffer)!)
+                        }
+                }
+            }
+
+            // THIRD ROW - NOTES
+            if let notes = offer.notes, !notes.isEmpty {
+                Group {
+                    MenuOfferRowView(
+                        title: MenuRow.notes.title,
+                        icon: Image.menu.notes) {
+                            selectedJobOffer = offer
+                            tappedMenuButton = .notes
+                        }
+                }
+            }
+
+            // FOURTH ROW - FULLTEXT
+            if let fulltextOffer = offer.fullTextOffer, !fulltextOffer.isEmpty {
+                Group {
+                    MenuOfferRowView(
+                        title: MenuRow.fullText.title,
+                        icon: Image.menu.document) {
+                            selectedJobOffer = offer
+                            tappedMenuButton = .fulltext
+                        }
+                }
+            }
         }
     }
 }
@@ -177,4 +199,8 @@ extension JobOfferListView {
             .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
             .environmentObject(Coordinator())
     }
+}
+
+enum MenuButton {
+    case notes, fulltext, edit
 }

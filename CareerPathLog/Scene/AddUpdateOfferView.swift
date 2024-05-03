@@ -52,14 +52,9 @@ struct AddUpdateOfferView: View {
                 .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
                 .toolbar {
                     saveUpdateButton
-                    if jobOffer != nil {
-                        backButton
-                    }
+                    backButton
                 }
                 .onAppear {
-                    // for test only
-                    print(jobOffer)
-                    ///////////////////////////////
                     fetchJobOffer()
             }
         }

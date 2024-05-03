@@ -1,18 +1,6 @@
 import CoreData
 import SwiftUI
 
-//class DataManager {
-//  static let shared = DataManager()
-//
-//  let context: NSManagedObjectContext
-//
-//  private init() {
-//    // inicializace persistentního kontextu nebo jiný způsob získání kontextu
-//    context = NSPersistentContainer(name: "JobOfferDataModel").viewContext
-//  }
-//}
-
-
 extension JobOfferEntity {
     convenience init(
         companyName: String,
@@ -179,5 +167,4 @@ extension JobOfferEntity {
             self.workingArrangements = String(newValue.rawValue)
         }
     }
-
 }

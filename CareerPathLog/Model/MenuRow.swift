@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum MenuItemRow: Identifiable, Codable {
+enum MenuRow: Identifiable, Codable {
     case edit
     case url
     case notes
