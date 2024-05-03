@@ -14,7 +14,7 @@ struct JobOfferListView: View {
     @State private var tappedMenuButton: MenuButton = .edit
 
     let sections: [FilterCategory] = FilterCategory.allCases
-    @State var selected: FilterCategory = .All
+    @State var selectedCategory: FilterCategory = .All
 
     // MARK: - BODY
     var body: some View {
@@ -28,14 +28,6 @@ struct JobOfferListView: View {
         .toolbar {
             addButton
             topBarMenu
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    print(selectedJobOffer.debugDescription)
-                    print(tappedMenuButton)
-                } label: {
-                    Text("Print")
-                }
-            }
         }
         .toolbarBackground(.hidden, for: .bottomBar)
         .sheet(isPresented: $newOffer) {
@@ -63,13 +55,10 @@ struct JobOfferListView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Handle the error appropriately
                 print("Failed to save the context: \(error.localizedDescription)")
             }
         }
     }
-
-
 }
 
 // MARK: - EXTENSION
@@ -92,12 +81,12 @@ extension JobOfferListView {
     }
 
     private var topBarFilter: some View {
-        HorizontalFilterView(selectedItem: $selected, items: sections, itemsCount: jobOffers.count)
+        HorizontalFilterView(selectedItem: $selectedCategory, items: sections, itemsCount: jobOffers.count)
     }
 
     private var offerListView: some View {
         VStack(alignment: .leading, spacing: 0) {
-            switch selected {
+            switch selectedCategory {
             case .All:
                 List {
                     ForEach(jobOffers) { offer in

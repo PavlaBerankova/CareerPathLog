@@ -17,7 +17,6 @@ struct StatusTextView: View {
         //
         //
         //                }
-
             .font(.footnote)
             .fontWeight(.bold)
             .padding(.horizontal, 8)

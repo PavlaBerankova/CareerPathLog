@@ -16,7 +16,8 @@ struct MenuOfferRowView: View {
                     .resizable()
                     .scaledToFit()
                 Text(title)
-                // Spacer()
+                    .padding(.leading)
+                Spacer()
             }
         }
     }

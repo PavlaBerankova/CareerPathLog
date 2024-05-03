@@ -28,6 +28,7 @@
       }
     },
     "%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -38,6 +39,7 @@
       }
     },
     "%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -232,6 +234,7 @@
       }
     },
     "99+" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -477,6 +480,7 @@
       }
     },
     "Content Menu" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -995,9 +999,6 @@
         }
       }
     },
-    "Print" : {
-
-    },
     "Profile" : {
       "localizations" : {
         "cs" : {
@@ -1425,6 +1426,7 @@
     },
     "You must fill %@ field." : {
       "comment" : "FormOfferView",
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {

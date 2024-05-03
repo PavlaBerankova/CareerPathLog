@@ -12,6 +12,7 @@ struct CareerPathLogApp: App {
                     .environmentObject(Coordinator())
                     .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
             }
+            .preferredColorScheme(.light)
         }
         .onChange(of: scenePhase) { newPhase in
           if newPhase == .background {

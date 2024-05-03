@@ -1,17 +1,8 @@
 import SwiftUI
 
 extension Image {
-    static let status = StatusSymbol()
     static let menu = MenuButtonSymbol()
     static let flags = FlagsSymbol()
-}
-
-struct StatusSymbol {
-    let allSendCv = Image(systemName: "envelope")
-    let noResponse = Image(systemName: "clock.arrow.circlepath")
-    let interview = Image(systemName: "person.bubble")
-    let accepted = Image(systemName: "checkmark.bubble")
-    let rejected = Image(systemName: "x.square")
 }
 
 struct MenuButtonSymbol {
