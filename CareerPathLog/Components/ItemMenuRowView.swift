@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MenuOfferRowView: View {
+struct ItemMenuRowView: View {
     // MARK: - PROPERTIES
     let title: LocalizedStringKey
     let icon: Image
@@ -26,13 +26,13 @@ struct MenuOfferRowView: View {
 // MARK: - PREVIEW
 #Preview {
     VStack {
-        MenuOfferRowView(title: "English", icon: Image.flags.english, action: { })
+        ItemMenuRowView(title: "English", icon: Image.flags.english, action: { })
             .frame(maxWidth: .infinity)
             .frame(height: 55)
-        MenuOfferRowView(title: "Czech", icon: Image.flags.czech, action: { })
+        ItemMenuRowView(title: "Czech", icon: Image.flags.czech, action: { })
             .frame(maxWidth: .infinity)
             .frame(height: 55)
-        MenuOfferRowView(title: "Open URL", icon: Image.menu.web, action: { })
+        ItemMenuRowView(title: "Open URL", icon: Image.menu.web, action: { })
             .frame(maxWidth: .infinity)
             .frame(height: 55)
     }

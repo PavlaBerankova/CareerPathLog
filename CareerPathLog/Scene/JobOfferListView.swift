@@ -135,7 +135,7 @@ extension JobOfferListView {
     func openMenu(for offer: JobOfferEntity) -> some View {
         Group {
             // FIRST ROW - EDIT
-            MenuOfferRowView(
+            ItemMenuRowView(
                 title: MenuRow.edit.title, icon: Image.menu.edit,
                 action: {
                     selectedJobOffer = offer
@@ -146,7 +146,7 @@ extension JobOfferListView {
             // SECOND ROW - URL
             if let urlOffer = offer.offerUrl, !urlOffer.isEmpty {
                 Group {
-                    MenuOfferRowView(
+                    ItemMenuRowView(
                         title: MenuRow.url.title,
                         icon: Image.menu.web) {
                             UIApplication.shared.open(URL(string: urlOffer)!)
@@ -157,7 +157,7 @@ extension JobOfferListView {
             // THIRD ROW - NOTES
             if let notes = offer.notes, !notes.isEmpty {
                 Group {
-                    MenuOfferRowView(
+                    ItemMenuRowView(
                         title: MenuRow.notes.title,
                         icon: Image.menu.notes) {
                             selectedJobOffer = offer
@@ -169,7 +169,7 @@ extension JobOfferListView {
             // FOURTH ROW - FULLTEXT
             if let fulltextOffer = offer.fullTextOffer, !fulltextOffer.isEmpty {
                 Group {
-                    MenuOfferRowView(
+                    ItemMenuRowView(
                         title: MenuRow.fullText.title,
                         icon: Image.menu.document) {
                             selectedJobOffer = offer
