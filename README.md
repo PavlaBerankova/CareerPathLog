@@ -4,6 +4,8 @@
 
 This project was created based on junior.guru challenge - [Hack your way to a new job](https://github.com/juniorguru/challenge/blob/main/challenges/challenge-1.md)
 
+My first version of this app you can find [here](https://github.com/PavlaBerankova/CareerPathLog/tree/main) 
+
 ## User can records:
 - all submitted CV
 - job offer information (company name, job title, salary, offer url, notes, full text offer....)
