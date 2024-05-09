@@ -22,7 +22,8 @@ My first version of this app you can find [here](https://github.com/PavlaBeranko
 
 ## Screenshots
 <div style="display: flex;">
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/3932c2d4-3907-46cc-9361-114a72c6b253" alt="ListView" width="200" />
-   <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/5b902734-d1bb-4123-ab7d-8bd6effb4695" alt="ListView2" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/8200e41b-fd1e-4a2e-bb48-62c345c47f61" alt="Main List View" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/73b3a267-516c-4f73-b7f2-9368b107fd42" alt="Open offer menu" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/07f27cea-369f-4df7-876a-6728fb612799" alt="Add new offer" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/f16fae29-4742-4564-a654-c62ac3451ead" alt="Edit offer" width="200" />
 </div>
-
