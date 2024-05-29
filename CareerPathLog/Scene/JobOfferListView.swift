@@ -4,7 +4,9 @@ import SwiftUI
 struct JobOfferListView: View {
     // MARK: - PROPERTIES
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)])
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)],
+                  predicate: NSPredicate(value: true)
+    )
     private var jobOffers: FetchedResults<JobOfferEntity>
     @EnvironmentObject var coordinator: Coordinator
     @State private var selectedJobOffer: JobOfferEntity?
@@ -12,9 +14,7 @@ struct JobOfferListView: View {
     @State private var showNotes = false
     @State private var showFulltextOffer = false
     @State private var tappedMenuButton: MenuButton = .edit
-
-    let sections: [FilterCategory] = FilterCategory.allCases
-    @State var selectedCategory: FilterCategory = .All
+    @State var selectedCategory: Status = .allStatus
 
     // MARK: - BODY
     var body: some View {
@@ -47,7 +47,27 @@ struct JobOfferListView: View {
         .onAppear {
             try? viewContext.save()
         }
+        .onChange(of: selectedCategory) { _ in
+            updatePredicate()
+        }
     }
+
+    private func updatePredicate() {
+            switch selectedCategory {
+            case .allStatus:
+                jobOffers.nsPredicate = NSPredicate(value: true)
+            case .noResponse:
+                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.noResponse.rawValue)
+            case .interview:
+                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.interview.rawValue)
+            case .accepted:
+                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.accepted.rawValue)
+            case .rejected:
+                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.rejected.rawValue)
+            case .archive:
+                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.archive.rawValue)
+            }
+        }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
@@ -81,40 +101,28 @@ extension JobOfferListView {
     }
 
     private var topBarFilter: some View {
-        HorizontalFilterView(selectedItem: $selectedCategory, items: sections, itemsCount: jobOffers.count)
+        HorizontalFilterView(
+            selectedFilter: $selectedCategory,
+            jobOffers: jobOffers
+        )
     }
 
     private var offerListView: some View {
         VStack(alignment: .leading, spacing: 0) {
-            switch selectedCategory {
-            case .All:
-                List {
-                    ForEach(jobOffers) { offer in
-                        OfferCardView(
-                            jobOffer: offer,
-                            onTapOfferCard: {
-                                selectedJobOffer = offer
-                                tappedMenuButton = .edit
-                            },
-                            onTapThreeDotButton:
-                                openMenu(for: offer))
-                    }
-                    .onDelete(perform: deleteItems)
-                    .listRowSeparator(.hidden)
+            List {
+                ForEach(jobOffers) { offer in
+                    OfferCardView(
+                        jobOffer: offer,
+                        onTapOfferCard: {
+                            selectedJobOffer = offer
+                            tappedMenuButton = .edit
+                        },
+                        onTapThreeDotButton: openMenu(for: offer))
                 }
-                .listStyle(.plain)
-
-            case .NoResponse:
-                Text("No Response")
-            case .Interview:
-                Text("Interview")
-            case .Accepted:
-                Text("Accepted")
-            case .Rejected:
-                Text("Rejected")
-            case .Archive:
-                Text("Archive")
+                .onDelete(perform: deleteItems)
+                .listRowSeparator(.hidden)
             }
+            .listStyle(.plain)
         }
     }
 

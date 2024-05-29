@@ -118,6 +118,8 @@ extension JobOfferEntity {
                 return "accepted"
             case .allStatus:
                 return "all submitted CV"
+            case .archive:
+                return "archived"
             }
         } else {
             return "\(viewNumberOfDaysSinceSubmittedCv) days without response"

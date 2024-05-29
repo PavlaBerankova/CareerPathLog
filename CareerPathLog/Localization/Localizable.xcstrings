@@ -269,12 +269,12 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pracovní nabídky"
+            "value" : "Nabídky"
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Accepted"
           }
         }
@@ -331,6 +331,16 @@
         }
       }
     },
+    "All" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vše"
+          }
+        }
+      }
+    },
     "all submitted CV" : {
       "comment" : "is not used",
       "extractionState" : "manual",
@@ -376,6 +386,9 @@
           }
         }
       }
+    },
+    "archived" : {
+
     },
     "Back" : {
       "localizations" : {
@@ -704,12 +717,12 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozvání na pohovor"
+            "value" : "Pohovory"
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Interview"
           }
         }
@@ -863,23 +876,34 @@
         }
       }
     },
+    "Move to Archive" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivovat"
+          }
+        }
+      }
+    },
     "No response" : {
       "localizations" : {
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CV bez odpovědi"
+            "value" : "Bez odpovědi"
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "No response"
           }
         }
       }
     },
     "No Response" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {

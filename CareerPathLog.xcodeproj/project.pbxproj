@@ -11,7 +11,6 @@
 		4407B06D2BD2F54F0003C3D0 /* WorkingArrangements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407B06C2BD2F54F0003C3D0 /* WorkingArrangements.swift */; };
 		4423D2922B242047006F7EB6 /* ItemMenuRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4423D2912B242047006F7EB6 /* ItemMenuRowView.swift */; };
 		443486BB2BD2AF1F009AB943 /* JobLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443486BA2BD2AF1F009AB943 /* JobLevel.swift */; };
-		444719F32BD66A75005771AE /* FilterCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444719F22BD66A75005771AE /* FilterCategory.swift */; };
 		444719F52BD66AEB005771AE /* HorizontalFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444719F42BD66AEB005771AE /* HorizontalFilterView.swift */; };
 		44553D422B03A16300040EDE /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44553D412B03A16300040EDE /* OfferViewModel.swift */; };
 		4469179E2AF24CC300CD4D55 /* CareerPathLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469179D2AF24CC300CD4D55 /* CareerPathLogApp.swift */; };
@@ -40,7 +39,6 @@
 		4407B06C2BD2F54F0003C3D0 /* WorkingArrangements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingArrangements.swift; sourceTree = "<group>"; };
 		4423D2912B242047006F7EB6 /* ItemMenuRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMenuRowView.swift; sourceTree = "<group>"; };
 		443486BA2BD2AF1F009AB943 /* JobLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobLevel.swift; sourceTree = "<group>"; };
-		444719F22BD66A75005771AE /* FilterCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategory.swift; sourceTree = "<group>"; };
 		444719F42BD66AEB005771AE /* HorizontalFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalFilterView.swift; sourceTree = "<group>"; };
 		44553D412B03A16300040EDE /* OfferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewModel.swift; sourceTree = "<group>"; };
 		4469179A2AF24CC300CD4D55 /* CareerPathLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareerPathLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +180,6 @@
 				443486BA2BD2AF1F009AB943 /* JobLevel.swift */,
 				4407B06A2BD2EAE50003C3D0 /* TypesOfEmployment.swift */,
 				4407B06C2BD2F54F0003C3D0 /* WorkingArrangements.swift */,
-				444719F22BD66A75005771AE /* FilterCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 				449A45272B34251300891DBE /* Coordinator.swift in Sources */,
 				44E578212B255C630052346E /* Date.swift in Sources */,
 				44FC27332BC11595009BB889 /* OfferCardView.swift in Sources */,
-				444719F32BD66A75005771AE /* FilterCategory.swift in Sources */,
 				4407B06D2BD2F54F0003C3D0 /* WorkingArrangements.swift in Sources */,
 				44D744DE2BD14F04000DD36F /* InfoTagView.swift in Sources */,
 				44AEF2472BBFE4EA00F9F627 /* JobOfferDataModel.xcdatamodeld in Sources */,

@@ -47,6 +47,16 @@ struct AddUpdateOfferView: View {
                         interviewSection
                     }
                     notesAndFulltextOfferSection
+                    Button {
+                        status = .archive
+                        updateJobOffer()
+                        // TODO: - show alert about move to archive
+                    } label: {
+                        HStack {
+                            Image(systemName: "archivebox")
+                            Text(LocalizedStringKey("Move to Archive"))
+                        }
+                    }
                 }
                 .formStyle(.grouped)
                 .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
