@@ -4,8 +4,18 @@ import SwiftUI
 struct HorizontalFilterView: View {
     // MARK: PROPERTIES
     @Binding var selectedFilter: Status
-    // var items: [FilterCategory]
-    let jobOffers: FetchedResults<JobOfferEntity>
+    var count: [Status: Int]
+    // var jobOffers: FetchedResults<JobOfferEntity>
+//    var statusCounts: [Status: Int] {
+//            var counts = [Status: Int]()
+//            counts[.allStatus] = jobOffers.count
+//            counts[.noResponse] = jobOffers.filter { $0.viewStatus == .noResponse }.count
+//            counts[.interview] = jobOffers.filter { $0.viewStatus == .interview }.count
+//            counts[.accepted] = jobOffers.filter { $0.viewStatus == .accepted }.count
+//            counts[.rejected] = jobOffers.filter { $0.viewStatus == .rejected }.count
+//            counts[.archive] = jobOffers.filter { $0.viewStatus == .archive }.count
+//            return counts
+//        }
 
     // MARK: BODY
     var body: some View {
@@ -13,68 +23,54 @@ struct HorizontalFilterView: View {
             HStack(spacing: 20) {
                 ForEach(Status.allCases, id: \.self) { status in
                     HorizontalFilterItem(
-                        categoryTitle: status.title,
-                        jobOffers: jobOffers,
                         status: status,
-                        selectedFilter: $selectedFilter)
+                        count: count[status] ?? 0,
+                        selectedFilter: selectedFilter
+                    )
                     .onTapGesture {
                         selectedFilter = status
+                        print(selectedFilter)
                     }
                 }
-//                ForEach(items, id: \.self) { item in
-//                    HorizontalFilterItem(
-//                        filterCategory: item.rawValue,
-//                        jobOffers: jobOffers,
-//                        status: item,
-//                        selectedFilter: $selectedItem
-//                    )
-//                    HorizontalFilterItem(
-//                        filterCategory: item.rawValue, 
-//                        jobOffers: jobOffers,
-//                        itemsCount: itemsCount,
-//                        selectedFilter: $selectedItem
-//                    )
-//                        .onTapGesture {
-//                            selectedFilter = status
-//                        }
-                }
             }
-            .padding()
         }
+        .padding()
     }
+}
 
 // MARK: - FILTER ITEM
 struct HorizontalFilterItem: View {
     // MARK: PROPERTIES
-    let categoryTitle: LocalizedStringKey
-    let jobOffers: FetchedResults<JobOfferEntity>
+    // let categoryTitle: Status
+    // let jobOffers: FetchedResults<JobOfferEntity>
     var status: Status
-    var itemsCount: Int {
-        switch status {
-        case .allStatus:
-            return jobOffers.count
-        case .noResponse:
-            return jobOffers.filter { $0.viewStatus == .noResponse }.count
-        case .interview:
-            return jobOffers.filter { $0.viewStatus == .interview }.count
-        case .accepted:
-            return jobOffers.filter { $0.viewStatus == .accepted }.count
-        case .rejected:
-            return jobOffers.filter { $0.viewStatus == .rejected }.count
-        case .archive:
-            return jobOffers.filter { $0.viewStatus == .archive }.count
-        }
-    }
-    @Binding var selectedFilter: Status
+    var count: Int
+//    var itemsCount: Int {
+//        switch status {
+//        case .allStatus:
+//            return jobOffers.count
+//        case .noResponse:
+//            return jobOffers.filter { $0.viewStatus == .noResponse }.count
+//        case .interview:
+//            return jobOffers.filter { $0.viewStatus == .interview }.count
+//        case .accepted:
+//            return jobOffers.filter { $0.viewStatus == .accepted }.count
+//        case .rejected:
+//            return jobOffers.filter { $0.viewStatus == .rejected }.count
+//        case .archive:
+//            return jobOffers.filter { $0.viewStatus == .archive }.count
+//        }
+//    }
+    var selectedFilter: Status
 
     // MARK: BODY
     var body: some View {
         VStack(spacing: 0.0) {
             HStack {
-                Text(categoryTitle)
+                Text(status.title)
                     .bold()
                     .foregroundColor(selectedFilter == status ? .accent : .accent.opacity(0.5))
-                Text(String(itemsCount))
+                Text(String(count))
                     .foregroundColor(selectedFilter == status ? .accent : .accent.opacity(0.5))
             }
             .font(.callout)
@@ -90,18 +86,15 @@ struct HorizontalFilterItem: View {
 //// MARK: - PREVIEW
 //#Preview("Filter View") {
 //    HorizontalFilterView(
-//        selectedItem: .constant(.NoResponse),
-//        items: FilterCategory.allCases,
-//        jobOffers: FetchedResults<JobOfferEntity>, 
-//    )
+//        selectedFilter: .constant(.interview),
+//        jobOffers: nil)
 //}
-//
+
 //#Preview("Filter Item") {
 //    HorizontalFilterItem(
-//        filterCategory: "Pohovor",
-//        jobOffers: FetchedResults<JobOffersEntities>,
-//        itemsCount: 3,
-//        selectedFilter: .constant(.Interview)
-//    )
+//        categoryTitle: Status.accepted.title,
+//        jobOffers: nil,
+//        status: .accepted,
+//        selectedFilter: .constant(.interview))
 //}
 

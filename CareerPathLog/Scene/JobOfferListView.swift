@@ -15,6 +15,7 @@ struct JobOfferListView: View {
     @State private var showFulltextOffer = false
     @State private var tappedMenuButton: MenuButton = .edit
     @State var selectedCategory: Status = .allStatus
+    @State private var allJobOffers: [JobOfferEntity] = []
 
     // MARK: - BODY
     var body: some View {
@@ -45,6 +46,8 @@ struct JobOfferListView: View {
         }
         .presentationDragIndicator(.visible)
         .onAppear {
+            allJobOffers = Array(jobOffers)
+            print(allJobOffers.count)
             try? viewContext.save()
         }
         .onChange(of: selectedCategory) { _ in
@@ -101,11 +104,21 @@ extension JobOfferListView {
     }
 
     private var topBarFilter: some View {
-        HorizontalFilterView(
-            selectedFilter: $selectedCategory,
-            jobOffers: jobOffers
-        )
+      HorizontalFilterView(
+        selectedFilter: $selectedCategory,
+        count: computeStatusCounts())
     }
+
+    private func computeStatusCounts() -> [Status: Int] {
+            var counts = [Status: Int]()
+            counts[.allStatus] = allJobOffers.count
+            counts[.noResponse] = allJobOffers.filter { $0.viewStatus == .noResponse }.count
+            counts[.interview] = allJobOffers.filter { $0.viewStatus == .interview }.count
+            counts[.accepted] = allJobOffers.filter { $0.viewStatus == .accepted }.count
+            counts[.rejected] = allJobOffers.filter { $0.viewStatus == .rejected }.count
+            counts[.archive] = allJobOffers.filter { $0.viewStatus == .archive }.count
+            return counts
+        }
 
     private var offerListView: some View {
         VStack(alignment: .leading, spacing: 0) {
