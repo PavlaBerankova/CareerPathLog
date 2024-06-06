@@ -197,7 +197,7 @@ extension OfferCardView {
         HStack {
             Group {
                 Text(jobOffer.viewStatusText)
-                if let statusSubtitle = jobOffer.viewInterviewStatusSubtitle {
+                if let statusSubtitle = jobOffer.viewStatusSubtitle {
                     Text(statusSubtitle)
                 }
             }

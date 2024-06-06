@@ -108,8 +108,6 @@ extension JobOfferEntity {
     var viewStatusText: LocalizedStringKey {
         if response {
             switch viewStatus {
-            case .noResponse:
-                return "\(viewNumberOfDaysSinceSubmittedCv) days without response"
             case .interview:
                 return "interview"
             case .rejected:
@@ -118,15 +116,14 @@ extension JobOfferEntity {
                 return "accepted"
             case .allStatus:
                 return "all submitted CV"
-            case .archive:
-                return "archived"
+            default: return  "\(viewNumberOfDaysSinceSubmittedCv) days without response"
             }
         } else {
             return "\(viewNumberOfDaysSinceSubmittedCv) days without response"
         }
     }
 
-    var viewInterviewStatusSubtitle: LocalizedStringResource? {
+    var viewStatusSubtitle: LocalizedStringResource? {
         if response && viewStatus == .interview {
             if firstRoundOfInterview && secondRoundOfInterview && thirdRoundOfInterview {
                 return "3. round"
@@ -135,6 +132,8 @@ extension JobOfferEntity {
             } else if firstRoundOfInterview {
                 return "1. round"
             }
+        } else if viewStatus == .archive {
+            return "archived"
         }
         return nil
     }
