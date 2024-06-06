@@ -40,32 +40,24 @@ struct AddUpdateOfferView: View {
     // MARK: - BODY
     var body: some View {
         NavigationStack {
-                Form {
-                    infoSection
-                    dateAndResponseSection
-                    if status == .interview {
-                        interviewSection
-                    }
-                    notesAndFulltextOfferSection
-                    Button {
-                        status = .archive
-                        updateJobOffer()
-                        // TODO: - show alert about move to archive
-                    } label: {
-                        HStack {
-                            Image(systemName: "archivebox")
-                            Text(LocalizedStringKey("Move to Archive"))
-                        }
-                    }
+            Form {
+                infoSection
+                dateAndResponseSection
+                if status == .interview {
+                    interviewSection
                 }
-                .formStyle(.grouped)
-                .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
-                .toolbar {
-                    saveUpdateButton
-                    backButton
-                }
-                .onAppear {
-                    fetchJobOffer()
+                notesAndFulltextOfferSection
+                archiveButton
+                deleteButton
+            }
+            .formStyle(.grouped)
+            .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")
+            .toolbar {
+                saveUpdateButton
+                backButton
+            }
+            .onAppear {
+                fetchJobOffer()
             }
         }
     }
@@ -278,6 +270,39 @@ extension AddUpdateOfferView {
             CustomTextEditor(with: $notes, header: "Notes")
             CustomTextEditor(with: $fullTextOffer, header: "Full text offer")
         }
+    }
+
+    private var archiveButton: some View {
+        Button {
+            if status != .archive {
+                status = .archive
+                updateJobOffer()
+            } else {
+                status = .noResponse
+                updateJobOffer()
+            }
+            // TODO: - show alert about move to archive
+        } label: {
+            HStack {
+                Image(systemName: "archivebox")
+                Text(LocalizedStringKey(status == .archive ? "Remove from Archive" : "Move to Archive"))
+            }
+        }
+    }
+
+    private var deleteButton: some View {
+        Button {
+            if let jobOffer = jobOffer {
+                persistenceController.delete(item: jobOffer)
+                updateJobOffer()
+            }
+        } label: {
+            HStack {
+                Image(systemName: "trash")
+                Text(LocalizedStringKey("Delete"))
+            }
+        }
+
     }
 
     private func fetchJobOffer() {

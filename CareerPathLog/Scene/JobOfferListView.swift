@@ -111,7 +111,7 @@ extension JobOfferListView {
 
     private func computeStatusCounts() -> [Status: Int] {
             var counts = [Status: Int]()
-            counts[.allStatus] = allJobOffers.count
+        counts[.allStatus] = allJobOffers.filter { $0.viewStatus != .archive }.count
             counts[.noResponse] = allJobOffers.filter { $0.viewStatus == .noResponse }.count
             counts[.interview] = allJobOffers.filter { $0.viewStatus == .interview }.count
             counts[.accepted] = allJobOffers.filter { $0.viewStatus == .accepted }.count

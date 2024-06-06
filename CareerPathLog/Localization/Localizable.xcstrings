@@ -338,6 +338,12 @@
             "state" : "translated",
             "value" : "Vše"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
         }
       }
     },
@@ -432,7 +438,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Choose type"
           }
         }
@@ -572,6 +578,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Date of submitted CV"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smazat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
           }
         }
       }
@@ -722,7 +744,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Interview"
           }
         }
@@ -877,11 +899,18 @@
       }
     },
     "Move to Archive" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivovat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
           }
         }
       }
@@ -896,7 +925,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "No response"
           }
         }

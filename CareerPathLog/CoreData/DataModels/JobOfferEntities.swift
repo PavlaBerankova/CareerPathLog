@@ -18,7 +18,7 @@ struct JobOffersEntities {
       thirdRoundOfInterview: false,
       dateOfThirdRoundOfInterview: nil,
       fullTextOffer: "Celý text inzerátu",
-      status: "No response", 
+      status: "Archive", 
       jobLocation: "Praha", 
       jobLevel: "medior", 
       typesOfEmployment: "Part-time", 

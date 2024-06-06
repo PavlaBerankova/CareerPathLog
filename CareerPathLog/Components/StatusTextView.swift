@@ -46,15 +46,15 @@ struct StatusTextView: View {
         Color.white.opacity(0.35)
 
         HStack(spacing: 0) {
-            StatusTextView(title: "Pohovor", subtitle: "1. kolo", textColor: .black, backgroundColor: .white, borderColor: .blue)
+            StatusTextView(title: "Pohovor", subtitle: "1. kolo", textColor: .black, backgroundColor: .white, borderColor: .accent)
             Rectangle()
                 .frame(width: 10, height: 2)
-                .foregroundColor(.blue)
-            StatusTextView(title: "1.", subtitle: nil, textColor: .black, backgroundColor: .white, borderColor: .blue)
+                .foregroundColor(.accent)
+            StatusTextView(title: "1.", subtitle: nil, textColor: .black, backgroundColor: .white, borderColor: .accent)
             Rectangle()
                 .frame(width: 10, height: 2)
-                .foregroundColor(.blue)
-            StatusTextView(title: "2. kolo", subtitle: nil, textColor: .black, backgroundColor: .white, borderColor: .blue)
+                .foregroundColor(.accent)
+            StatusTextView(title: "2. kolo", subtitle: nil, textColor: .black, backgroundColor: .white, borderColor: .accent)
         }
     }
     .frame(width: 400, height: 100)

@@ -5,58 +5,72 @@ struct OfferCardView<Content: View>: View {
     let jobOffer: JobOfferEntity
     var onTapOfferCard: () -> Void
     var onTapThreeDotButton: Content
-
-    let noResponseColorDarker: Color = .blue
-    let noResponseColor: Color = .blue
-    let interviewColor: Color = .blue
-    let acceptedColor: Color = .blue
-    let rejectedColor: Color = .red
-
     var textColor: Color {
-        if jobOffer.viewStatus == .noResponse {
-            if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
-                return .accentColor
-            } else {
-                return .accentColor
-            }
+        if jobOffer.viewStatus == .archive {
+            return .white
         } else {
-            return .accentColor
+            return .black
         }
+//        switch jobOffer.viewStatus {
+//        case .noResponse:
+//           if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
+//                return .white
+//            } else {
+//                return .black
+//            }
+//        case .archive: return .white
+//        default: return .black
+//        }
     }
 
-    var rowBackgroundColor: Color {
-        if jobOffer.viewStatus == .noResponse {
-            if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
-                return noResponseColor
-            } else {
-                return noResponseColor
-            }
-        } else if jobOffer.viewStatus == .interview {
-            return interviewColor
-        } else if jobOffer.viewStatus == .accepted {
-            return acceptedColor
+    var infoTagBackgroundColor: Color {
+        if jobOffer.viewStatus == .archive {
+            return .black.opacity(0.3)
         }
-        return rejectedColor
+        return .gray.opacity(0.08)
     }
+//
+//    let noResponseColorDarker: Color = .blue
+//    let noResponseColor: Color = .blue
+//    let interviewColor: Color = .blue
+//    let acceptedColor: Color = .blue
+//    let rejectedColor: Color = .red
+
+   // var textColor: Color = .accentColor
+
+//    var rowBackgroundColor: Color {
+//        if jobOffer.viewStatus == .noResponse {
+//            if jobOffer.viewNumberOfDaysSinceSubmittedCv > 14 {
+//                return noResponseColor
+//            } else {
+//                return noResponseColor
+//            }
+//        } else if jobOffer.viewStatus == .interview {
+//            return interviewColor
+//        } else if jobOffer.viewStatus == .accepted {
+//            return acceptedColor
+//        }
+//        return rejectedColor
+//    }
 
     var statusTextColor: Color {
-        .accent
-        //    switch jobOffer.viewStatus {
-        //    case "No response": return .noResponseColorDarker
-        //    case "Interview": return .interviewColorDarker
-        //    case "Accepted": return .green
-        //    default: return .red
-        //    }
+            switch jobOffer.viewStatus {
+            case .interview: return .darkPurple
+            case .accepted: return .darkGreen
+            case .rejected: return .darkRed
+            case .archive: return .darkBlue
+            default: return .accent
+            }
     }
 
-    var statusBackgroundColor: Color {
-        switch jobOffer.viewStatus {
-        case .noResponse: return .blue
-        case .interview: return .yellow
-        case .accepted: return .green
-        default: return .red
-        }
-    }
+//    var statusBackgroundColor: Color {
+//        switch jobOffer.viewStatus {
+//        case .noResponse: return .blue
+//        case .interview: return .yellow
+//        case .accepted: return .green
+//        default: return .red
+//        }
+//    }
 
     // MARK: - BODY
     var body: some View {
@@ -88,25 +102,29 @@ struct OfferCardView<Content: View>: View {
                     }
                 }
             }
-            .foregroundColor(.black)
+            .foregroundColor(textColor)
             .padding()
             .frame(maxWidth: .infinity)
             .frame(height: 180)
             .background(
                 ZStack {
-                    LinearGradient(gradient:
-                                    Gradient(colors: [.white, .white.opacity(0.0)]), startPoint: .top, endPoint: .bottom)
+                    if jobOffer.viewStatus == .archive {
+                        Color.accentColor
+                    } else {
+                        LinearGradient(gradient:
+                                        Gradient(colors: [.white, .white.opacity(0.0)]), startPoint: .top, endPoint: .bottom)
 
-                    LinearGradient(gradient:
-                                    Gradient(colors: [Color.purple.opacity(0.2), .blue.opacity(0.4)]), startPoint: .top, endPoint: .bottomTrailing)
+                        LinearGradient(gradient:
+                                        Gradient(colors: [Color.purple.opacity(0.2), .blue.opacity(0.4)]), startPoint: .top, endPoint: .bottomTrailing)
 
-                    Color.white.opacity(0.35)
+                        Color.white.opacity(0.35)
+                    }
                 }
                     .frame(maxWidth: .infinity)
                     .frame(height: 180)
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     .cornerRadius(4))
-            .foregroundColor(rowBackgroundColor)
+            //.foregroundColor(rowBackgroundColor)
 
             Button {
                 onTapOfferCard()
@@ -142,13 +160,13 @@ extension OfferCardView {
     private var tagInfo: some View {
         VStack(alignment: .trailing) {
             if jobOffer.viewJobLevel != .none {
-                InfoTagView(title: jobOffer.viewJobLevel.rawValue)
+                InfoTagView(title: jobOffer.viewJobLevel.rawValue, textColor: textColor, backgroundColor: infoTagBackgroundColor)
             }
             if jobOffer.viewTypesOfEmployment != .none {
-                InfoTagView(title: jobOffer.viewTypesOfEmployment.rawValue)
+                InfoTagView(title: jobOffer.viewTypesOfEmployment.rawValue, textColor: textColor, backgroundColor: infoTagBackgroundColor)
             }
             if jobOffer.viewWorkingArrangements != .none {
-                InfoTagView(title: jobOffer.viewWorkingArrangements.rawValue)
+                InfoTagView(title: jobOffer.viewWorkingArrangements.rawValue, textColor: textColor, backgroundColor: infoTagBackgroundColor)
             }
         }
         .font(.callout)
@@ -162,7 +180,7 @@ extension OfferCardView {
         }
         .font(.caption)
         .padding(.top, 5)
-        .foregroundColor(.secondary)
+        .foregroundColor(textColor.opacity(0.5))
     }
 
     private var jobOfferLocation: some View {
@@ -172,7 +190,7 @@ extension OfferCardView {
         }
         .font(.caption)
         .padding(.top, 5)
-        .foregroundColor(.secondary)
+        .foregroundColor(textColor.opacity(0.5))
     }
 
     private var statusText: some View {
@@ -187,7 +205,7 @@ extension OfferCardView {
             .fontWeight(.bold)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .background(Color.white.opacity(0.5))
+            .background(Color.white.opacity(0.8))
             .foregroundColor(statusTextColor)
             .bold()
             .cornerRadius(8)
