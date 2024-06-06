@@ -33,6 +33,8 @@ struct AddUpdateOfferView: View {
     @State private var notes = String()
     @State private var fullTextOffer = String()
 
+    @State private var archive = false
+
     let startDate = Date.distantPast
     let endDate = Date.distantFuture
     let dateOfInterview: LocalizedStringKey = "    Date of interview"
@@ -85,6 +87,7 @@ struct AddUpdateOfferView: View {
             newJobOffer.jobLevel = jobLevel.rawValue
             newJobOffer.typesOfEmployment = typesOfEmployment.rawValue
             newJobOffer.workingArrangements = workingArrangements.rawValue
+            newJobOffer.archive = archive
 
             persistenceController.saveContext()
             dismiss()
@@ -114,6 +117,7 @@ struct AddUpdateOfferView: View {
                 jobOffer.jobLevel = jobLevel.rawValue
                 jobOffer.typesOfEmployment = typesOfEmployment.rawValue
                 jobOffer.workingArrangements = workingArrangements.rawValue
+                jobOffer.archive = archive
             }
         }
         persistenceController.saveContext()
@@ -274,18 +278,20 @@ extension AddUpdateOfferView {
 
     private var archiveButton: some View {
         Button {
-            if status != .archive {
-                status = .archive
-                updateJobOffer()
-            } else {
-                status = .noResponse
-                updateJobOffer()
-            }
+            archive.toggle()
+            updateJobOffer()
+//            if status != .archive {
+//                status = .archive
+//                updateJobOffer()
+//            } else {
+//                status = .noResponse
+//                updateJobOffer()
+//            }
             // TODO: - show alert about move to archive
         } label: {
             HStack {
                 Image(systemName: "archivebox")
-                Text(LocalizedStringKey(status == .archive ? "Remove from Archive" : "Move to Archive"))
+                Text(LocalizedStringKey(archive ? "Remove from Archive" : "Move to Archive"))
             }
         }
     }
@@ -326,6 +332,7 @@ extension AddUpdateOfferView {
         self.jobLevel = jobOffer?.viewJobLevel ?? .none
         self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
         self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
+        self.archive = jobOffer?.archive ?? false
 
     }
 }

@@ -22,7 +22,9 @@ extension JobOfferEntity {
         jobLocation: String?,
         jobLevel: String?,
         typesOfEmployment: String?,
-        workingArrangements: String?) {
+        workingArrangements: String?,
+        archive: Bool = false
+    ) {
             self.init(context: PersistenceController.shared.container.viewContext)
             self.companyName = companyName
             self.jobTitle = jobTitle
@@ -132,7 +134,7 @@ extension JobOfferEntity {
             } else if firstRoundOfInterview {
                 return "1. round"
             }
-        } else if viewStatus == .archive {
+        } else if archive {
             return "archived"
         }
         return nil

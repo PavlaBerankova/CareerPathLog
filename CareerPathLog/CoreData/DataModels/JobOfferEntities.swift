@@ -22,7 +22,8 @@ struct JobOffersEntities {
       jobLocation: "Praha", 
       jobLevel: "medior", 
       typesOfEmployment: "Part-time", 
-      workingArrangements: nil),
+      workingArrangements: nil
+    ),
     JobOfferEntity(
       companyName: "Futured",
       jobTitle: "Full-stack vývojář",
@@ -43,7 +44,8 @@ struct JobOffersEntities {
       jobLocation: "Brno", 
       jobLevel: "senior", 
       typesOfEmployment: "Full-time", 
-      workingArrangements: "on-site"),
+      workingArrangements: "on-site"
+    ),
     JobOfferEntity(
       companyName: "Apple",
       jobTitle: "iOS Developer",
@@ -64,7 +66,8 @@ struct JobOffersEntities {
       jobLocation: nil, 
       jobLevel: "junior",
       typesOfEmployment: nil, 
-      workingArrangements: "hybrid"),
+      workingArrangements: "hybrid"
+    ),
     JobOfferEntity(
       companyName: "Google",
       jobTitle: "UX Designer",
@@ -85,6 +88,7 @@ struct JobOffersEntities {
       jobLocation: "Ostrava",
       jobLevel: nil, 
       typesOfEmployment: "Full-time", 
-      workingArrangements: "remote")
+      workingArrangements: "remote"
+    )
   ]
 }
