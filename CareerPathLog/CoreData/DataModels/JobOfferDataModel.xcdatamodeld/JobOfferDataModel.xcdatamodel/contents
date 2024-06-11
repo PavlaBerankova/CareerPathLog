@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="JobOfferEntity" representedClassName="JobOfferEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="archive" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="companyName" attributeType="String"/>
         <attribute name="dateOfFirstRoundOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateOfResponse" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -10,6 +9,7 @@
         <attribute name="dateOfThirdRoundOfInterview" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstRoundOfInterview" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="fullTextOffer" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="jobLevel" optional="YES" attributeType="String"/>
         <attribute name="jobLocation" optional="YES" attributeType="String"/>
         <attribute name="jobTitle" attributeType="String" defaultValueString=""/>

@@ -899,7 +899,6 @@
       }
     },
     "Move to Archive" : {
-      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -1116,6 +1115,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remote"
+          }
+        }
+      }
+    },
+    "Remove from Archive" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odebrat z archivu"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Remove from Archive"
           }
         }
       }

@@ -95,7 +95,8 @@ extension PersistenceController {
         jobLocation: String,
         jobLevel: JobLevel,
         typesOfEmployment: TypesOfEmployment,
-        workingArrangements: WorkingArrangements
+        workingArrangements: WorkingArrangements,
+        archive: Bool
     ) {
         let newJobOffer = JobOfferEntity(context: container.viewContext)
         newJobOffer.companyName = companyName
@@ -143,7 +144,8 @@ extension PersistenceController {
         newJobLocation: String,
         newJobLevel: JobLevel,
         newTypesOfEmployment: TypesOfEmployment,
-        newWorkingArrangements: WorkingArrangements
+        newWorkingArrangements: WorkingArrangements,
+        isArchived: Bool
     ) {
         jobOffer?.companyName = newCompanyName
         jobOffer?.jobTitle = newJobTitle
@@ -165,6 +167,8 @@ extension PersistenceController {
         jobOffer?.jobLevel = newJobLevel.rawValue
         jobOffer?.typesOfEmployment = newTypesOfEmployment.rawValue
         jobOffer?.workingArrangements = newWorkingArrangements.rawValue
+        jobOffer?.isArchived = isArchived
+
         fetchData()
         saveContext()
     }

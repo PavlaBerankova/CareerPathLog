@@ -6,7 +6,7 @@ struct OfferCardView<Content: View>: View {
     var onTapOfferCard: () -> Void
     var onTapThreeDotButton: Content
     var textColor: Color {
-        if jobOffer.archive {
+        if jobOffer.isArchived {
             return .white
         } else {
             return .black
@@ -24,7 +24,7 @@ struct OfferCardView<Content: View>: View {
     }
 
     var infoTagBackgroundColor: Color {
-        if jobOffer.archive {
+        if jobOffer.isArchived {
             return .black.opacity(0.3)
         }
         return .gray.opacity(0.08)
@@ -54,7 +54,7 @@ struct OfferCardView<Content: View>: View {
 //    }
 
     var statusTextColor: Color {
-        if jobOffer.archive {
+        if jobOffer.isArchived {
             return .darkBlue
         } else {
             switch jobOffer.viewStatus {
@@ -112,7 +112,7 @@ struct OfferCardView<Content: View>: View {
             .frame(height: 180)
             .background(
                 ZStack {
-                    if jobOffer.archive {
+                    if jobOffer.isArchived {
                         Color.accentColor
                     } else {
                         LinearGradient(gradient:

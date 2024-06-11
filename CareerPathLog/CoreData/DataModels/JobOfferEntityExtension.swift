@@ -23,7 +23,7 @@ extension JobOfferEntity {
         jobLevel: String?,
         typesOfEmployment: String?,
         workingArrangements: String?,
-        archive: Bool = false
+        isArchived: Bool = false
     ) {
             self.init(context: PersistenceController.shared.container.viewContext)
             self.companyName = companyName
@@ -46,6 +46,7 @@ extension JobOfferEntity {
             self.jobLevel = jobLevel
             self.typesOfEmployment = typesOfEmployment
             self.workingArrangements = workingArrangements
+            self.isArchived = isArchived
         }
 
     var viewCompanyName: String {
@@ -134,7 +135,7 @@ extension JobOfferEntity {
             } else if firstRoundOfInterview {
                 return "1. round"
             }
-        } else if archive {
+        } else if isArchived {
             return "archived"
         }
         return nil

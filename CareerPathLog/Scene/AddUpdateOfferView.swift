@@ -32,6 +32,8 @@ struct AddUpdateOfferView: View {
     @State private var notes = String()
     @State private var fullTextOffer = String()
 
+    @State private var isArchived: Bool = false
+
     let startDate = Date.distantPast
     let endDate = Date.distantFuture
     let dateOfInterview: LocalizedStringKey = "    Date of interview"
@@ -46,7 +48,7 @@ struct AddUpdateOfferView: View {
                     interviewSection
                 }
                 notesAndFulltextOfferSection
-                // archiveButton
+                archiveButton
                 deleteButton
             }
             .formStyle(.grouped)
@@ -95,7 +97,8 @@ extension AddUpdateOfferView {
             jobLocation: jobLocation,
             jobLevel: jobLevel,
             typesOfEmployment:typesOfEmployment,
-            workingArrangements: workingArrangements
+            workingArrangements: workingArrangements,
+            archive: isArchived
         )
     }
 
@@ -121,7 +124,8 @@ extension AddUpdateOfferView {
             newJobLocation: jobLocation,
             newJobLevel: jobLevel,
             newTypesOfEmployment: typesOfEmployment,
-            newWorkingArrangements: workingArrangements
+            newWorkingArrangements: workingArrangements,
+            isArchived: isArchived
         )
     }
 
@@ -265,23 +269,24 @@ extension AddUpdateOfferView {
         }
     }
 
-//    private var archiveButton: some View {
-//        Button {
-//            if status != .archive {
-//                status = .archive
-//                updateJobOffer()
-//            } else {
-//                status = .noResponse
-//                updateJobOffer()
-//            }
-//            // TODO: - show alert about move to archive
-//        } label: {
-//            HStack {
-//                Image(systemName: "archivebox")
-//                Text(LocalizedStringKey(status == .archive ? "Remove from Archive" : "Move to Archive"))
-//            }
-//        }
-//    }
+    private var archiveButton: some View {
+        Button {
+            if status != .archive {
+                status = .archive
+                updateJobOffer()
+            } else {
+                status = .noResponse
+                updateJobOffer()
+            }
+            dismiss()
+            // TODO: - show alert about move to archive
+        } label: {
+            HStack {
+                Image(systemName: "archivebox")
+                Text(status == .archive ? LocalizedStringKey("Remove from Archive") : "Move to Archive")
+            }
+        }
+    }
 
     private var deleteButton: some View {
         Button {
@@ -295,6 +300,7 @@ extension AddUpdateOfferView {
                 Image(systemName: "trash")
                 Text(LocalizedStringKey("Delete"))
             }
+            .foregroundColor(.red)
         }
 
     }
