@@ -3,11 +3,10 @@ import SwiftUI
 
 struct AddUpdateOfferView: View {
     // MARK: - PROPERTIES
-    var jobOffer: JobOfferEntity?
-
-    let persistenceController = PersistenceController.shared
-    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var model: PersistenceController
     @Environment(\.dismiss) private var dismiss
+
+    var jobOffer: JobOfferEntity?
 
     @State private var companyName = String()
     @State private var jobTitle = String()
@@ -47,7 +46,7 @@ struct AddUpdateOfferView: View {
                     interviewSection
                 }
                 notesAndFulltextOfferSection
-                archiveButton
+                // archiveButton
                 deleteButton
             }
             .formStyle(.grouped)
@@ -60,64 +59,6 @@ struct AddUpdateOfferView: View {
                 fetchJobOffer()
             }
         }
-    }
-
-    private func addJobOffer() {
-        withAnimation {
-            let newJobOffer = JobOfferEntity(context: viewContext)
-            newJobOffer.companyName = companyName
-            newJobOffer.jobTitle = jobTitle
-            newJobOffer.offerUrl = offerUrl
-            newJobOffer.salary = salary
-            newJobOffer.notes = notes
-            newJobOffer.dateOfSentCv = dateOfSentCv
-            newJobOffer.response = response
-            newJobOffer.dateOfResponse = dateOfResponse
-            newJobOffer.firstRoundOfInterview = firstRoundOfInterview
-            newJobOffer.dateOfFirstRoundOfInterview = dateOfFirstRoundOfInterview
-            newJobOffer.secondRoundOfInterview = secondRoundOfInterview
-            newJobOffer.dateOfSecondRoundOfInterview = dateOfSecondRoundOfInterview
-            newJobOffer.thirdRoundOfInterview = thirdRoundOfInterview
-            newJobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
-            newJobOffer.fullTextOffer = fullTextOffer
-            newJobOffer.status = status.rawValue
-            newJobOffer.jobLocation = jobLocation
-            newJobOffer.jobLevel = jobLevel.rawValue
-            newJobOffer.typesOfEmployment = typesOfEmployment.rawValue
-            newJobOffer.workingArrangements = workingArrangements.rawValue
-
-            persistenceController.saveContext()
-            dismiss()
-        }
-    }
-
-    private func updateJobOffer() {
-        if let jobOffer = jobOffer {
-            withAnimation {
-                jobOffer.companyName = companyName
-                jobOffer.jobTitle = jobTitle
-                jobOffer.offerUrl = offerUrl
-                jobOffer.salary = salary
-                jobOffer.notes = notes
-                jobOffer.dateOfSentCv = dateOfSentCv
-                jobOffer.response = response
-                jobOffer.dateOfResponse = dateOfResponse
-                jobOffer.firstRoundOfInterview = firstRoundOfInterview
-                jobOffer.dateOfFirstRoundOfInterview = dateOfFirstRoundOfInterview
-                jobOffer.secondRoundOfInterview = secondRoundOfInterview
-                jobOffer.dateOfSecondRoundOfInterview = dateOfSecondRoundOfInterview
-                jobOffer.thirdRoundOfInterview = thirdRoundOfInterview
-                jobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
-                jobOffer.fullTextOffer = fullTextOffer
-                jobOffer.status = status.rawValue
-                jobOffer.jobLocation = jobLocation
-                jobOffer.jobLevel = jobLevel.rawValue
-                jobOffer.typesOfEmployment = typesOfEmployment.rawValue
-                jobOffer.workingArrangements = workingArrangements.rawValue
-            }
-        }
-        persistenceController.saveContext()
-        dismiss()
     }
 
     private func CustomTextEditor(with offerText: Binding<String>, header: LocalizedStringResource) -> some View {
@@ -133,6 +74,57 @@ struct AddUpdateOfferView: View {
 
 // MARK: - EXTENSION
 extension AddUpdateOfferView {
+    private func addJobOffer() {
+        model.addJobOffer(
+            companyName: companyName,
+            jobTitle: jobTitle,
+            offerUrl: offerUrl,
+            salary: salary,
+            notes: notes,
+            dateOfSentCv: dateOfSentCv,
+            response: response,
+            dateOfResponse: dateOfResponse,
+            firstRoundOfInterview: firstRoundOfInterview,
+            dateOfFirstRoundOfInterview: dateOfFirstRoundOfInterview,
+            secondRoundOfInterview: secondRoundOfInterview,
+            dateOfSecondRoundOfInterview: dateOfSecondRoundOfInterview,
+            thirdRoundOfInterview: thirdRoundOfInterview,
+            dateOfThirdRoundOfInterview: dateOfThirdRoundOfInterview,
+            fullTextOffer: fullTextOffer,
+            status: status,
+            jobLocation: jobLocation,
+            jobLevel: jobLevel,
+            typesOfEmployment:typesOfEmployment,
+            workingArrangements: workingArrangements
+        )
+    }
+
+    private func updateJobOffer() {
+        model.updateJobOffer(
+            jobOffer: jobOffer,
+            newCompanyName: companyName,
+            newJobTitle: jobTitle,
+            newOfferUrl: offerUrl,
+            newSalary: salary,
+            newNotes: notes,
+            newDateOfSentCv: dateOfSentCv,
+            newResponse: response,
+            newDateOfResponse: dateOfResponse,
+            newFirstRoundOfInterview: firstRoundOfInterview,
+            newDateOfFirstRoundOfInterview: dateOfFirstRoundOfInterview,
+            newSecondRoundOfInterview: secondRoundOfInterview,
+            newDateOfSecondRoundOfInterview: dateOfSecondRoundOfInterview,
+            newThirdRoundOfInterview: thirdRoundOfInterview,
+            newDateOfThirdRoundOfInterview: dateOfThirdRoundOfInterview,
+            newFullTextOffer: fullTextOffer,
+            newStatus: status,
+            newJobLocation: jobLocation,
+            newJobLevel: jobLevel,
+            newTypesOfEmployment: typesOfEmployment,
+            newWorkingArrangements: workingArrangements
+        )
+    }
+
     private var saveUpdateButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button(jobOffer == nil ? "Save" : "Update") {
@@ -141,6 +133,7 @@ extension AddUpdateOfferView {
                 } else {
                     updateJobOffer()
                 }
+                dismiss()
             }
         }
     }
@@ -272,30 +265,31 @@ extension AddUpdateOfferView {
         }
     }
 
-    private var archiveButton: some View {
-        Button {
-            if status != .archive {
-                status = .archive
-                updateJobOffer()
-            } else {
-                status = .noResponse
-                updateJobOffer()
-            }
-            // TODO: - show alert about move to archive
-        } label: {
-            HStack {
-                Image(systemName: "archivebox")
-                Text(LocalizedStringKey(status == .archive ? "Remove from Archive" : "Move to Archive"))
-            }
-        }
-    }
+//    private var archiveButton: some View {
+//        Button {
+//            if status != .archive {
+//                status = .archive
+//                updateJobOffer()
+//            } else {
+//                status = .noResponse
+//                updateJobOffer()
+//            }
+//            // TODO: - show alert about move to archive
+//        } label: {
+//            HStack {
+//                Image(systemName: "archivebox")
+//                Text(LocalizedStringKey(status == .archive ? "Remove from Archive" : "Move to Archive"))
+//            }
+//        }
+//    }
 
     private var deleteButton: some View {
         Button {
-            if let jobOffer = jobOffer {
-                persistenceController.delete(item: jobOffer)
-                updateJobOffer()
+            guard let jobOffer else {
+                return
             }
+            model.delete(item: jobOffer)
+            dismiss()
         } label: {
             HStack {
                 Image(systemName: "trash")

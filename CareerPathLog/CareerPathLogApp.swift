@@ -4,13 +4,16 @@ import SwiftUI
 @main
 struct CareerPathLogApp: App {
   @Environment(\.scenePhase) var scenePhase
- 
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 JobOfferListView()
                     .environmentObject(Coordinator())
-                    .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                    .environmentObject(persistenceController)
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+
             }
             .preferredColorScheme(.light)
         }
