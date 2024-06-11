@@ -22,8 +22,15 @@ My first version of this app you can find [here](https://github.com/PavlaBeranko
 
 ## Screenshots
 <div style="display: flex;">
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/8200e41b-fd1e-4a2e-bb48-62c345c47f61" alt="Main List View" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/73b3a267-516c-4f73-b7f2-9368b107fd42" alt="Open offer menu" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/07f27cea-369f-4df7-876a-6728fb612799" alt="Add new offer" width="200" />
-  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/f16fae29-4742-4564-a654-c62ac3451ead" alt="Edit offer" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a8f6297d-b12d-4f83-97c4-be493ba33833" alt="" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/2701161a-0fcf-44b8-9b85-342a9e673686" alt="" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/9fb3af45-661e-4844-b393-7713c8c04ef4" alt="" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/7b9eef9a-a315-451e-a4e9-38798da2feea" alt="" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/9f0bc56c-88b7-4135-b578-0c94dc5c0534" alt="" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/ae5e93d3-55f3-48df-a377-f8cd23b314e5" alt="" width="200" />
+  <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a52038d7-c176-48e8-ade6-c8bd6b4de169" alt="" width="200" />
+    <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a64ad7b1-deb1-4263-889a-4138ee597660" alt="" width="200" />
 </div>
+
+
+
