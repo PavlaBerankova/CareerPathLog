@@ -3,6 +3,8 @@ import SwiftUI
 
 // Container can reads data model
 class PersistenceController: ObservableObject {
+    @Published var savedOffers: [JobOfferEntity] = []
+
   static let shared = PersistenceController()
 
   // The first time you reference the property, it will create an NSPersistentContainer.
@@ -17,12 +19,15 @@ class PersistenceController: ObservableObject {
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }
     }
+
     return container
   }()
 
   init(forPreview: Bool = false) {
     container = NSPersistentContainer(name: "JobOfferDataModel")
     container.viewContext.automaticallyMergesChangesFromParent = true
+
+
 
     if forPreview {
       container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -44,6 +49,8 @@ class PersistenceController: ObservableObject {
       }
     }
 
+      fetchData()
+
     /// - Tag: viewContextMergePolicy
     container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     container.viewContext.undoManager = nil
@@ -57,10 +64,125 @@ class PersistenceController: ObservableObject {
 }
 
 extension PersistenceController {
+    func fetchData() {
+        let request = NSFetchRequest<JobOfferEntity>(entityName: "JobOfferEntity")
+        request.sortDescriptors = [NSSortDescriptor(key: "dateOfSentCv", ascending: false)]
+
+        do {
+            savedOffers = try container.viewContext.fetch(request)
+        } catch let error {
+            print("Error fetching. \(error)")
+        }
+    }
+
+    func addJobOffer(
+        companyName: String,
+        jobTitle: String,
+        offerUrl: String,
+        salary: String,
+        notes: String,
+        dateOfSentCv: Date,
+        response: Bool,
+        dateOfResponse: Date,
+        firstRoundOfInterview: Bool,
+        dateOfFirstRoundOfInterview: Date,
+        secondRoundOfInterview: Bool,
+        dateOfSecondRoundOfInterview: Date,
+        thirdRoundOfInterview: Bool,
+        dateOfThirdRoundOfInterview: Date,
+        fullTextOffer: String,
+        status: Status,
+        jobLocation: String,
+        jobLevel: JobLevel,
+        typesOfEmployment: TypesOfEmployment,
+        workingArrangements: WorkingArrangements
+    ) {
+        let newJobOffer = JobOfferEntity(context: container.viewContext)
+        newJobOffer.companyName = companyName
+        newJobOffer.jobTitle = jobTitle
+        newJobOffer.offerUrl = offerUrl
+        newJobOffer.salary = salary
+        newJobOffer.notes = notes
+        newJobOffer.dateOfSentCv = dateOfSentCv
+        newJobOffer.response = response
+        newJobOffer.dateOfResponse = dateOfResponse
+        newJobOffer.firstRoundOfInterview = firstRoundOfInterview
+        newJobOffer.dateOfFirstRoundOfInterview = dateOfFirstRoundOfInterview
+        newJobOffer.secondRoundOfInterview = secondRoundOfInterview
+        newJobOffer.dateOfSecondRoundOfInterview = dateOfSecondRoundOfInterview
+        newJobOffer.thirdRoundOfInterview = thirdRoundOfInterview
+        newJobOffer.dateOfThirdRoundOfInterview = dateOfThirdRoundOfInterview
+        newJobOffer.fullTextOffer = fullTextOffer
+        newJobOffer.status = status.rawValue
+        newJobOffer.jobLocation = jobLocation
+        newJobOffer.jobLevel = jobLevel.rawValue
+        newJobOffer.typesOfEmployment = typesOfEmployment.rawValue
+        newJobOffer.workingArrangements = workingArrangements.rawValue
+        saveContext()
+        fetchData()
+    }
+
+    func updateJobOffer(
+        jobOffer: JobOfferEntity?,
+        newCompanyName: String,
+        newJobTitle: String,
+        newOfferUrl: String,
+        newSalary: String,
+        newNotes: String,
+        newDateOfSentCv: Date,
+        newResponse: Bool,
+        newDateOfResponse: Date,
+        newFirstRoundOfInterview: Bool,
+        newDateOfFirstRoundOfInterview: Date,
+        newSecondRoundOfInterview: Bool,
+        newDateOfSecondRoundOfInterview: Date,
+        newThirdRoundOfInterview: Bool,
+        newDateOfThirdRoundOfInterview: Date,
+        newFullTextOffer: String,
+        newStatus: Status,
+        newJobLocation: String,
+        newJobLevel: JobLevel,
+        newTypesOfEmployment: TypesOfEmployment,
+        newWorkingArrangements: WorkingArrangements
+    ) {
+        jobOffer?.companyName = newCompanyName
+        jobOffer?.jobTitle = newJobTitle
+        jobOffer?.offerUrl = newOfferUrl
+        jobOffer?.salary = newSalary
+        jobOffer?.notes = newNotes
+        jobOffer?.dateOfSentCv = newDateOfSentCv
+        jobOffer?.response = newResponse
+        jobOffer?.dateOfResponse = newDateOfResponse
+        jobOffer?.firstRoundOfInterview = newFirstRoundOfInterview
+        jobOffer?.dateOfFirstRoundOfInterview = newDateOfFirstRoundOfInterview
+        jobOffer?.secondRoundOfInterview = newSecondRoundOfInterview
+        jobOffer?.dateOfSecondRoundOfInterview = newDateOfSecondRoundOfInterview
+        jobOffer?.thirdRoundOfInterview = newThirdRoundOfInterview
+        jobOffer?.dateOfThirdRoundOfInterview = newDateOfThirdRoundOfInterview
+        jobOffer?.fullTextOffer = newFullTextOffer
+        jobOffer?.status = newStatus.rawValue
+        jobOffer?.jobLocation = newJobLocation
+        jobOffer?.jobLevel = newJobLevel.rawValue
+        jobOffer?.typesOfEmployment = newTypesOfEmployment.rawValue
+        jobOffer?.workingArrangements = newWorkingArrangements.rawValue
+        fetchData()
+        saveContext()
+    }
+
     func delete(item: JobOfferEntity) {
         container.viewContext.delete(item)
           saveContext()
+          fetchData()
        }
+
+
+      func deleteItem(indexSet: IndexSet) {
+          guard let index = indexSet.first else { return }
+          let entity = savedOffers[index]
+          container.viewContext.delete(entity)
+          saveContext()
+          fetchData()
+      }
 
   func saveContext() {
     // Add a convenience method to commit changes to the store.
@@ -78,6 +200,14 @@ extension PersistenceController {
       }
     }
   }
+
+    func filterOffer(by status: Status) -> [JobOfferEntity] {
+        if status == .allStatus {
+            savedOffers
+        } else {
+            savedOffers.filter { $0.viewStatus == status }
+        }
+    }
 
   func addMockData(context: NSManagedObjectContext) {
     let firstOffer = JobOfferEntity(context: context)

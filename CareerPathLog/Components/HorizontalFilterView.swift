@@ -4,18 +4,7 @@ import SwiftUI
 struct HorizontalFilterView: View {
     // MARK: PROPERTIES
     @Binding var selectedFilter: Status
-    var count: [Status: Int]
-    // var jobOffers: FetchedResults<JobOfferEntity>
-//    var statusCounts: [Status: Int] {
-//            var counts = [Status: Int]()
-//            counts[.allStatus] = jobOffers.count
-//            counts[.noResponse] = jobOffers.filter { $0.viewStatus == .noResponse }.count
-//            counts[.interview] = jobOffers.filter { $0.viewStatus == .interview }.count
-//            counts[.accepted] = jobOffers.filter { $0.viewStatus == .accepted }.count
-//            counts[.rejected] = jobOffers.filter { $0.viewStatus == .rejected }.count
-//            counts[.archive] = jobOffers.filter { $0.viewStatus == .archive }.count
-//            return counts
-//        }
+    
 
     // MARK: BODY
     var body: some View {
@@ -24,12 +13,10 @@ struct HorizontalFilterView: View {
                 ForEach(Status.allCases, id: \.self) { status in
                     HorizontalFilterItem(
                         status: status,
-                        count: count[status] ?? 0,
-                        selectedFilter: selectedFilter
+                        isSelected: selectedFilter == status
                     )
                     .onTapGesture {
                         selectedFilter = status
-                        print(selectedFilter)
                     }
                 }
             }
@@ -41,60 +28,44 @@ struct HorizontalFilterView: View {
 // MARK: - FILTER ITEM
 struct HorizontalFilterItem: View {
     // MARK: PROPERTIES
-    // let categoryTitle: Status
-    // let jobOffers: FetchedResults<JobOfferEntity>
+    @EnvironmentObject var model: PersistenceController
     var status: Status
-    var count: Int
-//    var itemsCount: Int {
-//        switch status {
-//        case .allStatus:
-//            return jobOffers.count
-//        case .noResponse:
-//            return jobOffers.filter { $0.viewStatus == .noResponse }.count
-//        case .interview:
-//            return jobOffers.filter { $0.viewStatus == .interview }.count
-//        case .accepted:
-//            return jobOffers.filter { $0.viewStatus == .accepted }.count
-//        case .rejected:
-//            return jobOffers.filter { $0.viewStatus == .rejected }.count
-//        case .archive:
-//            return jobOffers.filter { $0.viewStatus == .archive }.count
-//        }
-//    }
-    var selectedFilter: Status
+    var count: Int {
+        if status == .allStatus {
+            model.savedOffers.count
+        } else {
+            model.savedOffers.filter { $0.viewStatus == status }.count
+        }
+    }
+    var isSelected: Bool = true
 
     // MARK: BODY
     var body: some View {
-        VStack(spacing: 0.0) {
-            HStack {
-                Text(status.title)
-                    .bold()
-                    .foregroundColor(selectedFilter == status ? .accent : .accent.opacity(0.5))
-                Text(String(count))
-                    .foregroundColor(selectedFilter == status ? .accent : .accent.opacity(0.5))
+            VStack(spacing: 0) {
+                HStack {
+                    Text(status.title)
+                        .bold()
+                    Text(String(count))
+                }
+                .font(.callout)
+                .foregroundStyle(isSelected ? .accent : .accent.opacity(0.5))
+                if isSelected {
+                    Rectangle()
+                        .frame(height: 2.0)
+                        .foregroundColor(.accent)
+                }
             }
-            .font(.callout)
-            if selectedFilter == status {
-                Rectangle()
-                    .frame(height: 2.0)
-                    .foregroundColor(.accent)
-            }
-        }
     }
 }
 
-//// MARK: - PREVIEW
-//#Preview("Filter View") {
-//    HorizontalFilterView(
-//        selectedFilter: .constant(.interview),
-//        jobOffers: nil)
-//}
+// MARK: - PREVIEW
+#Preview("Filter View") {
+    HorizontalFilterView(selectedFilter: .constant(.noResponse))
+        .environmentObject(PersistenceController(forPreview: true))
+}
 
-//#Preview("Filter Item") {
-//    HorizontalFilterItem(
-//        categoryTitle: Status.accepted.title,
-//        jobOffers: nil,
-//        status: .accepted,
-//        selectedFilter: .constant(.interview))
-//}
+#Preview("Filter Item") {
+    HorizontalFilterItem(status: Status.allStatus)
+        .environmentObject(PersistenceController(forPreview: true))
+}
 

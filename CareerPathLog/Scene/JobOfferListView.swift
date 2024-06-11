@@ -3,11 +3,12 @@ import SwiftUI
 
 struct JobOfferListView: View {
     // MARK: - PROPERTIES
-    @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)],
-                  predicate: NSPredicate(value: true)
-    )
-    private var jobOffers: FetchedResults<JobOfferEntity>
+    @EnvironmentObject var model: PersistenceController
+    // @Environment(\.managedObjectContext) var viewContext
+//    @FetchRequest(sortDescriptors: [SortDescriptor(\.dateOfSentCv, order: .reverse)],
+//                  predicate: NSPredicate(value: true)
+//    )
+//    private var jobOffers: FetchedResults<JobOfferEntity>
     @EnvironmentObject var coordinator: Coordinator
     @State private var selectedJobOffer: JobOfferEntity?
     @State private var newOffer = false
@@ -15,7 +16,7 @@ struct JobOfferListView: View {
     @State private var showFulltextOffer = false
     @State private var tappedMenuButton: MenuButton = .edit
     @State var selectedCategory: Status = .allStatus
-    @State private var allJobOffers: [JobOfferEntity] = []
+//    @State private var allJobOffers: [JobOfferEntity] = []
 
     // MARK: - BODY
     var body: some View {
@@ -46,42 +47,41 @@ struct JobOfferListView: View {
         }
         .presentationDragIndicator(.visible)
         .onAppear {
-            allJobOffers = Array(jobOffers)
-            print(allJobOffers.count)
-            try? viewContext.save()
+            print(model.savedOffers)
+            print(model.savedOffers.count)
         }
-        .onChange(of: selectedCategory) { _ in
-            updatePredicate()
-        }
+//        .onChange(of: model.container) { _ in
+//            model.fetchData()
+//        }
     }
 
-    private func updatePredicate() {
-            switch selectedCategory {
-            case .allStatus:
-                jobOffers.nsPredicate = NSPredicate(value: true)
-            case .noResponse:
-                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.noResponse.rawValue)
-            case .interview:
-                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.interview.rawValue)
-            case .accepted:
-                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.accepted.rawValue)
-            case .rejected:
-                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.rejected.rawValue)
-            case .archive:
-                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.archive.rawValue)
-            }
-        }
+//    private func updatePredicate() {
+//            switch selectedCategory {
+//            case .allStatus:
+//                data.savedOffers.nsPredicate = NSPredicate(value: true)
+//            case .noResponse:
+//                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.noResponse.rawValue)
+//            case .interview:
+//                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.interview.rawValue)
+//            case .accepted:
+//                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.accepted.rawValue)
+//            case .rejected:
+//                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.rejected.rawValue)
+//            case .archive:
+//                jobOffers.nsPredicate = NSPredicate(format: "status == %@", Status.archive.rawValue)
+//            }
+//        }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { jobOffers[$0] }.forEach(viewContext.delete)
-            do {
-                try viewContext.save()
-            } catch {
-                print("Failed to save the context: \(error.localizedDescription)")
-            }
-        }
-    }
+//    private func deleteItems(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { data.savedOffers[$0] }.forEach(viewContext.delete)
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                print("Failed to save the context: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 }
 
 // MARK: - EXTENSION
@@ -104,26 +104,26 @@ extension JobOfferListView {
     }
 
     private var topBarFilter: some View {
-      HorizontalFilterView(
-        selectedFilter: $selectedCategory,
-        count: computeStatusCounts())
+      HorizontalFilterView(selectedFilter: $selectedCategory)
     }
 
-    private func computeStatusCounts() -> [Status: Int] {
-            var counts = [Status: Int]()
-        counts[.allStatus] = allJobOffers.filter { $0.archive == false }.count
-            counts[.noResponse] = allJobOffers.filter { $0.viewStatus == .noResponse }.count
-            counts[.interview] = allJobOffers.filter { $0.viewStatus == .interview }.count
-            counts[.accepted] = allJobOffers.filter { $0.viewStatus == .accepted }.count
-            counts[.rejected] = allJobOffers.filter { $0.viewStatus == .rejected }.count
-        counts[.archive] = allJobOffers.filter { $0.archive == true }.count
-            return counts
-        }
+//    private func computeStatusCounts() -> [Status: Int] {
+//            var counts = [Status: Int]()
+//        counts[.allStatus] = allJobOffers.filter { $0.viewStatus != .archive }.count
+//            counts[.noResponse] = allJobOffers.filter { $0.viewStatus == .noResponse }.count
+//            counts[.interview] = allJobOffers.filter { $0.viewStatus == .interview }.count
+//            counts[.accepted] = allJobOffers.filter { $0.viewStatus == .accepted }.count
+//            counts[.rejected] = allJobOffers.filter { $0.viewStatus == .rejected }.count
+//            counts[.archive] = allJobOffers.filter { $0.viewStatus == .archive }.count
+//            return counts
+//        }
+
+
 
     private var offerListView: some View {
         VStack(alignment: .leading, spacing: 0) {
             List {
-                ForEach(jobOffers) { offer in
+                ForEach(model.filterOffer(by: selectedCategory)) { offer in
                     OfferCardView(
                         jobOffer: offer,
                         onTapOfferCard: {
@@ -132,7 +132,7 @@ extension JobOfferListView {
                         },
                         onTapThreeDotButton: openMenu(for: offer))
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: model.deleteItem)
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
@@ -208,6 +208,7 @@ extension JobOfferListView {
         JobOfferListView()
             .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
             .environmentObject(Coordinator())
+            .environmentObject(PersistenceController())
     }
 }
 
