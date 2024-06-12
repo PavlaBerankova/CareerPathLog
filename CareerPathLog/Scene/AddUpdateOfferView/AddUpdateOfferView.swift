@@ -3,7 +3,8 @@ import SwiftUI
 
 struct AddUpdateOfferView: View {
     // MARK: - PROPERTIES
-    @EnvironmentObject var model: PersistenceController
+    @EnvironmentObject var data: PersistenceController
+    @StateObject var model = AddUpdateJobOfferViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var jobOffer: JobOfferEntity?
@@ -34,6 +35,9 @@ struct AddUpdateOfferView: View {
 
     @State private var isArchived: Bool = false
 
+    @State private var showingAlert = false
+    @State private var alertMessage = LocalizedStringKey(String())
+
     let startDate = Date.distantPast
     let endDate = Date.distantFuture
     let dateOfInterview: LocalizedStringKey = "    Date of interview"
@@ -48,6 +52,11 @@ struct AddUpdateOfferView: View {
                     interviewSection
                 }
                 notesAndFulltextOfferSection
+                Button {
+                    showingAlert.toggle()
+                } label: {
+                    Text("Show alert")
+                }
                 archiveButton
                 deleteButton
             }
@@ -59,6 +68,9 @@ struct AddUpdateOfferView: View {
             }
             .onAppear {
                 fetchJobOffer()
+            }
+            .alert(alertMessage, isPresented: $showingAlert) {
+                Button("OK", role: .cancel) { }
             }
         }
     }
@@ -77,7 +89,7 @@ struct AddUpdateOfferView: View {
 // MARK: - EXTENSION
 extension AddUpdateOfferView {
     private func addJobOffer() {
-        model.addJobOffer(
+        data.addJobOffer(
             companyName: companyName,
             jobTitle: jobTitle,
             offerUrl: offerUrl,
@@ -103,7 +115,7 @@ extension AddUpdateOfferView {
     }
 
     private func updateJobOffer() {
-        model.updateJobOffer(
+        data.updateJobOffer(
             jobOffer: jobOffer,
             newCompanyName: companyName,
             newJobTitle: jobTitle,
@@ -132,12 +144,17 @@ extension AddUpdateOfferView {
     private var saveUpdateButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button(jobOffer == nil ? "Save" : "Update") {
-                if jobOffer == nil {
-                    addJobOffer()
+                if model.validateTextField(companyName, jobTitle).isNotEmpty {
+                    if jobOffer == nil {
+                        addJobOffer()
+                    } else {
+                        updateJobOffer()
+                    }
+                    dismiss()
                 } else {
-                    updateJobOffer()
+                    alertMessage = model.validateTextField(companyName, jobTitle).message
+                    showingAlert.toggle()
                 }
-                dismiss()
             }
         }
     }
@@ -295,7 +312,7 @@ extension AddUpdateOfferView {
         Button {
             guard let jobOffer else { return }
 
-            model.delete(item: jobOffer)
+            data.delete(item: jobOffer)
             dismiss()
         } label: {
             HStack {

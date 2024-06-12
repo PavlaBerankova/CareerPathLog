@@ -3,7 +3,7 @@ import SwiftUI
 
 struct JobOfferListView: View {
     // MARK: - PROPERTIES
-    @EnvironmentObject var model: PersistenceController
+    @EnvironmentObject var data: PersistenceController
     @EnvironmentObject var coordinator: Coordinator
     @State private var selectedJobOffer: JobOfferEntity?
     @State private var newOffer = false
@@ -69,7 +69,7 @@ extension JobOfferListView {
     private var offerListView: some View {
         VStack(alignment: .leading, spacing: 0) {
             List {
-                ForEach(model.filterOffer(by: selectedCategory)) { offer in
+                ForEach(data.filterOffer(by: selectedCategory)) { offer in
                     OfferCardView(
                         jobOffer: offer,
                         onTapOfferCard: {
@@ -78,7 +78,7 @@ extension JobOfferListView {
                         },
                         onTapThreeDotButton: openMenu(for: offer))
                 }
-                .onDelete(perform: model.deleteItem)
+                .onDelete(perform: data.deleteItem)
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)

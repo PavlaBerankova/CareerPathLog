@@ -1235,6 +1235,9 @@
         }
       }
     },
+    "Show alert" : {
+
+    },
     "Show fulltext offer" : {
       "localizations" : {
         "cs" : {
@@ -1519,6 +1522,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You must fill %@ field."
+          }
+        }
+      }
+    },
+    "You must fill Company name and Job title field." : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Musíš vyplnit název firmy a název pozice."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must fill Company name and Job title field."
+          }
+        }
+      }
+    },
+    "You must fill Company name field." : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Musíš vyplnit název firmy."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must fill Company name field."
+          }
+        }
+      }
+    },
+    "You must fill Job title field." : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Musíš vyplnit název pozice."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must fill Job title field."
           }
         }
       }

@@ -207,11 +207,6 @@ extension PersistenceController {
         default:
             savedOffers.filter { $0.isArchived == true }
         }
-//        if status == .allStatus {
-//            savedOffers.filter { $0.isArchived == false }
-//        } else {
-//            savedOffers.filter { $0.viewStatus == status && $0.isArchived == false }
-//        }
     }
 
     // MARK: - MOCK DATA
