@@ -5,62 +5,57 @@ import SwiftUI
 class PersistenceController: ObservableObject {
     @Published var savedOffers: [JobOfferEntity] = []
 
-  static let shared = PersistenceController()
+    static let shared = PersistenceController()
 
-  // The first time you reference the property, it will create an NSPersistentContainer.
-  lazy var container: NSPersistentContainer = {
+    // The first time you reference the property, it will create an NSPersistentContainer.
+    lazy var container: NSPersistentContainer = {
 
-    // Pass the data model filename to the container’s initializer.
-    let container = NSPersistentContainer(name: "JobOfferDataModel")
+        // Pass the data model filename to the container’s initializer.
+        let container = NSPersistentContainer(name: "JobOfferDataModel")
 
-    // Load any persistent stores, which creates a store if none exists.
-    container.loadPersistentStores { storeDescription, error in
-      if let error = error as NSError? {
-        fatalError("Unresolved error \(error), \(error.userInfo)")
-      }
+        // Load any persistent stores, which creates a store if none exists.
+        container.loadPersistentStores { storeDescription, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+
+        return container
+    }()
+
+    init(forPreview: Bool = false) {
+        container = NSPersistentContainer(name: "JobOfferDataModel")
+        container.viewContext.automaticallyMergesChangesFromParent = true
+
+        if forPreview {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.loadPersistentStores { storeDescription, error in
+            if let error = error as NSError? {
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+
+        fetchData()
+
+        /// - Tag: viewContextMergePolicy
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.undoManager = nil
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+
+        // If forPreview is true then we want to load up some mock data. Do this AFTER you call loadPersistentStores.
+        if forPreview {
+            addMockData(context: container.viewContext)
+        }
     }
-
-    return container
-  }()
-
-  init(forPreview: Bool = false) {
-    container = NSPersistentContainer(name: "JobOfferDataModel")
-    container.viewContext.automaticallyMergesChangesFromParent = true
-
-
-
-    if forPreview {
-      container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-    }
-    container.loadPersistentStores { storeDescription, error in
-      if let error = error as NSError? {
-        // Replace this implementation with code to handle the error appropriately.
-        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-        /*
-         Typical reasons for an error here include:
-         * The parent directory does not exist, cannot be created, or disallows writing.
-         * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-         * The device is out of space.
-         * The store could not be migrated to the current model version.
-         Check the error message to determine what the actual problem was.
-         */
-        fatalError("Unresolved error \(error), \(error.userInfo)")
-      }
-    }
-
-      fetchData()
-
-    /// - Tag: viewContextMergePolicy
-    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-    container.viewContext.undoManager = nil
-    container.viewContext.shouldDeleteInaccessibleFaults = true
-
-    // If forPreview is true then we want to load up some mock data. Do this AFTER you call loadPersistentStores.
-    if forPreview {
-      addMockData(context: container.viewContext)
-    }
-  }
 }
 
 extension PersistenceController {
@@ -96,7 +91,7 @@ extension PersistenceController {
         jobLevel: JobLevel,
         typesOfEmployment: TypesOfEmployment,
         workingArrangements: WorkingArrangements,
-        archive: Bool
+        isArchived: Bool
     ) {
         let newJobOffer = JobOfferEntity(context: container.viewContext)
         newJobOffer.companyName = companyName
@@ -119,8 +114,9 @@ extension PersistenceController {
         newJobOffer.jobLevel = jobLevel.rawValue
         newJobOffer.typesOfEmployment = typesOfEmployment.rawValue
         newJobOffer.workingArrangements = workingArrangements.rawValue
+        newJobOffer.isArchived = isArchived
         saveContext()
-        fetchData()
+        // fetchData()
     }
 
     func updateJobOffer(
@@ -169,67 +165,73 @@ extension PersistenceController {
         jobOffer?.workingArrangements = newWorkingArrangements.rawValue
         jobOffer?.isArchived = isArchived
 
-        fetchData()
         saveContext()
+        // fetchData()
     }
 
     func delete(item: JobOfferEntity) {
         container.viewContext.delete(item)
-          saveContext()
-          fetchData()
-       }
-
-
-      func deleteItem(indexSet: IndexSet) {
-          guard let index = indexSet.first else { return }
-          let entity = savedOffers[index]
-          container.viewContext.delete(entity)
-          saveContext()
-          fetchData()
-      }
-
-  func saveContext() {
-    // Add a convenience method to commit changes to the store.
-    let context = container.viewContext
-
-    // Verify that the context has uncommitted changes
-    if context.hasChanges {
-      do {
-        // Attempt to save changes.
-        try context.save()
-      } catch {
-        // The context couldn't be saved.
-        let nserror = error as NSError
-        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-      }
+        saveContext()
+        // fetchData()
     }
-  }
 
-    func filterOffer(by status: Status) -> [JobOfferEntity] {
-        if status == .allStatus {
-            savedOffers
-        } else {
-            savedOffers.filter { $0.viewStatus == status }
+    func deleteItem(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entity = savedOffers[index]
+        container.viewContext.delete(entity)
+        saveContext()
+        // fetchData()
+    }
+
+    func saveContext() {
+        let context = container.viewContext
+
+        // Verify that the context has uncommitted changes
+        if context.hasChanges {
+            do {
+                try context.save()
+                fetchData()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
     }
 
-  func addMockData(context: NSManagedObjectContext) {
-    let firstOffer = JobOfferEntity(context: context)
-    firstOffer.companyName = "AV Studio"
-    firstOffer.jobTitle = "UX Designér/ka"
-    firstOffer.offerUrl = "https://www.startupjobs.cz/nabidka/69109/ux-designer-ka"
-    firstOffer.salary = "40 000kč"
-    firstOffer.notes = "Toto je poznámka"
-    firstOffer.dateOfSentCv = DateComponents(year: 2023, month: 11, day: 14).date ?? Date()
-    firstOffer.response = false
-    // firstOffer.dateOfResponse: nil,
-    firstOffer.firstRoundOfInterview = false
-    // firstOffer.dateOfFirstRoundOfInterview = nil
-    firstOffer.secondRoundOfInterview = false
-    // firstOffer.dateOfSecondRoundOfInterview = nil
-    firstOffer.thirdRoundOfInterview = false
-    // firstOffer.dateOfThirdRoundOfInterview = nil
-    firstOffer.fullTextOffer = """
+    func filterOffer(by status: Status) -> [JobOfferEntity] {
+        switch status {
+        case .allStatus:
+            savedOffers.filter { $0.isArchived == false }
+        case .noResponse, .interview, .accepted, .rejected:
+            savedOffers.filter { $0.viewStatus == status && $0.isArchived == false }
+        default:
+            savedOffers.filter { $0.isArchived == true }
+        }
+//        if status == .allStatus {
+//            savedOffers.filter { $0.isArchived == false }
+//        } else {
+//            savedOffers.filter { $0.viewStatus == status && $0.isArchived == false }
+//        }
+    }
+
+    // MARK: - MOCK DATA
+    func addMockData(context: NSManagedObjectContext) {
+        let firstOffer = JobOfferEntity(context: context)
+        firstOffer.companyName = "AV Studio"
+        firstOffer.jobTitle = "UX Designér/ka"
+        firstOffer.offerUrl = "https://www.startupjobs.cz/nabidka/69109/ux-designer-ka"
+        firstOffer.salary = "40 000kč"
+        firstOffer.notes = "Toto je poznámka"
+        firstOffer.dateOfSentCv = DateComponents(year: 2023, month: 11, day: 14).date ?? Date()
+        firstOffer.response = false
+        firstOffer.dateOfResponse = nil
+        firstOffer.firstRoundOfInterview = false
+        firstOffer.dateOfFirstRoundOfInterview = nil
+        firstOffer.secondRoundOfInterview = false
+        firstOffer.dateOfSecondRoundOfInterview = nil
+        firstOffer.thirdRoundOfInterview = false
+        firstOffer.dateOfThirdRoundOfInterview = nil
+        firstOffer.fullTextOffer = """
       Ahoj,
       aktuálně hledáme nového kolegu nebo kolegyni na pozici UX Designér. Bavilo by tě spolupracovat s klienty jako například Angry Beards, Venira, BrainMarket nebo třeba Havlíkova Apotéka? Chceš pracovat v pohodovém týmu, chodit do práce i z práce s úsměvem a koukat na ostatní z 5. patra našich kanclů? Pojďme se seznámit! 🤝
 
@@ -275,20 +277,19 @@ extension PersistenceController {
                       A v neposlední řadě možnost zvolit si pracovní stroj (Macbook nebo Asus) a příslušenství podle svých preferencí. 💻")
       """
 
-    let secondOffer = JobOfferEntity(context: context)
-    secondOffer.companyName = "Futured"
-    secondOffer.jobTitle = "Full-stack vývojář (JavaScript, TypeScript)"
-    secondOffer.offerUrl = "https://www.startupjobs.cz/nabidka/69531/full-stack-vyvojar-javascript-typescript"
-    secondOffer.salary = ""
-    secondOffer.notes = "Notes"
-    secondOffer.dateOfSentCv = Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 1))
-    secondOffer.response = true
-    // secondOffer.status = .rejected
-    secondOffer.dateOfResponse = Date.now
-    secondOffer.firstRoundOfInterview = false
-    secondOffer.secondRoundOfInterview = false
-    secondOffer.thirdRoundOfInterview = false
-    secondOffer.fullTextOffer = """
+        let secondOffer = JobOfferEntity(context: context)
+        secondOffer.companyName = "Futured"
+        secondOffer.jobTitle = "Full-stack vývojář (JavaScript, TypeScript)"
+        secondOffer.offerUrl = "https://www.startupjobs.cz/nabidka/69531/full-stack-vyvojar-javascript-typescript"
+        secondOffer.salary = ""
+        secondOffer.notes = "Notes"
+        secondOffer.dateOfSentCv = Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 1))
+        secondOffer.response = true
+        secondOffer.dateOfResponse = Date.now
+        secondOffer.firstRoundOfInterview = false
+        secondOffer.secondRoundOfInterview = false
+        secondOffer.thirdRoundOfInterview = false
+        secondOffer.fullTextOffer = """
 Chodíš rád*a nevyšlapanými cestami? Těší tě diskutovat s kolegy o nových technologiích a postupech? Výborně. Chceme tě poznat.
 
 Je naprosto nezbytné...
@@ -325,6 +326,6 @@ Dej dohromady ukázku kódu a pošli ji naší HR Míši. A pokud nemáš nic, c
 A co čekat potom? Do 2 dnů ti odpovíme. Potkáš se s HR Míšou a Full-stack Leadem Tomem. Seznámíme tě s našimi vývojáři a pobavíte se o technických záležitostech. Řekneme si ano, nebo ne :)
 """
 
-    try? context.save()
-  }
+        try? context.save()
+    }
 }

@@ -12,17 +12,10 @@ struct StatusTextView: View {
     // MARK: - BODY
     var body: some View {
         Text(title)
-        //                if let subtitle = subtitle {
-        //                    Text(subtitle)
-        //
-        //
-        //                }
             .font(.footnote)
             .fontWeight(.bold)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .background(backgroundColor)
-        // .background(Color.white.opacity(0.5))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .strokeBorder(borderColor, lineWidth: 2)
@@ -30,7 +23,6 @@ struct StatusTextView: View {
             .foregroundColor(textColor)
             .bold()
             .cornerRadius(8)
-
     }
 }
 

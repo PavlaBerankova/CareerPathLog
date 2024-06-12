@@ -394,7 +394,20 @@
       }
     },
     "archived" : {
-
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "archivováno"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "archived"
+          }
+        }
+      }
     },
     "Back" : {
       "localizations" : {
@@ -909,7 +922,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Archive"
+            "value" : "Move to Archive"
           }
         }
       }
@@ -1129,7 +1142,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Remove from Archive"
           }
         }

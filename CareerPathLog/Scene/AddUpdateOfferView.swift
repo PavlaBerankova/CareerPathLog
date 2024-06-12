@@ -17,17 +17,17 @@ struct AddUpdateOfferView: View {
     @State private var typesOfEmployment: TypesOfEmployment = .none
     @State private var workingArrangements: WorkingArrangements = .none
 
-    @State private var dateOfSentCv = Date()
+    @State private var dateOfSentCv = Date.now
     @State private var response = false
-    @State private var dateOfResponse = Date()
+    @State private var dateOfResponse = Date.now
     @State private var status: Status = .noResponse
 
     @State private var firstRoundOfInterview = false
-    @State private var dateOfFirstRoundOfInterview = Date()
+    @State private var dateOfFirstRoundOfInterview = Date.now
     @State private var secondRoundOfInterview = false
-    @State private var dateOfSecondRoundOfInterview = Date()
+    @State private var dateOfSecondRoundOfInterview = Date.now
     @State private var thirdRoundOfInterview = false
-    @State private var dateOfThirdRoundOfInterview = Date()
+    @State private var dateOfThirdRoundOfInterview = Date.now
 
     @State private var notes = String()
     @State private var fullTextOffer = String()
@@ -98,7 +98,7 @@ extension AddUpdateOfferView {
             jobLevel: jobLevel,
             typesOfEmployment:typesOfEmployment,
             workingArrangements: workingArrangements,
-            archive: isArchived
+            isArchived: isArchived
         )
     }
 
@@ -157,6 +157,7 @@ extension AddUpdateOfferView {
 
     private var infoSection: some View {
         Section {
+            // TODO: - Add check and validat Company name and Job title field, cannot be empty
             TextField("Company name", text: $companyName)
             TextField("Job title", text: $jobTitle)
             TextField("URL offer", text: $offerUrl)
@@ -271,28 +272,29 @@ extension AddUpdateOfferView {
 
     private var archiveButton: some View {
         Button {
-            if status != .archive {
-                status = .archive
+            if isArchived == false {
+                isArchived = true
                 updateJobOffer()
             } else {
-                status = .noResponse
+                isArchived = false
                 updateJobOffer()
             }
             dismiss()
             // TODO: - show alert about move to archive
+
         } label: {
             HStack {
                 Image(systemName: "archivebox")
-                Text(status == .archive ? LocalizedStringKey("Remove from Archive") : "Move to Archive")
+                Text(isArchived == true ? LocalizedStringKey("Remove from Archive") : "Move to Archive")
             }
         }
     }
 
+    // TODO: - Add show alert if the user is sure about delete item
     private var deleteButton: some View {
         Button {
-            guard let jobOffer else {
-                return
-            }
+            guard let jobOffer else { return }
+
             model.delete(item: jobOffer)
             dismiss()
         } label: {
@@ -302,7 +304,6 @@ extension AddUpdateOfferView {
             }
             .foregroundColor(.red)
         }
-
     }
 
     private func fetchJobOffer() {
@@ -326,7 +327,7 @@ extension AddUpdateOfferView {
         self.jobLevel = jobOffer?.viewJobLevel ?? .none
         self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
         self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
-
+        self.isArchived = jobOffer?.isArchived ?? false
     }
 }
 

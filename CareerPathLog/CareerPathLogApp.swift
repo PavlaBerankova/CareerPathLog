@@ -13,7 +13,6 @@ struct CareerPathLogApp: App {
                     .environmentObject(Coordinator())
                     .environmentObject(persistenceController)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
-
             }
             .preferredColorScheme(.light)
         }

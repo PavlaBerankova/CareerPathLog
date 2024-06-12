@@ -4,7 +4,6 @@ import SwiftUI
 struct HorizontalFilterView: View {
     // MARK: PROPERTIES
     @Binding var selectedFilter: Status
-    
 
     // MARK: BODY
     var body: some View {
@@ -32,9 +31,11 @@ struct HorizontalFilterItem: View {
     var status: Status
     var count: Int {
         if status == .allStatus {
-            model.savedOffers.count
+            model.savedOffers.filter { $0.isArchived == false }.count
+        } else if status == .archive {
+            model.savedOffers.filter { $0.isArchived }.count
         } else {
-            model.savedOffers.filter { $0.viewStatus == status }.count
+            model.savedOffers.filter { $0.viewStatus == status && $0.isArchived == false }.count
         }
     }
     var isSelected: Bool = true
