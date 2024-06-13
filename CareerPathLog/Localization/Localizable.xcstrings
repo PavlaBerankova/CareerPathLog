@@ -811,6 +811,38 @@
         }
       }
     },
+    "Job Offer was move to archive." : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzerát byl archivován."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Job Offer was move to archive."
+          }
+        }
+      }
+    },
+    "Job Offer was remove from archive." : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzerát byl odebrán z archivu."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Job Offer was remove from archive."
+          }
+        }
+      }
+    },
     "job title" : {
       "comment" : "OfferViewModel",
       "extractionState" : "manual",
@@ -1234,9 +1266,6 @@
           }
         }
       }
-    },
-    "Show alert" : {
-
     },
     "Show fulltext offer" : {
       "localizations" : {

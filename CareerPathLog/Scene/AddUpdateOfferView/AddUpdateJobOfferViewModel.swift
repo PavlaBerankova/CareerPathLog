@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class AddUpdateJobOfferViewModel: ObservableObject {
+final class AddUpdateJobOfferViewModel {
     init() { }
 
      func validateTextField(_ companyName: String, _ jobTitle: String) -> (message: LocalizedStringKey, isNotEmpty: Bool) {

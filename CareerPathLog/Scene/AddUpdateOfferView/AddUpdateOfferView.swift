@@ -4,7 +4,7 @@ import SwiftUI
 struct AddUpdateOfferView: View {
     // MARK: - PROPERTIES
     @EnvironmentObject var data: PersistenceController
-    @StateObject var model = AddUpdateJobOfferViewModel()
+    let model = AddUpdateJobOfferViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var jobOffer: JobOfferEntity?
@@ -52,11 +52,6 @@ struct AddUpdateOfferView: View {
                     interviewSection
                 }
                 notesAndFulltextOfferSection
-                Button {
-                    showingAlert.toggle()
-                } label: {
-                    Text("Show alert")
-                }
                 archiveButton
                 deleteButton
             }
@@ -70,7 +65,11 @@ struct AddUpdateOfferView: View {
                 fetchJobOffer()
             }
             .alert(alertMessage, isPresented: $showingAlert) {
-                Button("OK", role: .cancel) { }
+                Button("OK", role: .none) {
+                    if isArchived {
+                        dismiss()
+                    }
+                }
             }
         }
     }
@@ -152,8 +151,7 @@ extension AddUpdateOfferView {
                     }
                     dismiss()
                 } else {
-                    alertMessage = model.validateTextField(companyName, jobTitle).message
-                    showingAlert.toggle()
+                    showAlert(with: model.validateTextField(companyName, jobTitle).message)
                 }
             }
         }
@@ -174,7 +172,6 @@ extension AddUpdateOfferView {
 
     private var infoSection: some View {
         Section {
-            // TODO: - Add check and validat Company name and Job title field, cannot be empty
             TextField("Company name", text: $companyName)
             TextField("Job title", text: $jobTitle)
             TextField("URL offer", text: $offerUrl)
@@ -289,16 +286,17 @@ extension AddUpdateOfferView {
 
     private var archiveButton: some View {
         Button {
-            if isArchived == false {
-                isArchived = true
-                updateJobOffer()
-            } else {
+            if isArchived {
+                // Remove from archive
                 isArchived = false
                 updateJobOffer()
+                showAlert(with: LocalizedStringKey("Job Offer was remove from archive."))
+            } else {
+                // Move to archive
+                isArchived = true
+                updateJobOffer()
+                showAlert(with: LocalizedStringKey("Job Offer was move to archive."))
             }
-            dismiss()
-            // TODO: - show alert about move to archive
-
         } label: {
             HStack {
                 Image(systemName: "archivebox")
@@ -321,6 +319,11 @@ extension AddUpdateOfferView {
             }
             .foregroundColor(.red)
         }
+    }
+
+    private func showAlert(with message: LocalizedStringKey) {
+        alertMessage = message
+        showingAlert.toggle()
     }
 
     private func fetchJobOffer() {
