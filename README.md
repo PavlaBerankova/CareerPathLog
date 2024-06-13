@@ -32,5 +32,8 @@ My first version of this app you can find [here](https://github.com/PavlaBeranko
     <img src="https://github.com/PavlaBerankova/CareerPathLog/assets/107038196/a64ad7b1-deb1-4263-889a-4138ee597660" alt="" width="200" />
 </div>
 
+## Video demo of the App (on Youtube)
+https://youtu.be/IB8A60EQMUg
+
 
 
