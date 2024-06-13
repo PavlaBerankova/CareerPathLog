@@ -16,4 +16,12 @@ final class Coordinator: ObservableObject {
             .presentationDragIndicator(.visible)
             .presentationDetents([.medium, .large])
         }
+
+    var statisticsView: some View {
+        StatisticsView()
+    }
+
+    var profileView: some View {
+        ProfileView()
+    }
 }

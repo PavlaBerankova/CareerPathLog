@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum MenuRow: Identifiable, Codable {
+enum OfferMenuRow: Identifiable, Codable {
     case edit
     case url
     case notes

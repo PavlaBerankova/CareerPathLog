@@ -48,19 +48,45 @@ extension JobOfferListView {
     private var topBarMenu: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Menu {
+//                Section {
+//                    Text("Menu and Settings")
+//                        .foregroundStyle(.accent)
+//                }
                 Section {
-                    Text("Menu and Settings")
-                }
-                Section {
-                    Text("Statistics")
-                    Text("Profile")
-                    Text("Language")
+                    NavigationLink {
+                        coordinator.profileView
+                    } label: {
+                        Label("Profile", systemImage: "person.crop.circle")
+                    }
+
+                    NavigationLink {
+                        coordinator.statisticsView
+                    } label: {
+                        Label("Statistics", systemImage: "chart.xyaxis.line")
+                    }
+
+                    Menu {
+                        Button(action: {
+                                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                        }) {
+                            Label("Czech", image: "czech-republic")
+                        }
+                        Button(action: {
+                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                        }) {
+                            Label("English", image: "united-kingdom")
+                        }
+                    } label: {
+                        Label("Language", systemImage: "rectangle.3.group.bubble")
+                    }
                 }
             } label: {
                 Image(systemName: "line.3.horizontal")
             }
         }
     }
+
+
 
     private var topBarFilter: some View {
         HorizontalFilterView(selectedFilter: $selectedCategory)
@@ -103,7 +129,7 @@ extension JobOfferListView {
         Group {
             // FIRST ROW - EDIT
             ItemMenuRowView(
-                title: MenuRow.edit.title, icon: Image.menu.edit,
+                title: OfferMenuRow.edit.title, icon: Image.menu.edit,
                 action: {
                     selectedJobOffer = offer
                     tappedMenuButton = .edit
@@ -114,7 +140,7 @@ extension JobOfferListView {
             if let urlOffer = offer.offerUrl, !urlOffer.isEmpty {
                 Group {
                     ItemMenuRowView(
-                        title: MenuRow.url.title,
+                        title: OfferMenuRow.url.title,
                         icon: Image.menu.web) {
                             UIApplication.shared.open(URL(string: urlOffer)!)
                         }
@@ -125,7 +151,7 @@ extension JobOfferListView {
             if let notes = offer.notes, !notes.isEmpty {
                 Group {
                     ItemMenuRowView(
-                        title: MenuRow.notes.title,
+                        title: OfferMenuRow.notes.title,
                         icon: Image.menu.notes) {
                             selectedJobOffer = offer
                             tappedMenuButton = .notes
@@ -137,7 +163,7 @@ extension JobOfferListView {
             if let fulltextOffer = offer.fullTextOffer, !fulltextOffer.isEmpty {
                 Group {
                     ItemMenuRowView(
-                        title: MenuRow.fullText.title,
+                        title: OfferMenuRow.fullText.title,
                         icon: Image.menu.document) {
                             selectedJobOffer = offer
                             tappedMenuButton = .fulltext
