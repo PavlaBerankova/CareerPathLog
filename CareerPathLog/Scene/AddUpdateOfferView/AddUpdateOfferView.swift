@@ -53,8 +53,10 @@ struct AddUpdateOfferView: View {
                     interviewSection
                 }
                 notesAndFulltextOfferSection
-                archiveButton
-                deleteButton
+                if jobOffer != nil {
+                    archiveButton
+                    deleteButton
+                }
             }
             .formStyle(.grouped)
             .navigationTitle(jobOffer == nil ? "Add offer" : "Edit offer")

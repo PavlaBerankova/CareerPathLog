@@ -173,8 +173,8 @@
 			children = (
 				44AEF2482BBFE72700F9F627 /* JobOfferListView.swift */,
 				44D25EBF2C1B37AE007C778C /* StatisticsView.swift */,
-				444AF9132C1A05B400C8A284 /* AddUpdateOfferView */,
 				44D25EC12C1B3928007C778C /* ProfileView.swift */,
+				444AF9132C1A05B400C8A284 /* AddUpdateOfferView */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
