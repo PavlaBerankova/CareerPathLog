@@ -5,6 +5,7 @@ import SwiftUI
 class PersistenceController: ObservableObject {
     @Published var savedOffers: [JobOfferEntity] = []
 
+    // TODO: - Add UndoManager, when user delete some item and he want to take this action back.
     static let shared = PersistenceController()
 
     // The first time you reference the property, it will create an NSPersistentContainer.
@@ -166,13 +167,11 @@ extension PersistenceController {
         jobOffer?.isArchived = isArchived
 
         saveContext()
-        // fetchData()
     }
 
     func delete(item: JobOfferEntity) {
         container.viewContext.delete(item)
         saveContext()
-        // fetchData()
     }
 
     func deleteItem(indexSet: IndexSet) {
@@ -180,7 +179,6 @@ extension PersistenceController {
         let entity = savedOffers[index]
         container.viewContext.delete(entity)
         saveContext()
-        // fetchData()
     }
 
     func saveContext() {

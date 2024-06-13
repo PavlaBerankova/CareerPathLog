@@ -36,6 +36,7 @@ struct AddUpdateOfferView: View {
     @State private var isArchived: Bool = false
 
     @State private var showingAlert = false
+    @State private var showingAlertDelete = false
     @State private var alertMessage = LocalizedStringKey(String())
 
     let startDate = Date.distantPast
@@ -65,12 +66,15 @@ struct AddUpdateOfferView: View {
                 fetchJobOffer()
             }
             .alert(alertMessage, isPresented: $showingAlert) {
-                Button("OK", role: .none) {
-                    if isArchived {
-                        dismiss()
-                    }
-                }
+                alertOKButton
             }
+            .alert("Notification", isPresented: $showingAlertDelete) {
+                alertCancelButton
+                alertDeleteButton
+            } message: {
+                Text(LocalizedStringKey("Are you sure if you want to delete this job offer?"))
+            }
+
         }
     }
 
@@ -87,6 +91,26 @@ struct AddUpdateOfferView: View {
 
 // MARK: - EXTENSION
 extension AddUpdateOfferView {
+    private var alertOKButton: some View {
+        Button("OK", role: .none) {
+            if isArchived || model.validateTextField(companyName, jobTitle).isNotEmpty {
+                dismiss()
+            }
+        }
+    }
+
+    private var alertDeleteButton: some View {
+        Button("Delete", role: .destructive) {
+            guard let jobOffer else { return }
+            data.delete(item: jobOffer)
+            dismiss()
+        }
+    }
+
+    private var alertCancelButton: some View {
+        Button("Cancel", role: .cancel) { }
+    }
+
     private func addJobOffer() {
         data.addJobOffer(
             companyName: companyName,
@@ -151,7 +175,9 @@ extension AddUpdateOfferView {
                     }
                     dismiss()
                 } else {
-                    showAlert(with: model.validateTextField(companyName, jobTitle).message)
+                    showAlert(with: model.validateTextField(companyName, jobTitle).message) {
+                        showingAlert.toggle()
+                    }
                 }
             }
         }
@@ -290,12 +316,16 @@ extension AddUpdateOfferView {
                 // Remove from archive
                 isArchived = false
                 updateJobOffer()
-                showAlert(with: LocalizedStringKey("Job Offer was remove from archive."))
+                showAlert(with: LocalizedStringKey("Job Offer was remove from archive.")) {
+                    showingAlert.toggle()
+                }
             } else {
                 // Move to archive
                 isArchived = true
                 updateJobOffer()
-                showAlert(with: LocalizedStringKey("Job Offer was move to archive."))
+                showAlert(with: LocalizedStringKey("Job Offer was move to archive.")) {
+                    showingAlert.toggle()
+                }
             }
         } label: {
             HStack {
@@ -305,13 +335,11 @@ extension AddUpdateOfferView {
         }
     }
 
-    // TODO: - Add show alert if the user is sure about delete item
     private var deleteButton: some View {
         Button {
-            guard let jobOffer else { return }
-
-            data.delete(item: jobOffer)
-            dismiss()
+            showAlert(with: LocalizedStringKey("Are you sure, if you want to delete this job offer?")) {
+                showingAlertDelete.toggle()
+            }
         } label: {
             HStack {
                 Image(systemName: "trash")
@@ -321,9 +349,9 @@ extension AddUpdateOfferView {
         }
     }
 
-    private func showAlert(with message: LocalizedStringKey) {
+    private func showAlert(with message: LocalizedStringKey, action: () -> Void) {
         alertMessage = message
-        showingAlert.toggle()
+        action()
     }
 
     private func fetchJobOffer() {

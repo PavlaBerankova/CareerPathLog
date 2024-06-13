@@ -274,7 +274,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Accepted"
           }
         }
@@ -409,6 +409,25 @@
         }
       }
     },
+    "Are you sure if you want to delete this job offer?" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opravdu chceš tento inzerát smazat?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure, if you want to delete this Job Offer?"
+          }
+        }
+      }
+    },
+    "Are you sure, if you want to delete this job offer?" : {
+
+    },
     "Back" : {
       "localizations" : {
         "cs" : {
@@ -421,6 +440,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Back"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zrušit"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         }
       }
@@ -1024,6 +1059,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notes"
+          }
+        }
+      }
+    },
+    "Notification" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upozornění"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification"
           }
         }
       }
