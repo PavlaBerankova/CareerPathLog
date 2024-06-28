@@ -116,11 +116,10 @@ extension JobOfferListView {
             Button {
                 newOffer.toggle()
             } label: {
-                Image(systemName: "plus.circle.fill")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 55, height: 55)
-                    .foregroundStyle(Color.black)
+                Image(systemName: "plus.circle.fill", variableValue: 1.00)
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(Color.white, Color.clear, Color.black)
+                .font(.system(size: 48, weight: .light))
             }
         }
     }

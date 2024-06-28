@@ -4,40 +4,11 @@ import SwiftUI
 struct AddUpdateOfferView: View {
     // MARK: - PROPERTIES
     @EnvironmentObject var data: PersistenceController
-    let model = AddUpdateJobOfferViewModel()
     @Environment(\.dismiss) private var dismiss
 
+    @StateObject var model = AddUpdateJobOfferViewModel()
+
     var jobOffer: JobOfferEntity?
-
-    @State private var companyName = String()
-    @State private var jobTitle = String()
-    @State private var offerUrl = String()
-    @State private var salary = String()
-    @State private var jobLocation = String()
-    @State private var jobLevel: JobLevel = .none
-    @State private var typesOfEmployment: TypesOfEmployment = .none
-    @State private var workingArrangements: WorkingArrangements = .none
-
-    @State private var dateOfSentCv = Date.now
-    @State private var response = false
-    @State private var dateOfResponse = Date.now
-    @State private var status: Status = .noResponse
-
-    @State private var firstRoundOfInterview = false
-    @State private var dateOfFirstRoundOfInterview = Date.now
-    @State private var secondRoundOfInterview = false
-    @State private var dateOfSecondRoundOfInterview = Date.now
-    @State private var thirdRoundOfInterview = false
-    @State private var dateOfThirdRoundOfInterview = Date.now
-
-    @State private var notes = String()
-    @State private var fullTextOffer = String()
-
-    @State private var isArchived: Bool = false
-
-    @State private var showingAlert = false
-    @State private var showingAlertDelete = false
-    @State private var alertMessage = LocalizedStringKey(String())
 
     let startDate = Date.distantPast
     let endDate = Date.distantFuture
@@ -49,7 +20,7 @@ struct AddUpdateOfferView: View {
             Form {
                 infoSection
                 dateAndResponseSection
-                if status == .interview {
+                if model.content.status == .interview {
                     interviewSection
                 }
                 notesAndFulltextOfferSection
@@ -67,10 +38,10 @@ struct AddUpdateOfferView: View {
             .onAppear {
                 fetchJobOffer()
             }
-            .alert(alertMessage, isPresented: $showingAlert) {
+            .alert(model.alertMessage, isPresented: $model.showingAlert) {
                 alertOKButton
             }
-            .alert("Notification", isPresented: $showingAlertDelete) {
+            .alert("Notification", isPresented: $model.showingAlertDelete) {
                 alertCancelButton
                 alertDeleteButton
             } message: {
@@ -95,7 +66,8 @@ struct AddUpdateOfferView: View {
 extension AddUpdateOfferView {
     private var alertOKButton: some View {
         Button("OK", role: .none) {
-            if isArchived || model.validateTextField(companyName, jobTitle).isNotEmpty {
+            if model.content.isArchived ||
+                model.companyAndJobTitleTextFieldIsNotEmpty() == true {
                 dismiss()
             }
         }
@@ -115,61 +87,61 @@ extension AddUpdateOfferView {
 
     private func addJobOffer() {
         data.addJobOffer(
-            companyName: companyName,
-            jobTitle: jobTitle,
-            offerUrl: offerUrl,
-            salary: salary,
-            notes: notes,
-            dateOfSentCv: dateOfSentCv,
-            response: response,
-            dateOfResponse: dateOfResponse,
-            firstRoundOfInterview: firstRoundOfInterview,
-            dateOfFirstRoundOfInterview: dateOfFirstRoundOfInterview,
-            secondRoundOfInterview: secondRoundOfInterview,
-            dateOfSecondRoundOfInterview: dateOfSecondRoundOfInterview,
-            thirdRoundOfInterview: thirdRoundOfInterview,
-            dateOfThirdRoundOfInterview: dateOfThirdRoundOfInterview,
-            fullTextOffer: fullTextOffer,
-            status: status,
-            jobLocation: jobLocation,
-            jobLevel: jobLevel,
-            typesOfEmployment:typesOfEmployment,
-            workingArrangements: workingArrangements,
-            isArchived: isArchived
+            companyName: model.content.companyName,
+            jobTitle: model.content.jobTitle,
+            offerUrl: model.content.offerUrl,
+            salary: model.content.salary,
+            notes: model.content.notes,
+            dateOfSentCv: model.content.dateOfSentCv,
+            response: model.content.response,
+            dateOfResponse: model.content.dateOfResponse,
+            firstRoundOfInterview: model.content.firstRoundOfInterview,
+            dateOfFirstRoundOfInterview: model.content.dateOfFirstRoundOfInterview,
+            secondRoundOfInterview: model.content.secondRoundOfInterview,
+            dateOfSecondRoundOfInterview: model.content.dateOfSecondRoundOfInterview,
+            thirdRoundOfInterview: model.content.thirdRoundOfInterview,
+            dateOfThirdRoundOfInterview: model.content.dateOfThirdRoundOfInterview,
+            fullTextOffer: model.content.fullTextOffer,
+            status: model.content.status,
+            jobLocation: model.content.jobLocation,
+            jobLevel: model.content.jobLevel,
+            typesOfEmployment: model.content.typesOfEmployment,
+            workingArrangements: model.content.workingArrangements,
+            isArchived: model.content.isArchived
         )
     }
 
     private func updateJobOffer() {
         data.updateJobOffer(
             jobOffer: jobOffer,
-            newCompanyName: companyName,
-            newJobTitle: jobTitle,
-            newOfferUrl: offerUrl,
-            newSalary: salary,
-            newNotes: notes,
-            newDateOfSentCv: dateOfSentCv,
-            newResponse: response,
-            newDateOfResponse: dateOfResponse,
-            newFirstRoundOfInterview: firstRoundOfInterview,
-            newDateOfFirstRoundOfInterview: dateOfFirstRoundOfInterview,
-            newSecondRoundOfInterview: secondRoundOfInterview,
-            newDateOfSecondRoundOfInterview: dateOfSecondRoundOfInterview,
-            newThirdRoundOfInterview: thirdRoundOfInterview,
-            newDateOfThirdRoundOfInterview: dateOfThirdRoundOfInterview,
-            newFullTextOffer: fullTextOffer,
-            newStatus: status,
-            newJobLocation: jobLocation,
-            newJobLevel: jobLevel,
-            newTypesOfEmployment: typesOfEmployment,
-            newWorkingArrangements: workingArrangements,
-            isArchived: isArchived
+            newCompanyName: model.content.companyName,
+            newJobTitle: model.content.jobTitle,
+            newOfferUrl: model.content.offerUrl,
+            newSalary: model.content.salary,
+            newNotes: model.content.notes,
+            newDateOfSentCv: model.content.dateOfSentCv,
+            newResponse: model.content.response,
+            newDateOfResponse: model.content.dateOfResponse,
+            newFirstRoundOfInterview: model.content.firstRoundOfInterview,
+            newDateOfFirstRoundOfInterview: model.content.dateOfFirstRoundOfInterview,
+            newSecondRoundOfInterview: model.content.secondRoundOfInterview,
+            newDateOfSecondRoundOfInterview: model.content.dateOfSecondRoundOfInterview,
+            newThirdRoundOfInterview: model.content.thirdRoundOfInterview,
+            newDateOfThirdRoundOfInterview: model.content.dateOfThirdRoundOfInterview,
+            newFullTextOffer: model.content.fullTextOffer,
+            newStatus: model.content.status,
+            newJobLocation: model.content.jobLocation,
+            newJobLevel: model.content.jobLevel,
+            newTypesOfEmployment: model.content.typesOfEmployment,
+            newWorkingArrangements: model.content.workingArrangements,
+            isArchived: model.content.isArchived
         )
     }
 
     private var saveUpdateButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button(jobOffer == nil ? "Save" : "Update") {
-                if model.validateTextField(companyName, jobTitle).isNotEmpty {
+                if model.companyAndJobTitleTextFieldIsNotEmpty() {
                     if jobOffer == nil {
                         addJobOffer()
                     } else {
@@ -177,8 +149,8 @@ extension AddUpdateOfferView {
                     }
                     dismiss()
                 } else {
-                    showAlert(with: model.validateTextField(companyName, jobTitle).message) {
-                        showingAlert.toggle()
+                    showAlert(message: model.alertMessage) {
+                        model.showingAlert.toggle()
                     }
                 }
             }
@@ -200,13 +172,13 @@ extension AddUpdateOfferView {
 
     private var infoSection: some View {
         Section {
-            TextField("Company name", text: $companyName)
-            TextField("Job title", text: $jobTitle)
-            TextField("URL offer", text: $offerUrl)
-            TextField("Salary", text: $salary)
-            TextField("Job location", text: $jobLocation)
+            TextField("Company name", text: $model.content.companyName)
+            TextField("Job title", text: $model.content.jobTitle)
+            TextField("URL offer", text: $model.content.offerUrl)
+            TextField("Salary", text: $model.content.salary)
+            TextField("Job location", text: $model.content.jobLocation)
 
-            Picker("Types of Employment", selection: $typesOfEmployment) {
+            Picker("Types of Employment", selection: $model.content.typesOfEmployment) {
                 Text("Choose type").tag(nil as TypesOfEmployment?)
                 Divider()
 
@@ -215,7 +187,7 @@ extension AddUpdateOfferView {
             }
             .pickerStyle(.menu)
 
-            Picker("Working arrangements", selection: $workingArrangements) {
+            Picker("Working arrangements", selection: $model.content.workingArrangements) {
                 Text("Choose Type").tag(nil as WorkingArrangements?)
                 Divider()
 
@@ -224,7 +196,7 @@ extension AddUpdateOfferView {
                 Text("Hybrid").tag(WorkingArrangements.hybrid)
             }
 
-            Picker("Job level", selection: $jobLevel) {
+            Picker("Job level", selection: $model.content.jobLevel) {
                 Text("junior").tag(JobLevel.junior)
                 Text("medior").tag(JobLevel.medior)
                 Text("senior").tag(JobLevel.senior)
@@ -238,22 +210,22 @@ extension AddUpdateOfferView {
     private var dateAndResponseSection: some View {
         Section {
             DatePicker(
-                selection: $dateOfSentCv,
+                selection: $model.content.dateOfSentCv,
                 in: startDate...endDate,
                 displayedComponents: .date) {
                     Text("Date of submitted CV")
                 }
-            Toggle("Response", isOn: $response)
-            if response {
+            Toggle("Response", isOn: $model.content.response)
+            if model.content.response {
                 DatePicker(
-                    selection: $dateOfResponse,
+                    selection: $model.content.dateOfResponse,
                     in: startDate...endDate,
                     displayedComponents: .date) {
                         Text("Date of response")
                     }
 
                 Section {
-                    Picker("Type of response", selection: $status) {
+                    Picker("Type of response", selection: $model.content.status) {
                         Text(LocalizedStringKey("StatusPicker - no response"))
                             .tag(Status.noResponse)
                         Text(LocalizedStringKey("StatusPicker - interview"))
@@ -271,30 +243,30 @@ extension AddUpdateOfferView {
 
     private var interviewSection: some View {
         Section {
-            Toggle("1. round of interview", isOn: $firstRoundOfInterview)
-            if firstRoundOfInterview {
+            Toggle("1. round of interview", isOn: $model.content.firstRoundOfInterview)
+            if model.content.firstRoundOfInterview {
                 DatePicker(
-                    selection: $dateOfFirstRoundOfInterview,
+                    selection: $model.content.dateOfFirstRoundOfInterview,
                     in: startDate...endDate,
                     displayedComponents: .date) {
                         Text(dateOfInterview)
                     }
             }
 
-            Toggle("2. round of interview", isOn: $secondRoundOfInterview)
-            if secondRoundOfInterview {
+            Toggle("2. round of interview", isOn: $model.content.secondRoundOfInterview)
+            if model.content.secondRoundOfInterview {
                 DatePicker(
-                    selection: $dateOfSecondRoundOfInterview,
+                    selection: $model.content.dateOfSecondRoundOfInterview,
                     in: startDate...endDate,
                     displayedComponents: .date) {
                         Text(dateOfInterview)
                     }
             }
 
-            Toggle("3. round of interview", isOn: $thirdRoundOfInterview)
-            if thirdRoundOfInterview {
+            Toggle("3. round of interview", isOn: $model.content.thirdRoundOfInterview)
+            if model.content.thirdRoundOfInterview {
                 DatePicker(
-                    selection: $dateOfThirdRoundOfInterview,
+                    selection: $model.content.dateOfThirdRoundOfInterview,
                     in: startDate...endDate,
                     displayedComponents: .date) {
                         Text(dateOfInterview)
@@ -307,40 +279,38 @@ extension AddUpdateOfferView {
 
     private var notesAndFulltextOfferSection: some View {
         Group {
-            CustomTextEditor(with: $notes, header: "Notes")
-            CustomTextEditor(with: $fullTextOffer, header: "Full text offer")
+            CustomTextEditor(with: $model.content.notes, header: "Notes")
+            CustomTextEditor(with: $model.content.fullTextOffer, header: "Full text offer")
         }
     }
 
     private var archiveButton: some View {
         Button {
-            if isArchived {
+            if model.content.isArchived {
                 // Remove from archive
-                isArchived = false
+                model.content.isArchived = false
                 updateJobOffer()
-                showAlert(with: LocalizedStringKey("Job Offer was remove from archive.")) {
-                    showingAlert.toggle()
-                }
+                model.alertMessage = LocalizedStringKey("Job Offer was remove from archive.")
+                model.showingAlert.toggle()
             } else {
                 // Move to archive
-                isArchived = true
+                model.content.isArchived = true
                 updateJobOffer()
-                showAlert(with: LocalizedStringKey("Job Offer was move to archive.")) {
-                    showingAlert.toggle()
-                }
+                model.alertMessage = LocalizedStringKey("Job Offer was move to archive.")
+                model.showingAlert.toggle()
             }
         } label: {
             HStack {
                 Image(systemName: "archivebox")
-                Text(isArchived == true ? LocalizedStringKey("Remove from Archive") : "Move to Archive")
+                Text(model.content.isArchived == true ? LocalizedStringKey("Remove from Archive") : "Move to Archive")
             }
         }
     }
 
     private var deleteButton: some View {
         Button {
-            showAlert(with: LocalizedStringKey("Are you sure, if you want to delete this job offer?")) {
-                showingAlertDelete.toggle()
+            showAlert(message: LocalizedStringKey("Are you sure, if you want to delete this job offer?")) {
+                model.showingAlertDelete.toggle()
             }
         } label: {
             HStack {
@@ -351,33 +321,15 @@ extension AddUpdateOfferView {
         }
     }
 
-    private func showAlert(with message: LocalizedStringKey, action: () -> Void) {
-        alertMessage = message
+    private func showAlert(message: LocalizedStringKey, action: () -> Void) {
+        model.alertMessage = message
         action()
     }
 
     private func fetchJobOffer() {
-        self.companyName = jobOffer?.viewCompanyName ?? ""
-        self.jobTitle = jobOffer?.jobTitle ?? ""
-        self.offerUrl = jobOffer?.offerUrl ?? ""
-        self.salary = jobOffer?.salary ?? ""
-        self.notes = jobOffer?.notes ?? ""
-        self.dateOfSentCv = jobOffer?.dateOfSentCv ?? Date()
-        self.response = jobOffer?.response ?? false
-        self.dateOfResponse = jobOffer?.dateOfResponse ?? Date()
-        self.firstRoundOfInterview = jobOffer?.firstRoundOfInterview ?? false
-        self.dateOfFirstRoundOfInterview = jobOffer?.dateOfFirstRoundOfInterview ?? Date()
-        self.secondRoundOfInterview = jobOffer?.secondRoundOfInterview ?? false
-        self.dateOfSecondRoundOfInterview = jobOffer?.dateOfSecondRoundOfInterview ?? Date()
-        self.thirdRoundOfInterview = jobOffer?.thirdRoundOfInterview ?? false
-        self.dateOfThirdRoundOfInterview = jobOffer?.dateOfThirdRoundOfInterview ?? Date()
-        self.fullTextOffer = jobOffer?.fullTextOffer ?? ""
-        self.status = jobOffer?.viewStatus ?? .noResponse
-        self.jobLocation = jobOffer?.jobLocation ?? ""
-        self.jobLevel = jobOffer?.viewJobLevel ?? .none
-        self.typesOfEmployment = jobOffer?.viewTypesOfEmployment ?? .none
-        self.workingArrangements = jobOffer?.viewWorkingArrangements ?? .none
-        self.isArchived = jobOffer?.isArchived ?? false
+        if let jobOffer = jobOffer {
+               model.content = JobOfferEntityConverter.convert(model: jobOffer)
+           }
     }
 }
 
@@ -386,3 +338,4 @@ extension AddUpdateOfferView {
     AddUpdateOfferView(jobOffer: nil)
         .environment(\.managedObjectContext, PersistenceController(forPreview: true).container.viewContext)
 }
+
