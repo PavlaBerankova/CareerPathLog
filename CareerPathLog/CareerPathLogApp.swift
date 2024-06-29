@@ -15,6 +15,7 @@ struct CareerPathLogApp: App {
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
             .preferredColorScheme(.light)
+            .dynamicTypeSize(...DynamicTypeSize.xxLarge)
         }
         .onChange(of: scenePhase) { newPhase in
           if newPhase == .background {
