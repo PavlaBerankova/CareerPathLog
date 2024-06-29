@@ -48,45 +48,25 @@ extension JobOfferListView {
     private var topBarMenu: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Menu {
-//                Section {
-//                    Text("Menu and Settings")
-//                        .foregroundStyle(.accent)
-//                }
                 Section {
-                    NavigationLink {
-                        coordinator.profileView
-                    } label: {
-                        Label("Profile", systemImage: "person.crop.circle")
-                    }
-
-                    NavigationLink {
-                        coordinator.statisticsView
-                    } label: {
-                        Label("Statistics", systemImage: "chart.xyaxis.line")
-                    }
-
-                    Menu {
-                        Button(action: {
-                                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                        }) {
-                            Label("Czech", image: "czech-republic")
-                        }
-                        Button(action: {
-                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                        }) {
-                            Label("English", image: "united-kingdom")
-                        }
-                    } label: {
-                        Label("Language", systemImage: "rectangle.3.group.bubble")
-                    }
+                    Text("Choose Language")
+                        .foregroundStyle(.accent)
+                }
+                Button(action: {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }) {
+                    Label("Czech", image: "czech-republic")
+                }
+                Button(action: {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }) {
+                    Label("English", image: "united-kingdom")
                 }
             } label: {
                 Image(systemName: "line.3.horizontal")
             }
         }
     }
-
-
 
     private var topBarFilter: some View {
         HorizontalFilterView(selectedFilter: $selectedCategory)
@@ -117,9 +97,9 @@ extension JobOfferListView {
                 newOffer.toggle()
             } label: {
                 Image(systemName: "plus.circle.fill", variableValue: 1.00)
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(Color.white, Color.clear, Color.black)
-                .font(.system(size: 48, weight: .light))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.white, Color.clear, Color.black)
+                    .font(.system(size: 48, weight: .light))
             }
         }
     }

@@ -6,7 +6,7 @@ struct AddUpdateOfferView: View {
     @EnvironmentObject var data: PersistenceController
     @Environment(\.dismiss) private var dismiss
 
-    @StateObject var model = AddUpdateJobOfferViewModel()
+    @StateObject var model = AddUpdateOfferViewModel()
 
     var jobOffer: JobOfferEntity?
 
@@ -86,56 +86,11 @@ extension AddUpdateOfferView {
     }
 
     private func addJobOffer() {
-        data.addJobOffer(
-            companyName: model.content.companyName,
-            jobTitle: model.content.jobTitle,
-            offerUrl: model.content.offerUrl,
-            salary: model.content.salary,
-            notes: model.content.notes,
-            dateOfSentCv: model.content.dateOfSentCv,
-            response: model.content.response,
-            dateOfResponse: model.content.dateOfResponse,
-            firstRoundOfInterview: model.content.firstRoundOfInterview,
-            dateOfFirstRoundOfInterview: model.content.dateOfFirstRoundOfInterview,
-            secondRoundOfInterview: model.content.secondRoundOfInterview,
-            dateOfSecondRoundOfInterview: model.content.dateOfSecondRoundOfInterview,
-            thirdRoundOfInterview: model.content.thirdRoundOfInterview,
-            dateOfThirdRoundOfInterview: model.content.dateOfThirdRoundOfInterview,
-            fullTextOffer: model.content.fullTextOffer,
-            status: model.content.status,
-            jobLocation: model.content.jobLocation,
-            jobLevel: model.content.jobLevel,
-            typesOfEmployment: model.content.typesOfEmployment,
-            workingArrangements: model.content.workingArrangements,
-            isArchived: model.content.isArchived
-        )
+        data.addNewJobOffer(jobOffer: model.content)
     }
 
     private func updateJobOffer() {
-        data.updateJobOffer(
-            jobOffer: jobOffer,
-            newCompanyName: model.content.companyName,
-            newJobTitle: model.content.jobTitle,
-            newOfferUrl: model.content.offerUrl,
-            newSalary: model.content.salary,
-            newNotes: model.content.notes,
-            newDateOfSentCv: model.content.dateOfSentCv,
-            newResponse: model.content.response,
-            newDateOfResponse: model.content.dateOfResponse,
-            newFirstRoundOfInterview: model.content.firstRoundOfInterview,
-            newDateOfFirstRoundOfInterview: model.content.dateOfFirstRoundOfInterview,
-            newSecondRoundOfInterview: model.content.secondRoundOfInterview,
-            newDateOfSecondRoundOfInterview: model.content.dateOfSecondRoundOfInterview,
-            newThirdRoundOfInterview: model.content.thirdRoundOfInterview,
-            newDateOfThirdRoundOfInterview: model.content.dateOfThirdRoundOfInterview,
-            newFullTextOffer: model.content.fullTextOffer,
-            newStatus: model.content.status,
-            newJobLocation: model.content.jobLocation,
-            newJobLevel: model.content.jobLevel,
-            newTypesOfEmployment: model.content.typesOfEmployment,
-            newWorkingArrangements: model.content.workingArrangements,
-            isArchived: model.content.isArchived
-        )
+        data.updateJobOffer(jobOffer: jobOffer, updatedContent: model.content)
     }
 
     private var saveUpdateButton: some ToolbarContent {

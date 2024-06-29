@@ -460,6 +460,22 @@
         }
       }
     },
+    "Choose Language" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zvolte jazyk"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Language"
+          }
+        }
+      }
+    },
     "Choose type" : {
       "localizations" : {
         "cs" : {
@@ -931,6 +947,7 @@
       }
     },
     "Language" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -1149,6 +1166,7 @@
       }
     },
     "Profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -1352,6 +1370,7 @@
       }
     },
     "Statistics" : {
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {

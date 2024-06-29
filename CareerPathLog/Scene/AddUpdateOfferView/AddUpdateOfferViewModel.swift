@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class AddUpdateJobOfferViewModel: ObservableObject {
+final class AddUpdateOfferViewModel: ObservableObject {
     struct JobOffer {
         var companyName: String
         var jobTitle: String
@@ -77,7 +77,7 @@ final class AddUpdateJobOfferViewModel: ObservableObject {
             }
     }
 
-    @Published var content: JobOffer = .makeMock()
+    @Published var content: JobOffer = .emptyForm()
     @Published var showingAlert = false
     @Published var showingAlertDelete = false
     @Published var alertMessage = LocalizedStringKey(String())
@@ -88,23 +88,20 @@ final class AddUpdateJobOfferViewModel: ObservableObject {
         if content.companyName.isEmpty && content.jobTitle.isEmpty {
             alertMessage = LocalizedStringKey("You must fill Company name and Job title field.")
             return false
-            //return (LocalizedStringKey("You must fill Company name and Job title field."), false)
         } else if content.companyName.isEmpty {
             alertMessage = LocalizedStringKey("You must fill Company name field.")
             return false
-            //return (LocalizedStringKey("You must fill Company name field."), false)
         } else if content.jobTitle.isEmpty {
             alertMessage = LocalizedStringKey("You must fill Job title field.")
             return false
-            // return (LocalizedStringKey("You must fill Job title field."), false)
         }
         alertMessage = LocalizedStringKey(String())
         return true
     }
 }
 
-extension AddUpdateJobOfferViewModel.JobOffer {
-    static func makeMock() -> AddUpdateJobOfferViewModel.JobOffer {
+extension AddUpdateOfferViewModel.JobOffer {
+    static func emptyForm() -> AddUpdateOfferViewModel.JobOffer {
         .init(
             companyName: String(),
             jobTitle: String(),

@@ -4,10 +4,11 @@
 //
 //  Created by Pavla Beránková on 28.06.2024.
 //
-import CoreData
+
 import SwiftUI
+
 struct JobOfferEntityConverter {
-    static func convert(model: AddUpdateJobOfferViewModel.JobOffer) -> JobOfferEntity {
+    static func convert(model: AddUpdateOfferViewModel.JobOffer) -> JobOfferEntity {
         return JobOfferEntity(
             companyName: model.companyName,
             jobTitle: model.jobTitle,
@@ -32,8 +33,8 @@ struct JobOfferEntityConverter {
             isArchived: model.isArchived)
     }
 
-    static func convert(model: JobOfferEntity) -> AddUpdateJobOfferViewModel.JobOffer {
-        return AddUpdateJobOfferViewModel.JobOffer(
+    static func convert(model: JobOfferEntity) -> AddUpdateOfferViewModel.JobOffer {
+        return AddUpdateOfferViewModel.JobOffer(
             companyName: model.viewCompanyName,
             jobTitle: model.viewJobTitle,
             offerUrl: model.viewOfferUrl,
