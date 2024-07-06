@@ -89,6 +89,6 @@ struct JobOffersEntities {
       jobLevel: nil, 
       typesOfEmployment: "Full-time", 
       workingArrangements: "remote"
-    )
+    ),
   ]
 }

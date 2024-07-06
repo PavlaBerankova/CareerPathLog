@@ -72,7 +72,7 @@ extension PersistenceController {
     }
 
     func addNewJobOffer(jobOffer: AddUpdateOfferViewModel.JobOffer) {
-        var entity = JobOfferEntity(context: container.viewContext)
+        let entity = JobOfferEntity(context: container.viewContext)
 
         entity.companyName = jobOffer.companyName
         entity.jobTitle = jobOffer.jobTitle

@@ -20,7 +20,7 @@ struct AddUpdateOfferView: View {
             Form {
                 infoSection
                 dateAndResponseSection
-                if model.content.status == .interview {
+                if model.content.status == .interview || (model.content.status == .accepted || model.content.status == .rejected) && model.content.firstRoundOfInterview {
                     interviewSection
                 }
                 notesAndFulltextOfferSection

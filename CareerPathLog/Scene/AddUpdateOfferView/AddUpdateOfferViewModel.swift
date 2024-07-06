@@ -7,8 +7,32 @@
 
 import SwiftUI
 
+protocol JobOfferProtocol {
+    var companyName: String { get }
+    var jobTitle: String { get }
+    var offerUrl: String { get }
+    var salary: String { get }
+    var jobLocation: String { get }
+    var jobLevel: JobLevel { get }
+    var typesOfEmployment: TypesOfEmployment { get }
+    var workingArrangements: WorkingArrangements { get }
+    var dateOfSentCv: Date { get }
+    var response: Bool { get }
+    var dateOfResponse: Date { get }
+    var status: Status { get }
+    var firstRoundOfInterview: Bool { get }
+    var dateOfFirstRoundOfInterview: Date { get }
+    var secondRoundOfInterview: Bool { get }
+    var dateOfSecondRoundOfInterview: Date { get }
+    var thirdRoundOfInterview: Bool { get }
+    var dateOfThirdRoundOfInterview: Date { get }
+    var notes: String { get }
+    var fullTextOffer: String { get }
+    var isArchived: Bool { get }
+}
+
 final class AddUpdateOfferViewModel: ObservableObject {
-    struct JobOffer {
+    struct JobOffer: JobOfferProtocol {
         var companyName: String
         var jobTitle: String
         var offerUrl: String
